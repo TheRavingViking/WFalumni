@@ -10,15 +10,29 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                        <div class="form-group{{ $errors->has('voornaam') ? ' has-error' : '' }}">
+                            <label for="voornaam" class="col-md-4 control-label">voornaam</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="voornaam" type="text" class="form-control" name="voornaam" value="{{ old('voornaam') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('voornaam'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('voornaam') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('achternaam') ? ' has-error' : '' }}">
+                            <label for="achternaam" class="col-md-4 control-label">achternaam</label>
+
+                            <div class="col-md-6">
+                                <input id="achternaam" type="text" class="form-control" name="achternaam" value="{{ old('achternaam') }}" required autofocus>
+
+                                @if ($errors->has('achternaam'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('achternaam') }}</strong>
                                     </span>
                                 @endif
                             </div>
