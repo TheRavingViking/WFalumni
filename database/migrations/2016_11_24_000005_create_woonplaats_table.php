@@ -3,21 +3,21 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMigrationsTable extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Run the migrations.
-     * @table migrations
+     * @table password_resets
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('migrations', function (Blueprint $table) {
+        Schema::create('password_resets', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->string('migration', 255);
-            $table->integer('batch');
+            $table->string('email', 255);
+            $table->string('token', 255);
+            $table->timestamp('created_at')->nullable()->default(null);
         });
     }
 
@@ -28,6 +28,6 @@ class CreateMigrationsTable extends Migration
      */
      public function down()
      {
-       Schema::dropIfExists('migrations');
+       Schema::dropIfExists('password_resets');
      }
 }

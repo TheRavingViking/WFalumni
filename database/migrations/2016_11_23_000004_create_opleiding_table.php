@@ -3,30 +3,31 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOpleidingTable extends Migration
+class CreateEventsTable extends Migration
 {
     /**
      * Run the migrations.
-     * @table opleiding
+     * @table events
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('opleiding', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('users_id')->unsigned();
-            $table->string('opleidingsnaam', 255);
-            $table->string('instituut', 255);
+            $table->string('plaats', 255);
+            $table->date('datum');
             $table->date('begin');
-            $table->date('eind')->nullable();
-            $table->string('locatie', 255);
-            $table->string('niveau', 45);
-            $table->boolean('behaald')->default('0');
+            $table->date('eind');
+            $table->string('naam', 255);
+            $table->string('beschrijving', 255);
+            $table->string('categorie', 255);
+            $table->boolean('isDeleted')->default('0');
 
 
-            $table->foreign('users_id', 'fk_opleiding_users_idx')
+            $table->foreign('users_id', 'fk_events_users1_idx')
                 ->references('id')->on('users')
                 ->onDelete('no action')
                 ->onUpdate('no action');
@@ -40,6 +41,6 @@ class CreateOpleidingTable extends Migration
      */
      public function down()
      {
-       Schema::dropIfExists('opleiding');
+       Schema::dropIfExists('events');
      }
 }
