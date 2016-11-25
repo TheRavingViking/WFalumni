@@ -32,11 +32,11 @@ class CreateUsersTable extends Migration
             $table->string('facebook', 255)->nullable();
             $table->string('linkedin', 255)->nullable();
             $table->string('remember_token', 100)->nullable()->default(null);
-            $table->string('burgerlijke staat', 45)->nullable();
-            $table->boolean('heeft kinderen')->nullable()->default('0');
+            $table->string('burgerlijke_staat', 45)->nullable();
+            $table->boolean('heeft_kinderen')->nullable()->default('0');
             $table->integer('jaarinkomen')->nullable();
             $table->boolean('geenmailverzenden')->nullable()->default('0');
-            $table->string('post adres', 255)->nullable();
+            $table->string('post_adres', 255)->nullable();
             $table->integer('studentnummer')->nullable();
             $table->string('telefoonnummer', 15)->nullable();
             $table->string('twitter', 255)->nullable();
