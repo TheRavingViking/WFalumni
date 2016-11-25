@@ -43,7 +43,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        &nbsp;<li><a href="{{ url('/overview') }}">overview</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -62,10 +62,16 @@
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
+<<<<<<< HEAD
                                                      document.getElementById('logout-form').submit();">Logout</a>
                                     <li>
                                         <a href="{{ url('/profiel') }}">Profiel</a>
 
+=======
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+>>>>>>> 2d0241178d07a5402a2522dd633e77fd308a4610
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
