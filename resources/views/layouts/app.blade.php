@@ -62,16 +62,10 @@
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
-<<<<<<< HEAD
-                                                     document.getElementById('logout-form').submit();">Logout</a>
-                                    <li>
-                                        <a href="{{ url('/profiel') }}">Profiel</a>
+                                                     document.getElementById('logout-form').submit();">Logout</a> </li>
+                                    <li> <a href="{{ url('/profiel') }}">Profiel</a> </li>
 
-=======
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
->>>>>>> 2d0241178d07a5402a2522dd633e77fd308a4610
+
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
