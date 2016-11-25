@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/overview', 'overview@fetchall');
+Route::get('/overview', 'users@fetchall');

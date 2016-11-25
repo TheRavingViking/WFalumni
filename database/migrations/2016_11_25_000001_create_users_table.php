@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('email', 255);
             $table->string('password', 255);
             $table->string('nationaliteit', 255)->nullable();
+            $table->string('geboorteland', 255)->nullable();
+            $table->string('geboorteprovincie', 255)->nullable();
             $table->string('geboorteplaats', 255)->nullable();
             $table->date('geboortedatum')->nullable();
             $table->string('geslacht', 5)->nullable();

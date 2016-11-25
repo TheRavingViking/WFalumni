@@ -17,7 +17,7 @@ class CreateOpleidingTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('users_id')->unsigned();
-            $table->string('opleidingsnaam', 255);
+            $table->string('naam', 255);
             $table->string('instituut', 255);
             $table->string('richting', 255);
             $table->date('begin');
@@ -25,6 +25,8 @@ class CreateOpleidingTable extends Migration
             $table->string('locatie', 255);
             $table->string('niveau', 45);
             $table->boolean('behaald')->default('0');
+            $table->string('land', 255);
+            $table->string('provincie', 255)->nullable();
 
 
             $table->foreign('users_id', 'fk_opleiding_users_idx')

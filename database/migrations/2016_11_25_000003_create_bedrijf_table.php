@@ -19,12 +19,14 @@ class CreateBedrijfTable extends Migration
             $table->integer('users_id')->unsigned();
             $table->string('functie', 255);
             $table->string('richting', 255);
-            $table->string('bedrijfsnaam', 255);
+            $table->string('naam', 255);
             $table->string('locatie', 255);
             $table->date('begin');
             $table->date('eind')->nullable();
-            $table->string('bedrijfstelefoonnummer', 15)->nullable();
-            $table->string('bezoek adres', 255)->nullable();
+            $table->string('telefoonnummer', 15)->nullable();
+            $table->string('bezoekadres', 255)->nullable();
+            $table->string('land', 255);
+            $table->string('provincie', 255)->nullable();
 
 
             $table->foreign('users_id', 'fk_bedrijf_users1_idx')
