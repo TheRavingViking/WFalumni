@@ -52,6 +52,14 @@ class RegisterController extends Controller
             'achternaam' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'geslacht' => 'required|max:5',
+            'burgerlijke_staat' => 'required|max:45',
+            'studentnummer' => 'required',
+            'post_adres' => 'required|max:255',
+            'telefoonnummer' => 'required|max:15',
+            'geboortedatum' => 'required',
+            'geboorteplaats' => 'required|max:255',
+            'nationaliteit' => 'required|max:255',
         ]);
     }
 
@@ -68,6 +76,14 @@ class RegisterController extends Controller
             'achternaam' => $data['achternaam'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'geslacht' => $data['geslacht'],
+            'burgerlijke_staat' => $data['burgerlijke_staat'],
+            'studentnummer' => $data['studentnummer'],
+            'post_adres' => $data['post_adres'],
+            'telefoonnummer' => $data['telefoonnummer'],
+            'geboortedatum' => $data['geboortedatum'],
+            'geboorteplaats' => $data['geboorteplaats'],
+            'nationaliteit' => $data['nationaliteit'],
         ]);
     }
 }
