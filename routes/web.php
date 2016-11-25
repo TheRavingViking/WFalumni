@@ -19,10 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-<<<<<<< HEAD
+Route::get('profiel', 'UserController@profiel');
+
 Route::get('/page', function () {
     return view('page');
 });
-=======
-Route::get('/overview', 'overview@fetchall');
->>>>>>> 67314c5382d17bd783bf32d0b4791cfc0cf6444c
+

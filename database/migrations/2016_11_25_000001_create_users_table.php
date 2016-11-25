@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->date('geboortedatum')->nullable();
             $table->string('geslacht', 5)->nullable();
             $table->string('titel', 255)->nullable();
-            $table->text('foto')->nullable();
+            $table->text('foto')->default('default.png');
             $table->string('facebook', 255)->nullable();
             $table->string('linkedin', 255)->nullable();
             $table->string('remember_token', 100)->nullable()->default(null);
