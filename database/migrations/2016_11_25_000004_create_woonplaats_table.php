@@ -17,7 +17,7 @@ class CreateWoonplaatsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('users_id')->unsigned();
-            $table->string('plaatsnaam', 45);
+            $table->string('naam', 45);
             $table->date('begin');
             $table->date('eind')->nullable();
             $table->string('longitude', 255)->nullable();
