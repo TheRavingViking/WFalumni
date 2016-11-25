@@ -90,7 +90,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('burgerlijke staat') ? ' has-error' : '' }}">
-                            <label for="burgerlijke staat" class="col-md-4 control-label">burgerlijke staat</label>
+                            <label for="burgerlijke staat" class="col-md-4 control-label">Burgerlijke staat</label>
 
                             <div class="col-md-6">
                                 <input id="burgerlijke staat" type="text" class="form-control" name="burgerlijke staat" value="{{ old('burgerlijke staat') }}" required>
@@ -104,7 +104,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('studentnummer') ? ' has-error' : '' }}">
-                            <label for="studentnummer" class="col-md-4 control-label">studentnummer</label>
+                            <label for="studentnummer" class="col-md-4 control-label">Studentnummer</label>
 
                             <div class="col-md-6">
                                 <input id="studentnummer" type="text" class="form-control" name="studentnummer" value="{{ old('studentnummer') }}" required>
@@ -118,7 +118,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('post adres') ? ' has-error' : '' }}">
-                            <label for="post adres" class="col-md-4 control-label">post adres</label>
+                            <label for="post adres" class="col-md-4 control-label">Post adres</label>
 
                             <div class="col-md-6">
                                 <input id="post adres" type="text" class="form-control" name="post adres" value="{{ old('post adres') }}" required>
@@ -132,7 +132,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('telefoonnummer') ? ' has-error' : '' }}">
-                            <label for="telefoonnummer" class="col-md-4 control-label">telefoonnummer</label>
+                            <label for="telefoonnummer" class="col-md-4 control-label">Telefoonnummer</label>
 
                             <div class="col-md-6">
                                 <input id="telefoonnummer" type="text" class="form-control" name="telefoonnummer" value="{{ old('telefoonnummer') }}" required>
@@ -146,7 +146,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('geboortedatum') ? ' has-error' : '' }}">
-                            <label for="geboortedatum" class="col-md-4 control-label">geboortedatum</label>
+                            <label for="geboortedatum" class="col-md-4 control-label">Geboortedatum</label>
 
                             <div class="col-md-6">
                                 <input id="geboortedatum" type="date" class="form-control" name="geboortedatum" value="{{ old('geboortedatum') }}" required>
@@ -160,7 +160,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('geboorteplaats') ? ' has-error' : '' }}">
-                            <label for="geboorteplaats" class="col-md-4 control-label">geboorteplaats</label>
+                            <label for="geboorteplaats" class="col-md-4 control-label">Geboorteplaats</label>
 
                             <div class="col-md-6">
                                 <input id="geboorteplaats" type="text" class="form-control" name="geboorteplaats" value="{{ old('geboorteplaats') }}" required>
@@ -174,7 +174,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('nationaliteit') ? ' has-error' : '' }}">
-                            <label for="nationaliteit" class="col-md-4 control-label">nationaliteit</label>
+                            <label for="nationaliteit" class="col-md-4 control-label">Nationaliteit</label>
 
                             <div class="col-md-6">
                                 <input id="nationaliteit" type="text" class="form-control" name="nationaliteit" value="{{ old('nationaliteit') }}" required>
