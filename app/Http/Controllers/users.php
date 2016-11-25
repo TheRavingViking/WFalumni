@@ -10,7 +10,7 @@ class users extends Controller
     public function fetchall()
     {
 
-        $users = DB::table('users')->get();
+        $users = DB::table('users')->where('isdeleted', '0')->get();
 
         return view('overview', compact('users') );
 
