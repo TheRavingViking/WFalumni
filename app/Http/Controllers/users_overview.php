@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 
-class users extends Controller
+class users_overview extends Controller
 {
     public function fetchall()
     {

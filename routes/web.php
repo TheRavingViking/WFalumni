@@ -21,4 +21,4 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('profiel', 'UserController@profiel');
 
-Route::get('/overview', 'users@fetchall');
+Route::get('/overview', 'users_overview@fetchall');
