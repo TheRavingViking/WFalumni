@@ -2,17 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\users_overview_model;
 use Illuminate\Http\Request;
-use DB;
 
 class users_overview extends Controller
 {
-    public function fetchall()
+    public function index()
     {
 
-        $users = DB::table('users')->where('isdeleted', '0')->get();
+        $users = users_overview_model::all();
 
         return view('overview', compact('users') );
 
+    }
+
+    public function show($id)
+    {
+
+        $users = users_overview_model::find($id);
+
+
+        return view('detailpage', compact('users'));
     }
 }

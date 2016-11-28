@@ -26,7 +26,7 @@
                             <a href="{{$user->linkedin}}"><span class="glyphicon glyphicon-user"></span></a>
                         </button>
                         <button type="button" class="btn btn-default btn-lg">
-                            <a href="detailpage?id={{$user->id}}"s><span class="glyphicon glyphicon-cog"></span></a>
+                            <a href="overview/{{$user->id}}"s><span class="glyphicon glyphicon-cog"></span></a>
                         </button>
                     </div>
                 </div>
