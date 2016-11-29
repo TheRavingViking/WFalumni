@@ -21,6 +21,6 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('profiel', 'UserController@profiel');
 
-Route::get('/overview', 'users_overview@index');
+Route::get('/overview', 'UserController@index');
 
-Route::get('/overview/{id}', 'users_overview@show');
+Route::get('/overview/{id}', 'UserController@show');
