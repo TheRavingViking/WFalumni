@@ -11,7 +11,7 @@ class add_user extends Seeder
      */
     public function run()
     {
-        DB::table('alumni')->insert(array(
+        DB::table('users')->insert(array(
             array('voornaam'=>'john', 'achternaam'=>'doe', 'linkedin' => 'www.linkedin.com', 'email' => 'test' . '@test.com', 'password' => '$2y$10$bRsD96BYEgyv1Dn1scV1xuTfIq4ICIda7FYU0c3QghazXN4FNRk8G', 'foto'=>'default.png' ),
             array('voornaam'=>'Jessica', 'achternaam'=>'Jones', 'linkedin' => 'www.linkedin.com', 'email' => str_random(10) . '@gmail.com', 'password' => 'test', 'foto'=>'default.png'),
             array('voornaam'=>'Tony', 'achternaam'=>'Stark', 'linkedin' => 'www.linkedin.com', 'email' => str_random(10) . '@gmail.com', 'password' => 'test', 'foto'=>'default.png'),
