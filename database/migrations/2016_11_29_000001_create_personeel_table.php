@@ -3,17 +3,17 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreatePersoneelTable extends Migration
 {
     /**
      * Run the migrations.
-     * @table users
+     * @table personeel
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('personeel', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('bevoegdheid')->default('99');
@@ -23,28 +23,19 @@ class CreateUsersTable extends Migration
             $table->string('achternaam', 255);
             $table->string('email', 255);
             $table->string('password', 255);
-            $table->string('nationaliteit', 255)->nullable();
-            $table->string('geboorteland', 255)->nullable();
-            $table->string('geboorteprovincie', 255)->nullable();
-            $table->string('geboorteplaats', 255)->nullable();
-            $table->date('geboortedatum')->nullable();
-            $table->string('geslacht', 5)->nullable();
-            $table->string('titel', 255)->nullable();
-            $table->string('foto', 255)->default('default.png');
+            $table->text('foto')->nullable();
             $table->string('facebook', 255)->nullable();
             $table->string('linkedin', 255)->nullable();
             $table->string('remember_token', 100)->nullable()->default(null);
-            $table->string('burgerlijke_staat', 45)->nullable();
-            $table->boolean('heeft_kinderen')->nullable()->default('0');
-            $table->integer('jaarinkomen')->nullable();
-            $table->boolean('geenmailverzenden')->nullable()->default('0');
-            $table->string('post_adres', 255)->nullable();
-            $table->integer('studentnummer')->nullable();
             $table->string('telefoonnummer', 15)->nullable();
             $table->string('twitter', 255)->nullable();
             $table->string('website', 255)->nullable();
+            $table->string('richting', 255);
+            $table->string('opleiding1', 255)->nullable();
+            $table->string('opleiding2', 255)->nullable();
+            $table->string('opleiding3', 255)->nullable();
 
-            $table->unique(["email"], 'unique_users');
+            $table->unique(["email"], 'unique_personeel');
             $table->nullableTimestamps();
         });
     }
@@ -56,6 +47,6 @@ class CreateUsersTable extends Migration
      */
      public function down()
      {
-       Schema::dropIfExists('users');
+       Schema::dropIfExists('personeel');
      }
 }
