@@ -4,14 +4,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <img src="/uploads/avatars/{{ $user->foto }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
-                        <h2>{{ $user->voornaam }} Profiel</h2>
-                    </div>
+                <div class="panel panel-default" style="padding: 1em">
+                        <img src="/uploads/avatars/{{ $user->foto }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px; padding:">
+                        <h2>{{ $user->voornaam }} {{ $user->achternaam }} Profiel</h2>
+                        <form enctype="multipart/form-data" action="/profiel" method="post">
+                            <label>Update profiel foto</label>
+                            <input type="file" name="avatar">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type ="submit" class="pull-right btn btn-sm btn-primary">
+                        </form>
+
                     <br>
                     <br>
                     <br>
+
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                             {{ csrf_field() }}
