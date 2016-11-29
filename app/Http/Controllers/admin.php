@@ -7,9 +7,17 @@
  */
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
+use DB;
 
 class admin extends Controller
 {
+    public function fetchall()
+    {
 
+        $users = DB::table('users')->get();
+
+        return view('admin', compact('users') );
+
+    }
 }

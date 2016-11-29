@@ -24,6 +24,20 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('tussenvoegsel') ? ' has-error' : '' }}">
+                            <label for="tussenvoegsel" class="col-md-4 control-label">Tussenvoegsel</label>
+
+                            <div class="col-md-6">
+                                <input id="tussenvoegsel" type="text" class="form-control" name="tussenvoegsel" value="{{ old('tussenvoegsel') }}">
+
+                                @if ($errors->has('tussenvoegsel'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('tussenvoegsel') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('achternaam') ? ' has-error' : '' }}">
                             <label for="achternaam" class="col-md-4 control-label">Achternaam</label>
 
@@ -75,11 +89,13 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('geslacht') ? ' has-error' : '' }}">
-                            <label for="geslacht" class="col-md-4 control-label">Geslacht</label>
+                            <label for="geslacht" class="col-md-4 control-label">Geslacht
+                                <br>Man:<br><br>Vrouw:
+                            </label>
 
-                            <div class="col-md-6">
-                                <input id="geslacht" type="radio" class="form-control" name="geslacht" value="man" required>Man
-                                <input id="geslacht" type="radio" class="form-control" name="geslacht" value="vrouw" required>Vrouw
+                            <div class="col-md-6"><br>
+                                <input id="geslacht" type="radio" class="form-control" name="geslacht" value="man" required>
+                                <input id="geslacht" type="radio" class="form-control" name="geslacht" value="vrouw" required>
 
                                 @if ($errors->has('geslacht'))
                                     <span class="help-block">
@@ -97,7 +113,7 @@
 
                                 @if ($errors->has('burgerlijke staat'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('burgerlijke staat') }}</strong>
+                                        <strong>{{ $errors->first('burgerlijke_staat') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -125,7 +141,7 @@
 
                                 @if ($errors->has('post adres'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('post adres') }}</strong>
+                                        <strong>{{ $errors->first('post_adres') }}</strong>
                                     </span>
                                 @endif
                             </div>

@@ -1,10 +1,4 @@
 @extends('layouts.app')
-/**
- * Created by PhpStorm.
- * User: Freddy
- * Date: 25-11-2016
- * Time: 13:07
- */
 
 @section('content')
 
@@ -20,13 +14,15 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($user as $key => $value)
+        @foreach($users as $user)
             <tr>
-                <td>{{ $value->id }}</td>
-                <td>{{ $value->voornaam }}</td>
-                <td>{{ $value->achternaam }}</td>
-                <td>{{ $value->studentnummer }}</td>
-                <td>{{ $value->email }}</td>
+                <td>{{ $user->id }}</td>
+                <td>{{ $user->voornaam }}</td>
+                <td>{{ $user->achternaam }}</td>
+                <td>{{ $user->studentnummer }}</td>
+                <td>{{ $user->email }}</td>
         @endforeach
         </tbody>
 @endsection
+
+{{$user->voornaam}}
