@@ -23,10 +23,10 @@ class CreateWoonplaatsTable extends Migration
             $table->string('latitude', 255)->nullable();
             $table->string('land', 255);
             $table->string('provincie', 25)->nullable();
-            $table->integer('users_id')->unsigned();
+            $table->integer('user_id')->unsigned();
 
 
-            $table->foreign('users_id', 'fk_woonplaats_users1_idx')
+            $table->foreign('user_id', 'fk_woonplaats_users1_idx')
                 ->references('id')->on('users')
                 ->onDelete('no action')
                 ->onUpdate('no action');
