@@ -6,5 +6,9 @@
 
         {{$users->voornaam}}
 
+        @foreach($users->opleiding as $user)
+            {{$user->naam}}
+            @endforeach
+
     </div>
 @stop
