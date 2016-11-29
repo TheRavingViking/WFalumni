@@ -30,9 +30,4 @@ class User extends Authenticatable
 
     protected $table = "users";
 
-    public function opleiding()
-    {
-        return $this->hasMany(opleiding::class);
-    }
-
 }

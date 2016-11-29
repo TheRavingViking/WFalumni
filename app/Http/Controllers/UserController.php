@@ -19,20 +19,14 @@ class UserController extends Controller
 
     public function index()
     {
-
-        $users = User->opleiding::paginate(2);
-        return $users;
-//        return view('overview', compact('users'));
-
+        $users = user::paginate(2);
+        return view('overview', compact('users'));
     }
 
     public function show($id)
     {
-
         $users = User::find($id);
-
-
-        return view('detailpage', compact('users'));
+        return view ('detailpage', compact('users'));
     }
 
     public function update_avatar(Request $request)
