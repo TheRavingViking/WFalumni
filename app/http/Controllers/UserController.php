@@ -18,6 +18,7 @@ class UserController extends Controller
 
         $users = User::paginate(2);
 
+
         return view('overview', compact('users') );
 
     }
