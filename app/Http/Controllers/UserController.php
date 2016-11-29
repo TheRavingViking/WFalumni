@@ -20,12 +20,7 @@ class UserController extends Controller
 
         $users = User::paginate(2);
 
-<<<<<<< HEAD
-
         return view('overview', compact('users') );
-=======
-        return view('overview', compact('users'));
->>>>>>> origin/dev
 
     }
 
