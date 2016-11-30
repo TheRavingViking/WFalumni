@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\opleiding;
+
 use Illuminate\Http\Request;
 use Auth;
-use App\User;
 use Image;
+use App\User;
+use App\Opleiding;
+
 
 
 class UserController extends Controller
@@ -19,19 +21,13 @@ class UserController extends Controller
 
     public function index()
     {
-        $user = User::with('opleiding')->get();
-        $user->load('opleiding.User');
+        $users = User::with('opleiding')->get();
 
-        return $user;
-
-//        return view('overview', compact('user'));
+        return view('overview', compact('users'));
     }
 
-    public function show($id)
+    public function show(User $users)
     {
-        $users = User::find($id);
-
-
         return view('detailpage', compact('users'));
     }
 

@@ -2,9 +2,11 @@
 
 @section('content')
 
-
+{{--{{dd($users)}}--}}
     <div class="container">
         @foreach($users as $user)
+
+
 
 
             <div class="panel panel-default" style="padding: 1em">
@@ -17,9 +19,7 @@
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                             <h1 href="overview/{{$user->id}}">{{$user->voornaam}} {{$user->tussenvoegsel}} {{$user->achternaam}}</h1>
                             <br>
-                            Nationaliteit: {{$user->nationaliteit}}. Geboorteland: {{$user->geboorteland}}.
-                            Geboorteplaats: {{$user->geboorteplaats}}. <br>
-                            Geboortedatum: {{$user->geboortedatum}}. Geslacht: {{$user->geslacht}}.<br>
+
                     </div>
                     <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" align="right">
                         <button type="button" class="btn btn-default btn-lg">
@@ -39,7 +39,7 @@
         <div class="container" style="alignment: center">
             <div class="row">
                 <div>
-                    {{ $users->links() }}
+                    {{--{{ $users->links() }}--}}
                 </div>
             </div>
         </div>
