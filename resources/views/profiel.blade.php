@@ -2,18 +2,23 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default" style="padding: 1em">
-                        <img src="/uploads/avatars/{{ $user->foto }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px; padding:">
+            <div class="panel panel-default" style="padding: 1em">
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                        <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive" style="min-width: 100px; float:left; border-radius:50%; margin-right:25px;">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h2>{{ $user->voornaam }} {{ $user->achternaam }} Profiel</h2>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <form enctype="multipart/form-data" action="/profiel" method="post">
                             <label>Update profiel foto</label>
                             <input type="file" name="avatar">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type ="submit" class="pull-right btn btn-sm btn-primary">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"><br>
+                            <input type="submit" class="pull-right btn btn-sm btn-primary"><br>
                         </form>
-
+                    </div>
                     <br>
                     <br>
                     <br>
@@ -106,8 +111,11 @@
                                 </label>
 
                                 <div class="col-md-6"><br>
-                                    <input id="geslacht" type="radio" class="form-control" name="geslacht" value="man">
-                                    <input id="geslacht" type="radio" class="form-control" name="geslacht" value="vrouw">
+                                    {{--<input id="geslacht" type="radio" class="form-control" name="geslacht" value="man">--}}
+                                    {{--<input id="geslacht" type="radio" class="form-control" name="geslacht" value="vrouw">--}}
+
+                                    <input id="geslacht" name="geslacht" type="radio" value="man"><br>
+                                    <input id="geslacht" name="geslacht" type="radio" value="vrouw">
 
                                     @if ($errors->has('geslacht'))
                                         <span class="help-block">

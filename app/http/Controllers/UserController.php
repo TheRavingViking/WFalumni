@@ -41,7 +41,7 @@ class UserController extends Controller
         Image::make($avatar)-> resize(300, 300)->save( public_path('/uploads/avatars/' . $filename) );
 
         $user = Auth::user();
-        $user->foto= $filename;
+        $user->foto = $filename;
         $user->save();
         }
         return view('profiel', array('user' => Auth::user()));
