@@ -106,8 +106,8 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('geslacht') ? ' has-error' : '' }}">
-                                <label for="geslacht" class="col-md-4 control-label">Geslacht
-                                    <br>Man:<br><br>Vrouw:
+                                <label for="geslacht" class="col-md-4 control-label">Geslacht:
+                                    <br>Ik ben een Man<br>Ik ben een Vrouw
                                 </label>
 
                                 <div class="col-md-6"><br>
@@ -196,7 +196,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('geboorteprovincie') ? ' has-error' : '' }}">
-                                <label for="geboorteprovincie" class="col-md-4 control-label">geboorteprovincie</label>
+                                <label for="geboorteprovincie" class="col-md-4 control-label">Geboorteprovincie</label>
 
                                 <div class="col-md-6">
                                     <input id="geboorteprovincie" type="text" class="form-control" name="geboorteprovincie" value="{{ $user->geboorteprovincie }}">
@@ -302,6 +302,54 @@
                                     @if ($errors->has('website'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('website') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('heeft_kinderen') ? ' has-error' : '' }}">
+                                <label for="heeft_kinderen" class="col-md-4 control-label">Kinderen</label>
+
+                                <div class="col-md-6">
+                                    <input id="heeft_kinderen" type="text" class="form-control" name="heeft_kinderen" value="{{ $user->heeft_kinderen }}">
+
+                                    @if ($errors->has('heeft_kinderen'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('heeft_kinderen') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('jaarinkomen') ? ' has-error' : '' }}">
+                                <label for="jaarinkomen" class="col-md-4 control-label">Jaarinkomen</label>
+
+                                <div class="col-md-6">
+                                    <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen" value="{{ $user->jaarinkomen }}">
+
+                                    @if ($errors->has('jaarinkomen'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('jaarinkomen') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('geenmailverzenden') ? ' has-error' : '' }}">
+                                <label for="geenmailverzenden" class="col-md-4 control-label">Wenst email te ontvangen:
+                                    <br>Ja, graag<br>Nee, dank je
+                                </label>
+
+                                <div class="col-md-6"><br>
+                                    {{--<input id="geslacht" type="radio" class="form-control" name="geslacht" value="man">--}}
+                                    {{--<input id="geslacht" type="radio" class="form-control" name="geslacht" value="vrouw">--}}
+
+                                    <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1"><br>
+                                    <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0">
+
+                                    @if ($errors->has('geslacht'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('geslacht') }}</strong>
                                     </span>
                                     @endif
                                 </div>
