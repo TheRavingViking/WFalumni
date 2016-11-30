@@ -25,4 +25,4 @@ Route::get('/overview', 'UserController@index');
 
 Route::post('/profiel', 'UserController@update_avatar');
 
-Route::get('/overview/{id}', 'UserController@show');
+Route::get('/overview/{users}', 'UserController@show');
