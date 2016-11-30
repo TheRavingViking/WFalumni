@@ -279,8 +279,33 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('facebook') ? ' has-error' : '' }}">
+                                <label for="twitter" class="col-md-4 control-label">Twitter</label>
 
+                                <div class="col-md-6">
+                                    <input id="twitter" type="text" class="form-control" name="twitter" value="{{ $user->twitter }}">
 
+                                    @if ($errors->has('twitter'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('twitter') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('facebook') ? ' has-error' : '' }}">
+                                <label for="website" class="col-md-4 control-label">Website</label>
+
+                                <div class="col-md-6">
+                                    <input id="website" type="text" class="form-control" name="website" value="{{ $user->website }}">
+
+                                    @if ($errors->has('website'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('website') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
