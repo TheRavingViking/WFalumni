@@ -12,11 +12,11 @@
                         <h2>{{ $user->voornaam }} {{ $user->achternaam }} Profiel</h2>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <form enctype="multipart/form-data" action="/profiel" method="post">
+                        <form enctype="multipart/form-data" action="{{ url('/profiel') }}" method="post">
                             <label>Update profiel foto</label>
                             <input type="file" name="avatar">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"><br>
-                            <input type="submit" class="pull-left btn btn-sm btn-primary"><br>
+                            <input type="submit" class="pull-leftbtn btn-sm btn-primary"><br>
                         </form>
                     </div>
                     <br>
