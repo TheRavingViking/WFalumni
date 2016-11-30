@@ -16,7 +16,7 @@
                             <label>Update profiel foto</label>
                             <input type="file" name="avatar">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}"><br>
-                            <input type="submit" class="pull-right btn btn-sm btn-primary"><br>
+                            <input type="submit" class="pull-left btn btn-sm btn-primary"><br>
                         </form>
                     </div>
                     <br>
@@ -24,7 +24,7 @@
                     <br>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/profiel') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('voornaam') ? ' has-error' : '' }}">
@@ -250,6 +250,35 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="form-group{{ $errors->has('Linkedin') ? ' has-error' : '' }}">
+                                <label for="Linkedin" class="col-md-4 control-label">Linkedin ref</label>
+
+                                <div class="col-md-6">
+                                    <input id="linkedin" type="text" class="form-control" name="linkedin" value="{{ $user->linkedin }}">
+
+                                    @if ($errors->has('linkedin'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('linkedin') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('facebook') ? ' has-error' : '' }}">
+                                <label for="facebook" class="col-md-4 control-label">Facebook</label>
+
+                                <div class="col-md-6">
+                                    <input id="facebook" type="text" class="form-control" name="facebook" value="{{ $user->facebook }}">
+
+                                    @if ($errors->has('facebook'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('facebook') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
 
 
 

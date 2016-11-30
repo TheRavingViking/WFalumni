@@ -17,11 +17,11 @@
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                             <h1 href="overview/{{$user->id}}">{{$user->voornaam}} {{$user->tussenvoegsel}} {{$user->achternaam}}</h1>
                             <br>
-                            Nationaliteit: {{$user->naam}}. Geboorteland: {{$user->geboorteland}}.
+                            Nationaliteit: {{$user->nationaliteit}}. Geboorteland: {{$user->geboorteland}}.
                             Geboorteplaats: {{$user->geboorteplaats}}. <br>
                             Geboortedatum: {{$user->geboortedatum}}. Geslacht: {{$user->geslacht}}.<br>
                     </div>
-                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" align="right">
                         <button type="button" class="btn btn-default btn-lg">
                             <a href="mailto:{{$user->email}}"><span class="glyphicon glyphicon-envelope"></span></a>
                         </button>
