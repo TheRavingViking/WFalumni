@@ -9,7 +9,6 @@
 
             <div class="panel panel-default" style="padding: 1em">
                 <div class="row">
-
                     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive"
                              style="min-width: 100px; float:left; border-radius:50%; margin-right:25px;">

@@ -21,10 +21,12 @@ class UserController extends Controller
     {
         $users = user::paginate(2);
         return view('overview', compact('users'));
+
     }
 
     public function show($id)
     {
+
         $users = User::find($id);
         return view ('detailpage', compact('users'));
     }
@@ -36,9 +38,9 @@ class UserController extends Controller
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
             Image::make($avatar)->resize(300, 300)->save(public_path('/uploads/avatars/' . $filename));
 
-            $user = Auth::user();
-            $user->foto = $filename;
-            $user->save();
+        $user = Auth::user();
+        $user->foto = $filename;
+        $user->save();
         }
         return view('profiel', array('user' => Auth::user()));
     }
