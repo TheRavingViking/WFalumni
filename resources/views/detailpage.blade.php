@@ -2,9 +2,13 @@
 
 @section('content')
 
-<div class="container">
+    <div class="container">
 
-    <h1>{{$users->voornaam}} {{$users->tussenvoegsel}} {{$users->achternaam}}</h1>
+        {{$users->voornaam}}
 
-</div>
+        @foreach($users->opleiding as $user)
+            {{$user->naam}}
+            @endforeach
+
+    </div>
 @stop

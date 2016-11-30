@@ -26,10 +26,10 @@ class CreateOpleidingTable extends Migration
             $table->boolean('behaald')->default('0');
             $table->string('land', 255);
             $table->string('provincie', 255)->nullable();
-            $table->integer('alumni_id')->unsigned();
+            $table->integer('user_id')->unsigned();
 
 
-            $table->foreign('alumni_id', 'fk_opleiding_alumni_idx')
+            $table->foreign('user_id', 'fk_opleiding_users1_idx')
                 ->references('id')->on('users')
                 ->onDelete('no action')
                 ->onUpdate('no action');
