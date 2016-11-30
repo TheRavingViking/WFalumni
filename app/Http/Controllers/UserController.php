@@ -19,8 +19,12 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = user::paginate(2);
-        return view('overview', compact('users'));
+        $user = User::with('opleiding')->get();
+        $user->load('opleiding.User');
+
+        return $user;
+
+//        return view('overview', compact('user'));
     }
 
     public function show($id)
