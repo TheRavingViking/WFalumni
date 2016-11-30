@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -63,8 +63,8 @@
                                     <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">Logout</a> </li>
-                                    <li> <a href="{{ url('/profiel') }}">Profiel</a> </li>
+                                                     document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-log-out">&nbsp</span>Logout</a> </li>
+                                    <li> <a href="{{ url('/profiel') }}"><span class="glyphicon glyphicon-user">&nbsp</span>Profiel</a> </li>
 
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">

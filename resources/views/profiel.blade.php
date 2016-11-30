@@ -2,24 +2,29 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default" style="padding: 1em">
-                        <img src="/uploads/avatars/{{ $user->foto }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px; padding:">
+            <div class="panel panel-default" style="padding: 1em">
+                <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                        <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive" style="min-width: 100px; float:left; border-radius:50%; margin-right:25px;">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h2>{{ $user->voornaam }} {{ $user->achternaam }} Profiel</h2>
-                        <form enctype="multipart/form-data" action="/profiel" method="post">
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <form enctype="multipart/form-data" action="{{ url('/profiel') }}" method="post">
                             <label>Update profiel foto</label>
                             <input type="file" name="avatar">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type ="submit" class="pull-right btn btn-sm btn-primary">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"><br>
+                            <input type="submit" class="pull-leftbtn btn-sm btn-primary"><br>
                         </form>
-
+                    </div>
                     <br>
                     <br>
                     <br>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/profiel') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('voornaam') ? ' has-error' : '' }}">
@@ -101,13 +106,16 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('geslacht') ? ' has-error' : '' }}">
-                                <label for="geslacht" class="col-md-4 control-label">Geslacht
-                                    <br>Man:<br><br>Vrouw:
+                                <label for="geslacht" class="col-md-4 control-label">Geslacht:
+                                    <br>Ik ben een Man<br>Ik ben een Vrouw
                                 </label>
 
                                 <div class="col-md-6"><br>
-                                    <input id="geslacht" type="radio" class="form-control" name="geslacht" value="man">
-                                    <input id="geslacht" type="radio" class="form-control" name="geslacht" value="vrouw">
+                                    {{--<input id="geslacht" type="radio" class="form-control" name="geslacht" value="man">--}}
+                                    {{--<input id="geslacht" type="radio" class="form-control" name="geslacht" value="vrouw">--}}
+
+                                    <input id="geslacht" name="geslacht" type="radio" value="man"><br>
+                                    <input id="geslacht" name="geslacht" type="radio" value="vrouw">
 
                                     @if ($errors->has('geslacht'))
                                         <span class="help-block">
@@ -188,7 +196,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('geboorteprovincie') ? ' has-error' : '' }}">
-                                <label for="geboorteprovincie" class="col-md-4 control-label">geboorteprovincie</label>
+                                <label for="geboorteprovincie" class="col-md-4 control-label">Geboorteprovincie</label>
 
                                 <div class="col-md-6">
                                     <input id="geboorteprovincie" type="text" class="form-control" name="geboorteprovincie" value="{{ $user->geboorteprovincie }}">
@@ -243,7 +251,109 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('Linkedin') ? ' has-error' : '' }}">
+                                <label for="Linkedin" class="col-md-4 control-label">Linkedin ref</label>
 
+                                <div class="col-md-6">
+                                    <input id="linkedin" type="text" class="form-control" name="linkedin" value="{{ $user->linkedin }}">
+
+                                    @if ($errors->has('linkedin'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('linkedin') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('facebook') ? ' has-error' : '' }}">
+                                <label for="facebook" class="col-md-4 control-label">Facebook</label>
+
+                                <div class="col-md-6">
+                                    <input id="facebook" type="text" class="form-control" name="facebook" value="{{ $user->facebook }}">
+
+                                    @if ($errors->has('facebook'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('facebook') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('facebook') ? ' has-error' : '' }}">
+                                <label for="twitter" class="col-md-4 control-label">Twitter</label>
+
+                                <div class="col-md-6">
+                                    <input id="twitter" type="text" class="form-control" name="twitter" value="{{ $user->twitter }}">
+
+                                    @if ($errors->has('twitter'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('twitter') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('facebook') ? ' has-error' : '' }}">
+                                <label for="website" class="col-md-4 control-label">Website</label>
+
+                                <div class="col-md-6">
+                                    <input id="website" type="text" class="form-control" name="website" value="{{ $user->website }}">
+
+                                    @if ($errors->has('website'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('website') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('heeft_kinderen') ? ' has-error' : '' }}">
+                                <label for="heeft_kinderen" class="col-md-4 control-label">Kinderen</label>
+
+                                <div class="col-md-6">
+                                    <input id="heeft_kinderen" type="text" class="form-control" name="heeft_kinderen" value="{{ $user->heeft_kinderen }}">
+
+                                    @if ($errors->has('heeft_kinderen'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('heeft_kinderen') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('jaarinkomen') ? ' has-error' : '' }}">
+                                <label for="jaarinkomen" class="col-md-4 control-label">Jaarinkomen</label>
+
+                                <div class="col-md-6">
+                                    <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen" value="{{ $user->jaarinkomen }}">
+
+                                    @if ($errors->has('jaarinkomen'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('jaarinkomen') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('geenmailverzenden') ? ' has-error' : '' }}">
+                                <label for="geenmailverzenden" class="col-md-4 control-label">Wenst email te ontvangen:
+                                    <br>Ja, graag<br>Nee, dank je
+                                </label>
+
+                                <div class="col-md-6"><br>
+                                    {{--<input id="geslacht" type="radio" class="form-control" name="geslacht" value="man">--}}
+                                    {{--<input id="geslacht" type="radio" class="form-control" name="geslacht" value="vrouw">--}}
+
+                                    <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1"><br>
+                                    <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0">
+
+                                    @if ($errors->has('geslacht'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('geslacht') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
