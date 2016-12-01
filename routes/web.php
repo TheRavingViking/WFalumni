@@ -17,12 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeControl ler@index');
+Route::get('/home', 'HomeController@index');
 Route::get('/profiel', 'UserController@profiel');
 Route::get('/editprofiel', 'UserController@editprofiel');
 Route::post('/editprofiel', 'UserController@update');
-Route::get('profiel', 'UserController@profiel');
 Route::post('/profiel', 'UserController@update_avatar');
 Route::get('/overview', 'UserController@index');
 Route::get('/overview/{users}', 'UserController@show');
-
