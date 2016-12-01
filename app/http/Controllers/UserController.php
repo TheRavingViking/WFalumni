@@ -21,7 +21,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::with(['opleiding' => function ($q) {
+        $users = User::with(['bedrijf','opleiding' => function ($q) {
             $q->latest('eind');
         }])->get();
 
