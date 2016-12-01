@@ -37,7 +37,12 @@ class User extends Authenticatable
 
     public function bedrijf()
     {
-        return $this->hasMany(opleiding::class);
+        return $this->hasMany(bedrijf::class);
+    }
+
+    public function woonplaats()
+    {
+        return $this->hasMany(woonplaats::class);
     }
 
 
