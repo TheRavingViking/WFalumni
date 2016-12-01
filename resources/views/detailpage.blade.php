@@ -4,11 +4,9 @@
 
     <div class="container">
 
-        {{$users->voornaam}}
-
-        @foreach($users->opleiding as $user)
-            {{$user->naam}}
-            @endforeach
-
+{{$users->voornaam}}
+@foreach($users->opleiding as $opleiding)
+    {{$opleiding->naam}}
+@endforeach
     </div>
 @stop

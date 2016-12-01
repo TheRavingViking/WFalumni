@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class opleiding extends Model
 {
-    public function user()
+    protected $table = "opleiding";
+
+    public function Opleiding()
     {
         return $this->belongsTo(User::class);
     }
-    protected $table = "opleiding";
+
 }
