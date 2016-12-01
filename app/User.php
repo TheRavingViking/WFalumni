@@ -35,5 +35,10 @@ class User extends Authenticatable
         return $this->hasMany(opleiding::class);
     }
 
+    public function bedrijf()
+    {
+        return $this->hasMany(opleiding::class);
+    }
+
 
 }

@@ -4,9 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class opleiding extends Model
+class Bedrijf extends Model
+
 {
-    protected $table = "opleiding";
+    protected $table = "bedrijf";
 
     public function User()
     {
