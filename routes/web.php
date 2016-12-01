@@ -22,7 +22,6 @@ Route::get('/home', 'HomeController@index');
 Route::get('/profiel', 'UserController@profiel');
 Route::get('/editprofiel', 'UserController@editprofiel');
 Route::post('/editprofiel', 'UserController@update');
-Route::get('profiel', 'UserController@profiel');
 
 Route::get('/overview', 'UserController@index');
 

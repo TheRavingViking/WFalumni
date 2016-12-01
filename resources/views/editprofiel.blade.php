@@ -25,7 +25,6 @@
 
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="/editprofiel">
-                            {{--<input type="hidden" name="_method" value="PUT" >--}}
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('voornaam') ? ' has-error' : '' }}">
@@ -252,7 +251,23 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('geenmailverzenden') ? ' has-error' : '' }}">
+                                <label for="geenmailverzenden" class="col-md-4 control-label">Wenst email te ontvangen:
+                                    <br>Ja, graag<br>Nee, dank je
+                                </label>
 
+                                <div class="col-md-6"><br>
+
+                                    <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1"><br>
+                                    <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0">
+
+                                    @if ($errors->has('geslacht'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('geslacht') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
@@ -267,7 +282,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 @endsection

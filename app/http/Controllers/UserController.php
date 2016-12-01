@@ -61,5 +61,6 @@ class UserController extends Controller
         $studentnummer = $req->input('studentnummer');
         $user->studentnummer = $studentnummer;
         $user->save();
+        return view('profiel', array('user' => Auth::user() ) );
     }
 }
