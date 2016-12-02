@@ -17,4 +17,4 @@
             {{$woonplaats->naam}}
         @endforeach
     </div>
-@stop
+@stopww

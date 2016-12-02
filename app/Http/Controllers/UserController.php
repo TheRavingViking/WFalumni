@@ -21,13 +21,16 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::with(['opleiding' => function ($q) {$q->latest('eind');}])->get();
+
+        $users = User::with(['bedrijf', 'opleiding' => function ($q) {$q->latest('eind');}])->where('isdeleted', '=', '0')->get();
+
         return view('overview', compact('users'));
+;
     }
 
-    public function show(User $users)
+    public function show(User $user)
     {
-        return view('detailpage', compact('users'));
+        return view('profiel', compact('user'));
     }
 
     public function update(Request $req)
