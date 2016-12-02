@@ -82,13 +82,15 @@ class UserController extends Controller
         $user->save();
         return view('profiel', array('user' => Auth::user() ) );
     }
-//    public function destroy($id)
-//    {
-//        $task = Task::findOrFail($id);
-//        $task->delete();
-//        return view('welcome');
-//    }
+    public function delete()
+    {
+        $user = Auth::user();
+        $value = '1';
+        $user->isDeleted= $value;
+        $user->save();
 
+        return view('welcome', array('user' => Auth::logout() ) );
+    }
 
 }
 

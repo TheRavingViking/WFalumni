@@ -32,22 +32,14 @@
                     <h4>twitter</h4><h5>{{ $user->twitter }}</h5><br>
                     <h4>website</h4><h5>{{ $user->website }}</h5><br>
 
+                    <a class="btn btn-primary" href="editprofiel">edit profiel</a><br>
                         </div>
                     </div>
                 </div>
             </div>
-            <a class="btn btn-primary" href="editprofiel">edit profiel</a>
-                </div>
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
-                                Wijzig
-                            </button>
-                        </div>
-                    </div>
-    {{--{!!  Form::open(['method'=>'DELETE','action'=>['UserController@destroy', $user->id]]) !!}--}}
-    {{--<div class="form-group"><div class="col-md-6 col-md-offset-4">--}}
-            {{--{!! Form::submit('Delete Users',['class'=>'btn btn-danger']) !!}--}}
-            {{--{!! Form::close() !!}--}}
-        {{--</div>--}}
+
+
+
+
+
 @endsection

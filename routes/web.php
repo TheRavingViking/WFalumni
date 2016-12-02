@@ -24,3 +24,4 @@ Route::post('/editprofiel', 'UserController@update');
 Route::post('/profiel', 'UserController@update_avatar');
 Route::get('/overview', 'UserController@index');
 Route::get('/overview/{users}', 'UserController@show');
+Route::post('/editprofiel', 'UserController@delete');

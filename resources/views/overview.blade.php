@@ -2,18 +2,10 @@
 
 @section('content')
 
-
-
-
-
-
 <a href="mailto: @foreach ($users as $mail){{$mail->email}},@endforeach " target="_top">Link to all the mail</a>
     <div class="container">
         {{--{{dd($users)}}--}}
         @foreach($users as $user)
-
-
-
 
             <div class="panel panel-default" style="padding: 1em">
                 <div class="row">
