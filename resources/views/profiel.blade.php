@@ -13,7 +13,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST" action="/profiel" id="profielform">
+                        <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/profiel" id="profielform">
                             {{ csrf_field() }}
 
                             <label>Update profiel foto</label>
@@ -125,7 +125,7 @@
 
                                 <div class="col-md-6">
                                     {{--<input id="burgerlijke staat" type="text" class="form-control" name="burgerlijke staat" value="{{ $user->burgerlijke_staat }}">--}}
-                                    <select id="burgerlijke staat" name="burgelijke_staat" form="profielform">
+                                    <select id="burgerlijke staat" name="burgelijke_staat">
                                         <option name="burgelijke_staat" value="ongehuwd">ongehuwd</option>
                                         <option name="burgelijke_staat" value="gehuwd">gehuwd</option>
                                     </select>

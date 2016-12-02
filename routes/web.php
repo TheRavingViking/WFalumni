@@ -25,4 +25,4 @@ Route::post('/profiel', 'UserController@update');
 
 Route::get('/overview', 'UserController@index');
 Route::get('/overview/{users}', 'UserController@show');
-Route::post('/profiel', 'UserController@delete');
+//Route::post('/profiel', 'UserController@delete');
