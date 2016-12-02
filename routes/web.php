@@ -21,6 +21,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/profiel', 'UserController@profiel');
 Route::post('/profiel', 'UserController@update');
+//Route::post('/profiel', 'UserController@update_avatar');
 
 Route::get('/overview', 'UserController@index');
 Route::get('/profiel/{user}', 'UserController@show');
+
+//Route::post('/profiel', 'UserController@delete');

@@ -13,7 +13,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST" action="/profiel">
+                        <form enctype="multipart/form-data" class="form-horizontal" role="form" method="POST" action="/profiel" id="profielform">
                             {{ csrf_field() }}
 
                             <label>Update profiel foto</label>
@@ -103,11 +103,14 @@
                                 </label>
 
                                 <div class="col-md-6"><br>
-                                    {{--<input id="geslacht" type="radio" class="form-control" name="geslacht" value="man">--}}
-                                    {{--<input id="geslacht" type="radio" class="form-control" name="geslacht" value="vrouw">--}}
 
-                                    <input id="geslacht" name="geslacht" type="radio" value="man"><br>
-                                    <input id="geslacht" name="geslacht" type="radio" value="vrouw">
+                                    @if($user->geslacht == 'man') <input id="geslacht" name="geslacht" type="radio" value="man" checked><br>
+                                    @else <input id="geslacht" name="geslacht" type="radio" value="man"><br>
+                                    @endif
+
+                                    @if($user->geslacht == 'vrouw') <input id="geslacht" name="geslacht" type="radio" value="vrouw" checked>
+                                    @else <input id="geslacht" name="geslacht" type="radio" value="vrouw">
+                                    @endif
 
                                     @if ($errors->has('geslacht'))
                                         <span class="help-block">
@@ -121,8 +124,11 @@
                                 <label for="burgerlijke staat" class="col-md-4 control-label">Burgerlijke staat</label>
 
                                 <div class="col-md-6">
-                                    <input id="burgerlijke staat" type="text" class="form-control" name="burgerlijke staat" value="{{ $user->burgerlijke_staat }}">
-
+                                    {{--<input id="burgerlijke staat" type="text" class="form-control" name="burgerlijke staat" value="{{ $user->burgerlijke_staat }}">--}}
+                                    <select id="burgerlijke staat" name="burgelijke_staat" form="profielform">
+                                        <option name="burgelijke_staat" value="ongehuwd">ongehuwd</option>
+                                        <option name="burgelijke_staat" value="gehuwd">gehuwd</option>
+                                    </select>
                                     @if ($errors->has('burgerlijke staat'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('burgerlijke_staat') }}</strong>
@@ -355,6 +361,25 @@
                                 </div>
                             </div>
 
+                            @foreach($user->opleiding as $opl)
+
+                            <div class="form-group{{ $errors->has('naam') ? ' has-error' : '' }}">
+                                <label for="naam" class="col-md-4 control-label">opleiding</label>
+
+                                <div class="col-md-6">
+                                    <input id="naam" type="text" class="form-control" name="naam" value="{{ $opl->naam }}" disabled>
+
+                                    @if ($errors->has('naam'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('naam') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            @endforeach
+
+
                             <div class="form-group{{ $errors->has('geenmailverzenden') ? ' has-error' : '' }}">
                                 <label for="geenmailverzenden" class="col-md-4 control-label">Wenst email te ontvangen:
                                     <br>Ja, graag<br>Nee, dank je
@@ -362,12 +387,17 @@
 
                                 <div class="col-md-6"><br>
 
-                                    <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1"><br>
-                                    <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0">
+                                    @if($user->geenmailverzenden == 1) <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1" checked><br>
+                                    @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1"><br>
+                                    @endif
 
-                                    @if ($errors->has('geslacht'))
+                                    @if($user->geenmailverzenden == 0) <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0" checked>
+                                    @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0">
+                                    @endif
+
+                                    @if ($errors->has('geenmailverzenden'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('geslacht') }}</strong>
+                                        <strong>{{ $errors->first('geenmailverzenden') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -380,6 +410,13 @@
                                     </button>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-danger">
+                                        Delete User
+                                    </button>
+                                </div>
+                            </div>
                         </form>
                     </div>
 
@@ -387,5 +424,51 @@
             </div>
         </div>
     </div>
+
+    <label for="naam" class="col-md-4 control-label">voeg een opleiding toe</label>
+
+    <div class="col-md-6">
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Voeg toe</button>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">x</span>
+                <p>Some text in the Modal..</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
 @endsection
 

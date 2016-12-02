@@ -25,7 +25,6 @@ class UserController extends Controller
         $users = User::with(['bedrijf', 'opleiding' => function ($q) {$q->latest('eind');}])->where('isdeleted', '=', '0')->get();
 
         return view('overview', compact('users'));
-;
     }
 
     public function show(User $user)
@@ -66,19 +65,21 @@ class UserController extends Controller
             'facebook' => $req['facebook'],
             'linkedin' => $req['linkedin'],
             'twitter' => $req['twitter'],
-            'website' => $req['website']
+            'website' => $req['website'],
+            'geenmailverzenden' => $req['geenmailverzenden']
         );
         $user->fill($new_user_data);
         $user->save();
         return view('profiel', array('user' => Auth::user() ) );
     }
-
-//    public function destroy($id)
-//    {
-//        $task = Task::findOrFail($id);
-//        $task->delete();
-//        return view('welcome');
-//    }
+    public function delete()
+    {
+        $user = Auth::user();
+        $value= '1';
+        $user->isDeleted= $value;
+        $user->save();
+        return view('welcome', array('user' => Auth::logout() ) );
+    }
 
 
 }

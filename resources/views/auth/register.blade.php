@@ -9,6 +9,10 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
+                        <div>
+                            <label for="isDeleted"></label>
+                            <input id="isDeleted" name="isDeleted" value="0" hidden>
+                        </div>
 
                         <div class="form-group{{ $errors->has('voornaam') ? ' has-error' : '' }}">
                             <label for="voornaam" class="col-md-4 control-label">Voornaam</label>
@@ -90,12 +94,12 @@
 
                         <div class="form-group{{ $errors->has('geslacht') ? ' has-error' : '' }}">
                             <label for="geslacht" class="col-md-4 control-label">Geslacht
-                                <br>Man:<br><br>Vrouw:
+                                <br>Man:<br>Vrouw:
                             </label>
 
                             <div class="col-md-6"><br>
-                                <input id="geslacht" type="radio" class="form-control" name="geslacht" value="man" required>
-                                <input id="geslacht" type="radio" class="form-control" name="geslacht" value="vrouw" required>
+                                <input id="geslacht" type="radio" name="geslacht" value="man" required><br>
+                                <input id="geslacht" type="radio" name="geslacht" value="vrouw" required>
 
                                 @if ($errors->has('geslacht'))
                                     <span class="help-block">
@@ -105,13 +109,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('burgerlijke staat') ? ' has-error' : '' }}">
-                            <label for="burgerlijke staat" class="col-md-4 control-label">Burgerlijke staat</label>
+                        <div class="form-group{{ $errors->has('burgerlijke_staat') ? ' has-error' : '' }}">
+                            <label for="burgerlijke_staat" class="col-md-4 control-label">Burgerlijke staat</label>
 
                             <div class="col-md-6">
-                                <input id="burgerlijke staat" type="text" class="form-control" name="burgerlijke staat" value="{{ old('burgerlijke staat') }}" required>
+                                <input id="burgerlijke_staat" type="text" class="form-control" name="burgerlijke_staat" value="{{ old('burgerlijke_staat') }}" required>
 
-                                @if ($errors->has('burgerlijke staat'))
+                                @if ($errors->has('burgerlijke_staat'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('burgerlijke_staat') }}</strong>
                                     </span>
@@ -133,13 +137,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('post adres') ? ' has-error' : '' }}">
-                            <label for="post adres" class="col-md-4 control-label">Post adres</label>
+                        <div class="form-group{{ $errors->has('post_adres') ? ' has-error' : '' }}">
+                            <label for="post_adres" class="col-md-4 control-label">Post adres</label>
 
                             <div class="col-md-6">
-                                <input id="post adres" type="text" class="form-control" name="post adres" value="{{ old('post adres') }}" required>
+                                <input id="post_adres" type="text" class="form-control" name="post_adres" value="{{ old('post_adres') }}" required>
 
-                                @if ($errors->has('post adres'))
+                                @if ($errors->has('post_adres'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('post_adres') }}</strong>
                                     </span>
