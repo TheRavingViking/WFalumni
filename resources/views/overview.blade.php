@@ -25,11 +25,8 @@
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                             <h1 href="overview/{{$user->id}}">{{$user->voornaam}} {{$user->tussenvoegsel}} {{$user->achternaam}}</h1>
                             <br>
-                        {{$user->opleiding[0]->naam}} {{$user->opleiding[0]->begin}} tot {{$user->opleiding[0]->eind}} Behaald: @if ($user->opleiding[0]->behaald === 1)
-                                                                                                                           Ja
-                                                                                                                        @else
-                                                                                                                           Nee
-                                                                                                                        @endif
+                        {{$user->opleiding[0]->naam}} {{$user->opleiding[0]->begin}} tot {{$user->opleiding[0]->eind}}
+                        Behaald: @if ($user->opleiding[0]->behaald === 1)Ja @else Nee @endif
 
                     </div>
                     <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" align="right">
