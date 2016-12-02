@@ -8,6 +8,17 @@
                     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive" style="min-width: 100px; float:left; border-radius:50%; margin-right:25px;">
                     </div>
+
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <form enctype="multipart/form-data" action="{{ url('/profiel') }}" method="post">
+                            <label>Update profiel foto</label>
+                            <input type="file" name="avatar">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}"><br>
+                            <input type="submit" class="pull-leftbtn btn-sm btn-primary"><br>
+                        </form>
+                    </div>
+
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <h2>{{ $user->voornaam }} {{ $user->achternaam }} Profiel</h2>
                     </div>
@@ -45,4 +56,9 @@
                             </button>
                         </div>
                     </div>
+    {{--{!!  Form::open(['method'=>'DELETE','action'=>['UserController@destroy', $user->id]]) !!}--}}
+    {{--<div class="form-group"><div class="col-md-6 col-md-offset-4">--}}
+            {{--{!! Form::submit('Delete Users',['class'=>'btn btn-danger']) !!}--}}
+            {{--{!! Form::close() !!}--}}
+        {{--</div>--}}
 @endsection
