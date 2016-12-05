@@ -23,7 +23,7 @@ class CreateEventsTable extends Migration
             $table->string('naam', 255);
             $table->string('beschrijving', 255);
             $table->string('categorie', 255);
-            $table->boolean('isDeleted')->default('0');
+            $table->softDeletes();
             $table->integer('user_id')->unsigned();
 
 

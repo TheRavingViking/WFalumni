@@ -17,7 +17,7 @@ class CreatePersoneelTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('bevoegdheid')->default('99');
-            $table->boolean('isDeleted')->default('0');
+            $table->softDeletes();
             $table->string('voornaam', 255);
             $table->string('tussenvoegsel', 255)->nullable();
             $table->string('achternaam', 255);
