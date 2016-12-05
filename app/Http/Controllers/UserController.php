@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\App;
 use Image;
 use App\User;
 use App\Opleiding;
-
 
 
 class UserController extends Controller
@@ -22,7 +22,9 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::with(['opleiding' => function ($q) {$q->latest('eind');}])->get();
+        $users = User::with(['opleiding' => function ($q) {
+            $q->latest('eind');
+        }])->get();
 
         return view('overview', compact('users'));
     }
@@ -35,14 +37,14 @@ class UserController extends Controller
     public function update(Request $req)
     {
         $user = Auth::user();
-            if ($req->hasFile('avatar')) {
-                $avatar = $req->file('avatar');
-                $filename = time() . '.' . $avatar->getClientOriginalExtension();
-                Image::make($avatar)-> resize(300, 300)->save( public_path('/uploads/avatars/' . $filename) );
+        if ($req->hasFile('avatar')) {
+            $avatar = $req->file('avatar');
+            $filename = time() . '.' . $avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(300, 300)->save(public_path('/uploads/avatars/' . $filename));
 
-                $user->foto= $filename;
-                $user->save();
-            }
+            $user->foto = $filename;
+            $user->save();
+        }
 
         $new_user_data = array(
             'voornaam' => $req['voornaam'],
@@ -70,17 +72,29 @@ class UserController extends Controller
         );
         $user->fill($new_user_data);
         $user->save();
-        return view('profiel', array('user' => Auth::user() ) );
+        return view('profiel', array('user' => Auth::user()));
     }
+
     public function delete()
     {
         $user = Auth::user();
-        $value= '1';
-        $user->isDeleted= $value;
+        $value = '1';
+        $user->isDeleted = $value;
         $user->save();
-        return view('welcome', array('user' => Auth::logout() ) );
+        return view('welcome', array('user' => Auth::logout()));
     }
 
+
+    public function SoftDelete(Request $users)
+    {
+
+        $checkbox = $users->checkbox;
+        foreach ($checkbox as $id)
+        $id = User::where('id', $id)->delete();
+
+
+        return redirect()->action('UserController@index');
+    }
 
 }
 

@@ -2,6 +2,19 @@
 
 @section('content')
 
+<div class="container">
+    <div class="panel panel-default">
+        <div class="row">
+            <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/overview" id="delete">
+                {{ csrf_field() }}
+            <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 1em;">
+                <button type="submit" class="btn btn-danger">Delete User</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 
     <a href="mailto: @foreach ($users as $mail){{$mail->email}},@endforeach " target="_top">Link to all the mail</a>
@@ -36,13 +49,14 @@
                                 <a href="profiel/{{$user->id}}"><span class="glyphicon glyphicon-cog"></span></a>
                             </button>
 
-                            <input type="checkbox" name="delete" value="{{$user->id}}">
+                            <input type="checkbox" name="checkbox[]" value="{{$user->id}}">
                         </div>
                     </div>
                 </div>
             </div>
 
         @endforeach
+
         <div class="container" style="alignment: center">
             <div class="row">
                 <div>
@@ -50,4 +64,5 @@
                 </div>
             </div>
         </div>
+            </form>
 @stop
