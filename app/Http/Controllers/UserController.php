@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Illuminate\Support\Facades\App;
 use Image;
@@ -75,7 +76,7 @@ class UserController extends Controller
         return view('profiel', array('user' => Auth::user()));
     }
 
-    public function delete()
+    public function SoftDelete()
     {
         $user = Auth::user();
         $value = '1';
@@ -85,15 +86,21 @@ class UserController extends Controller
     }
 
 
-    public function SoftDelete(Request $users)
+    public function MassSoftDelete(Request $users)
     {
 
-        $checkbox = $users->checkbox;
-        foreach ($checkbox as $id)
-        $id = User::where('id', $id)->delete();
+        if (empty($users->checkbox)) {
+            return redirect::to('overview')->with('message', 'Login Failed');
+           // return Redirect::to('user/login')->with('message', 'Login Failed');
+        }
+        else {
+            $checkbox = $users->checkbox;
+            foreach ($checkbox as $id)
+                $id = User::where('id', $id)->delete();
 
 
-        return redirect()->action('UserController@index');
+            return redirect()->action('UserController@index');
+        }
     }
 
 }
