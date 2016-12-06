@@ -360,6 +360,23 @@
 
                             @endforeach
 
+                            <label for="opleiding" class="col-md-4 control-label">voeg een opleiding toe</label>
+
+                            <div class="col-md-6">
+                                <!-- Trigger/Open The Modal -->
+                                <button id="myBtn" type="button">Voeg toe</button>
+
+                                <!-- The Modal -->
+                                <div id="myModal" class="modal">
+
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <span class="close">x</span>
+                                        <input id="opleiding" class="form-control" name="opleiding" placeholder="naam van de opleiding">
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('titel') ? ' has-error' : '' }}">
                                 <label for="titel" class="col-md-4 control-label">Titel</label>
 
@@ -447,23 +464,6 @@
                     </div>
 
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <label for="naam" class="col-md-4 control-label">voeg een opleiding toe</label>
-
-    <div class="col-md-6">
-        <!-- Trigger/Open The Modal -->
-        <button id="myBtn">Voeg toe</button>
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">x</span>
-                <p>Some text in the Modal..</p>
             </div>
         </div>
     </div>
