@@ -27,6 +27,7 @@ class CreateBedrijfTable extends Migration
             $table->string('land', 255);
             $table->string('provincie', 255)->nullable();
             $table->integer('user_id')->unsigned();
+            $table->nullableTimestamps();
 
 
             $table->foreign('user_id', 'fk_bedrijf_users1_idx')

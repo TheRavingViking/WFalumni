@@ -25,6 +25,7 @@ class CreateEventsTable extends Migration
             $table->string('categorie', 255);
             $table->softDeletes();
             $table->integer('user_id')->unsigned();
+            $table->nullableTimestamps();
 
 
             $table->foreign('user_id', 'fk_events_users_idx')

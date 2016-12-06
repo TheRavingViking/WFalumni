@@ -27,6 +27,8 @@ class CreateOpleidingTable extends Migration
             $table->string('land', 255);
             $table->string('provincie', 255)->nullable();
             $table->integer('user_id')->unsigned();
+            $table->softDeletes();
+            $table->nullableTimestamps();
 
 
             $table->foreign('user_id', 'fk_opleiding_users1_idx')
