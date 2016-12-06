@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Illuminate\Support\Facades\App;
 use Image;
@@ -99,8 +100,7 @@ class UserController extends Controller
     {
 
         if (empty($users->checkbox)) {
-            return redirect::to('overview')->with('message', 'Login Failed');
-           // return Redirect::to('user/login')->with('message', 'Login Failed');
+            return redirect::to('overview')->with('message', 'Geen gebruikers verwijderd, selecteer gebruikers');
         }
         else {
             $checkbox = $users->checkbox;
@@ -108,7 +108,7 @@ class UserController extends Controller
                 $id = User::where('id', $id)->delete();
 
 
-            return redirect()->action('UserController@index');
+          return redirect()->action('UserController@index');
         }
     }
 

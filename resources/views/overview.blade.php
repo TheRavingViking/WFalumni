@@ -2,7 +2,15 @@
 
 @section('content')
 
+
+
+
 <div class="container">
+    @if (session('message'))
+        <div class="alert alert-danger">
+            {{ session('message') }}
+        </div>
+    @endif
     <div class="panel panel-default" style="padding: 2em">
         <div class="row">
             <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/overview" id="delete">
