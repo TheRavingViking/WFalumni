@@ -24,7 +24,7 @@ class UserController extends Controller
 
         $users = User::with(['opleiding' => function ($q) {
             $q->latest('eind');
-        }])->get();
+        }])->paginate(3);
 
         return view('overview', compact('users'));
     }

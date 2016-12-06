@@ -18,6 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/mail', 'MailController@index');
+Route::post('/mail', function (\illuminate\Http\Request $request, \illuminate\Mail\Mailer $mailer){
+    $mailer->to($request->input('Email'))->send(new \App\Mail\MailAll($request->input('users')));
+return redirect()->back();});
 
 Route::get('/profiel', 'UserController@profiel');
 Route::post('/profiel', 'UserController@update');
