@@ -3,21 +3,24 @@
 @section('content')
 
 <div class="container">
-    <div class="panel panel-default">
+    <div class="panel panel-default" style="padding: 2em">
         <div class="row">
             <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/overview" id="delete">
                 {{ csrf_field() }}
-            <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 1em;">
+            <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
                 <button type="submit" class="btn btn-danger">Delete User</button>
             </div>
-
+                <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+                <button class="btn btn-default">
+                    <a href="mailto: @foreach ($users as $mail){{$mail->email}},@endforeach " target="_top">Mail iedereen</a>
+                </button>
+                </div>
         </div>
     </div>
 </div>
 
 
 
-    <a href="mailto: @foreach ($users as $mail){{$mail->email}},@endforeach " target="_top">Link to all the mail</a>
     <div class="container">
         @foreach($users as $user)
 
@@ -60,7 +63,7 @@
         <div class="container" style="alignment: center">
             <div class="row">
                 <div>
-                    {{--{{ $users->links() }}--}}
+                    {{ $users->links() }}
                 </div>
             </div>
         </div>
