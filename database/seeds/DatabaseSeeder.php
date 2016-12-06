@@ -20,6 +20,11 @@ class DatabaseSeeder extends Seeder
             ->each(function($w) {$w->Woonplaats()->saveMany(factory(App\Woonplaats::class, 2)
                 ->make());});
 
+        $this->call(add_user::class);
+        $this->call(add_opleiding::class);
+        $this->call(add_bedrijf::class);
+        $this->call(add_woonplaats::class);
+
 
 
     }
