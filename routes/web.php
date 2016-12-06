@@ -28,6 +28,6 @@ Route::post('/profiel', 'UserController@update');
 //Route::post('/profiel', 'UserController@update_avatar');
 
 Route::get('/overview', 'UserController@index');
-Route::post('/overview', 'UserController@SoftDelete');
+Route::post('/overview', 'UserController@MassSoftDelete');
 Route::get('/profiel/{user}', 'UserController@show');
-//Route::post('/profiel', 'UserController@delete');
+Route::post('/profiel/delete', 'UserController@SoftDelete');

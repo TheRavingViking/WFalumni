@@ -445,7 +445,6 @@
                                     @endif
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
@@ -453,6 +452,10 @@
                                     </button>
                                 </div>
                             </div>
+                        </form>
+                        <form action="/profiel/delete" method="POST">
+                            <input type="hidden" name="id" value="{{ $user->id }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-danger">

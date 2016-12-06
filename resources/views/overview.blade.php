@@ -51,7 +51,6 @@
                             <button type="button" class="btn btn-default btn-lg">
                                 <a href="profiel/{{$user->id}}"><span class="glyphicon glyphicon-cog"></span></a>
                             </button>
-
                             <input type="checkbox" name="checkbox[]" value="{{$user->id}}">
                         </div>
                     </div>
@@ -67,5 +66,7 @@
                 </div>
             </div>
         </div>
+    </div>
             </form>
+
 @stop

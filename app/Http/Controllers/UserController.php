@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Illuminate\Support\Facades\App;
 use Image;
@@ -76,13 +75,22 @@ class UserController extends Controller
         return view('profiel', array('user' => Auth::user()));
     }
 
-    public function SoftDelete()
+    public function SoftDelete(request $id)
     {
-        $user = Auth::user();
-        $value = '1';
-        $user->isDeleted = $value;
-        $user->save();
+
+        $user = Auth::user($id);
+        $id = $id->id;
+        $user = User::find($id);
+
+        $user->delete();
+
         return view('welcome', array('user' => Auth::logout()));
+
+//        $user = Auth::user();
+//        $value = '1';
+//        $user->deleted_at = $value;
+//        $user->save();
+//        return view('welcome', array('user' => Auth::logout()));
     }
 
 
