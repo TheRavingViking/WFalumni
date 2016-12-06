@@ -43,7 +43,7 @@
                                 <a href="mailto:{{$user->email}}"><span class="glyphicon glyphicon-envelope"></span></a>
                             </button>
                             <button type="button" class="btn btn-default btn-lg">
-                                <a href="{{$user->linkedin}}"><span class="glyphicon glyphicon-user"></span></a>
+                                <a href="https://{{$user->linkedin}}"><span class="glyphicon glyphicon-user"></span></a>
                             </button>
                             <button type="button" class="btn btn-default btn-lg">
                                 <a href="profiel/{{$user->id}}"><span class="glyphicon glyphicon-cog"></span></a>
