@@ -12,492 +12,181 @@
                         <h2>{{ $user->voornaam }} {{ $user->achternaam }} Profiel</h2>
                     </div>
 
-                    <div class="panel-body">
-                        <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/profiel" id="profielform">
-                            {{ csrf_field() }}
-
+                    <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/profiel" id="profielform">
+                        {{ csrf_field() }}
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                             <label>Update profiel foto</label>
                             <input type="file" name="avatar">
 
-                        <div class="well">
-                            <div class="form-group{{ $errors->has('voornaam') ? ' has-error' : '' }}">
-                                <label for="voornaam" class="col-md-4 control-label">Voornaam</label>
+                            <label for="voornaam">Voornaam</label>
+                            <input id="voornaam" type="text" class="form-control" name="voornaam" value="{{$user->voornaam}}">
 
-                                <div class="col-md-6">
-                                    <input id="voornaam" type="text" class="form-control" name="voornaam" value="{{$user->voornaam}}">
+                            <label for="tussenvoegsel">Tussenvoegsel</label>
+                            <input id="tussenvoegsel" type="text" class="form-control" name="tussenvoegsel" value="{{ $user->tussenvoegsel }}">
 
-                                    @if ($errors->has('voornaam'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('voornaam') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            <label for="achternaam">Achternaam</label>
+                            <input id="achternaam" type="text" class="form-control" name="achternaam" value="{{ $user->achternaam }}">
 
-                            <div class="form-group{{ $errors->has('tussenvoegsel') ? ' has-error' : '' }}">
-                                <label for="tussenvoegsel" class="col-md-4 control-label">Tussenvoegsel</label>
+                            <label for="email">E-Mail Address</label>
+                            <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}">
 
-                                <div class="col-md-6">
-                                    <input id="tussenvoegsel" type="text" class="form-control" name="tussenvoegsel" value="{{ $user->tussenvoegsel }}">
-
-                                    @if ($errors->has('tussenvoegsel'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('tussenvoegsel') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('achternaam') ? ' has-error' : '' }}">
-                                <label for="achternaam" class="col-md-4 control-label">Achternaam</label>
-
-                                <div class="col-md-6">
-                                    <input id="achternaam" type="text" class="form-control" name="achternaam" value="{{ $user->achternaam }}">
-
-                                    @if ($errors->has('achternaam'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('achternaam') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}">
-
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('studentnummer') ? ' has-error' : '' }}">
-                                <label for="studentnummer" class="col-md-4 control-label">Studentnummer</label>
-
-                                <div class="col-md-6">
-                                    <input id="studentnummer" type="text" class="form-control" name="studentnummer" value="{{ $user->studentnummer }}">
-
-                                    @if ($errors->has('studentnummer'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('studentnummer') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            <label for="studentnummer">Studentnummer</label>
+                            <input id="studentnummer" type="text" class="form-control" name="studentnummer" value="{{ $user->studentnummer }}">
 
                             @foreach($user->woonplaats as $woonplaats)
-
-                                <div class="form-group{{ $errors->has('woonplaats') ? ' has-error' : '' }}">
-                                    <label for="woonplaats" class="col-md-4 control-label">Woonplaats</label>
-
-                                    <div class="col-md-6">
-                                        <input id="woonplaats" type="text" class="form-control" name="woonplaats" value="{{ $user->naam }}" disabled>
-
-                                        @if ($errors->has('woonplaats'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('woonplaats') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
+                                <label for="woonplaats">Woonplaats</label>
+                                <input id="woonplaats" type="text" class="form-control" name="woonplaats" value="{{ $user->naam }}" disabled>
 
                             @endforeach
 
-                            <div class="form-group{{ $errors->has('post adres') ? ' has-error' : '' }}">
-                                <label for="post adres" class="col-md-4 control-label">Post adres</label>
+                            <label for="post adres">Post adres</label>
+                            <input id="post adres" type="text" class="form-control" name="post adres" value="{{ $user->post_adres }}">
 
-                                <div class="col-md-6">
-                                    <input id="post adres" type="text" class="form-control" name="post adres" value="{{ $user->post_adres }}">
+                            <label for="telefoonnummer">Telefoonnummer</label>
+                            <input id="telefoonnummer" type="text" class="form-control" name="telefoonnummer" value="{{ $user->telefoonnummer }}">
 
-                                    @if ($errors->has('post adres'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('post_adres') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            <label for="facebook">facebook</label>
+                            <input id="facebook" type="text" class="form-control" name="facebook" value="{{ $user->facebook }}">
 
-                            <div class="form-group{{ $errors->has('telefoonnummer') ? ' has-error' : '' }}">
-                                <label for="telefoonnummer" class="col-md-4 control-label">Telefoonnummer</label>
+                            <label for="linkedin">linkedin</label>
+                            <input id="linkedin" type="text" class="form-control" name="linkedin" value="{{ $user->linkedin }}">
 
-                                <div class="col-md-6">
-                                    <input id="telefoonnummer" type="text" class="form-control" name="telefoonnummer" value="{{ $user->telefoonnummer }}">
+                            <label for="twitter">twitter</label>
+                            <input id="twitter" type="text" class="form-control" name="twitter" value="{{ $user->twitter }}">
 
-                                    @if ($errors->has('telefoonnummer'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('telefoonnummer') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            <label for="website">website</label>
+                            <input id="website" type="text" class="form-control" name="website" value="{{ $user->website }}">
 
-                            <div class="form-group{{ $errors->has('facebook') ? ' has-error' : '' }}">
-                                <label for="facebook" class="col-md-4 control-label">facebook</label>
+                            <label for="password">Password</label>
+                            <input id="password" type="password" class="form-control" name="password">
 
-                                <div class="col-md-6">
-                                    <input id="facebook" type="text" class="form-control" name="facebook" value="{{ $user->facebook }}">
+                            <label for="password-confirm">Confirm Password</label>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
 
-                                    @if ($errors->has('facebook'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('facebook') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            <label for="geslacht">Geslacht
+                                <br>Man:&nbsp&nbsp&nbsp
+                                @if($user->geslacht == 'man') <input id="geslacht" name="geslacht" type="radio" value="man" checked>
+                                @else <input id="geslacht" name="geslacht" type="radio" value="man">
+                                @endif
+                                <br>Vrouw:
+                                @if($user->geslacht == 'vrouw') <input id="geslacht" name="geslacht" type="radio" value="vrouw" checked>
+                                @else <input id="geslacht" name="geslacht" type="radio" value="vrouw">
+                                @endif
+                            </label>
 
-                            <div class="form-group{{ $errors->has('linkedin') ? ' has-error' : '' }}">
-                                <label for="linkedin" class="col-md-4 control-label">linkedin</label>
+                            <br><label for="burgerlijke staat" title="burgelijke staat">Burgerlijke staat</label>
+                            <select name="burgerlijke staat" title="burgelijke staat">
+                                <option value="ongehuwd">ongehuwd</option>
+                                <option value="gehuwd">gehuwd</option>
+                            </select><br>
 
-                                <div class="col-md-6">
-                                    <input id="linkedin" type="text" class="form-control" name="linkedin" value="{{ $user->linkedin }}">
+                            <label for="heeft_kinderen">heeft_kinderen</label>
+                            <input id="heeft_kinderen" type="text" class="form-control" name="heeft_kinderen" value="{{ $user->heeft_kinderen }}">
 
-                                    @if ($errors->has('linkedin'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('linkedin') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            <label for="nationaliteit">Nationaliteit</label>
+                            <input id="nationaliteit" type="text" class="form-control" name="nationaliteit" value="{{ $user->nationaliteit }}">
 
-                            <div class="form-group{{ $errors->has('twitter') ? ' has-error' : '' }}">
-                                <label for="twitter" class="col-md-4 control-label">twitter</label>
+                            <label for="geboortedatum">Geboortedatum</label>
+                            <input id="geboortedatum" type="date" class="form-control" name="geboortedatum" value="{{ $user->geboortedatum }}">
 
-                                <div class="col-md-6">
-                                    <input id="twitter" type="text" class="form-control" name="twitter" value="{{ $user->twitter }}">
+                            <label for="geboorteplaats">Geboorteplaats</label>
+                            <input id="geboorteplaats" type="text" class="form-control" name="geboorteplaats" value="{{ $user->geboorteplaats }}">
 
-                                    @if ($errors->has('twitter'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('twitter') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            <label for="geboorteprovincie">geboorteprovincie</label>
+                            <input id="geboorteprovincie" type="text" class="form-control" name="geboorteprovincie" value="{{ $user->geboorteprovincie }}">
 
-                            <div class="form-group{{ $errors->has('website') ? ' has-error' : '' }}">
-                                <label for="website" class="col-md-4 control-label">website</label>
-
-                                <div class="col-md-6">
-                                    <input id="website" type="text" class="form-control" name="website" value="{{ $user->website }}">
-
-                                    @if ($errors->has('website'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('website') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password">
-
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="well">
-                            <div class="form-group{{ $errors->has('geslacht') ? ' has-error' : '' }}">
-                                <label for="geslacht" class="col-md-4 control-label">Geslacht
-                                    <br>Man:<br>Vrouw:
-                                </label>
-
-                                <div class="col-md-6"><br>
-
-                                    @if($user->geslacht == 'man') <input id="geslacht" name="geslacht" type="radio" value="man" checked><br>
-                                    @else <input id="geslacht" name="geslacht" type="radio" value="man"><br>
-                                    @endif
-
-                                    @if($user->geslacht == 'vrouw') <input id="geslacht" name="geslacht" type="radio" value="vrouw" checked>
-                                    @else <input id="geslacht" name="geslacht" type="radio" value="vrouw">
-                                    @endif
-
-                                    @if ($errors->has('geslacht'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('geslacht') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('burgerlijke staat') ? ' has-error' : '' }}">
-                                <label for="burgerlijke staat" class="col-md-4 control-label">Burgerlijke staat</label>
-
-                                <div class="col-md-6">
-                                    {{--<input id="burgerlijke staat" type="text" class="form-control" name="burgerlijke staat" value="{{ $user->burgerlijke_staat }}">--}}
-                                    <select name="burgerlijke_staat">
-                                        <option value="ongehuwd">ongehuwd</option>
-                                        <option value="gehuwd">gehuwd</option>
-                                    </select>
-                                    @if ($errors->has('burgerlijke staat'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('burgerlijke_staat') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('heeft_kinderen') ? ' has-error' : '' }}">
-                                <label for="heeft_kinderen" class="col-md-4 control-label">heeft_kinderen</label>
-
-                                <div class="col-md-6">
-                                    <input id="heeft_kinderen" type="text" class="form-control" name="heeft_kinderen" value="{{ $user->heeft_kinderen }}">
-
-                                    @if ($errors->has('heeft_kinderen'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('heeft_kinderen') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('nationaliteit') ? ' has-error' : '' }}">
-                                <label for="nationaliteit" class="col-md-4 control-label">Nationaliteit</label>
-
-                                <div class="col-md-6">
-                                    <input id="nationaliteit" type="text" class="form-control" name="nationaliteit" value="{{ $user->nationaliteit }}">
-
-                                    @if ($errors->has('nationaliteit'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('nationaliteit') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('geboortedatum') ? ' has-error' : '' }}">
-                                <label for="geboortedatum" class="col-md-4 control-label">Geboortedatum</label>
-
-                                <div class="col-md-6">
-                                    <input id="geboortedatum" type="date" class="form-control" name="geboortedatum" value="{{ $user->geboortedatum }}">
-
-                                    @if ($errors->has('geboortedatum'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('geboortedatum') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('geboorteplaats') ? ' has-error' : '' }}">
-                                <label for="geboorteplaats" class="col-md-4 control-label">Geboorteplaats</label>
-
-                                <div class="col-md-6">
-                                    <input id="geboorteplaats" type="text" class="form-control" name="geboorteplaats" value="{{ $user->geboorteplaats }}">
-
-                                    @if ($errors->has('geboorteplaats'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('geboorteplaats') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('geboorteprovincie') ? ' has-error' : '' }}">
-                                <label for="geboorteprovincie" class="col-md-4 control-label">geboorteprovincie</label>
-
-                                <div class="col-md-6">
-                                    <input id="geboorteprovincie" type="text" class="form-control" name="geboorteprovincie" value="{{ $user->geboorteprovincie }}">
-
-                                    @if ($errors->has('geboorteprovincie'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('geboorteprovincie') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('geboorteland') ? ' has-error' : '' }}">
-                                <label for="geboorteland" class="col-md-4 control-label">geboorteland</label>
-
-                                <div class="col-md-6">
-                                    <input id="geboorteland" type="text" class="form-control" name="geboorteland" value="{{ $user->geboorteland }}">
-
-                                    @if ($errors->has('geboorteland'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('geboorteland') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                        </div>
+                            <label for="geboorteland">geboorteland</label>
+                            <input id="geboorteland" type="text" class="form-control" name="geboorteland" value="{{ $user->geboorteland }}">
 
                             @foreach($user->opleiding as $opl)
 
-                            <div class="form-group{{ $errors->has('naam') ? ' has-error' : '' }}">
-                                <label for="naam" class="col-md-4 control-label">opleiding</label>
-
-                                <div class="col-md-6">
-                                    <input id="naam" type="text" class="form-control" name="naam" value="{{ $opl->naam }}" disabled>
-
-                                    @if ($errors->has('naam'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('naam') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                                <label for="naam">opleiding</label>
+                                <input id="naam" type="text" class="form-control" name="naam" value="{{ $opl->naam }}" disabled>
 
                             @endforeach
 
-                            <label for="opleiding" class="col-md-4 control-label">voeg een opleiding toe</label>
+                            <label for="opleiding">voeg een opleiding toe</label>
 
-                            <div class="col-md-6">
+                            <div>
                                 <!-- Trigger/Open The Modal -->
-                                <button id="myBtn" type="button">Voeg toe</button>
+                                <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
                                 <!-- The Modal -->
-                                <div id="myModal" class="modal">
+                                <div id="myModal" class="modal fade">
 
-                                    <!-- Modal content -->
+                                    <!-- Modal content-->
                                     <div class="modal-content">
-                                        <span class="close">x</span>
-                                        <input id="opleiding" class="form-control" name="opleiding" placeholder="naam van de opleiding">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Vul de opleidings informatie in</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <label for="naam">Naam van de opleiding</label>
+                                            <input id="naam" type="text" name="naam">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group{{ $errors->has('titel') ? ' has-error' : '' }}">
-                                <label for="titel" class="col-md-4 control-label">Titel</label>
 
-                                <div class="col-md-6">
-                                    <input id="titel" type="text" class="form-control" name="titel" value="{{ $user->titel }}">
+                            </div><br><br>
 
-                                    @if ($errors->has('titel'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('titel') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            <label for="titel">Titel</label>
+                            <input id="titel" type="text" class="form-control" name="titel" value="{{ $user->titel }}">
 
                             @foreach($user->bedrijf as $bedrijf)
 
-                                <div class="form-group{{ $errors->has('naam') ? ' has-error' : '' }}">
-                                    <label for="naam" class="col-md-4 control-label">Werkplaats</label>
+                                <label for="naam">Werkplaats</label>
+                                <input id="naam" type="text" class="form-control" name="naam" value="{{ $bedrijf->naam }}" disabled>
 
-                                    <div class="col-md-6">
-                                        <input id="naam" type="text" class="form-control" name="naam" value="{{ $bedrijf->naam }}" disabled>
+                            @endforeach
 
-                                        @if ($errors->has('naam'))
-                                            <span class="help-block">
-                                        <strong>{{ $errors->first('naam') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
+                            <label for="werkplaats">voeg een werkplaats toe</label>
 
-                                @endforeach
+                            <div>
+                                <!-- Trigger/Open The Modal -->
+                                <button id="werkBut" class="btn btn-info btn-md" type="button">Voeg toe</button>
 
-                            <div class="form-group{{ $errors->has('jaarinkomen') ? ' has-error' : '' }}">
-                                <label for="jaarinkomen" class="col-md-4 control-label">jaarinkomen</label>
+                            </div><br><br>
 
-                                <div class="col-md-6">
-                                    <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen" value="{{ $user->jaarinkomen }}">
+                            <label for="jaarinkomen">jaarinkomen</label>
+                            <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen" value="{{ $user->jaarinkomen }}">
 
-                                    @if ($errors->has('jaarinkomen'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('jaarinkomen') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                            <label for="geenmailverzenden">Wenst email te ontvangen:
+                                <br>Ja, graag&nbsp&nbsp&nbsp&nbsp&nbsp
 
-                            <div class="form-group{{ $errors->has('geenmailverzenden') ? ' has-error' : '' }}">
-                                <label for="geenmailverzenden" class="col-md-4 control-label">Wenst email te ontvangen:
-                                    <br>Ja, graag<br>Nee, dank je
-                                </label>
+                                @if($user->geenmailverzenden == 1) <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1" checked><br>
+                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1"><br>
+                                @endif
 
-                                <div class="col-md-6"><br>
+                                Nee, dank je
+                                @if($user->geenmailverzenden == 0) <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0" checked>
+                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0">
+                                @endif
+                            </label>
 
-                                    @if($user->geenmailverzenden == 1) <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1" checked><br>
-                                    @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1"><br>
-                                    @endif
+                            <br><button type="submit" class="btn btn-primary">
+                                Wijzig
+                            </button>
+                        </div>
 
-                                    @if($user->geenmailverzenden == 0) <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0" checked>
-                                    @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0">
-                                    @endif
-
-                                    @if ($errors->has('geenmailverzenden'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('geenmailverzenden') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Wijzig
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                        <form action="/profiel/delete" method="POST">
-                            <input type="hidden" name="id" value="{{ $user->id }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-danger">
-                                        Delete User
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                    </form>
+                </div>
+                </form>
+                <form action="/profiel/delete" method="POST">
+                    <input type="hidden" name="id" value="{{ $user->id }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-4">
+                            <button type="submit" class="btn btn-danger">
+                                Delete User
+                            </button>
+                        </div>
                     </div>
-
                 </div>
             </div>
-        </div>
-    </div>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById('myModal');
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
 @endsection
+
 
