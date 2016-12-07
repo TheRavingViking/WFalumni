@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\App;
 use Image;
 use App\User;
 use App\Opleiding;
-
+use App\Bedrijf;
 
 class UserController extends Controller
 {
@@ -36,6 +36,63 @@ class UserController extends Controller
     public function show(User $user)
     {
         return view('profiel', compact('user'));
+    }
+
+    public function createOpleiding(Request $request)
+    {
+        dd($request) ;
+        $data = array(
+          'naam' => $request['naam'],
+          'instituut' => $request['instituut'],
+          'richting' => $request['richting'],
+          'begin' => $request['begin'],
+          'eind' => $request['eind'],
+          'locatie' => $request['locatie'],
+          'niveau' => $request['niveau'],
+          'behaald' => $request['behaald'],
+          'land' => $request['land'],
+          'provincie' => $request['provincie'],
+          'user_id' => $request['user_id']
+        );
+        opleiding::create($data);
+        return view('profiel', array('user' => Auth::user()));
+    }
+
+    public function createBedrijf(Request $request)
+    {
+        dd($request) ;
+        $data = array(
+            'naam' => $request['naam'],
+            'functie' => $request['functie'],
+            'richting' => $request['richting'],
+            'begin' => $request['begin'],
+            'eind' => $request['eind'],
+            'locatie' => $request['locatie'],
+            'telefoonnummer' => $request['telefoonnummer'],
+            'bezoekadres' => $request['bezoekadres'],
+            'land' => $request['land'],
+            'provincie' => $request['provincie'],
+            'user_id' => $request['user_id']
+        );
+        bedrijf::create($data);
+        return view('profiel', array('user' => Auth::user()));
+    }
+
+    public function createWoonplaats(Request $request)
+    {
+        dd($request) ;
+        $data = array(
+            'naam' => $request['naam'],
+            'begin' => $request['begin'],
+            'eind' => $request['eind'],
+            'longitude' => $request['longitude'],
+            'latitude' => $request['latitude'],
+            'land' => $request['land'],
+            'provincie' => $request['provincie'],
+            'user_id' => $request['user_id']
+        );
+        bedrijf::create($data);
+        return view('profiel', array('user' => Auth::user()));
     }
 
     public function update(Request $req)

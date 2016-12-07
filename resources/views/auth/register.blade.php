@@ -10,8 +10,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
                         <div>
-                            <label for="isDeleted"></label>
-                            <input id="isDeleted" name="isDeleted" value="0" hidden>
+                            <input title="deleted_at" id="deleted_at" name="deleted_at" value="null" hidden>
                         </div>
 
                         <div class="form-group{{ $errors->has('voornaam') ? ' has-error' : '' }}">

@@ -25,7 +25,9 @@ return redirect()->back();});
 
 Route::get('/profiel', 'UserController@profiel');
 Route::post('/profiel', 'UserController@update');
-//Route::post('/profiel', 'UserController@update_avatar');
+Route::post('/profiel/opleiding', 'UserController@createOpleiding');
+Route::post('/profiel/bedrijf', 'UserController@createBedrijf');
+Route::post('/profiel/woonplaats', 'UserController@createWoonplaats');
 
 Route::get('/overview', 'UserController@index');
 Route::post('/overview', 'UserController@MassSoftDelete');

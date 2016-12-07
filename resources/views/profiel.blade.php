@@ -115,34 +115,6 @@
 
                             @endforeach
 
-                            <label for="opleiding">voeg een opleiding toe</label>
-
-                            <div>
-                                <!-- Trigger/Open The Modal -->
-                                <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-                                <!-- The Modal -->
-                                <div id="myModal" class="modal fade">
-
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Vul de opleidings informatie in</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <label for="naam">Naam van de opleiding</label>
-                                            <input id="naam" type="text" name="naam">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div><br><br>
-
                             <label for="titel">Titel</label>
                             <input id="titel" type="text" class="form-control" name="titel" value="{{ $user->titel }}">
 
@@ -152,14 +124,6 @@
                                 <input id="naam" type="text" class="form-control" name="naam" value="{{ $bedrijf->naam }}" disabled>
 
                             @endforeach
-
-                            <label for="werkplaats">voeg een werkplaats toe</label>
-
-                            <div>
-                                <!-- Trigger/Open The Modal -->
-                                <button id="werkBut" class="btn btn-info btn-md" type="button">Voeg toe</button>
-
-                            </div><br><br>
 
                             <label for="jaarinkomen">jaarinkomen</label>
                             <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen" value="{{ $user->jaarinkomen }}">
@@ -184,7 +148,6 @@
 
                     </form>
                 </div>
-                </form>
                 <form action="/profiel/delete" method="POST">
                     <input type="hidden" name="id" value="{{ $user->id }}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -192,12 +155,248 @@
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-danger">
                                 Delete User
-                            </button>
+                                </button>
+                            </div>
                         </div>
+                    </form>
+                </div>
+            </div>
+
+        <label for="opleiding">voeg een opleiding toe</label>
+
+        <div>
+            <!-- Trigger/Open The Modal -->
+            <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#oplModal">Voeg toe</button>
+
+            <!-- The Modal -->
+            <div id="oplModal" class="modal fade">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Vul de opleidings informatie in</h4>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <form method="POST" action="profiel/opleiding" class="form-horizontal">
+                            {!! csrf_field() !!}
+
+                            <div class="form-group">
+                                <label for="naam">Naam van de opleiding</label>
+                                <input id="naam" type="text" name="naam" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instituut">Naam van het instituut</label>
+                                <input id="instituut" type="text" name="instituut" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="richting">Naam van de richting</label>
+                                <input id="richting" type="text" name="richting" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="begin">Begin van de opleiding</label>
+                                <input id="begin" type="date" name="begin" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="eind">Einde van de opleiding</label>
+                                <input id="eind" type="date" name="eind">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="locatie">Locatie van het instituut</label>
+                                <input id="locatie" type="text" name="locatie" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="niveau">Niveau van de opleiding</label>
+                                <input id="niveau" type="text" name="niveau" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="behaald">Opleiding behaald</label>
+                                <input id="behaald" name="behaald" type="radio" value="1" required>ja
+                                <input id="behaald" name="behaald" type="radio" value="0">nee
+                            </div>
+
+                            <div class="form-group">
+                                <label for="land">Land van het instituut</label>
+                                <input id="land" type="text" name="land" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="provincie">Provincie van het instituut</label>
+                                <input id="provincie" type="text" name="provincie">
+                            </div>
+
+                            <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}" >
+
+                            <button type="submit" class="btn btn-default" >Submit</button>
+                        </form>
+                    </div>
+                        <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <label for="bedrijf">voeg een bedrijf toe</label>
+
+        <div>
+            <!-- Trigger/Open The Modal -->
+            <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#bedModal">Voeg toe</button>
+
+            <!-- The Modal -->
+            <div id="bedModal" class="modal fade">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Vul het bedrijf in</h4>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <form method="POST" action="profiel/bedrijf" class="form-horizontal">
+                            {!! csrf_field() !!}
+
+                            <div class="form-group">
+                                <label for="functie">functie</label>
+                                <input id="functie" type="text" name="functie" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="richting">richting</label>
+                                <input id="richting" type="text" name="richting" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="naam">naam</label>
+                                <input id="naam" type="text" name="naam" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="locatie">locatie</label>
+                                <input id="locatie" type="text" name="locatie" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="begin">begin</label>
+                                <input id="begin" type="date" name="begin" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="eind">eind</label>
+                                <input id="eind" type="date" name="eind">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telefoonnummer">telefoonnummer</label>
+                                <input id="telefoonnummer" type="text" name="telefoonnummer">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bezoekadres">bezoekadres</label>
+                                <input id="bezoekadres" type="text" name="bezoekadres">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="land">land</label>
+                                <input id="land" type="text" name="land" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="provincie">provincie</label>
+                                <input id="provincie" type="text" name="provincie">
+                            </div>
+
+                            <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}" >
+
+                            <button type="submit" class="btn btn-default" >Submit</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <label for="woonplaats">voeg een woonplaats toe</label>
+
+        <div>
+            <!-- Trigger/Open The Modal -->
+            <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#woonModal">Voeg toe</button>
+
+            <!-- The Modal -->
+            <div id="woonModal" class="modal fade">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Vul de woonplaats</h4>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <form method="POST" action="profiel/woonplaats" class="form-horizontal">
+                            {!! csrf_field() !!}
+
+                            <div class="form-group">
+                                <label for="naam">naam</label>
+                                <input id="naam" type="text" name="naam" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="begin">begin</label>
+                                <input id="begin" type="date" name="begin" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="eind">eind</label>
+                                <input id="eind" type="date" name="eind">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="longitude">longitude</label>
+                                <input id="longitude" type="text" name="longitude">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="latitude">longitude</label>
+                                <input id="latitude" type="text" name="latitude">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="land">land</label>
+                                <input id="land" type="text" name="land" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="provincie">provincie</label>
+                                <input id="provincie" type="text" name="provincie">
+                            </div>
+
+                            <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}" >
+
+                            <button type="submit" class="btn btn-default" >Submit</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
                     </div>
                 </div>
         </div></form>
             </div>
+        </div>
 @endsection
 
 
