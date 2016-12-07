@@ -58,6 +58,25 @@ class UserController extends Controller
         return redirect::to('profiel')->with('message', 'Opleiding toegevoegd');
     }
 
+    public function deleteOpleiding(Request $request)
+    {
+        $user = $request->user_id;
+        if (Opleiding::where('user_id', $user)->count() > 1)
+        {
+            $id = $request->id;
+            $id = Opleiding::find($id);
+            $id->delete();
+            return redirect::back()->with('status', 'Opleiding verwijderd');
+        }
+        else
+        {
+            return redirect::back()->with('error', 'Je mag niet minder dan 1 opleiding hebben.');
+        }
+    }
+
+
+
+
     public function createBedrijf(Request $request)
     {
         $data = array(
@@ -77,6 +96,25 @@ class UserController extends Controller
         return redirect::to('profiel')->with('message', 'bedrijf toegevoegd');
     }
 
+    public function deleteBedrijf(Request $request)
+    {
+        $user = $request->user_id;
+        if (Bedrijf::where('user_id', $user)->count() > 1)
+        {
+        $id = $request->id;
+        $id = Bedrijf::find($id);
+        $id->delete();
+        return redirect::back()->with('status', 'bedrijf verwijderd');
+        }
+        else
+        {
+        return redirect::back()->with('error', 'Je mag niet minder dan 1 bedrijf hebben.');
+        }
+    }
+
+
+
+
     public function createWoonplaats(Request $request)
     {
         $data = array(
@@ -92,6 +130,24 @@ class UserController extends Controller
         woonplaats::create($data);
         return redirect::to('profiel')->with('message', 'woonplaats toegevoegd');
     }
+
+    public function deleteWoonplaats(Request $request)
+    {
+        $user = $request->user_id;
+        if (Woonplaats::where('user_id', $user)->count() > 1)
+        {
+            $id = $request->id;
+            $id = Woonplaats::find($id);
+            $id->delete();
+            return redirect::back()->with('status', 'Woonplaats verwijderd');
+        }
+        else
+        {
+            return redirect::back()->with('error', 'Je mag niet minder dan 1 woonplaats hebben.');
+        }
+    }
+
+
 
     public function update(Request $req)
     {

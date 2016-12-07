@@ -25,6 +25,7 @@ class CreateWoonplaatsTable extends Migration
             $table->string('provincie', 25)->nullable();
             $table->integer('user_id')->unsigned();
             $table->nullableTimestamps();
+            $table->softDeletes();
 
 
             $table->foreign('user_id', 'fk_woonplaats_users1_idx')
