@@ -40,7 +40,6 @@ class UserController extends Controller
 
     public function createOpleiding(Request $request)
     {
-        dd($request) ;
         $data = array(
           'naam' => $request['naam'],
           'instituut' => $request['instituut'],
@@ -60,7 +59,6 @@ class UserController extends Controller
 
     public function createBedrijf(Request $request)
     {
-        dd($request) ;
         $data = array(
             'naam' => $request['naam'],
             'functie' => $request['functie'],
@@ -80,7 +78,6 @@ class UserController extends Controller
 
     public function createWoonplaats(Request $request)
     {
-        dd($request) ;
         $data = array(
             'naam' => $request['naam'],
             'begin' => $request['begin'],
@@ -91,7 +88,7 @@ class UserController extends Controller
             'provincie' => $request['provincie'],
             'user_id' => $request['user_id']
         );
-        bedrijf::create($data);
+        woonplaats::create($data);
         return view('profiel', array('user' => Auth::user()));
     }
 
