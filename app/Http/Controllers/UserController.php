@@ -77,8 +77,9 @@ class UserController extends Controller
         );
         $user->fill($new_user_data);
         $user->save();
-        return view('profiel', array('user' => Auth::user()));
-    }
+        //return view('profiel', array('user' => Auth::user()));
+        return back()->with('status', 'Update was succesvol!!');
+            }
 
     public function SoftDelete(request $id)
     {

@@ -13,23 +13,23 @@
                     </div>
 
                     <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/profiel" id="profielform">
+                        @foreach ($errors->all() as $error)
+                            <p class="alert alert-danger">{{ $error }}</p>
+                        @endforeach
+
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
                         {{ csrf_field() }}
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                             <label>Update profiel foto</label>
                             <input type="file" name="avatar">
 
-                            <div class="input-group" style="padding-top: 1em; padding-bottom: 1em;">
-                                <span class="input-group-addon">Voornaam</span>
-                                <input id="voornaam" type="text" class="form-control" name="voornaam" placeholder="voornaam" value="{{$user->voornaam}}">
-                            </div>
-
-                            <div class="input-group" style="padding-bottom: 1em;">
-                                <span class="input-group-addon">Tussenvoegsel</span>
-                                <input id="tussenvoegsel" type="text" class="form-control" name="tussenvoegsel" placeholder="tussenvoegsel" value="{{$user->tussenvoegsel}}">
-                            </div>
-
+                            <label for="voornaam">Voornaam</label>
+                            <input id="voornaam" type="text" class="form-control" name="voornaam" value="{{$user->voornaam}}">
 
                             <label for="tussenvoegsel">Tussenvoegsel</label>
                             <input id="tussenvoegsel" type="text" class="form-control" name="tussenvoegsel" value="{{ $user->tussenvoegsel }}">
@@ -196,6 +196,7 @@
                         </div>
                     </div>
                 </div>
+        </div></form>
             </div>
 @endsection
 
