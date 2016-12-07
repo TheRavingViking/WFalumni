@@ -42,9 +42,9 @@
                     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                         <div style="margin-left: 1em;">
                             <h4><b>{{$user->voornaam}} {{$user->tussenvoegsel}} {{$user->achternaam}}</b></h4>
-                            Opleiding:{{$user->opleiding[0]->naam}} genoten tussen:{{$user->opleiding[0]->begin}}
-                            tot {{$user->opleiding[0]->eind}}
-                            Behaald: @if ($user->opleiding[0]->behaald === 1)Ja @else Nee @endif<br>
+                            Opleiding:{{$user->opleiding->last()->naam}} genoten tussen:{{$user->opleiding->last()->begin}}
+                            tot {{$user->opleiding->last()->eind}}
+                            Behaald: @if ($user->opleiding->last()->behaald === 1)Ja @else Nee @endif<br>
                         </div>
                     </div>
 

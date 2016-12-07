@@ -23,9 +23,12 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::with(['opleiding' => function ($q) {
-            $q->latest('eind');
-        }])->paginate(25);
+//        $users = User::with(['opleiding' => function ($q) {
+//            $q->latest('eind');
+//        }])->paginate(25);
+
+        $users = User::with('opleiding')->paginate(25);
+
 
         return view('overview', compact('users'));
     }

@@ -9,17 +9,27 @@
                         <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive" style="min-width: 100px; float:left; border-radius:50%; margin-right:25px;">
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <h2>{{ $user->voornaam }} {{ $user->achternaam }} Profiel</h2>
+                        <h2>{{ $user->voornaam }} {{ $user->tussenvoegsel }} {{ $user->achternaam }}</h2>
                     </div>
 
                     <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/profiel" id="profielform">
                         {{ csrf_field() }}
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
                             <label>Update profiel foto</label>
                             <input type="file" name="avatar">
 
-                            <label for="voornaam">Voornaam</label>
-                            <input id="voornaam" type="text" class="form-control" name="voornaam" value="{{$user->voornaam}}">
+                            <div class="input-group" style="padding-top: 1em; padding-bottom: 1em;">
+                                <span class="input-group-addon">Voornaam</span>
+                                <input id="voornaam" type="text" class="form-control" name="voornaam" placeholder="voornaam" value="{{$user->voornaam}}">
+                            </div>
+
+                            <div class="input-group" style="padding-bottom: 1em;">
+                                <span class="input-group-addon">Tussenvoegsel</span>
+                                <input id="tussenvoegsel" type="text" class="form-control" name="tussenvoegsel" placeholder="tussenvoegsel" value="{{$user->tussenvoegsel}}">
+                            </div>
+
 
                             <label for="tussenvoegsel">Tussenvoegsel</label>
                             <input id="tussenvoegsel" type="text" class="form-control" name="tussenvoegsel" value="{{ $user->tussenvoegsel }}">
