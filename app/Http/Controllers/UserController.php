@@ -11,6 +11,7 @@ use Image;
 use App\User;
 use App\Opleiding;
 use App\Bedrijf;
+use App\Woonplaats;
 
 class UserController extends Controller
 {
@@ -54,7 +55,7 @@ class UserController extends Controller
           'user_id' => $request['user_id']
         );
         opleiding::create($data);
-        return view('profiel', array('user' => Auth::user()));
+        return redirect::to('profiel')->with('message', 'Opleiding toegevoegd');
     }
 
     public function createBedrijf(Request $request)
@@ -73,7 +74,7 @@ class UserController extends Controller
             'user_id' => $request['user_id']
         );
         bedrijf::create($data);
-        return view('profiel', array('user' => Auth::user()));
+        return redirect::to('profiel')->with('message', 'bedrijf toegevoegd');
     }
 
     public function createWoonplaats(Request $request)
@@ -89,7 +90,7 @@ class UserController extends Controller
             'user_id' => $request['user_id']
         );
         woonplaats::create($data);
-        return view('profiel', array('user' => Auth::user()));
+        return redirect::to('profiel')->with('message', 'woonplaats toegevoegd');
     }
 
     public function update(Request $req)

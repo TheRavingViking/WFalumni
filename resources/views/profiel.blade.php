@@ -45,7 +45,7 @@
 
                             @foreach($user->woonplaats as $woonplaats)
                                 <label for="woonplaats">Woonplaats</label>
-                                <input id="woonplaats" type="text" class="form-control" name="woonplaats" value="{{ $user->naam }}" disabled>
+                                <input id="woonplaats" type="text" class="form-control" name="woonplaats" value="{{ $woonplaats->naam }}" disabled>
 
                             @endforeach
 
@@ -390,11 +390,11 @@
 
                             <button type="submit" class="btn btn-default" >Submit</button>
                         </form>
-                    </div>
+                        </div>
                     <div class="modal-footer">
+                        </div>
                     </div>
                 </div>
-        </div></form>
             </div>
         </div>
 @endsection
