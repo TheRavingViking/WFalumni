@@ -11,19 +11,19 @@
 |
 */
 
-$factory->define(App\Bedrijf::class, function (Faker\Generator $faker) {
+$factory->define(App\Woonplaats::class, function (Faker\Generator $faker) {
 
-    $faker->addProvider(new Faker\Provider\nl_NL\Company($faker));
+
+    $faker->addProvider(new Faker\Provider\nl_NL\Address($faker));
+
     return [
-        'functie' => $faker->name,
-        'richting' => $faker->name,
-        'naam' => $faker->company,
-        'locatie' => $faker->city,
+        'naam' => $faker->city,
         'begin' => $faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now'),
         'eind' => $faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now'),
-        'telefoonnummer' => $faker->phoneNumber,
-        'bezoekadres' => $faker->address,
+        'longitude' => $faker->longitude,
+        'latitude' => $faker->latitude,
         'land' => $faker->country,
+        'provincie' => $faker->state,
 
     ];
 });

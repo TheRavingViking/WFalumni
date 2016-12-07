@@ -13,16 +13,18 @@
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
 
+    $faker->addProvider(new Faker\Provider\nl_NL\Person($faker));
+
     $geslacht = array('Man', 'Vrouw');
 
 
     return [
 
         'geslacht'=> $faker->randomElement($geslacht),
-        'voornaam' => $faker->name,
+        'voornaam' => $faker->firstName,
         'studentnummer' => $faker->numberBetween($min = 100000, $max = 999999),
         'achternaam' => $faker->lastName,
-        'email' => $faker->unique()->email,
+        'email' => $faker->unique()->safeEmail,
         'foto' => 'default.png',
         'linkedin' => 'www.linkedin.com',
         'password' => $faker->password,

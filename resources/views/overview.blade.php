@@ -54,10 +54,10 @@
                                 <a href="mailto:{{$user->email}}"><span class="glyphicon glyphicon-envelope"></span></a>
                             </button>
                             <button type="button" class="btn btn-default btn-lg">
-                                <a href="https://{{$user->linkedin}}"><span class="glyphicon glyphicon-user"></span></a>
+                                <a href="https://{{$user->linkedin}}"><span class="fa fa-fw fa-linkedin"></span></a>
                             </button>
                             <button type="button" class="btn btn-default btn-lg">
-                                <a href="profiel/{{$user->id}}"><span class="glyphicon glyphicon-cog"></span></a>
+                                <a href="profiel/{{$user->id}}"><span class="glyphicon glyphicon-user""></span></a>
                             </button>
                             <input type="checkbox" name="checkbox[]" value="{{$user->id}}">
                         </div>
