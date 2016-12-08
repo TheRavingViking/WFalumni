@@ -17,18 +17,29 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
-Route::get('/mail', 'MailController@index');
-Route::get('/profiel', 'UserController@profiel');
-Route::post('/profiel', 'UserController@update');
-Route::post('/profiel/opleiding', 'UserController@createOpleiding');
-Route::post('/profiel/opleiding/delete', 'UserController@deleteOpleiding');
-Route::post('/profiel/bedrijf', 'UserController@createBedrijf');
-Route::post('/profiel/bedrijf/delete', 'UserController@deleteBedrijf');
-Route::post('/profiel/woonplaats', 'UserController@createWoonplaats');
-Route::post('/profiel/woonplaats/delete', 'UserController@deleteWoonplaats');
+Route::get('/home', 'HomeController@index')->middleware('auth');
 
-Route::get('/overview', 'UserController@index');
-Route::post('/overview', 'UserController@MassSoftDelete');
-Route::get('/profiel/{user}', 'UserController@show');
-Route::post('/profiel/delete', 'UserController@SoftDelete');
+Route::get('/mail', 'MailController@index')->middleware('auth');
+
+Route::get('/profiel', 'UserController@profiel')->middleware('auth');
+Route::get('/profiel/{user}', 'UserController@show')->middleware('auth');
+Route::post('/profiel/delete', 'UserController@SoftDelete')->middleware('auth');
+
+Route::post('/profiel', 'UserController@update')->middleware('auth');
+
+Route::post('/profiel/opleiding', 'UserController@createOpleiding')->middleware('auth');
+Route::post('/profiel/opleiding/delete', 'UserController@deleteOpleiding')->middleware('auth');
+
+Route::post('/profiel/bedrijf', 'UserController@createBedrijf')->middleware('auth');
+Route::post('/profiel/bedrijf/delete', 'UserController@deleteBedrijf')->middleware('auth');
+
+Route::post('/profiel/woonplaats', 'UserController@createWoonplaats')->middleware('auth');
+Route::post('/profiel/woonplaats/delete', 'UserController@deleteWoonplaats')->middleware('auth');
+
+Route::get('/overview', 'UserController@index')->middleware('auth');
+Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth');
+
+Route::post('/personeelProfiel/store', 'PersoneelController@update')->middleware('auth');
+Route::post('/personeelProfiel/delete', 'PersoneelController@SoftDelete')->middleware('auth');
+
+Route::get('/personeelOverview', 'PersoneelController@index');
