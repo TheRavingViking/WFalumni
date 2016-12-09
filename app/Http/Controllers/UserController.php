@@ -39,20 +39,29 @@ class UserController extends Controller
         return view('profiel', compact('user'));
     }
 
+    public function search(request $request)
+    {
+        $keyword = request('searchinput');
+        $users = User::SearchByKeyword($keyword)->paginate(25);
+        return view('overview', compact('users'));
+
+    }
+
+
     public function createOpleiding(Request $request)
     {
         $data = array(
-          'naam' => $request['naam'],
-          'instituut' => $request['instituut'],
-          'richting' => $request['richting'],
-          'begin' => $request['begin'],
-          'eind' => $request['eind'],
-          'locatie' => $request['locatie'],
-          'niveau' => $request['niveau'],
-          'behaald' => $request['behaald'],
-          'land' => $request['land'],
-          'provincie' => $request['provincie'],
-          'user_id' => $request['user_id']
+            'naam' => $request['naam'],
+            'instituut' => $request['instituut'],
+            'richting' => $request['richting'],
+            'begin' => $request['begin'],
+            'eind' => $request['eind'],
+            'locatie' => $request['locatie'],
+            'niveau' => $request['niveau'],
+            'behaald' => $request['behaald'],
+            'land' => $request['land'],
+            'provincie' => $request['provincie'],
+            'user_id' => $request['user_id']
         );
         opleiding::create($data);
         return redirect::to('profiel')->with('message', 'Opleiding toegevoegd');
@@ -61,20 +70,15 @@ class UserController extends Controller
     public function deleteOpleiding(Request $request)
     {
         $user = $request->user_id;
-        if (Opleiding::where('user_id', $user)->count() > 1)
-        {
+        if (Opleiding::where('user_id', $user)->count() > 1) {
             $id = $request->id;
             $id = Opleiding::find($id);
             $id->delete();
             return redirect::back()->with('status', 'Opleiding verwijderd');
-        }
-        else
-        {
+        } else {
             return redirect::back()->with('error', 'Je mag niet minder dan 1 opleiding hebben.');
         }
     }
-
-
 
 
     public function createBedrijf(Request $request)
@@ -99,20 +103,15 @@ class UserController extends Controller
     public function deleteBedrijf(Request $request)
     {
         $user = $request->user_id;
-        if (Bedrijf::where('user_id', $user)->count() > 1)
-        {
-        $id = $request->id;
-        $id = Bedrijf::find($id);
-        $id->delete();
-        return redirect::back()->with('status', 'bedrijf verwijderd');
-        }
-        else
-        {
-        return redirect::back()->with('error', 'Je mag niet minder dan 1 bedrijf hebben.');
+        if (Bedrijf::where('user_id', $user)->count() > 1) {
+            $id = $request->id;
+            $id = Bedrijf::find($id);
+            $id->delete();
+            return redirect::back()->with('status', 'bedrijf verwijderd');
+        } else {
+            return redirect::back()->with('error', 'Je mag niet minder dan 1 bedrijf hebben.');
         }
     }
-
-
 
 
     public function createWoonplaats(Request $request)
@@ -134,19 +133,15 @@ class UserController extends Controller
     public function deleteWoonplaats(Request $request)
     {
         $user = $request->user_id;
-        if (Woonplaats::where('user_id', $user)->count() > 1)
-        {
+        if (Woonplaats::where('user_id', $user)->count() > 1) {
             $id = $request->id;
             $id = Woonplaats::find($id);
             $id->delete();
             return redirect::back()->with('status', 'Woonplaats verwijderd');
-        }
-        else
-        {
+        } else {
             return redirect::back()->with('error', 'Je mag niet minder dan 1 woonplaats hebben.');
         }
     }
-
 
 
     public function update(Request $req)
@@ -190,7 +185,7 @@ class UserController extends Controller
         $user->save();
         //return view('profiel', array('user' => Auth::user()));
         return back()->with('status', 'Update was succesvol!!');
-            }
+    }
 
     public function SoftDelete(request $id)
     {
@@ -216,14 +211,13 @@ class UserController extends Controller
 
         if (empty($users->checkbox)) {
             return redirect::to('overview')->with('message', 'Geen gebruikers verwijderd, selecteer gebruikers');
-        }
-        else {
+        } else {
             $checkbox = $users->checkbox;
             foreach ($checkbox as $id)
                 $id = User::where('id', $id)->delete();
 
 
-          return redirect()->action('UserController@index');
+            return redirect()->action('UserController@index');
         }
     }
 

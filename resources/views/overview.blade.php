@@ -5,27 +5,35 @@
 
 
 
-<div class="container">
-    @if (session('message'))
-        <div class="alert alert-danger">
-            {{ session('message') }}
-        </div>
-    @endif
-    <div class="panel panel-default" style="padding: 2em">
-        <div class="row">
-            <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/overview" id="delete">
-                {{ csrf_field() }}
-            <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                <button type="submit" class="btn btn-danger">Delete User</button>
+    <div class="container">
+        @if (session('message'))
+            <div class="alert alert-danger">
+                {{ session('message') }}
             </div>
-                <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                <button class="btn btn-default">
-                    <a href="mailto: @foreach ($users as $mail){{$mail->email}},@endforeach " target="_top">Mail iedereen</a>
-                </button>
+        @endif
+        <div class="panel panel-default" style="padding: 2em">
+            <div class="row">
+                <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/overview"
+                      id="delete">
+                    {{ csrf_field() }}
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+                        <button type="submit" class="btn btn-danger">Delete User</button>
+                    </div>
+                </form>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+                    <button class="btn btn-default">
+                        <a href="mailto: @foreach ($users as $mail){{$mail->email}},@endforeach " target="_top">Mail
+                            iedereen</a>
+                    </button>
                 </div>
+                <form class="form-horizontal" method="get" action="">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="text" name="searchinput" placeholder="Search.." id="searchinput">
+                    <button class="btn btn-primary">Go</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 
 
@@ -42,7 +50,8 @@
                     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                         <div style="margin-left: 1em;">
                             <h4><b>{{$user->voornaam}} {{$user->tussenvoegsel}} {{$user->achternaam}}</b></h4>
-                            Opleiding:{{$user->opleiding->last()->naam}} genoten tussen:{{$user->opleiding->last()->begin}}
+                            Opleiding:{{$user->opleiding->last()->naam}} genoten
+                            tussen:{{$user->opleiding->last()->begin}}
                             tot {{$user->opleiding->last()->eind}}
                             Behaald: @if ($user->opleiding->last()->behaald === 1)Ja @else Nee @endif<br>
                         </div>
@@ -75,6 +84,6 @@
             </div>
         </div>
     </div>
-            </form>
+    </form>
 
 @stop

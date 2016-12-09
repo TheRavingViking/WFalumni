@@ -51,5 +51,18 @@ class User extends Authenticatable
         return $this->hasMany(woonplaats::class);
     }
 
+    public function scopeSearchByKeyword($query, $keyword)
+    {
+        if ($keyword!='') {
+            $query->where(function ($query) use ($keyword) {
+                $query->where("voornaam", "LIKE","%$keyword%")
+                    ->orWhere("tussenvoegsel", "LIKE", "%$keyword%")
+                    ->orWhere("achternaam", "LIKE", "%$keyword%");
+            });
+        }
+        return $query;
+    }
+
+
 
 }

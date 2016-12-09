@@ -29,6 +29,7 @@ Route::post('/profiel/woonplaats', 'UserController@createWoonplaats');
 Route::post('/profiel/woonplaats/delete', 'UserController@deleteWoonplaats');
 
 Route::get('/overview', 'UserController@index');
+Route::get('/overview', 'UserController@search');
 Route::post('/overview', 'UserController@MassSoftDelete');
 Route::get('/profiel/{user}', 'UserController@show');
 Route::post('/profiel/delete', 'UserController@SoftDelete');
