@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->softDeletes();
+
             $table->string('voornaam', 255);
             $table->string('tussenvoegsel', 255)->nullable();
             $table->string('achternaam', 255);
@@ -42,9 +42,13 @@ class CreateUsersTable extends Migration
             $table->string('telefoonnummer', 15)->nullable();
             $table->string('twitter', 255)->nullable();
             $table->string('website', 255)->nullable();
+            $table->integer('bevoegdheid')->default('99');
+            $table->string('afdeling', 255)->nullable();
+
 
             $table->unique(["email"], 'unique_users');
             $table->nullableTimestamps();
+            $table->softDeletes();
         });
     }
 

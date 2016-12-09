@@ -43,8 +43,13 @@ class UserController extends Controller
     {
         $keyword = request('searchinput');
         $users = User::SearchByKeyword($keyword)->paginate(25);
-        return view('overview', compact('users'));
 
+        if (count($users)== '0'){
+            return redirect::to('overview')->with('error', 'Geen zoekresultaten gevonden');
+        }Else{
+            $count = count($users);
+            return view ('overview', compact('users'));
+        }
     }
 
 
