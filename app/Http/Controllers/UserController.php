@@ -178,8 +178,7 @@ class UserController extends Controller
             'linkedin' => $req['linkedin'],
             'twitter' => $req['twitter'],
             'website' => $req['website'],
-            'geenmailverzenden' => $req['geenmailverzenden'],
-            'naam' => $req['naam']
+            'geenmailverzenden' => $req['geenmailverzenden']
         );
         $user->fill($new_user_data);
         $user->save();
