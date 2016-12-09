@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sweetalert.css">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -85,5 +86,7 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/js/sweetalert.min.js"></script>
+    @include('sweet::alert')
 </body>
 </html>

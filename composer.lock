@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a771d522cd3e5ab29306fac6861ac83c",
-    "content-hash": "ba95a83af226a25a2ab6d1c56cc8c250",
+    "hash": "b92b3b3cfd354a629a85145bbafdb2cc",
+    "content-hash": "3eeed569688def6b08d1fdf736f53085",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2371,6 +2371,57 @@
                 "web"
             ],
             "time": "2016-07-25 15:51:55"
+        },
+        {
+            "name": "uxweb/sweet-alert",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uxweb/sweet-alert.git",
+                "reference": "5424a5363edbe9b50f0f28c8a7bd1c20b6872009"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uxweb/sweet-alert/zipball/5424a5363edbe9b50f0f28c8a7bd1c20b6872009",
+                "reference": "5424a5363edbe9b50f0f28c8a7bd1c20b6872009",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/session": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "UxWeb\\SweetAlert\\": "src/SweetAlert/"
+                },
+                "files": [
+                    "src/SweetAlert/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Uziel Bueno",
+                    "email": "ux.webs@gmail.com"
+                }
+            ],
+            "description": "A simple PHP package to show Sweet Alerts with the Laravel Framework",
+            "keywords": [
+                "alert",
+                "laravel",
+                "notifier",
+                "sweet"
+            ],
+            "time": "2016-11-23 21:14:35"
         },
         {
             "name": "vlucas/phpdotenv",
