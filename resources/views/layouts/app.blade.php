@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/ladda-themed.scss">
     <link rel="stylesheet" href="/css/sweetalert.css">
     <!-- Scripts -->
     <script>
@@ -87,6 +88,10 @@
     <!-- Scripts -->
     <script src="/js/app.js"></script>
     <script src="/js/sweetalert.min.js"></script>
+    <script src="/js/spin.js"></script>
+    <script src="/js/ladda.js"></script>
+    <script src="/js/custom_script.js"></script>
+
     @include('sweet::alert')
 </body>
 </html>
