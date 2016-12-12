@@ -214,7 +214,7 @@ class UserController extends Controller
     {
 
         if (empty($users->checkbox)) {
-            return redirect::to('overview')->with('message', 'Geen gebruikers verwijderd, selecteer gebruikers');
+            return redirect::to('overview')->with('error', 'Geen gebruikers verwijderd, selecteer gebruikers');
         } else {
             $checkbox = $users->checkbox;
             foreach ($checkbox as $id)
