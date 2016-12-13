@@ -38,24 +38,24 @@
                 </form>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <form class="form-horizontal" method="get" action="">
+                <form class="form-horizontal" method="get" action="/overview/filter">
                     <select name="richtingen" id="richtingen">
                         @foreach($richtingen as $richting)
-                            <option value="{{ $richting->id }}">
+                            <option value="{{ $richting->naam }}">
                                 {{ $richting->naam }}
                             </option>
                         @endforeach
                     </select>
                     <select name="opleidingen" id="opleidingen">
                         @foreach($opleidingen as $opleiding)
-                            <option value="{{ $opleiding->id }}">
+                            <option value="{{ $opleiding->naam }}">
                                 {{ $opleiding->naam }}
                             </option>
                         @endforeach
                     </select>
                     <select name="specialisaties" id="specialisaties">
                         @foreach($specialisaties as $specialisatie)
-                            <option value="{{ $specialisatie->id }}">
+                            <option value="{{ $specialisatie->naam }}">
                                 {{ $specialisatie->naam }}
                             </option>
                         @endforeach

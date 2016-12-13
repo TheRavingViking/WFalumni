@@ -52,23 +52,37 @@ class UserController extends Controller
 
         $users = User::SearchByKeyword($keyword)->paginate(25);
 
+
         if (count($users) == '0') {
             return redirect::to('overview')->with('error', 'Geen zoekresultaten gevonden');
 
         } Else {
-            $count = count($users);
+            $users->count();
+            $users->total();
             $richtingen = dropdown_richting::all();
             $opleidingen = dropdown_opleidingen::all();
             $specialisaties = dropdown_specialisaties::all();
-            if ($count == '1') {
-                $request->session()->flash('status', $count . ' ' . 'zoekresultaat gevonden');
-            } Else {
-                $request->session()->flash('status', $count . ' ' . 'zoekresultaten gevonden');
-            }
+
+            $request->session()->flash('status', 'Aantal zoekresultaten gevonden:' . ' ' . $users->total());
+
             return view('overview', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
         }
     }
 
+
+    public function filter(request $request)
+    {
+        $richtingen = request('richtingen');
+        $opleidingen = request('opleidingen');
+        $specialisaties = request('specialisaties');
+
+        $users = User::has(['opleiding' => function ($query) {
+            $query->where($opleidingen, '===', 'naam');
+        }])->toSql();
+//        $books = Book::with(['author' => function($query) {$query->where('is_deleted', 'N');}, 'author.contacts' => function($query) {$query->where('is_deleted', 'N');}])->get();
+        dd($users);
+
+    }
 
     public function createOpleiding(Request $request)
     {

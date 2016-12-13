@@ -39,6 +39,7 @@ Route::post('/profiel/woonplaats/delete', 'UserController@deleteWoonplaats')->mi
 
 Route::get('/overview', 'UserController@index')->middleware('auth');
 Route::get('overview/search','UserController@search')->middleware('auth');
+Route::get('overview/filter','UserController@filter')->middleware('auth');
 Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth');
 
 Route::post('/personeelProfiel/store', 'PersoneelController@update')->middleware('auth');
