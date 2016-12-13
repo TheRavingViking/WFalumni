@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
         $this->call(add_opleiding::class);
         $this->call(add_bedrijf::class);
         $this->call(add_woonplaats::class);
+        $this->call(add_richtingen::class);
+        $this->call(add_opleidingen::class);
 
 
 
