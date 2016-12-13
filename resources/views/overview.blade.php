@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="container">
         @if (session('error'))
             <div class="alert alert-danger">
@@ -30,37 +31,37 @@
                             iedereen</a>
                     </button>
                 </div>
-                <form class="form-horizontal" method="get" action="">
+                <form class="form-horizontal" method="get" action="/overview/search">
                     {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                     <input type="text" name="searchinput" placeholder="Search.." id="searchinput">
                     <button class="btn btn-primary">Go</button>
                 </form>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <form class="form-horizontal" method="get" action="">
-                    <select name="richtingen" id="richtingen">
-                        @foreach($richtingen as $richting)
-                            <option value="{{ $richting->id }}">
-                                {{ $richting->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <select name="opleidingen" id="opleidingen">
-                        @foreach($opleidingen as $opleiding)
-                            <option value="{{ $opleiding->id }}">
-                                {{ $opleiding->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <select name="specialisaties" id="specialisaties">
-                        @foreach($specialisaties as $specialisatie)
-                            <option value="{{ $specialisatie->id }}">
-                                {{ $specialisatie->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <button class="btn btn-primary">Go</button>
-                </form>
+            {{--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">--}}
+                {{--<form class="form-horizontal" method="get" action="">--}}
+                    {{--<select name="richtingen" id="richtingen">--}}
+                        {{--@foreach($richtingen as $richting)--}}
+                            {{--<option value="{{ $richting->id }}">--}}
+                                {{--{{ $richting->naam }}--}}
+                            {{--</option>--}}
+                        {{--@endforeach--}}
+                    {{--</select>--}}
+                    {{--<select name="opleidingen" id="opleidingen">--}}
+                        {{--@foreach($opleidingen as $opleiding)--}}
+                            {{--<option value="{{ $opleiding->id }}">--}}
+                                {{--{{ $opleiding->naam }}--}}
+                            {{--</option>--}}
+                        {{--@endforeach--}}
+                    {{--</select>--}}
+                    {{--<select name="specialisaties" id="specialisaties">--}}
+                        {{--@foreach($specialisaties as $specialisatie)--}}
+                            {{--<option value="{{ $specialisatie->id }}">--}}
+                                {{--{{ $specialisatie->naam }}--}}
+                            {{--</option>--}}
+                        {{--@endforeach--}}
+                    {{--</select>--}}
+                    {{--<button class="btn btn-primary">Go</button>--}}
+                {{--</form>--}}
             </div>
 
         </div>
