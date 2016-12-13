@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\opleidingen;
+use App\richting;
+use App\specialisaties;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
@@ -28,10 +31,13 @@ class UserController extends Controller
 //            $q->latest('eind');
 //        }])->paginate(25);
 
-        $users = User::with('opleiding')->paginate(25);
+        $users = User::has('opleiding')->paginate(25);
+        $richtingen = richting::all();
+        $opleidingen = opleidingen::all();
+        $specialisaties = specialisaties::all();
 
 
-        return view('overview', compact('users'));
+        return view('overview', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
     }
 
     public function show(User $user)

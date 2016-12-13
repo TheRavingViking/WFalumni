@@ -2,9 +2,6 @@
 
 @section('content')
 
-
-
-
     <div class="container">
         @if (session('error'))
             <div class="alert alert-danger">
@@ -18,57 +15,56 @@
             </div>
         @endif
 
-            <div class="panel panel-default" style="padding: 2em">
-                <div class="row">
-                    <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/overview"
-                          id="delete">
-                        {{ csrf_field() }}
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                            <button type="submit" class="btn btn-danger">Delete User</button>
-                        </div>
-                    </form>
+        <div class="panel panel-default" style="padding: 2em">
+            <div class="row">
+                <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/overview"
+                      id="delete">
+                    {{ csrf_field() }}
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                        <button class="btn btn-default">
-                            <a href="mailto: @foreach ($users as $mail){{$mail->email}},@endforeach " target="_top">Mail
-                                iedereen</a>
-                        </button>
+                        <button type="submit" class="btn btn-danger">Delete User</button>
                     </div>
-                    <form class="form-horizontal" method="get" action="">
-                        {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
-                        <input type="text" name="searchinput" placeholder="Search.." id="searchinput">
-                        <button class="btn btn-primary">Go</button>
-                    </form>
+                </form>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+                    <button class="btn btn-default">
+                        <a href="mailto: @foreach ($users as $mail){{$mail->email}}@endforeach " target="_top">Mail
+                            iedereen</a>
+                    </button>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                 <form class="form-horizontal" method="get" action="">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <label for="richting">Richting</label>
-                    <select id="richting" name="richting">
-                        <option name="richting" value="ICT">ICT</option>
-                        <option name="richting" value="PABO">PABO</option>
-                        <option name="richting" value="ECONOMIE">ECONOMIE</option>
-                    </select>
-                    <label for="opleiding">Opleiding</label>
-                    <select id="opleiding" name="unit">
-                        <option name="opleiding" value="ml">ml</option>
-                        <option name="opleiding" value="gram">gram</option>
-                        <option name="opleiding" value="tl">tl</option>
-                        <option name="opleiding" value="ml">el</option>
-                    </select>
-                    <label for="jaar">Jaar</label>
-                    <select id="opleiding" name="unit">
-                        <option name="opleiding" value="ml">ml</option>
-                        <option name="opleiding" value="gram">gram</option>
-                        <option name="opleiding" value="tl">tl</option>
-                        <option name="opleiding" value="ml">el</option>
-                    </select>
-
+                    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+                    <input type="text" name="searchinput" placeholder="Search.." id="searchinput">
                     <button class="btn btn-primary">Go</button>
                 </form>
-                </div>
-
             </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <form class="form-horizontal" method="get" action="">
+                    <select name="richtingen" id="richtingen">
+                        @foreach($richtingen as $richting)
+                            <option value="{{ $richting->id }}">
+                                {{ $richting->naam }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <select name="opleidingen" id="opleidingen">
+                        @foreach($opleidingen as $opleiding)
+                            <option value="{{ $opleiding->id }}">
+                                {{ $opleiding->naam }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <select name="specialisaties" id="specialisaties">
+                        @foreach($specialisaties as $specialisatie)
+                            <option value="{{ $specialisatie->id }}">
+                                {{ $specialisatie->naam }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <button class="btn btn-primary">Go</button>
+                </form>
+            </div>
+
         </div>
+    </div>
     </div>
 
 
@@ -121,6 +117,8 @@
             </div>
         </div>
     </div>
-    </form>
+
+
+
 
 @stop

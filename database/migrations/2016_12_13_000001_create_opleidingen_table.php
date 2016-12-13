@@ -20,6 +20,10 @@ class CreateOpleidingenTable extends Migration
             $table->integer('richtingen_id')->unsigned();
 
             $table->unique(["id"], 'unique_opleidingen');
+            $table->foreign('richtingen_id', 'fk_opleidingen_richtingen_idx')
+                ->references('id')->on('richtingen')
+                ->onDelete('no action')
+                ->onUpdate('no action');
         });
     }
 
