@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 
-
 use App\dropdown_opleidingen;
 use App\dropdown_richting;
 use App\dropdown_specialisaties;
@@ -32,7 +31,6 @@ class UserController extends Controller
 //        $users = User::with(['opleiding' => function ($q) {
 //            $q->latest('eind');
 //        }])->paginate(25);
-
         $users = User::has('opleiding')->paginate(25);
         $richtingen = dropdown_richting::all();
         $opleidingen = dropdown_opleidingen::all();
@@ -54,12 +52,20 @@ class UserController extends Controller
 
         $users = User::SearchByKeyword($keyword)->paginate(25);
 
-        if (count($users)== '0'){
+        if (count($users) == '0') {
             return redirect::to('overview')->with('error', 'Geen zoekresultaten gevonden');
 
-        }Else{
+        } Else {
             $count = count($users);
-            return view ('overview', compact('users'));
+            $richtingen = dropdown_richting::all();
+            $opleidingen = dropdown_opleidingen::all();
+            $specialisaties = dropdown_specialisaties::all();
+            if ($count == '1') {
+                $request->session()->flash('status', $count . ' ' . 'zoekresultaat gevonden');
+            } Else {
+                $request->session()->flash('status', $count . ' ' . 'zoekresultaten gevonden');
+            }
+            return view('overview', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
         }
     }
 
