@@ -28,10 +28,21 @@ class UserController extends Controller
     public function index()
     {
 
-//        $users = User::with(['opleiding' => function ($q) {
-//            $q->latest('eind');
-//        }])->paginate(25);
-        $users = User::has('opleiding')->paginate(25);
+
+//        $users = User::has('opleiding')->paginate(25);
+
+
+        $auth = Auth::user()->opleiding()->first()->naam;
+        $eind = Auth::user()->opleiding()->first()->eind;
+        $eind = substr($eind, 0, 4);
+
+
+        $users = Opleiding::with('user')->where('naam', $auth)->where('eind', $eind)->toSql();
+
+
+        return $users;
+
+
         $richtingen = dropdown_richting::all();
         $opleidingen = dropdown_opleidingen::all();
         $specialisaties = dropdown_specialisaties::all();
