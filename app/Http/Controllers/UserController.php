@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 
-use App\opleidingen;
+
+use App\dropdown_opleidingen;
+use App\dropdown_richting;
+use App\dropdown_specialisaties;
 use App\richting;
-use App\specialisaties;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
@@ -32,9 +34,9 @@ class UserController extends Controller
 //        }])->paginate(25);
 
         $users = User::has('opleiding')->paginate(25);
-        $richtingen = richting::all();
-        $opleidingen = opleidingen::all();
-        $specialisaties = specialisaties::all();
+        $richtingen = dropdown_richting::all();
+        $opleidingen = dropdown_opleidingen::all();
+        $specialisaties = dropdown_specialisaties::all();
 
 
         return view('overview', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));

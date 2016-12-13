@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class richting extends Model
+class dropdown_richting extends Model
 {
     protected $table = "richtingen";
 
     public function opleidingen_dropdown()
     {
-        return $this->hasMany(opleidingen::class);
+        return $this->hasMany(dropdown_opleidingen::class);
     }
 
 
