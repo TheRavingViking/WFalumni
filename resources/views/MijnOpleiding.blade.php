@@ -27,12 +27,12 @@
                 </form>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
                     <button class="btn btn-default">
-                        <a href="mailto: @foreach ($users as $mail){{$mail->email}}@endforeach " target="_top">Mail
+                        <a href="mailto: @foreach ($opl as $mail){{$mail->user->email}}@endforeach " target="_top">Mail
                             iedereen</a>
                     </button>
                 </div>
                 <form class="form-horizontal" method="get" action="/overview/search">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                     <input type="text" name="searchinput" placeholder="Search.." id="searchinput">
                     <button class="btn btn-primary">Go</button>
                 </form>
@@ -71,39 +71,37 @@
 
 
     <div class="container">
-        @foreach($users as $user)
+        @foreach($opl as $user)
 
             <div class="panel panel-default" style="padding: 1em">
                 <div class="row">
                     <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">
-                        <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive"
+                        <img src="/uploads/avatars/{{ $user->user->foto }}" class="img-responsive"
                              style="min-width: 5em; float:left; border-radius:50%; margin-right:1em;">
                     </div>
 
                     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                         <div style="margin-left: 1em;">
-                            <h4>
-                                <b>{{$user->voornaam}} {{$user->tussenvoegsel}} {{$user->achternaam}}</b>
-                            </h4>
-                            Opleiding:{{$user->opleiding->last()->naam}} genoten
-                            tussen:{{$user->opleiding->last()->begin}}
-                            tot {{$user->opleiding->last()->eind}}
-                            Behaald: @if ($user->opleiding->last()->behaald === 1)Ja @else Nee @endif<br>
+                            <h4><b>{{$user->user->voornaam}} {{$user->user->tussenvoegsel}} {{$user->user->achternaam}}</b></h4>
+                            {{--Opleiding:{{$user->opleiding->naam}} genoten--}}
+                            {{--tussen:{{$user->opleiding->begin}}--}}
+                            {{--tot {{$user->opleiding->eind}}--}}
+                            {{--Behaald: @if ($user->opleiding->behaald === 1)Ja @else Nee @endif<br>--}}
                         </div>
                     </div>
 
                     <div class="col-xs-10 col-sm-2 col-md-2 col-lg-2" style="padding: 1em;">
                         <div class="row">
                             <button type="button" class="btn btn-default btn-lg">
-                                <a href="mailto:{{$user->email}}"><span class="glyphicon glyphicon-envelope"></span></a>
+                                {{--<a href="mailto:{{$user->email}}"><span class="glyphicon glyphicon-envelope"></span></a>--}}
                             </button>
                             <button type="button" class="btn btn-default btn-lg">
-                                <a href="https://{{$user->linkedin}}"><span class="glyphicon glyphicon-user"></span></a>
+                                {{--<a href="https://{{$user->linkedin}}"><span class="glyphicon glyphicon-user"></span></a>--}}
                             </button>
                             <button type="button" class="btn btn-default btn-lg">
-                                <a href="profiel/{{$user->id}}"><span class="glyphicon glyphicon-cog""></span></a>
+                                {{--<a href="profiel/{{$user->id}}"><span class="glyphicon glyphicon-cog""></span></a>--}}
                             </button>
-                            <input type="checkbox" name="checkbox[]" value="{{$user->id}}">
+                            {{--<input type="checkbox" name="checkbox[]" value="{{$user->id}}">--}}
                         </div>
                     </div>
                 </div>
@@ -114,7 +112,8 @@
         <div class="container" style="alignment: center">
             <div class="row">
                 <div>
-                    {{$users->appends(request()->input())->links()}}
+                    {{--{{ $users->links() }}--}}
+                    {{$opl->appends(request()->input())->links()}}
                 </div>
             </div>
         </div>
@@ -124,3 +123,4 @@
 
 
 @stop
+

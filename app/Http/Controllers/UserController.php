@@ -29,19 +29,7 @@ class UserController extends Controller
     {
 
 
-//        $users = User::has('opleiding')->paginate(25);
-
-
-        $auth = Auth::user()->opleiding()->first()->naam;
-        $eind = Auth::user()->opleiding()->first()->eind;
-        $eind = substr($eind, 0, 4);
-
-
-        $users = Opleiding::with('user')->where('naam', $auth)->where('eind', $eind)->toSql();
-
-
-        return $users;
-
+        $users = User::has('opleiding')->paginate(25);
 
         $richtingen = dropdown_richting::all();
         $opleidingen = dropdown_opleidingen::all();
@@ -49,6 +37,28 @@ class UserController extends Controller
 
 
         return view('overview', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+    }
+
+
+
+    public function mijnOpleiding()
+    {
+
+
+        $auth = Auth::user()->opleiding()->get()->last()->naam;
+        $eind = Auth::user()->opleiding()->first()->eind;
+
+//return $auth;
+
+        $opl = Opleiding::with('user')->where('naam', $auth)->paginate(25);
+
+
+        $richtingen = dropdown_richting::all();
+        $opleidingen = dropdown_opleidingen::all();
+        $specialisaties = dropdown_specialisaties::all();
+
+
+        return view('MijnOpleiding', array('opl' => $opl, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
     }
 
     public function show(User $user)
