@@ -48,7 +48,7 @@ Route::post('/personeelProfiel/delete', 'PersoneelController@SoftDelete')->middl
 
 Route::get('/personeelOverview', 'PersoneelController@index');
 
-Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen');
-Route::post('/adminOpleidingen/richting', 'AdminController@createRichting');
-Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding');
-Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie');
+Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen')->middleware('auth');
+Route::post('/adminOpleidingen/richting', 'AdminController@createRichting')->middleware('auth');
+Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding')->middleware('auth');
+Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie')->middleware('auth');
