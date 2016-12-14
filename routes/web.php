@@ -46,3 +46,8 @@ Route::post('/personeelProfiel/store', 'PersoneelController@update')->middleware
 Route::post('/personeelProfiel/delete', 'PersoneelController@SoftDelete')->middleware('auth');
 
 Route::get('/personeelOverview', 'PersoneelController@index');
+
+Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen');
+Route::post('/adminOpleidingen/richting', 'AdminController@createRichting');
+Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding');
+Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie');

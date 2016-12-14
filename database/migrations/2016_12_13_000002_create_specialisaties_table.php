@@ -24,6 +24,8 @@ class CreateSpecialisatiesTable extends Migration
                 ->references('id')->on('opleidingen')
                 ->onDelete('no action')
                 ->onUpdate('no action');
+            $table->nullableTimestamps();
+            $table->softDeletes();
         });
     }
 

@@ -24,6 +24,8 @@ class CreateOpleidingenTable extends Migration
                 ->references('id')->on('richtingen')
                 ->onDelete('no action')
                 ->onUpdate('no action');
+            $table->nullableTimestamps();
+            $table->softDeletes();
         });
     }
 
