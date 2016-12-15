@@ -137,7 +137,7 @@ class UserController extends Controller
         if (count($users) == '0') {
             return redirect::to('overview')->with('error', 'Geen zoekresultaten gevonden');
         } else {
-            $request->session()->flash('status', 'Aantal zoekresultaten gevonden:' . ' ' . $users->total());
+            $request->session()->flash('statusN', 'Aantal zoekresultaten gevonden:' . ' ' . $users->total());
         }
 
         $richtingen = dropdown_richting::all();

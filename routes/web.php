@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     Alert::info('Wookies', 'Welkom bij WFAlumni!');
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
