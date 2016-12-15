@@ -19,6 +19,8 @@ class CreateRichtingenTable extends Migration
             $table->string('naam', 255);
 
             $table->unique(["id"], 'unique_richtingen');
+            $table->nullableTimestamps();
+            $table->softDeletes();
         });
     }
 
