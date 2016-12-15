@@ -38,10 +38,12 @@ Route::post('/profiel/woonplaats', 'UserController@createWoonplaats')->middlewar
 Route::post('/profiel/woonplaats/delete', 'UserController@deleteWoonplaats')->middleware('auth');
 
 Route::get('/overview', 'UserController@index')->middleware('auth');
-Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
 Route::get('overview/search','UserController@search')->middleware('auth');
 Route::get('overview/filter','UserController@filter')->middleware('auth');
 Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth');
+
+Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
+Route::get('/mijnopleiding/search', 'UserController@mijnOpleidingSearch')->middleware('auth');
 
 Route::post('/personeelProfiel/store', 'PersoneelController@update')->middleware('auth');
 Route::post('/personeelProfiel/delete', 'PersoneelController@SoftDelete')->middleware('auth');

@@ -310,86 +310,86 @@
                     <h1>Opleidingen</h1>
                     <div>
                         <!-- Trigger/Open The Modal -->
-                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#oplModal">
-                            Voeg opleiding toe
-                        </button>
+                        {{--<button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#oplModal">--}}
+                            {{--Voeg opleiding toe--}}
+                        {{--</button>--}}
 
                         <!-- The Modal -->
                         <div id="oplModal" class="modal fade">
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
+                            {{--<!-- Modal content-->--}}
+                            {{--<div class="modal-content">--}}
+                                {{--<div class="modal-header">--}}
 
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Vul de opleidings informatie in</h4>
+                                    {{--<button type="button" class="close" data-dismiss="modal">&times;</button>--}}
+                                    {{--<h4 class="modal-title">Vul de opleidings informatie in</h4>--}}
 
-                                </div>
-                                <div class="modal-body">
+                                {{--</div>--}}
+                                {{--<div class="modal-body">--}}
 
-                                    <form method="POST" action="profiel/opleiding" class="form-horizontal">
-                                        {!! csrf_field() !!}
+                                    {{--<form method="POST" action="profiel/opleiding" class="form-horizontal">--}}
+                                        {{--{!! csrf_field() !!}--}}
 
-                                        <div class="form-group">
-                                            <label for="naam">Naam van de opleiding</label>
-                                            <input id="naam" type="text" name="naam" required>
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="naam">Naam van de opleiding</label>--}}
+                                            {{--<input id="naam" type="text" name="naam" required>--}}
+                                        {{--</div>--}}
 
-                                        <div class="form-group">
-                                            <label for="instituut">Naam van het instituut</label>
-                                            <input id="instituut" type="text" name="instituut" required>
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="instituut">Naam van het instituut</label>--}}
+                                            {{--<input id="instituut" type="text" name="instituut" required>--}}
+                                        {{--</div>--}}
 
-                                        <div class="form-group">
-                                            <label for="richting">Naam van de richting</label>
-                                            <input id="richting" type="text" name="richting" required>
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="richting">Naam van de richting</label>--}}
+                                            {{--<input id="richting" type="text" name="richting" required>--}}
+                                        {{--</div>--}}
 
-                                        <div class="form-group">
-                                            <label for="begin">Begin van de opleiding</label>
-                                            <input id="begin" type="date" name="begin" required>
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="begin">Begin van de opleiding</label>--}}
+                                            {{--<input id="begin" type="date" name="begin" required>--}}
+                                        {{--</div>--}}
 
-                                        <div class="form-group">
-                                            <label for="eind">Einde van de opleiding</label>
-                                            <input id="eind" type="date" name="eind">
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="eind">Einde van de opleiding</label>--}}
+                                            {{--<input id="eind" type="date" name="eind">--}}
+                                        {{--</div>--}}
 
-                                        <div class="form-group">
-                                            <label for="locatie">Locatie van het instituut</label>
-                                            <input id="locatie" type="text" name="locatie" required>
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="locatie">Locatie van het instituut</label>--}}
+                                            {{--<input id="locatie" type="text" name="locatie" required>--}}
+                                        {{--</div>--}}
 
-                                        <div class="form-group">
-                                            <label for="niveau">Niveau van de opleiding</label>
-                                            <input id="niveau" type="text" name="niveau" required>
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="niveau">Niveau van de opleiding</label>--}}
+                                            {{--<input id="niveau" type="text" name="niveau" required>--}}
+                                        {{--</div>--}}
 
-                                        <div class="form-group">
-                                            <label for="behaald">Opleiding behaald</label>
-                                            <input id="behaald" name="behaald" type="radio" value="1" required>ja
-                                            <input id="behaald" name="behaald" type="radio" value="0">nee
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="behaald">Opleiding behaald</label>--}}
+                                            {{--<input id="behaald" name="behaald" type="radio" value="1" required>ja--}}
+                                            {{--<input id="behaald" name="behaald" type="radio" value="0">nee--}}
+                                        {{--</div>--}}
 
-                                        <div class="form-group">
-                                            <label for="land">Land van het instituut</label>
-                                            <input id="land" type="text" name="land" required>
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="land">Land van het instituut</label>--}}
+                                            {{--<input id="land" type="text" name="land" required>--}}
+                                        {{--</div>--}}
 
-                                        <div class="form-group">
-                                            <label for="provincie">Provincie van het instituut</label>
-                                            <input id="provincie" type="text" name="provincie">
-                                        </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="provincie">Provincie van het instituut</label>--}}
+                                            {{--<input id="provincie" type="text" name="provincie">--}}
+                                        {{--</div>--}}
 
-                                        <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
+                                        {{--<input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">--}}
 
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                </div>
-                            </div>
-                        </div>
+                                        {{--<button type="submit" class="btn btn-default">Submit</button>--}}
+                                    {{--</form>--}}
+                                {{--</div>--}}
+                                {{--<div class="modal-footer">--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                     </div>
                     <br>
 
@@ -413,10 +413,10 @@
                             <input id="tel" type="text" class="form-control" name="tel"
                                    value="{{ $opl->behaald }}" disabled><br>
 
-                            <input id="id" type="hidden" name="id" value="{{ $opl->id }}">
-                            <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-danger">Delete Opleiding</button>
+                            {{--<input id="id" type="hidden" name="id" value="{{ $opl->id }}">--}}
+                            {{--<input id="id" type="hidden" name="user_id" value="{{ $user->id }}">--}}
+                            {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+                            {{--<button type="submit" class="btn btn-danger">Delete Opleiding</button>--}}
 
                             <hr>
                         </form>

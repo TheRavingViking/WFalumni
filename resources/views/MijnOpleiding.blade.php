@@ -18,55 +18,18 @@
 
         <div class="panel panel-default" style="padding: 2em">
             <div class="row">
-                <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/overview"
-                      id="delete">
-                    {{ csrf_field() }}
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                        <button type="submit" class="btn btn-danger">Delete User</button>
-                    </div>
-                </form>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                    <button class="btn btn-default">
-                        <a href="mailto: @foreach ($opl as $mail){{$mail->user->email}}@endforeach " target="_top">Mail
-                            iedereen</a>
-                    </button>
-                </div>
-                <form class="form-horizontal" method="get" action="/overview/search">
+                <form class="form-horizontal" method="get" action="/mijnopleiding/search">
                     {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
                     <input type="text" name="searchinput" placeholder="Search.." id="searchinput">
-                    <button class="btn btn-primary">Go</button>
-                </form>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <form class="form-horizontal" method="get" action="/overview/filter">
-                    <select name="richtingen" id="richtingen">
-                        @foreach($richtingen as $richting)
-                            <option value="{{ $richting->naam }}">
-                                {{ $richting->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <select name="opleidingen" id="opleidingen">
-                        @foreach($opleidingen as $opleiding)
-                            <option value="{{ $opleiding->naam }}">
-                                {{ $opleiding->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <select name="specialisaties" id="specialisaties">
-                        @foreach($specialisaties as $specialisatie)
-                            <option value="{{ $specialisatie->naam }}">
-                                {{ $specialisatie->naam }}
-                            </option>
-                        @endforeach
-                    </select>
+                    <input type="hidden" name="opleiding" id="opleiding" value="{{$auth}}">
+                    <input type="hidden" name="jaar" id="jaar" value="{{$eind}}">
                     <button class="btn btn-primary">Go</button>
                 </form>
             </div>
 
         </div>
     </div>
-    </div>
+
 
 
 
@@ -83,25 +46,21 @@
                     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                         <div style="margin-left: 1em;">
                             <h4><b>{{$user->user->voornaam}} {{$user->user->tussenvoegsel}} {{$user->user->achternaam}}</b></h4>
-                            {{--Opleiding:{{$user->opleiding->naam}} genoten--}}
-                            {{--tussen:{{$user->opleiding->begin}}--}}
-                            {{--tot {{$user->opleiding->eind}}--}}
-                            {{--Behaald: @if ($user->opleiding->behaald === 1)Ja @else Nee @endif<br>--}}
+                            Opleiding:{{$user->naam}} genoten
+                            tussen:{{$user->begin}}
+                            tot {{$user->eind}}
+                            Behaald: @if ($user->behaald === 1)Ja @else Nee @endif<br>
                         </div>
                     </div>
 
                     <div class="col-xs-10 col-sm-2 col-md-2 col-lg-2" style="padding: 1em;">
                         <div class="row">
                             <button type="button" class="btn btn-default btn-lg">
-                                {{--<a href="mailto:{{$user->email}}"><span class="glyphicon glyphicon-envelope"></span></a>--}}
+                                <a href="mailto:{{$user->user->email}}"><span class="glyphicon glyphicon-envelope"></span></a>
                             </button>
                             <button type="button" class="btn btn-default btn-lg">
-                                {{--<a href="https://{{$user->linkedin}}"><span class="glyphicon glyphicon-user"></span></a>--}}
+                                <a href="profiel/{{$user->user->id}}"><span class="glyphicon glyphicon-user"></span></a>
                             </button>
-                            <button type="button" class="btn btn-default btn-lg">
-                                {{--<a href="profiel/{{$user->id}}"><span class="glyphicon glyphicon-cog""></span></a>--}}
-                            </button>
-                            {{--<input type="checkbox" name="checkbox[]" value="{{$user->id}}">--}}
                         </div>
                     </div>
                 </div>
@@ -112,7 +71,6 @@
         <div class="container" style="alignment: center">
             <div class="row">
                 <div>
-                    {{--{{ $users->links() }}--}}
                     {{$opl->appends(request()->input())->links()}}
                 </div>
             </div>

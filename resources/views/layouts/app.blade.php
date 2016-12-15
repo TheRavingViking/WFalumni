@@ -46,6 +46,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;<li><a href="{{ url('/overview') }}">overview</a></li>
+                        &nbsp;<li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
                         &nbsp;<li><a href="{{ url('/mail') }}">Mail</a></li>
                     </ul>
 

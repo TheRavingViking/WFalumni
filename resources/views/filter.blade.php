@@ -37,7 +37,7 @@
                     <button class="btn btn-primary">Go</button>
                 </form>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 1em;">
                 <form class="form-horizontal" method="get" action="/overview/filter">
                     <select name="richtingen" id="richtingen">
                         <option value="">-----</option>
@@ -56,7 +56,7 @@
                         @endforeach
                     </select>
                     <select name="specialisaties" id="specialisaties">
-                        <option value="">-----</option>
+                        <option value="">-----</option>a
                         @foreach($specialisaties as $specialisatie)
                             <option value="{{ $specialisatie->naam }}">
                                 {{ $specialisatie->naam }}
@@ -88,10 +88,10 @@
                             <h4>
                                 <b>{{$user->voornaam}} {{$user->tussenvoegsel}} {{$user->achternaam}}</b>
                             </h4>
-                            Opleiding:{{$user->opleiding->last()->naam}} genoten
-                            tussen:{{$user->opleiding->last()->begin}}
-                            tot {{$user->opleiding->last()->eind}}
-                            Behaald: @if ($user->opleiding->last()->behaald === 1)Ja @else Nee @endif<br>
+                            Opleiding:{{$user->naam}} genoten
+                            tussen:{{$user->begin}}
+                            tot {{$user->eind}}
+                            Behaald: @if ($user->behaald === 1)Ja @else Nee @endif<br>
                         </div>
                     </div>
 
