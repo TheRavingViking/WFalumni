@@ -16,6 +16,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     $faker->addProvider(new Faker\Provider\nl_NL\Person($faker));
 
     $geslacht = array('Man', 'Vrouw');
+    $number = array('1', '1');
 
 
     return [
@@ -34,6 +35,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'geboorteplaats' => $faker->city,
         'geboortedatum' => $faker->dateTime,
         'titel' => $faker->title,
+        'bevoegdheid' => $faker->randomElement($number),
+
+
 
     ];
 

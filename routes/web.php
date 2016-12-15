@@ -55,3 +55,11 @@ Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen');
 Route::post('/adminOpleidingen/richting', 'AdminController@createRichting');
 Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding');
 Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie');
+Route::get('/admin', 'AdminController@index')->middleware('auth');
+
+Route::post('/admin/assign-roles', [
+    'uses' => 'AdminController@postAdminAssignRoles',
+    'as' => 'admin.assign',
+    'middleware' => 'roles',
+    'roles' => ['Admin']
+]);
