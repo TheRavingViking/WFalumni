@@ -75,7 +75,7 @@ class UserController extends Controller
                     ->orWhere('tussenvoegsel', 'LIKE', "%$key%")
                     ->orWhere('achternaam', 'LIKE', "%$key%")
 //                    ->Where('naam', "$opleiding")
-                    ->Where(function  ($query) use ($opleiding, $jaar) {
+                    ->Where(function ($query) use ($opleiding, $jaar) {
                         $query->where('naam', $opleiding)
                             ->where('eind', $jaar);
                     })
@@ -125,19 +125,26 @@ class UserController extends Controller
         $opleidingen = request('opleidingen');
         $specialisaties = request('specialisaties');
 
-
         $users = DB::table('users')
             ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
             ->select('users.*', 'opleiding.*')
-            ->where('richting', $richtingen)
-            ->orwhere('opleiding.naam', $opleidingen)
+            ->where([
+                ['naam', $opleidingen],
+                ['richting', $richtingen],
+            ])
             ->paginate(25);
+
+        if (count($users) == '0') {
+            return redirect::to('overview')->with('error', 'Geen zoekresultaten gevonden');
+        } else {
+            $request->session()->flash('status', 'Aantal zoekresultaten gevonden:' . ' ' . $users->total());
+        }
 
         $richtingen = dropdown_richting::all();
         $opleidingen = dropdown_opleidingen::all();
         $specialisaties = dropdown_specialisaties::all();
 
-        return view('filter', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+        return view('filter', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties))->with('status', '');
 
     }
 
@@ -159,7 +166,7 @@ class UserController extends Controller
         );
         $id = $request['user_id'];
         opleiding::create($data);
-        return redirect::to('profiel/' . $id )->with('message', 'Opleiding toegevoegd');
+        return redirect::to('profiel/' . $id)->with('message', 'Opleiding toegevoegd');
     }
 
     public

@@ -15,9 +15,9 @@
 
 $factory->define(App\Opleiding::class, function (Faker\Generator $faker) {
 
-    $naam = array('Leraar Opleiding', 'Economie', 'AD Software Development');
+    $naam = array('Leraar basisonderwijs', 'AD Ondernemen', 'AD Software Development');
     $instituut = array('windesheim Flevoland', 'ROC Almere', 'HVA');
-    $richting = array('Business', 'Informatica', 'Pabo');
+    $richting = array('Business', 'ICT', 'Law');
 
     return [
         'naam' => $faker->randomElement($naam),
