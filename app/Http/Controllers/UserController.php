@@ -120,8 +120,9 @@ class UserController extends Controller
             'provincie' => $request['provincie'],
             'user_id' => $request['user_id']
         );
+        $id = $request['user_id'];
         opleiding::create($data);
-        return redirect::to('profiel')->with('message', 'Opleiding toegevoegd');
+        return redirect::to('profiel/' . $id )->with('message', 'Opleiding toegevoegd');
     }
 
     public function deleteOpleiding(Request $request)
@@ -153,8 +154,9 @@ class UserController extends Controller
             'provincie' => $request['provincie'],
             'user_id' => $request['user_id']
         );
+        $id = $request['user_id'];
         bedrijf::create($data);
-        return redirect::to('profiel')->with('message', 'bedrijf toegevoegd');
+        return redirect::to('profiel/' . $id)->with('message', 'bedrijf toegevoegd');
     }
 
     public function deleteBedrijf(Request $request)
@@ -183,8 +185,10 @@ class UserController extends Controller
             'provincie' => $request['provincie'],
             'user_id' => $request['user_id']
         );
+        $id = $request['user_id'];
         woonplaats::create($data);
-        return redirect::to('profiel')->with('message', 'woonplaats toegevoegd');
+        return redirect::to('profiel/' . $id)->with('message', 'woonplaats toegevoegd');
+        //return view('profiel/' . $id);
     }
 
     public function deleteWoonplaats(Request $request)
@@ -203,7 +207,8 @@ class UserController extends Controller
 
     public function update(Request $req)
     {
-        $user = Auth::user();
+        $id = $req->id;
+        $user = user::find($id);
         if ($req->hasFile('avatar')) {
             $avatar = $req->file('avatar');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
@@ -235,7 +240,9 @@ class UserController extends Controller
             'linkedin' => $req['linkedin'],
             'twitter' => $req['twitter'],
             'website' => $req['website'],
-            'geenmailverzenden' => $req['geenmailverzenden']
+            'geenmailverzenden' => $req['geenmailverzenden'],
+            'bevoegdheid' => $req['bevoegdheid'],
+            'afdeling' => $req['afdeling']
         );
         $user->fill($new_user_data);
         $user->save();

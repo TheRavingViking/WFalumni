@@ -47,7 +47,7 @@
                                 <a href="https://{{$persoon->linkedin}}"><span class="glyphicon glyphicon-user"></span></a>
                             </button>
                             <button type="button" class="btn btn-default btn-lg">
-                                <a href="profiel/{{$persoon->id}}"><span class="glyphicon glyphicon-cog"></span></a>
+                                <a href="personeelProfiel/{{$persoon->id}}"><span class="glyphicon glyphicon-cog"></span></a>
                             </button>
                             <input type="checkbox" name="checkbox[]" value="{{$persoon->id}}">
                         </div>

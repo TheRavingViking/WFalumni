@@ -26,7 +26,7 @@ Route::get('/profiel', 'UserController@profiel')->middleware('auth');
 Route::get('/profiel/{user}', 'UserController@show')->middleware('auth');
 Route::post('/profiel/delete', 'UserController@SoftDelete')->middleware('auth');
 
-Route::post('/profiel', 'UserController@update')->middleware('auth');
+Route::post('/profiel', 'UserController@update')->middleware('auth' );
 
 Route::post('/profiel/opleiding', 'UserController@createOpleiding')->middleware('auth');
 Route::post('/profiel/opleiding/delete', 'UserController@deleteOpleiding')->middleware('auth');
@@ -38,6 +38,7 @@ Route::post('/profiel/woonplaats', 'UserController@createWoonplaats')->middlewar
 Route::post('/profiel/woonplaats/delete', 'UserController@deleteWoonplaats')->middleware('auth');
 
 Route::get('/overview', 'UserController@index')->middleware('auth');
+
 Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
 Route::get('overview/search','UserController@search')->middleware('auth');
 Route::get('overview/filter','UserController@filter')->middleware('auth');
