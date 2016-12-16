@@ -34,9 +34,10 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" id="searchinput"
                                name="searchinput">
-                        <span class="input-group-btn"><button class="btn btn-primary" type="button">Go!</button></span>
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">Go!</button>
+                        </span>
                     </div>
-
                 </form>
             </div>
             <form class="form-horizontal" method="get" action="/overview/filter">
