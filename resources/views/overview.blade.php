@@ -18,55 +18,54 @@
 
         <div class="panel panel-default" style="padding: 2em">
             <div class="row">
-                <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/overview"
+                <form enctype="multipart/form-data" method="POST" action="/overview"
                       id="delete">
                     {{ csrf_field() }}
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
                         <button type="submit" class="btn btn-danger">Delete User</button>
-                    </div>
                 </form>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                    <button class="btn btn-default">
-                        <a href="mailto: @foreach ($users as $mail){{$mail->email}}@endforeach " target="_top">Mail
-                            iedereen</a>
-                    </button>
-                </div>
+                <button class="btn btn-default">
+                    <a href="mailto: @foreach ($users as $mail){{$mail->email}}@endforeach">Mail
+                        iedereen</a>
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
                 <form class="form-horizontal" method="get" action="/overview/search">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="text" name="searchinput" placeholder="Search.." id="searchinput">
-                    <button class="btn btn-primary">Go</button>
-                </form>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
-                <form class="form-horizontal" method="get" action="/overview/filter">
-                    <select name="richtingen" id="richtingen">
-                        <option value="">-----</option>
-                        @foreach($richtingen as $richting)
-                            <option value="{{ $richting->naam }}">
-                                {{ $richting->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <select name="opleidingen" id="opleidingen">
-                        <option value="">-----</option>
-                        @foreach($opleidingen as $opleiding)
-                            <option value="{{ $opleiding->naam }}">
-                                {{ $opleiding->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <select name="specialisaties" id="specialisaties">
-                        <option value="">-----</option>
-                        @foreach($specialisaties as $specialisatie)
-                            <option value="{{ $specialisatie->naam }}">
-                                {{ $specialisatie->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <button class="btn btn-primary">Go</button>
-                </form>
-            </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" id="searchinput"
+                               name="searchinput">
+                        <span class="input-group-btn"><button class="btn btn-primary" type="button">Go!</button></span>
+                    </div>
 
+                </form>
+            </div>
+            <form class="form-horizontal" method="get" action="/overview/filter">
+                <select name="richtingen" id="richtingen">
+                    <option value="">-----</option>
+                    @foreach($richtingen as $richting)
+                        <option value="{{ $richting->naam }}">
+                            {{ $richting->naam }}
+                        </option>
+                    @endforeach
+                </select>
+                <select name="opleidingen" id="opleidingen">
+                    <option value="">-----</option>
+                    @foreach($opleidingen as $opleiding)
+                        <option value="{{ $opleiding->naam }}">
+                            {{ $opleiding->naam }}
+                        </option>
+                    @endforeach
+                </select>
+                <select name="specialisaties" id="specialisaties">
+                    <option value="">-----</option>
+                    @foreach($specialisaties as $specialisatie)
+                        <option value="{{ $specialisatie->naam }}">
+                            {{ $specialisatie->naam }}
+                        </option>
+                    @endforeach
+                </select>
+                <button class="btn btn-primary">Go</button>
+            </form>
         </div>
     </div>
     </div>
@@ -122,7 +121,6 @@
             </div>
         </div>
     </div>
-
 
 
 

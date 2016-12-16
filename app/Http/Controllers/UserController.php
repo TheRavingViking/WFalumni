@@ -43,18 +43,23 @@ class UserController extends Controller
 
     public function mijnOpleiding()
     {
+        if (Auth::user()->bevoegdheid == 1) {
+            $auth = Auth::user()->opleiding()->get()->last()->naam;
+            $eind = Auth::user()->opleiding()->get()->last()->eind;
+            $eind = substr($eind, 0, 4);
 
+//            return $auth;
 
-        $auth = Auth::user()->opleiding()->get()->last()->naam;
-        $eind = Auth::user()->opleiding()->get()->last()->eind;
-        $eind = substr($eind, 0, 4);
+            $opl = Opleiding::with('user')->where('naam', $auth)->whereYear('eind', $eind)->where('behaald', 1)->paginate(25);
 
-//        return $eind;
+            return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => $eind));
+        } else {
 
-        $opl = Opleiding::with('user')->where('naam', $auth)->whereYear('eind', $eind)->where('behaald', 1)->paginate(25);
+            $auth = Auth::user()->opleiding()->get()->last()->naam;
+            $opl = Opleiding::with('user')->where('naam', $auth)->where('behaald', 1)->paginate(25);
 
-
-        return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => $eind));
+            return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => ''));
+        }
     }
 
 
@@ -88,8 +93,8 @@ class UserController extends Controller
                 return $users;
             }
         }
-        }
 
+    }
 
     public function show(User $user)
     {

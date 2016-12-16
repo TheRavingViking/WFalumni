@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    Alert::info('Wookies', 'Welkom bij WFAlumni!');
+//    Alert::info('Wookies', 'Welkom bij WFAlumni!');
     return view('auth/login');
 });
 
@@ -39,10 +39,15 @@ Route::post('/profiel/woonplaats', 'UserController@createWoonplaats')->middlewar
 Route::post('/profiel/woonplaats/delete', 'UserController@deleteWoonplaats')->middleware('auth');
 
 
-Route::get('/overview', 'UserController@index')->middleware('auth', 'admin');
-Route::get('overview/search','UserController@search')->middleware('auth', 'admin');
-Route::get('overview/filter','UserController@filter')->middleware('auth', 'admin');
-Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth', 'admin');
+//Route::get('/overview', 'UserController@index')->middleware('auth', 'admin');
+//Route::get('overview/search','UserController@search')->middleware('auth', 'admin');
+//Route::get('overview/filter','UserController@filter')->middleware('auth', 'admin');
+//Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth', 'admin');
+
+Route::get('/overview', 'UserController@index')->middleware('auth');
+Route::get('overview/search','UserController@search')->middleware('auth');
+Route::get('overview/filter','UserController@filter')->middleware('auth');
+Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth');
 
 Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
 Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
@@ -54,6 +59,8 @@ Route::post('/adminOpleidingen/richting', 'AdminController@createRichting');
 Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding');
 Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie');
 Route::get('/admin', 'AdminController@index')->middleware('auth');
+Route::get('/dashboard', 'AdminController@dashboard')->middleware('auth');
+Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('auth');
 
 Route::post('/admin/assign-roles', [
     'uses' => 'AdminController@postAdminAssignRoles',
