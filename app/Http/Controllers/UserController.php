@@ -80,18 +80,20 @@ class UserController extends Controller
                     ->where('naam', '=', $opleiding)
                     ->where('eind', 'LIKE', "$jaar%")
                     ->where('behaald', 1)
+                    ->Where(function ($query) use ($key) {
+                        $query->where('voornaam', 'LIKE', "%$key%")
+                            ->orWhere('tussenvoegsel', 'LIKE', "%$key%")
+                            ->orWhere('achternaam', 'LIKE', "%$key%");
+                    })
+                    ->paginate(25);
 
-                ->Where(function ($query) use ($key) {
-                $query->where('voornaam', 'LIKE', "%$key%")
-                ->orWhere('tussenvoegsel', 'LIKE', "%$key%")
-                ->orWhere('achternaam', 'LIKE', "%$key%");
-                            })
-                    ->get();
+                $auth = Auth::user()->opleiding()->get()->last()->naam;
+                $eind = Auth::user()->opleiding()->get()->last()->eind;
 
-                //var_dump($users);
-                //var_dump($jaar);
-                return $users;
+                return view('MijnOpleidingSearch', array('opl' => $users, 'auth' => $auth, 'eind' => $eind));
             }
+        } else {
+            return view('MijnOpleiding', array('opl' => $users, 'auth' => $auth, 'eind' => $eind));
         }
 
     }

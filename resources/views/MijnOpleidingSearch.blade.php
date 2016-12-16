@@ -18,26 +18,28 @@
 
         <div class="panel panel-default" style="padding: 2em">
             <div class="row">
-                <form class="form-horizontal" method="get" action="/mijnopleiding/search">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="text" name="searchinput" placeholder="Search.." id="searchinput">
-                    <input type="hidden" name="opleiding" id="opleiding" value="{{$auth}}">
-                    <input type="hidden" name="jaar" id="jaar" value="{{$eind}}">
-                    <button class="btn btn-primary">Go</button>
-                </form>
-            </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form class="form-horizontal" method="get" action="/mijnopleiding/search">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="opleiding" id="opleiding" value="{{$auth}}">
+                        <input type="hidden" name="jaar" id="jaar" value="{{$eind}}">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" id="searchinput"
+                                   name="searchinput">
+                            <span class="input-group-btn"><button class="btn btn-primary"
+                                                                  type="submit">Go!</button></span>
+                        </div>
 
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
 
 
-
     <div class="container">
         @foreach($opl as $user)
-            @php($jaar = substr($user->eind, 0, 4))
-            @if($jaar == $eind && $user->naam == $auth)
-
                 <div class="panel panel-default" style="padding: 1em">
                     <div class="row">
                         <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">
@@ -67,7 +69,6 @@
                         </div>
                     </div>
                 </div>
-            @endif
         @endforeach
 
         <div class="container" style="alignment: center">
