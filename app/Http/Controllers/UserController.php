@@ -58,35 +58,38 @@ class UserController extends Controller
     }
 
 
-    public function MijnOpleidingSearch(request $request)
+    public function MijnOpleidingSearch(Request $request)
     {
         $opleiding = request('opleiding');
         $jaar = request('jaar');
         $keyword = request('searchinput');
         $keyword = explode(" ", $keyword);
-//        return $keyword;
+
+        //var_dump($keyword);
 
         if ($keyword != '') {
             foreach ($keyword as $key) {
                 $users = DB::table('users')
                     ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
                     ->select('users.*', 'opleiding.*')
-                    ->where('voornaam', 'LIKE', "%$key%")
-                    ->orWhere('tussenvoegsel', 'LIKE', "%$key%")
-                    ->orWhere('achternaam', 'LIKE', "%$key%")
-//                    ->Where('naam', "$opleiding")
-                    ->Where(function ($query) use ($opleiding, $jaar) {
-                        $query->where('naam', $opleiding)
-                            ->where('eind', $jaar);
-                    })
-                    ->toSql();
+                    ->where('naam', '=', $opleiding)
+                    ->where('eind', 'LIKE', "$jaar%")
+                    ->where('behaald', 1)
 
+                ->Where(function ($query) use ($key) {
+                $query->where('voornaam', 'LIKE', "%$key%")
+                ->orWhere('tussenvoegsel', 'LIKE', "%$key%")
+                ->orWhere('achternaam', 'LIKE', "%$key%");
+                            })
+                    ->get();
 
+                //var_dump($users);
+                //var_dump($jaar);
                 return $users;
             }
         }
+        }
 
-    }
 
     public function show(User $user)
     {
@@ -118,7 +121,7 @@ class UserController extends Controller
     }
 
 
-    public function filter(request $request)
+    public function filter(Request $request)
     {
 
         $richtingen = request('richtingen');

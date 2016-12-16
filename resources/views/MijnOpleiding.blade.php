@@ -16,16 +16,16 @@
             </div>
         @endif
 
-        {{--<div class="panel panel-default" style="padding: 2em">--}}
-            {{--<div class="row">--}}
-                {{--<form class="form-horizontal" method="get" action="/mijnopleiding/search">--}}
-                    {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
-                    {{--<input type="text" name="searchinput" placeholder="Search.." id="searchinput">--}}
-                    {{--<input type="hidden" name="opleiding" id="opleiding" value="{{$auth}}">--}}
-                    {{--<input type="hidden" name="jaar" id="jaar" value="{{$eind}}">--}}
-                    {{--<button class="btn btn-primary">Go</button>--}}
-                {{--</form>--}}
-            {{--</div>--}}
+        <div class="panel panel-default" style="padding: 2em">
+            <div class="row">
+                <form class="form-horizontal" method="get" action="/mijnopleiding/search">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="text" name="searchinput" placeholder="Search.." id="searchinput">
+                    <input type="hidden" name="opleiding" id="opleiding" value="{{$auth}}">
+                    <input type="hidden" name="jaar" id="jaar" value="{{$eind}}">
+                    <button class="btn btn-primary">Go</button>
+                </form>
+            </div>
 
         </div>
     </div>
@@ -76,9 +76,6 @@
             </div>
         </div>
     </div>
-
-
-
 
 @stop
 
