@@ -40,6 +40,10 @@ class UserController extends Controller
         return view('overview', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
     }
 
+    public function show(User $user)
+    {
+        return view('profiel', compact('user'));
+    }
 
     public function mijnOpleiding()
     {
@@ -68,11 +72,12 @@ class UserController extends Controller
         $opleiding = request('opleiding');
         $jaar = request('jaar');
         $keyword = request('searchinput');
+        if ($keyword != '') {
         $keyword = explode(" ", $keyword);
 
         //var_dump($keyword);
 
-        if ($keyword != '') {
+
             foreach ($keyword as $key) {
                 $users = DB::table('users')
                     ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
@@ -89,19 +94,18 @@ class UserController extends Controller
 
                 $auth = Auth::user()->opleiding()->get()->last()->naam;
                 $eind = Auth::user()->opleiding()->get()->last()->eind;
+                $eind = substr($eind, 0, 4);
 
                 return view('MijnOpleidingSearch', array('opl' => $users, 'auth' => $auth, 'eind' => $eind));
             }
         } else {
-            return view('MijnOpleiding', array('opl' => $users, 'auth' => $auth, 'eind' => $eind));
+
+            return redirect('mijnopleiding')->with('error', 'Leeg zoekveld.');
         }
 
     }
 
-    public function show(User $user)
-    {
-        return view('profiel', compact('user'));
-    }
+
 
     public function search(request $request)
     {

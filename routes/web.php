@@ -50,7 +50,6 @@ Route::get('overview/filter','UserController@filter')->middleware('auth');
 Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth');
 
 Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
-Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
 Route::get('/mijnopleiding/search', 'UserController@mijnOpleidingSearch')->middleware('auth');
 
 
