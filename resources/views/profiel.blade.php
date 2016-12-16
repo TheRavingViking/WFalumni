@@ -2,6 +2,15 @@
 
 @section('content')
 
+@php
+if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
+    {
+        $temp = '';
+    } else
+    {
+        $temp = 'disabled';
+    }
+@endphp
 
     <div class="container">
     @foreach ($errors->all() as $error)
@@ -13,8 +22,6 @@
             {{ session('error') }}
         </div>
     @endif
-
-
 
     @if (session('status'))
         <div class="alert alert-success">
@@ -42,132 +49,142 @@
 
                         {{ csrf_field() }}
 
+                            <input type="hidden" name="id" id="id" value="{{$user->id}}">
+
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                             <label>Update profiel foto</label>
-                            <input type="file" name="avatar">
+                            <input type="file" name="avatar" {{$temp}}>
 
                             <label for="voornaam">Voornaam</label>
                             <input id="voornaam" type="text" class="form-control" name="voornaam"
-                                   value="{{$user->voornaam}}">
+                                   value="{{$user->voornaam}}" {{$temp}}>
 
                             <label for="tussenvoegsel">Tussenvoegsel</label>
                             <input id="tussenvoegsel" type="text" class="form-control" name="tussenvoegsel"
-                                   value="{{ $user->tussenvoegsel }}">
+                                   value="{{ $user->tussenvoegsel }}" {{$temp}}>
 
                             <label for="achternaam">Achternaam</label>
                             <input id="achternaam" type="text" class="form-control" name="achternaam"
-                                   value="{{ $user->achternaam }}">
+                                   value="{{ $user->achternaam }}" {{$temp}}>
 
                             <label for="email">E-Mail Address</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}">
+                            <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" {{$temp}}>
 
                             <label for="studentnummer">Studentnummer</label>
                             <input id="studentnummer" type="text" class="form-control" name="studentnummer"
-                                   value="{{ $user->studentnummer }}">
+                                   value="{{ $user->studentnummer }}" {{$temp}}>
 
                             <label for="telefoonnummer">Telefoonnummer</label>
                             <input id="telefoonnummer" type="text" class="form-control" name="telefoonnummer"
-                                   value="{{ $user->telefoonnummer }}">
+                                   value="{{ $user->telefoonnummer }}" {{$temp}}>
 
                             <label for="facebook">facebook</label>
                             <input id="facebook" type="text" class="form-control" name="facebook"
-                                   value="{{ $user->facebook }}">
+                                   value="{{ $user->facebook }}" {{$temp}}>
 
                             <label for="linkedin">linkedin</label>
                             <input id="linkedin" type="text" class="form-control" name="linkedin"
-                                   value="{{ $user->linkedin }}">
+                                   value="{{ $user->linkedin }}" {{$temp}}>
 
                             <label for="twitter">twitter</label>
                             <input id="twitter" type="text" class="form-control" name="twitter"
-                                   value="{{ $user->twitter }}">
+                                   value="{{ $user->twitter }}" {{$temp}}>
 
                             <label for="website">website</label>
                             <input id="website" type="text" class="form-control" name="website"
-                                   value="{{ $user->website }}">
+                                   value="{{ $user->website }}" {{$temp}}>
 
 
                             <label for="post adres">Post adres</label>
                             <input id="post adres" type="text" class="form-control" name="post adres"
-                                   value="{{ $user->post_adres }}">
+                                   value="{{ $user->post_adres }}" {{$temp}}>
 
 
                             <label for="password">Password</label>
-                            <input id="password" type="password" class="form-control" name="password">
+                            <input id="password" type="password" class="form-control" name="password" {{$temp}}>
 
                             <label for="password-confirm">Confirm Password</label>
                             <input id="password-confirm" type="password" class="form-control"
-                                   name="password_confirmation">
+                                   name="password_confirmation" {{$temp}}>
 
                             <label for="geslacht">Geslacht
                                 <br>Man:&nbsp&nbsp&nbsp
                                 @if($user->geslacht == 'man') <input id="geslacht" name="geslacht" type="radio"
-                                                                     value="man" checked>
-                                @else <input id="geslacht" name="geslacht" type="radio" value="man">
+                                                                     value="man" checked {{$temp}}>
+                                @else <input id="geslacht" name="geslacht" type="radio" value="man" {{$temp}}>
                                 @endif
                                 <br>Vrouw:
                                 @if($user->geslacht == 'vrouw') <input id="geslacht" name="geslacht" type="radio"
-                                                                       value="vrouw" checked>
-                                @else <input id="geslacht" name="geslacht" type="radio" value="vrouw">
+                                                                       value="vrouw" checked {{$temp}}>
+                                @else <input id="geslacht" name="geslacht" type="radio" value="vrouw" {{$temp}}>
                                 @endif
                             </label>
 
                             <br><label for="burgerlijke staat" title="burgelijke staat">Burgerlijke staat</label>
-                            <select name="burgerlijke staat" title="burgelijke staat">
+                            <select name="burgerlijke staat" title="burgelijke staat" {{$temp}}>
                                 <option value="ongehuwd">ongehuwd</option>
                                 <option value="gehuwd">gehuwd</option>
                             </select><br>
 
                             <label for="heeft_kinderen">heeft_kinderen</label>
                             <input id="heeft_kinderen" type="text" class="form-control" name="heeft_kinderen"
-                                   value="{{ $user->heeft_kinderen }}">
+                                   value="{{ $user->heeft_kinderen }}" {{$temp}}>
 
                             <label for="nationaliteit">Nationaliteit</label>
                             <input id="nationaliteit" type="text" class="form-control" name="nationaliteit"
-                                   value="{{ $user->nationaliteit }}">
+                                   value="{{ $user->nationaliteit }}" {{$temp}}>
 
                             <label for="geboortedatum">Geboortedatum</label>
                             <input id="geboortedatum" type="date" class="form-control" name="geboortedatum"
-                                   value="{{ $user->geboortedatum }}">
+                                   value="{{ $user->geboortedatum }}" {{$temp}}>
 
                             <label for="geboorteplaats">Geboorteplaats</label>
                             <input id="geboorteplaats" type="text" class="form-control" name="geboorteplaats"
-                                   value="{{ $user->geboorteplaats }}">
+                                   value="{{ $user->geboorteplaats }}" {{$temp}}>
 
                             <label for="geboorteprovincie">geboorteprovincie</label>
                             <input id="geboorteprovincie" type="text" class="form-control" name="geboorteprovincie"
-                                   value="{{ $user->geboorteprovincie }}">
+                                   value="{{ $user->geboorteprovincie }}" {{$temp}}>
 
                             <label for="geboorteland">geboorteland</label>
                             <input id="geboorteland" type="text" class="form-control" name="geboorteland"
-                                   value="{{ $user->geboorteland }}">
+                                   value="{{ $user->geboorteland }}" {{$temp}}>
 
 
                             <label for="titel">Titel</label>
-                            <input id="titel" type="text" class="form-control" name="titel" value="{{ $user->titel }}">
+                            <input id="titel" type="text" class="form-control" name="titel" value="{{ $user->titel }}" {{$temp}}>
 
                             <label for="jaarinkomen">jaarinkomen</label>
                             <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen"
-                                   value="{{ $user->jaarinkomen }}">
+                                   value="{{ $user->jaarinkomen }}" {{$temp}}>
 
                             <label for="geenmailverzenden">Wenst email te ontvangen:
                                 <br>Ja, graag&nbsp&nbsp&nbsp&nbsp&nbsp
 
                                 @if($user->geenmailverzenden == 1) <input id="geenmailverzenden"
                                                                           name="geenmailverzenden" type="radio"
-                                                                          value="1" checked><br>
-                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1"><br>
+                                                                          value="1" checked {{$temp}}><br>
+                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1" {{$temp}}><br>
                                 @endif
 
                                 Nee, dank je
                                 @if($user->geenmailverzenden == 0) <input id="geenmailverzenden"
                                                                           name="geenmailverzenden" type="radio"
-                                                                          value="0" checked>
-                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0">
+                                                                          value="0" checked {{$temp}}>
+                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0" {{$temp}}>
                                 @endif
-                            </label>
+                            </label><br>
+
+                            <label for="bevoegdheid">bevoegdheid</label>
+                            <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
+                                   value="{{ $user->bevoegdheid }}" {{$temp}}>
+
+                            <label for="afdeling">afdeling</label>
+                            <input id="afdeling" type="text" class="form-control" name="afdeling"
+                                   value="{{ $user->afdeling }}" {{$temp}}>
 
                             <br>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" {{$temp}}>
                                 Wijzig
                             </button>
                         </div>
@@ -179,7 +196,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-danger">
+                                <button type="submit" class="btn btn-danger" {{$temp}}>
                                     Delete User
                                 </button>
                             </div>
@@ -202,7 +219,7 @@
                     <h1>Woonplaats</h1>
                     <div>
                         <!-- Trigger/Open The Modal -->
-                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#woonModal">
+                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#woonModal" {{$temp}}>
                             Voeg Woonplaats toe
                         </button>
 
@@ -219,7 +236,7 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <form method="POST" action="profiel/woonplaats" class="form-horizontal">
+                                    <form method="POST" action="{{ url('profiel/woonplaats') }}" class="form-horizontal">
                                         {!! csrf_field() !!}
 
                                         <div class="form-group">
@@ -243,7 +260,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="latitude">longitude</label>
+                                            <label for="latitude">latitude</label>
                                             <input id="latitude" type="text" name="latitude">
                                         </div>
 
@@ -289,7 +306,7 @@
                             <input id="id" type="hidden" name="id" value="{{ $woonplaats->id }}">
                             <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-danger">Delete Woonplaats</button>
+                            <button type="submit" class="btn btn-danger" {{$temp}}>Delete Woonplaats</button>
 
                             <hr>
                         </form>
@@ -310,7 +327,7 @@
                     <h1>Opleidingen</h1>
                     <div>
                         <!-- Trigger/Open The Modal -->
-                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#oplModal">
+                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#oplModal" {{$temp}}>
                             Voeg opleiding toe
                         </button>
 
@@ -327,7 +344,7 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <form method="POST" action="profiel/opleiding" class="form-horizontal">
+                                    <form method="POST" action="{{ url('profiel/opleiding') }}" class="form-horizontal">
                                         {!! csrf_field() !!}
 
                                         <div class="form-group">
@@ -416,7 +433,7 @@
                             <input id="id" type="hidden" name="id" value="{{ $opl->id }}">
                             <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-danger">Delete Opleiding</button>
+                            <button type="submit" class="btn btn-danger" {{$temp}}>Delete Opleiding</button>
 
                             <hr>
                         </form>
@@ -439,7 +456,7 @@
                     {{--modal--}}
                     <div>
                         <!-- Trigger/Open The Modal -->
-                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#bedModal">
+                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#bedModal" {{$temp}}>
                             Voeg werkplek toe
                         </button>
 
@@ -456,7 +473,7 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <form method="POST" action="profiel/bedrijf" class="form-horizontal">
+                                    <form method="POST" action="{{ url('profiel/bedrijf') }}" class="form-horizontal">
                                         {!! csrf_field() !!}
 
                                         <div class="form-group">
@@ -542,7 +559,7 @@
                             <input id="id" type="hidden" name="id" value="{{ $bedrijf->id }}">
                             <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-danger">Delete bedrijf</button>
+                            <button type="submit" class="btn btn-danger" {{$temp}}>Delete bedrijf</button>
 
                             <hr>
                         </form>

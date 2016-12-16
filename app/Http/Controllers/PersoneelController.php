@@ -16,4 +16,10 @@ class PersoneelController extends Controller
         $personeel = personeel::paginate(3);
         return view('personeelOverview', compact('personeel'));
     }
+
+    public function show(personeel $persoon)
+    {
+        return view('personeelProfiel', compact('persoon'));
+    }
+
 }

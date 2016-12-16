@@ -16,6 +16,7 @@ use App\User;
 use App\Opleiding;
 use App\Bedrijf;
 use App\Woonplaats;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -40,25 +41,51 @@ class UserController extends Controller
     }
 
 
-
     public function mijnOpleiding()
     {
 
 
         $auth = Auth::user()->opleiding()->get()->last()->naam;
-        $eind = Auth::user()->opleiding()->first()->eind;
+        $eind = Auth::user()->opleiding()->get()->last()->eind;
+        $eind = substr($eind, 0, 4);
 
-//return $auth;
+//        return $eind;
 
-        $opl = Opleiding::with('user')->where('naam', $auth)->paginate(25);
-
-
-        $richtingen = dropdown_richting::all();
-        $opleidingen = dropdown_opleidingen::all();
-        $specialisaties = dropdown_specialisaties::all();
+        $opl = Opleiding::with('user')->where('naam', $auth)->whereYear('eind', $eind)->where('behaald', 1)->paginate(25);
 
 
-        return view('MijnOpleiding', array('opl' => $opl, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+        return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => $eind));
+    }
+
+
+    public function MijnOpleidingSearch(request $request)
+    {
+        $opleiding = request('opleiding');
+        $jaar = request('jaar');
+        $keyword = request('searchinput');
+        $keyword = explode(" ", $keyword);
+//        return $keyword;
+
+        if ($keyword != '') {
+            foreach ($keyword as $key) {
+                $users = DB::table('users')
+                    ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                    ->select('users.*', 'opleiding.*')
+                    ->where('voornaam', 'LIKE', "%$key%")
+                    ->orWhere('tussenvoegsel', 'LIKE', "%$key%")
+                    ->orWhere('achternaam', 'LIKE', "%$key%")
+//                    ->Where('naam', "$opleiding")
+                    ->Where(function ($query) use ($opleiding, $jaar) {
+                        $query->where('naam', $opleiding)
+                            ->where('eind', $jaar);
+                    })
+                    ->toSql();
+
+
+                return $users;
+            }
+        }
+
     }
 
     public function show(User $user)
@@ -93,19 +120,36 @@ class UserController extends Controller
 
     public function filter(request $request)
     {
+
         $richtingen = request('richtingen');
         $opleidingen = request('opleidingen');
         $specialisaties = request('specialisaties');
 
-        $users = User::has(['opleiding' => function ($query) {
-            $query->where($opleidingen, '===', 'naam');
-        }])->toSql();
-//        $books = Book::with(['author' => function($query) {$query->where('is_deleted', 'N');}, 'author.contacts' => function($query) {$query->where('is_deleted', 'N');}])->get();
-        dd($users);
+        $users = DB::table('users')
+            ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+            ->select('users.*', 'opleiding.*')
+            ->where([
+                ['naam', $opleidingen],
+                ['richting', $richtingen],
+            ])
+            ->paginate(25);
+
+        if (count($users) == '0') {
+            return redirect::to('overview')->with('error', 'Geen zoekresultaten gevonden');
+        } else {
+            $request->session()->flash('statusN', 'Aantal zoekresultaten gevonden:' . ' ' . $users->total());
+        }
+
+        $richtingen = dropdown_richting::all();
+        $opleidingen = dropdown_opleidingen::all();
+        $specialisaties = dropdown_specialisaties::all();
+
+        return view('filter', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties))->with('status', '');
 
     }
 
-    public function createOpleiding(Request $request)
+    public
+    function createOpleiding(Request $request)
     {
         $data = array(
             'naam' => $request['naam'],
@@ -120,11 +164,13 @@ class UserController extends Controller
             'provincie' => $request['provincie'],
             'user_id' => $request['user_id']
         );
+        $id = $request['user_id'];
         opleiding::create($data);
-        return redirect::to('profiel')->with('message', 'Opleiding toegevoegd');
+        return redirect::to('profiel/' . $id)->with('message', 'Opleiding toegevoegd');
     }
 
-    public function deleteOpleiding(Request $request)
+    public
+    function deleteOpleiding(Request $request)
     {
         $user = $request->user_id;
         if (Opleiding::where('user_id', $user)->count() > 1) {
@@ -138,7 +184,8 @@ class UserController extends Controller
     }
 
 
-    public function createBedrijf(Request $request)
+    public
+    function createBedrijf(Request $request)
     {
         $data = array(
             'naam' => $request['naam'],
@@ -153,11 +200,13 @@ class UserController extends Controller
             'provincie' => $request['provincie'],
             'user_id' => $request['user_id']
         );
+        $id = $request['user_id'];
         bedrijf::create($data);
-        return redirect::to('profiel')->with('message', 'bedrijf toegevoegd');
+        return redirect::to('profiel/' . $id)->with('message', 'bedrijf toegevoegd');
     }
 
-    public function deleteBedrijf(Request $request)
+    public
+    function deleteBedrijf(Request $request)
     {
         $user = $request->user_id;
         if (Bedrijf::where('user_id', $user)->count() > 1) {
@@ -171,7 +220,8 @@ class UserController extends Controller
     }
 
 
-    public function createWoonplaats(Request $request)
+    public
+    function createWoonplaats(Request $request)
     {
         $data = array(
             'naam' => $request['naam'],
@@ -183,11 +233,14 @@ class UserController extends Controller
             'provincie' => $request['provincie'],
             'user_id' => $request['user_id']
         );
+        $id = $request['user_id'];
         woonplaats::create($data);
-        return redirect::to('profiel')->with('message', 'woonplaats toegevoegd');
+        return redirect::to('profiel/' . $id)->with('message', 'woonplaats toegevoegd');
+        //return view('profiel/' . $id);
     }
 
-    public function deleteWoonplaats(Request $request)
+    public
+    function deleteWoonplaats(Request $request)
     {
         $user = $request->user_id;
         if (Woonplaats::where('user_id', $user)->count() > 1) {
@@ -201,9 +254,11 @@ class UserController extends Controller
     }
 
 
-    public function update(Request $req)
+    public
+    function update(Request $req)
     {
-        $user = Auth::user();
+        $id = $req->id;
+        $user = user::find($id);
         if ($req->hasFile('avatar')) {
             $avatar = $req->file('avatar');
             $filename = time() . '.' . $avatar->getClientOriginalExtension();
@@ -235,7 +290,9 @@ class UserController extends Controller
             'linkedin' => $req['linkedin'],
             'twitter' => $req['twitter'],
             'website' => $req['website'],
-            'geenmailverzenden' => $req['geenmailverzenden']
+            'geenmailverzenden' => $req['geenmailverzenden'],
+            'bevoegdheid' => $req['bevoegdheid'],
+            'afdeling' => $req['afdeling']
         );
         $user->fill($new_user_data);
         $user->save();
@@ -243,7 +300,8 @@ class UserController extends Controller
         return back()->with('status', 'Update was succesvol!!');
     }
 
-    public function SoftDelete(request $id)
+    public
+    function SoftDelete(request $id)
     {
 
         $user = Auth::user($id);
@@ -262,7 +320,8 @@ class UserController extends Controller
     }
 
 
-    public function MassSoftDelete(Request $users)
+    public
+    function MassSoftDelete(Request $users)
     {
 
         if (empty($users->checkbox)) {

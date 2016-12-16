@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     Alert::info('Wookies', 'Welkom bij WFAlumni!');
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -43,12 +43,23 @@ Route::get('overview/search','UserController@search')->middleware('auth');
 Route::get('overview/filter','UserController@filter')->middleware('auth');
 Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth');
 
+Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
+Route::get('/mijnopleiding/search', 'UserController@mijnOpleidingSearch')->middleware('auth');
+
 Route::post('/personeelProfiel/store', 'PersoneelController@update')->middleware('auth');
 Route::post('/personeelProfiel/delete', 'PersoneelController@SoftDelete')->middleware('auth');
 
 Route::get('/personeelOverview', 'PersoneelController@index');
 
-Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen')->middleware('auth');
-Route::post('/adminOpleidingen/richting', 'AdminController@createRichting')->middleware('auth');
-Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding')->middleware('auth');
-Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie')->middleware('auth');
+Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen');
+Route::post('/adminOpleidingen/richting', 'AdminController@createRichting');
+Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding');
+Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie');
+Route::get('/admin', 'AdminController@index')->middleware('auth');
+
+Route::post('/admin/assign-roles', [
+    'uses' => 'AdminController@postAdminAssignRoles',
+    'as' => 'admin.assign',
+    'middleware' => 'roles',
+    'roles' => ['Admin']
+]);
