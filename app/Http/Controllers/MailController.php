@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 
-
 class MailController extends Controller
 {
     public function index()
@@ -21,13 +20,23 @@ class MailController extends Controller
 
     public function send(request $request)
     {
-        $users = $request->users;
-        $title = $request->title;
-        $email = $request->email;
+
+        if (empty($request)) {
 
 
-        mail::to($users)->send(new MailAll($title, $email));
-        return redirect()->back();
+            $users = User::all('email');
+            $title = $request->title;
+            $subject = $request->subject;
+            $email = $request->email;
+
+
+            foreach ($users as $mail)
+                mail::to($mail)->queue(new MailAll($subject, $email, $title));
+
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('error', 'Voer de velden in.');
+        }
     }
 
 }
