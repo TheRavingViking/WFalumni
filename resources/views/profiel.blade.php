@@ -194,19 +194,17 @@
                         </div>
 
                     </form>
-
+                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 1em;">
                     <form action="/profiel/delete" method="POST">
                         <input type="hidden" name="id" value="{{ $user->id }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-danger" {{$temp}}>
                                     Delete User
                                 </button>
                             </div>
-                        </div>
                     </form>
-
+                </div>
 
                 </div>
 
