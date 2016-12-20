@@ -10,5 +10,4 @@ class user_role extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }
