@@ -2,32 +2,32 @@
 
 @section('content')
 
-@php
-if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
-    {
-        $temp = '';
-    } else
-    {
-        $temp = 'disabled';
-    }
-@endphp
+    @php
+        if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
+            {
+                $temp = '';
+            } else
+            {
+                $temp = 'disabled';
+            }
+    @endphp
 
     <div class="container">
-    @foreach ($errors->all() as $error)
-        <p class="alert alert-danger">{{ $error }}</p>
-    @endforeach
+        @foreach ($errors->all() as $error)
+            <p class="alert alert-danger">{{ $error }}</p>
+        @endforeach
 
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
 
     </div>
 
@@ -49,7 +49,7 @@ if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
 
                         {{ csrf_field() }}
 
-                            <input type="hidden" name="id" id="id" value="{{$user->id}}">
+                        <input type="hidden" name="id" id="id" value="{{$user->id}}">
 
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
                             <label>Update profiel foto</label>
@@ -68,7 +68,8 @@ if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
                                    value="{{ $user->achternaam }}" {{$temp}}>
 
                             <label for="email">E-Mail Address</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" {{$temp}}>
+                            <input id="email" type="email" class="form-control" name="email"
+                                   value="{{ $user->email }}" {{$temp}}>
 
                             <label for="studentnummer">Studentnummer</label>
                             <input id="studentnummer" type="text" class="form-control" name="studentnummer"
@@ -152,7 +153,8 @@ if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
 
 
                             <label for="titel">Titel</label>
-                            <input id="titel" type="text" class="form-control" name="titel" value="{{ $user->titel }}" {{$temp}}>
+                            <input id="titel" type="text" class="form-control" name="titel"
+                                   value="{{ $user->titel }}" {{$temp}}>
 
                             <label for="jaarinkomen">jaarinkomen</label>
                             <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen"
@@ -164,14 +166,16 @@ if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
                                 @if($user->geenmailverzenden == 1) <input id="geenmailverzenden"
                                                                           name="geenmailverzenden" type="radio"
                                                                           value="1" checked {{$temp}}><br>
-                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="1" {{$temp}}><br>
+                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"
+                                             value="1" {{$temp}}><br>
                                 @endif
 
                                 Nee, dank je
                                 @if($user->geenmailverzenden == 0) <input id="geenmailverzenden"
                                                                           name="geenmailverzenden" type="radio"
                                                                           value="0" checked {{$temp}}>
-                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio" value="0" {{$temp}}>
+                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"
+                                             value="0" {{$temp}}>
                                 @endif
                             </label><br>
 
@@ -213,107 +217,112 @@ if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
     {{--Woonplaats form & modal--}}
     <div class="container">
         <div class="panel panel-default" style="padding: 1em">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <a href="#woonplaatscollapse" class="btn btn-info" data-toggle="collapse">Woonplaats</a>
+            <div id="woonplaatscollapse" class="collapse">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                    <h1>Woonplaats</h1>
-                    <div>
-                        <!-- Trigger/Open The Modal -->
-                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#woonModal" {{$temp}}>
-                            Voeg Woonplaats toe
-                        </button>
+                        <h1>Woonplaats</h1>
 
-                        <!-- The Modal -->
-                        <div id="woonModal" class="modal fade">
+                        <br>
+                        @foreach($user->woonplaats as $woonplaats)
+                            <form class="form-horizontal" method="POST"
+                                  action="/profiel/woonplaats/delete">
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
+                                <h4>{{ $woonplaats->naam }}</h4>
+                                <input id="naam" type="text" class="form-control" name="naam"
+                                       value="{{ $woonplaats->naam }}" disabled> <br>
+                                <input id="functie" type="text" class="form-control" name="functie"
+                                       value="{{ $woonplaats->provincie }}" disabled> <br>
+                                <input id="richting" type="text" class="form-control" name="richting"
+                                       value="{{ $woonplaats->land }}" disabled> <br>
+                                <input id="begin" type="text" class="form-control" name="begin"
+                                       value="{{ $woonplaats->begin }}" disabled> <br>
+                                <input id="eind" type="text" class="form-control" name="eind"
+                                       value="{{ $woonplaats->eind }}" disabled> <br>
 
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Vul de woonplaats</h4>
+                                <input id="id" type="hidden" name="id" value="{{ $woonplaats->id }}">
+                                <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn btn-danger" {{$temp}}>Delete Woonplaats</button>
 
-                                </div>
-                                <div class="modal-body">
+                                <hr>
+                            </form>
 
-                                    <form method="POST" action="{{ url('profiel/woonplaats') }}" class="form-horizontal">
-                                        {!! csrf_field() !!}
 
-                                        <div class="form-group">
-                                            <label for="naam">naam</label>
-                                            <input id="naam" type="text" name="naam" required>
-                                        </div>
+                        @endforeach
+                        <div>
+                            <!-- Trigger/Open The Modal -->
+                            <button type="button" class="btn btn-info btn-md" data-toggle="modal"
+                                    data-target="#woonModal" {{$temp}}>
+                                Voeg Woonplaats toe
+                            </button>
 
-                                        <div class="form-group">
-                                            <label for="begin">begin</label>
-                                            <input id="begin" type="date" name="begin" required>
-                                        </div>
+                            <!-- The Modal -->
+                            <div id="woonModal" class="modal fade">
 
-                                        <div class="form-group">
-                                            <label for="eind">eind</label>
-                                            <input id="eind" type="date" name="eind">
-                                        </div>
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
 
-                                        <div class="form-group">
-                                            <label for="longitude">longitude</label>
-                                            <input id="longitude" type="text" name="longitude">
-                                        </div>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Vul de woonplaats</h4>
 
-                                        <div class="form-group">
-                                            <label for="latitude">latitude</label>
-                                            <input id="latitude" type="text" name="latitude">
-                                        </div>
+                                    </div>
+                                    <div class="modal-body">
 
-                                        <div class="form-group">
-                                            <label for="land">land</label>
-                                            <input id="land" type="text" name="land" required>
-                                        </div>
+                                        <form method="POST" action="{{ url('profiel/woonplaats') }}"
+                                              class="form-horizontal">
+                                            {!! csrf_field() !!}
 
-                                        <div class="form-group">
-                                            <label for="provincie">provincie</label>
-                                            <input id="provincie" type="text" name="provincie">
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="naam">naam</label>
+                                                <input id="naam" type="text" name="naam" required>
+                                            </div>
 
-                                        <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
+                                            <div class="form-group">
+                                                <label for="begin">begin</label>
+                                                <input id="begin" type="date" name="begin" required>
+                                            </div>
 
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
+                                            <div class="form-group">
+                                                <label for="eind">eind</label>
+                                                <input id="eind" type="date" name="eind">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="longitude">longitude</label>
+                                                <input id="longitude" type="text" name="longitude">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="latitude">latitude</label>
+                                                <input id="latitude" type="text" name="latitude">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="land">land</label>
+                                                <input id="land" type="text" name="land" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="provincie">provincie</label>
+                                                <input id="provincie" type="text" name="provincie">
+                                            </div>
+
+                                            <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
+
+                                            <button type="submit" class="btn btn-default">Submit</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
                                 </div>
                             </div>
+
+
                         </div>
-
-
                     </div>
-                    <br>
-                    @foreach($user->woonplaats as $woonplaats)
-                        <form class="form-horizontal" method="POST"
-                              action="/profiel/woonplaats/delete">
-
-                            <h4>{{ $woonplaats->naam }}</h4>
-                            <input id="naam" type="text" class="form-control" name="naam"
-                                   value="{{ $woonplaats->naam }}" disabled> <br>
-                            <input id="functie" type="text" class="form-control" name="functie"
-                                   value="{{ $woonplaats->provincie }}" disabled> <br>
-                            <input id="richting" type="text" class="form-control" name="richting"
-                                   value="{{ $woonplaats->land }}" disabled> <br>
-                            <input id="begin" type="text" class="form-control" name="begin"
-                                   value="{{ $woonplaats->begin }}" disabled> <br>
-                            <input id="eind" type="text" class="form-control" name="eind"
-                                   value="{{ $woonplaats->eind }}" disabled> <br>
-
-                            <input id="id" type="hidden" name="id" value="{{ $woonplaats->id }}">
-                            <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-danger" {{$temp}}>Delete Woonplaats</button>
-
-                            <hr>
-                        </form>
-
-
-                    @endforeach
-
                 </div>
             </div>
         </div>
@@ -321,128 +330,132 @@ if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
     {{--opleiding form & modal--}}
     <div class="container">
         <div class="panel panel-default" style="padding: 1em">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <a href="#opleidingcollapse" class="btn btn-info" data-toggle="collapse">Opleidingen</a>
+            <div id="opleidingcollapse" class="collapse">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-                    <h1>Opleidingen</h1>
-                    <div>
-                        <!-- Trigger/Open The Modal -->
-                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#oplModal" {{$temp}}>
-                            Voeg opleiding toe
-                        </button>
+                        <h1>Opleidingen</h1>
 
-                        <!-- The Modal -->
-                        <div id="oplModal" class="modal fade">
+                        <br>
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
+                        @foreach($user->opleiding as $opl)
+                            <form class="form-horizontal" method="POST"
+                                  action="/profiel/opleiding/delete">
 
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Vul de opleidings informatie in</h4>
+                                <h4>{{ $opl->naam }}</h4>
+                                <input id="naam" type="text" class="form-control" name="naam"
+                                       value="{{ $opl->naam }}" disabled> <br>
+                                <input id="functie" type="text" class="form-control" name="functie"
+                                       value="{{ $opl->instituut }}" disabled> <br>
+                                <input id="functie" type="text" class="form-control" name="functie"
+                                       value="{{ $opl->richting }}" disabled> <br>
+                                <input id="begin" type="text" class="form-control" name="begin"
+                                       value="{{ $opl->begin }}" disabled> <br>
+                                <input id="eind" type="text" class="form-control" name="eind"
+                                       value="{{ $opl->eind }}" disabled> <br>
+                                <input id="adres" type="text" class="form-control" name="adres"
+                                       value="{{ $opl->locatie }}" disabled> <br>
+                                <input id="tel" type="text" class="form-control" name="tel"
+                                       value="{{ $opl->behaald }}" disabled><br>
 
-                                </div>
-                                <div class="modal-body">
+                                <input id="id" type="hidden" name="id" value="{{ $opl->id }}">
+                                <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn btn-danger" {{$temp}}>Delete Opleiding</button>
 
-                                    <form method="POST" action="{{ url('profiel/opleiding') }}" class="form-horizontal">
-                                        {!! csrf_field() !!}
+                                <hr>
+                            </form>
 
-                                        <div class="form-group">
-                                            <label for="naam">Naam van de opleiding</label>
-                                            <input id="naam" type="text" name="naam" required>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label for="instituut">Naam van het instituut</label>
-                                            <input id="instituut" type="text" name="instituut" required>
-                                        </div>
+                        @endforeach
+                        <div>
+                            <!-- Trigger/Open The Modal -->
+                            <button type="button" class="btn btn-info btn-md" data-toggle="modal"
+                                    data-target="#oplModal" {{$temp}}>
+                                Voeg opleiding toe
+                            </button>
 
-                                        <div class="form-group">
-                                            <label for="richting">Naam van de richting</label>
-                                            <input id="richting" type="text" name="richting" required>
-                                        </div>
+                            <!-- The Modal -->
+                            <div id="oplModal" class="modal fade">
 
-                                        <div class="form-group">
-                                            <label for="begin">Begin van de opleiding</label>
-                                            <input id="begin" type="date" name="begin" required>
-                                        </div>
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
 
-                                        <div class="form-group">
-                                            <label for="eind">Einde van de opleiding</label>
-                                            <input id="eind" type="date" name="eind">
-                                        </div>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Vul de opleidings informatie in</h4>
 
-                                        <div class="form-group">
-                                            <label for="locatie">Locatie van het instituut</label>
-                                            <input id="locatie" type="text" name="locatie" required>
-                                        </div>
+                                    </div>
+                                    <div class="modal-body">
 
-                                        <div class="form-group">
-                                            <label for="niveau">Niveau van de opleiding</label>
-                                            <input id="niveau" type="text" name="niveau" required>
-                                        </div>
+                                        <form method="POST" action="{{ url('profiel/opleiding') }}"
+                                              class="form-horizontal">
+                                            {!! csrf_field() !!}
 
-                                        <div class="form-group">
-                                            <label for="behaald">Opleiding behaald</label>
-                                            <input id="behaald" name="behaald" type="radio" value="1" required>ja
-                                            <input id="behaald" name="behaald" type="radio" value="0">nee
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="naam">Naam van de opleiding</label>
+                                                <input id="naam" type="text" name="naam" required>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="land">Land van het instituut</label>
-                                            <input id="land" type="text" name="land" required>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="instituut">Naam van het instituut</label>
+                                                <input id="instituut" type="text" name="instituut" required>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="provincie">Provincie van het instituut</label>
-                                            <input id="provincie" type="text" name="provincie">
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="richting">Naam van de richting</label>
+                                                <input id="richting" type="text" name="richting" required>
+                                            </div>
 
-                                        <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
+                                            <div class="form-group">
+                                                <label for="begin">Begin van de opleiding</label>
+                                                <input id="begin" type="date" name="begin" required>
+                                            </div>
 
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
+                                            <div class="form-group">
+                                                <label for="eind">Einde van de opleiding</label>
+                                                <input id="eind" type="date" name="eind">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="locatie">Locatie van het instituut</label>
+                                                <input id="locatie" type="text" name="locatie" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="niveau">Niveau van de opleiding</label>
+                                                <input id="niveau" type="text" name="niveau" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="behaald">Opleiding behaald</label>
+                                                <input id="behaald" name="behaald" type="radio" value="1" required>ja
+                                                <input id="behaald" name="behaald" type="radio" value="0">nee
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="land">Land van het instituut</label>
+                                                <input id="land" type="text" name="land" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="provincie">Provincie van het instituut</label>
+                                                <input id="provincie" type="text" name="provincie">
+                                            </div>
+
+                                            <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
+
+                                            <button type="submit" class="btn btn-default">Submit</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                    <br>
-
-                    @foreach($user->opleiding as $opl)
-                        <form class="form-horizontal" method="POST"
-                              action="/profiel/opleiding/delete">
-
-                            <h4>{{ $opl->naam }}</h4>
-                            <input id="naam" type="text" class="form-control" name="naam"
-                                   value="{{ $opl->naam }}" disabled> <br>
-                            <input id="functie" type="text" class="form-control" name="functie"
-                                   value="{{ $opl->instituut }}" disabled> <br>
-                            <input id="functie" type="text" class="form-control" name="functie"
-                                   value="{{ $opl->richting }}" disabled> <br>
-                            <input id="begin" type="text" class="form-control" name="begin"
-                                   value="{{ $opl->begin }}" disabled> <br>
-                            <input id="eind" type="text" class="form-control" name="eind"
-                                   value="{{ $opl->eind }}" disabled> <br>
-                            <input id="adres" type="text" class="form-control" name="adres"
-                                   value="{{ $opl->locatie }}" disabled> <br>
-                            <input id="tel" type="text" class="form-control" name="tel"
-                                   value="{{ $opl->behaald }}" disabled><br>
-
-                            <input id="id" type="hidden" name="id" value="{{ $opl->id }}">
-                            <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-danger" {{$temp}}>Delete Opleiding</button>
-
-                            <hr>
-                        </form>
-
-
-                    @endforeach
-
-
-
                 </div>
             </div>
         </div>
@@ -450,123 +463,129 @@ if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
     {{--bedrijf form & modal--}}
     <div class="container">
         <div class="panel panel-default" style="padding: 1em">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <h1>Werkplekken</h1>
-                    {{--modal--}}
-                    <div>
-                        <!-- Trigger/Open The Modal -->
-                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#bedModal" {{$temp}}>
-                            Voeg werkplek toe
-                        </button>
+            <a href="#bedrijfcollapse" class="btn btn-info" data-toggle="collapse">Bedrijven</a>
+            <div id="bedrijfcollapse" class="collapse">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <h1>Werkplekken</h1>
 
-                        <!-- The Modal -->
-                        <div id="bedModal" class="modal fade">
+                        <br>
 
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
+                        @foreach($user->bedrijf as $bedrijf)
+                            <form class="form-horizontal" method="POST"
+                                  action="/profiel/bedrijf/delete">
 
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Vul het bedrijf in</h4>
+                                <h4>{{ $bedrijf->naam }}</h4>
+                                <input id="naam" type="text" class="form-control" name="naam"
+                                       value="{{ $bedrijf->naam }}" disabled> <br>
+                                <input id="functie" type="text" class="form-control" name="functie"
+                                       value="{{ $bedrijf->functie }}" disabled> <br>
+                                <input id="begin" type="text" class="form-control" name="begin"
+                                       value="{{ $bedrijf->begin }}" disabled> <br>
+                                <input id="eind" type="text" class="form-control" name="eind"
+                                       value="{{ $bedrijf->eind }}" disabled> <br>
+                                <input id="adres" type="text" class="form-control" name="adres"
+                                       value="{{ $bedrijf->bezoekadres }}" disabled> <br>
+                                <input id="tel" type="text" class="form-control" name="tel"
+                                       value="{{ $bedrijf->telefoonnummer }}" disabled><br>
 
-                                </div>
-                                <div class="modal-body">
+                                <input id="id" type="hidden" name="id" value="{{ $bedrijf->id }}">
+                                <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn btn-danger" {{$temp}}>Delete bedrijf</button>
 
-                                    <form method="POST" action="{{ url('profiel/bedrijf') }}" class="form-horizontal">
-                                        {!! csrf_field() !!}
+                                <hr>
+                            </form>
 
-                                        <div class="form-group">
-                                            <label for="functie">functie</label>
-                                            <input id="functie" type="text" name="functie" required>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <label for="richting">richting</label>
-                                            <input id="richting" type="text" name="richting" required>
-                                        </div>
+                        @endforeach
+                        {{--modal--}}
+                        <div>
+                            <!-- Trigger/Open The Modal -->
+                            <button type="button" class="btn btn-info btn-md" data-toggle="modal"
+                                    data-target="#bedModal" {{$temp}}>
+                                Voeg werkplek toe
+                            </button>
 
-                                        <div class="form-group">
-                                            <label for="naam">naam</label>
-                                            <input id="naam" type="text" name="naam" required>
-                                        </div>
+                            <!-- The Modal -->
+                            <div id="bedModal" class="modal fade">
 
-                                        <div class="form-group">
-                                            <label for="locatie">locatie</label>
-                                            <input id="locatie" type="text" name="locatie" required>
-                                        </div>
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
 
-                                        <div class="form-group">
-                                            <label for="begin">begin</label>
-                                            <input id="begin" type="date" name="begin" required>
-                                        </div>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Vul het bedrijf in</h4>
 
-                                        <div class="form-group">
-                                            <label for="eind">eind</label>
-                                            <input id="eind" type="date" name="eind">
-                                        </div>
+                                    </div>
+                                    <div class="modal-body">
 
-                                        <div class="form-group">
-                                            <label for="telefoonnummer">telefoonnummer</label>
-                                            <input id="telefoonnummer" type="text" name="telefoonnummer">
-                                        </div>
+                                        <form method="POST" action="{{ url('profiel/bedrijf') }}"
+                                              class="form-horizontal">
+                                            {!! csrf_field() !!}
 
-                                        <div class="form-group">
-                                            <label for="bezoekadres">bezoekadres</label>
-                                            <input id="bezoekadres" type="text" name="bezoekadres">
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="functie">functie</label>
+                                                <input id="functie" type="text" name="functie" required>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="land">land</label>
-                                            <input id="land" type="text" name="land" required>
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="richting">richting</label>
+                                                <input id="richting" type="text" name="richting" required>
+                                            </div>
 
-                                        <div class="form-group">
-                                            <label for="provincie">provincie</label>
-                                            <input id="provincie" type="text" name="provincie">
-                                        </div>
+                                            <div class="form-group">
+                                                <label for="naam">naam</label>
+                                                <input id="naam" type="text" name="naam" required>
+                                            </div>
 
-                                        <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
+                                            <div class="form-group">
+                                                <label for="locatie">locatie</label>
+                                                <input id="locatie" type="text" name="locatie" required>
+                                            </div>
 
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
+                                            <div class="form-group">
+                                                <label for="begin">begin</label>
+                                                <input id="begin" type="date" name="begin" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="eind">eind</label>
+                                                <input id="eind" type="date" name="eind">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="telefoonnummer">telefoonnummer</label>
+                                                <input id="telefoonnummer" type="text" name="telefoonnummer">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="bezoekadres">bezoekadres</label>
+                                                <input id="bezoekadres" type="text" name="bezoekadres">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="land">land</label>
+                                                <input id="land" type="text" name="land" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="provincie">provincie</label>
+                                                <input id="provincie" type="text" name="provincie">
+                                            </div>
+
+                                            <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
+
+                                            <button type="submit" class="btn btn-default">Submit</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                    <br>
-
-                    @foreach($user->bedrijf as $bedrijf)
-                        <form class="form-horizontal" method="POST"
-                              action="/profiel/bedrijf/delete">
-
-                            <h4>{{ $bedrijf->naam }}</h4>
-                            <input id="naam" type="text" class="form-control" name="naam"
-                                   value="{{ $bedrijf->naam }}" disabled> <br>
-                            <input id="functie" type="text" class="form-control" name="functie"
-                                   value="{{ $bedrijf->functie }}" disabled> <br>
-                            <input id="begin" type="text" class="form-control" name="begin"
-                                   value="{{ $bedrijf->begin }}" disabled> <br>
-                            <input id="eind" type="text" class="form-control" name="eind"
-                                   value="{{ $bedrijf->eind }}" disabled> <br>
-                            <input id="adres" type="text" class="form-control" name="adres"
-                                   value="{{ $bedrijf->bezoekadres }}" disabled> <br>
-                            <input id="tel" type="text" class="form-control" name="tel"
-                                   value="{{ $bedrijf->telefoonnummer }}" disabled><br>
-
-                            <input id="id" type="hidden" name="id" value="{{ $bedrijf->id }}">
-                            <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-danger" {{$temp}}>Delete bedrijf</button>
-
-                            <hr>
-                        </form>
-
-
-                    @endforeach
-
                 </div>
             </div>
         </div>
