@@ -94,16 +94,12 @@ class UserController extends Controller
 
                 $auth = Auth::user()->opleiding()->get()->last()->naam;
                 $eind = Auth::user()->opleiding()->get()->last()->eind;
-                $eind = substr($eind, 0, 4);
 
                 return view('MijnOpleidingSearch', array('opl' => $users, 'auth' => $auth, 'eind' => $eind));
             }
         } else {
             return view('MijnOpleiding', array('opl' => $users, 'auth' => $auth, 'eind' => $eind));
         }
-
-    }
-
 
     public function search(request $request)
     {

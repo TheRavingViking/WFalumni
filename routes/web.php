@@ -50,7 +50,6 @@ Route::get('overview/filter','UserController@filter')->middleware('auth');
 Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth');
 
 Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
-Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
 Route::get('/mijnopleiding/search', 'UserController@mijnOpleidingSearch')->middleware('auth');
 
 
@@ -61,10 +60,5 @@ Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisa
 Route::get('/admin', 'AdminController@index')->middleware('auth');
 Route::get('/dashboard', 'AdminController@dashboard')->middleware('auth');
 Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('auth');
-
-Route::post('/admin/assign-roles', [
-    'uses' => 'AdminController@postAdminAssignRoles',
-    'as' => 'admin.assign',
-    'middleware' => 'roles',
-    'roles' => ['Admin']
-]);
+Route::post('/admin/assign-roles', 'AdminController@postAdminAssignRoles')->name('admin.assign');
+\Debugbar::enable(); //<-- Toont debugbar, Laurens, !!!! enable of disable!!!!

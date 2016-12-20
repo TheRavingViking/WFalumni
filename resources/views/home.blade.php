@@ -11,7 +11,7 @@
                     You are logged in!
                     <div class="content">
                         <div class="title m-b-md">
-                            Windesheim Alumni
+                           Welkom Windesheim Alumnus!
                         </div>
 
                     </div>
