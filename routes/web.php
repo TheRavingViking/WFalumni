@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->middleware('auth');
 
 Route::get('/mail', 'MailController@index');
-
+Route::post('/mail', 'MailController@send');
 
 Route::get('/profiel', 'UserController@profiel')->middleware('auth');
 Route::get('/profiel/{user}', 'UserController@show')->middleware('auth');
@@ -45,12 +45,13 @@ Route::post('/profiel/woonplaats/delete', 'UserController@deleteWoonplaats')->mi
 //Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth', 'admin');
 
 Route::get('/overview', 'UserController@index')->middleware('auth');
-Route::get('overview/search','UserController@search')->middleware('auth');
-Route::get('overview/filter','UserController@filter')->middleware('auth');
+Route::get('overview/search', 'UserController@search')->middleware('auth');
+Route::get('overview/filter', 'UserController@filter')->middleware('auth');
 Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth');
 
 Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth');
 Route::get('/mijnopleiding/search', 'UserController@mijnOpleidingSearch')->middleware('auth');
+Route::get('/mijnopleiding/filter', 'UserController@mijnOpleidingFilter')->middleware('auth');
 
 
 Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen');

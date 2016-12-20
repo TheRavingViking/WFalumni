@@ -54,51 +54,102 @@ class UserController extends Controller
             $eind = substr($eind, 0, 4);
 
 //            return $auth;
+            $richtingen = dropdown_richting::all();
+            $opleidingen = dropdown_opleidingen::all();
+            $specialisaties = dropdown_specialisaties::all();
 
             $opl = Opleiding::with('user')->where('naam', $auth)->whereYear('eind', $eind)->where('behaald', 1)->paginate(25);
 
-            return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => $eind));
+            return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => $eind, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
         } else {
 
-            $auth = Auth::user()->opleiding()->get()->last()->naam;
+            $auth = Auth::user()->afdeling;
             $eind = Auth::user()->opleiding()->get()->last()->eind;
             $eind = substr($eind, 0, 4);
-            $opl = Opleiding::with('user')->where('naam', $auth)->where('behaald', 1)->paginate(25);
 
-            return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => $eind));
+            $richtingen = dropdown_richting::all();
+            $opleidingen = dropdown_opleidingen::all();
+            $specialisaties = dropdown_specialisaties::all();
+
+            $opl = Opleiding::with('user')->where('richting', $auth)->where('behaald', 1)->paginate(25);
+
+            return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => $eind, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
         }
     }
 
 
     public function MijnOpleidingSearch(Request $request)
     {
-        $opleiding = request('opleiding');
-        $jaar = request('jaar');
-        $keyword = request('searchinput');
-        $keyword = explode(" ", $keyword);
+        if (Auth::user()->bevoegdheid == 1) {
+            $opleiding = request('opleiding');
+            $jaar = request('jaar');
+            $keyword = request('searchinput');
+            $keyword = explode(" ", $keyword);
 
-        if ($keyword != '') {
-            foreach ($keyword as $key) {
-                $users = DB::table('users')
-                    ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
-                    ->select('users.*', 'opleiding.*')
-                    ->where('naam', '=', $opleiding)
-                    ->where('eind', 'LIKE', "$jaar%")
-                    ->where('behaald', 1)
-                    ->Where(function ($query) use ($key) {
-                        $query->where('voornaam', 'LIKE', "%$key%")
-                            ->orWhere('tussenvoegsel', 'LIKE', "%$key%")
-                            ->orWhere('achternaam', 'LIKE', "%$key%");
-                    })
-                    ->paginate(25);
+            if ($keyword != '') {
+                foreach ($keyword as $key) {
+                    $users = DB::table('users')
+                        ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                        ->select('users.*', 'opleiding.*')
+                        ->where('naam', '=', $opleiding)
+                        ->where('eind', 'LIKE', "$jaar%")
+                        ->where('behaald', 1)
+                        ->Where(function ($query) use ($key) {
+                            $query->where('voornaam', 'LIKE', "%$key%")
+                                ->orWhere('tussenvoegsel', 'LIKE', "%$key%")
+                                ->orWhere('achternaam', 'LIKE', "%$key%");
+                        })
+                        ->paginate(25);
 
-                $auth = Auth::user()->opleiding()->get()->last()->naam;
-                $eind = Auth::user()->opleiding()->get()->last()->eind;
 
-                return view('MijnOpleidingSearch', array('opl' => $users, 'auth' => $auth, 'eind' => $eind));
+                    $auth = Auth::user()->opleiding()->get()->last()->naam;
+                    $eind = Auth::user()->opleiding()->get()->last()->eind;
+                    $eind = substr($eind, 0, 4);
+
+
+                    $richtingen = dropdown_richting::all();
+                    $opleidingen = dropdown_opleidingen::all();
+                    $specialisaties = dropdown_specialisaties::all();
+
+
+                    return view('MijnOpleidingSearch', array('opl' => $users, 'auth' => $auth, 'eind' => $eind, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+                }
+            } else {
+                return redirect()->back('mijnopleiding');
+            }
+
+        } else {
+            $opleiding = Auth::user()->afdeling;
+            $eind = '';
+            $keyword = request('searchinput');
+            $keyword = explode(" ", $keyword);
+
+            if ($keyword != '') {
+                foreach ($keyword as $key) {
+                    $users = DB::table('users')
+                        ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                        ->select('users.*', 'opleiding.*')
+                        ->where('richting', '=', $opleiding)
+                        ->where('behaald', 1)
+                        ->Where(function ($query) use ($key) {
+                            $query->where('voornaam', 'LIKE', "%$key%")
+                                ->orWhere('tussenvoegsel', 'LIKE', "%$key%")
+                                ->orWhere('achternaam', 'LIKE', "%$key%");
+                        })
+                        ->paginate(25);
+
+                    $richtingen = dropdown_richting::all();
+                    $opleidingen = dropdown_opleidingen::all();
+                    $specialisaties = dropdown_specialisaties::all();
+
+                    return view('MijnOpleidingSearch', array('opl' => $users, 'auth' => $opleiding, 'eind' => $eind, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+                }
+            } else {
+                return redirect()->back('mijnopleiding');
             }
         }
     }
+
 
     public function search(request $request)
     {
@@ -125,7 +176,8 @@ class UserController extends Controller
     }
 
 
-    public function filter(Request $request)
+    public
+    function filter(Request $request)
     {
 
         $richtingen = request('richtingen');
