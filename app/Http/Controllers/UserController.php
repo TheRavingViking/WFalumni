@@ -97,9 +97,8 @@ class UserController extends Controller
 
                 return view('MijnOpleidingSearch', array('opl' => $users, 'auth' => $auth, 'eind' => $eind));
             }
-        } else {
-            return view('MijnOpleiding', array('opl' => $users, 'auth' => $auth, 'eind' => $eind));
         }
+    }
 
     public function search(request $request)
     {

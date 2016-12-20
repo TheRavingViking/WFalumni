@@ -65,13 +65,14 @@
                     <div class="well">
                         <h4>Geslacht Verdeling</h4>
                         <p>Man: {{$man}}%  Vrouw: {{$vrouw}}%</p>
+                        <canvas id="GeslachtVerdeling"></canvas>
 
                     </div>
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="well">
-                        <h4>Gemiddeld Jaarinkomen</h4>
-                        <p>€ {{round($jaarinkomen, 2)}}</p>
+                        <h4>Bounce</h4>
+                        <p>30%</p>
                     </div>
                 </div>
             </div>
@@ -113,7 +114,28 @@
         </div>
     </div>
 </div>
+{{$man}}
+<div>
 
+</div>
+<script>
+
+
+    var GeslachtVerdelingCHART = document.getElementById('GeslachtVerdeling').getContext('2d');
+    var PieChart = new Chart(GeslachtVerdelingCHART, {
+        type: 'pie',
+        data: {
+            labels: ["Man", "Vrouw"],
+            datasets: [
+                {
+                    data: [{{$man}}, {{$vrouw}}]
+                }
+            ]
+        }
+    })
+
+
+</script>
 </body>
 </html>
 @endsection
