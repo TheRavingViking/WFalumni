@@ -11,7 +11,6 @@ class MailController extends Controller
 
         $users = User::all();
 
-
         return view('mail', compact('users'));
     }
 }

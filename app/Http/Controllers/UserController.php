@@ -40,6 +40,11 @@ class UserController extends Controller
         return view('overview', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
     }
 
+    public function show(User $user)
+    {
+        return view('profiel', compact('user'));
+    }
+
 
     public function mijnOpleiding()
     {
@@ -56,9 +61,11 @@ class UserController extends Controller
         } else {
 
             $auth = Auth::user()->opleiding()->get()->last()->naam;
+            $eind = Auth::user()->opleiding()->get()->last()->eind;
+            $eind = substr($eind, 0, 4);
             $opl = Opleiding::with('user')->where('naam', $auth)->where('behaald', 1)->paginate(25);
 
-            return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => ''));
+            return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => $eind));
         }
     }
 
@@ -69,8 +76,6 @@ class UserController extends Controller
         $jaar = request('jaar');
         $keyword = request('searchinput');
         $keyword = explode(" ", $keyword);
-
-        //var_dump($keyword);
 
         if ($keyword != '') {
             foreach ($keyword as $key) {
@@ -89,6 +94,7 @@ class UserController extends Controller
 
                 $auth = Auth::user()->opleiding()->get()->last()->naam;
                 $eind = Auth::user()->opleiding()->get()->last()->eind;
+                $eind = substr($eind, 0, 4);
 
                 return view('MijnOpleidingSearch', array('opl' => $users, 'auth' => $auth, 'eind' => $eind));
             }
@@ -98,10 +104,6 @@ class UserController extends Controller
 
     }
 
-    public function show(User $user)
-    {
-        return view('profiel', compact('user'));
-    }
 
     public function search(request $request)
     {

@@ -20,7 +20,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->middleware('auth');
 
-Route::get('/mail', 'MailController@index')->middleware('auth');
+Route::get('/mail', 'MailController@index');
 
 
 Route::get('/profiel', 'UserController@profiel')->middleware('auth');

@@ -36,6 +36,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'geboortedatum' => $faker->dateTime,
         'titel' => $faker->title,
         'bevoegdheid' => $faker->randomElement($number),
+        'jaarinkomen' => $faker->numberBetween($min = 0, $max = 100000),
 
 
 

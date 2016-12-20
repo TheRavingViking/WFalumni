@@ -70,8 +70,8 @@
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="well">
-                        <h4>Bounce</h4>
-                        <p>30%</p>
+                        <h4>Gemiddeld Jaarinkomen</h4>
+                        <p>€ {{round($jaarinkomen, 2)}}</p>
                     </div>
                 </div>
             </div>
