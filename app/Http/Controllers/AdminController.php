@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\woonplaats;
 use App\opleiding;
 use App\User;
@@ -12,7 +13,7 @@ use App\dropdown_opleidingen;
 use App\dropdown_richting;
 use App\dropdown_specialisaties;
 use Illuminate\Support\Facades\Redirect;
-
+use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 
 class AdminController extends Controller
 {
@@ -196,12 +197,18 @@ class AdminController extends Controller
     public function GeoChart()
     {
 
-        $long = woonplaats::all('longitude');
-        $lat = woonplaats::all('latitude');
-        $naam = woonplaats::all('naam');
 
+        // Draw a map
+        Mapper::map(52.5, 5);
 
-        return view ('geochart', array('long' => $long, 'lat' => $lat, 'naam' => $naam));
+        // Add information window for each address
+        $woonplaats = woonplaats::all();
+
+            foreach($woonplaats as $c){
+                Mapper::marker($c->latitude, $c->longitude);
+            }
+
+        return view('geochart');
 
     }
 }
