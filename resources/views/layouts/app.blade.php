@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/css/ladda-themed.scss">
     <link rel="stylesheet" href="/css/sweetalert.css">
     <link rel="stylesheet" href="/css/bootstrap-social.css">
+
     <!-- Scripts -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxQSrZncVpFr_uTMDq6LjP6gHsLs_PHb4&callback=initMap"
             type="text/javascript"></script>
@@ -67,11 +68,11 @@
                 <!-- Left Side Of Navbar -->
                 @if (Auth::check())
                     <ul class="nav navbar-nav">
-                        &nbsp;
+
                         <li><a href="{{ url('/overview') }}">Overview</a></li>
-                        &nbsp;
+
                         <li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
-                        &nbsp;
+
                         <li><a href="{{ url('/mail') }}">Mail</a></li>
 
                         <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
@@ -122,5 +123,6 @@
 </div>
 
 @include('sweet::alert')
+
 </body>
 </html>
