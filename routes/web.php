@@ -61,5 +61,5 @@ Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisa
 Route::get('/admin', 'AdminController@index')->middleware('auth');
 Route::get('/dashboard', 'AdminController@dashboard')->middleware('auth');
 Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('auth');
-Route::post('/admin/assign-roles', 'AdminController@postAdminAssignRoles')->name('admin.assign');
+Route::Post('/admin/assign', 'AdminController@AdminAssign')->name('admin.assign');
 \Debugbar::enable(); //<-- Toont debugbar, Laurens, !!!! enable of disable!!!!

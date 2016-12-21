@@ -21,21 +21,16 @@
         @foreach($users as $user)
             <tr>
                {{--{{ dd($users) }}--}}
-                <form action="{{ route('admin.assign') }}" method="post">
-                <td>{{ $user->id }}</td>
+                <form action="{{ route('admin.assign') }}" method="POST">
+                    {{--{{ method_field('PATCH') }}--}}
+                <td>{{ $user->id }}</td><input type="hidden" name="id" value="{{ $user->id }}"></td>
                 <td>{{ $user->voornaam }}</td>
                 <td>{{ $user->achternaam }}</td>
                 <td>{{ $user->studentnummer }}</td>
-                <td>{{ $user->email }} <input type="hidden" name="email" value="{{ $user->email }}"></td>
-                <td><input type="checkbox"  name="alumnus"></td>
-                <td><input type="checkbox"  name="opleidingsadmin"></td>
-                <td><input type="checkbox"  name="superadmin"></td>
-
-                    {{-- Vervangt bovenstaande (hasRole -> method error)                - Laurens--}}
-                    {{--<td><input type="checkbox" {{ $user->hasRole('1') ? 'checked' : '' }} name="alumnus"></td>--}}
-                    {{--<td><input type="checkbox" {{ $user->hasRole('2') ? 'checked' : '' }} name="opleidingsadmin"></td>--}}
-                    {{--<td><input type="checkbox" {{ $user->hasRole('3') ? 'checked' : '' }} name="superadmin"></td>--}}
-
+                <td>{{ $user->email }}
+                <td><input type="radio" {{ $user->bevoegdheid === 1 ? 'checked' : '' }} name="bevoegdheid" value="1"></td>
+                <td><input type="radio" {{ $user->bevoegdheid === 2 ? 'checked' : '' }} name="bevoegdheid" value="2"></td>
+                <td><input type="radio" {{ $user->bevoegdheid === 3 ? 'checked' : '' }} name="bevoegdheid" value="3"></td>
             {{ csrf_field() }}
                 <td><button type="submit">Rollen wijzigen</button></td>
             </form>

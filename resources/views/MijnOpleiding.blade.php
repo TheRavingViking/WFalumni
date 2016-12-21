@@ -26,7 +26,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search" id="searchinput"
                                    name="searchinput">
-                            <span class="input-group-btn"><button class="btn btn-primary"
+                            <span class="input-group-btn"><button class="btn btn-primary" data-style="expand-right"
                                                                   type="submit">Go!</button></span>
                         </div>
                     </form>
