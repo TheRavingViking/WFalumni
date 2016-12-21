@@ -27,6 +27,9 @@ Route::get('/profiel', 'UserController@profiel')->middleware('auth');
 Route::get('/profiel/{user}', 'UserController@show')->middleware('auth');
 Route::post('/profiel/delete', 'UserController@SoftDelete')->middleware('auth');
 
+Route::get('/addUser', 'UserController@addUserIndex');
+Route::post('/addUser', 'UserController@addUser');
+
 Route::post('/profiel', 'UserController@update')->middleware('auth');
 
 Route::post('/profiel/opleiding', 'UserController@createOpleiding')->middleware('auth');

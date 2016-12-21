@@ -395,5 +395,49 @@ class UserController extends Controller
         }
     }
 
+    public function addUserIndex() {
+        $richtingen = dropdown_richting::all();
+        $opleidingen = dropdown_opleidingen::all();
+        $specialisaties = dropdown_specialisaties::all();
+
+        return view('addUser', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+    }
+
+    public function addUser(request $request) {
+        //Mail::to($data['email'])->send(new Welkommail);
+        $user = new User;
+        $user->voornaam = $request['voornaam'];
+        $user->tussenvoegsel = $request['tussenvoegsel'];
+        $user->achternaam = $request['achternaam'];
+        $user->email = $request['email'];
+        $user->geslacht = $request['geslacht'];
+        $user->studentnummer = $request['studentnummer'];
+        $user->post_adres = $request['post_adres'];
+        $user->telefoonnummer = $request['telefoonnummer'];
+        $user->geboortedatum = $request['geboortedatum'];
+        $user->geboorteplaats = $request['geboorteplaats'];
+        $user->geboorteprovincie = $request['geboorteprovincie'];
+        $user->geboorteland = $request['geboorteland'];
+        $user->nationaliteit = $request['nationaliteit'];
+
+        $opleiding = new Opleiding;
+        $opleiding->naam = $request['opleidingen'];
+        $opleiding->instituut = $request['opleidingsinstituut'];
+        $opleiding->richting = $request['richtingen'];
+        $opleiding->begin = $request['begin'];
+        $opleiding->eind = $request['eind'];
+        $opleiding->locatie = $request['locatie'];
+        $opleiding->niveau = $request['niveau'];
+        $opleiding->behaald = 1;
+        $opleiding->land = $request['opleidingsprovincie'];
+        $opleiding->provincie = $request['opleidingsland'];
+
+        $user->save();
+        $opleiding->user()->associate($user);
+        $opleiding->save();
+
+        return Redirect::to('addUser');
+    }
+
 }
 
