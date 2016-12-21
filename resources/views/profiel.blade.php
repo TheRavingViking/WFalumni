@@ -222,7 +222,6 @@
 
                         <h1>Woonplaats</h1>
 
-                        <br>
                         @foreach($user->woonplaats as $woonplaats)
                             <form class="form-horizontal" method="POST"
                                   action="/profiel/woonplaats/delete">

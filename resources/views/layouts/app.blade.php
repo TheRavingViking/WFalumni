@@ -15,7 +15,14 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/ladda-themed.scss">
     <link rel="stylesheet" href="/css/sweetalert.css">
+    <link rel="stylesheet" href="/css/bootstrap-social.css">
     <!-- Scripts -->
+    <script src="/js/app.js"></script>
+    <script src="/js/sweetalert.min.js"></script>
+    <script src="/js/spin.js"></script>
+    <script src="/js/ladda.js"></script>
+    <script src="/js/custom_script.js"></script>
+    <script src="https://use.fontawesome.com/fd199dc15c.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
@@ -104,13 +111,6 @@
 
     @yield('content')
 </div>
-
-<!-- Scripts -->
-<script src="/js/app.js"></script>
-<script src="/js/sweetalert.min.js"></script>
-<script src="/js/spin.js"></script>
-<script src="/js/ladda.js"></script>
-<script src="/js/custom_script.js"></script>
 
 @include('sweet::alert')
 </body>

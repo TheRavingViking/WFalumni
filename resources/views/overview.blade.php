@@ -98,18 +98,16 @@
 
                     <div class="col-xs-10 col-sm-2 col-md-2 col-lg-2" style="padding: 1em;">
                         <div class="row">
-                            <button type="button" class="btn btn-default btn-lg">
-                                <a href="mailto:{{$user->email}}"><span
-                                            class="glyphicon glyphicon-envelope"></span></a>
-                            </button>
-                            <button type="button" class="btn btn-default btn-lg">
-                                <a href="https://{{$user->linkedin}}"><span
-                                            class="glyphicon glyphicon-user"></span></a>
-                            </button>
-                            <button type="button" class="btn btn-default btn-lg">
-                                <a href="profiel/{{$user->id}}"><span
-                                            class="glyphicon glyphicon-cog"></span></a>
-                            </button>
+                            <a href="https://{{$user->facebook}}" class="btn btn-social-icon btn-facebook">
+                                <span class="fa fa-facebook"></span>
+                            </a>
+                            <a href="https://{{$user->linkedin}}" class="btn btn-social-icon btn-linkedin">
+                                <span class="fa fa-linkedin"></span>
+                            </a>
+                            <a href="mailto:{{$user->email}}" class="btn btn-social-icon btn-google"><span
+                                        class="fa fa-envelope"></span></a>
+                            <a href="profiel/{{$user->id}}" class="btn btn-social-icon btn-linkedin">
+                                <span class="fa fa-user"></span></a>
                             <input type="checkbox" name="checkbox[]" value="{{$user->id}}">
                         </div>
                     </div>
