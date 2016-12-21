@@ -169,7 +169,7 @@ class AdminController extends Controller
                 'countPersoneel' => $countPersoneel,
                 'man' => $per_man,
                 'vrouw' => $per_vrouw));
-        }else{
+        } else {
 
             return redirect()->back('dashboard');
 
@@ -188,7 +188,7 @@ class AdminController extends Controller
         $user->fill($data);
         $user->save();
 //dd($user);
-      return back()->with('message', 'Update gelukt!');
+        return back()->with('message', 'Update gelukt!');
 
 
     }
