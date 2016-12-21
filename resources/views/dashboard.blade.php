@@ -63,8 +63,6 @@
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="well">
-                        <h4>Geslacht Verdeling</h4>
-                        <p>Man: {{$man}}%  Vrouw: {{$vrouw}}%</p>
                         <canvas id="GeslachtVerdeling"></canvas>
 
                     </div>
@@ -128,9 +126,16 @@
             labels: ["Man", "Vrouw"],
             datasets: [
                 {
+                    backgroundColor:[ "rgba(153,255,51,0.4)", "rgba(153,100,51,0.4)" ],
                     data: [{{$man}}, {{$vrouw}}]
                 }
             ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Geslacht Verdeling'
+            }
         }
     })
 

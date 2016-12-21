@@ -13,6 +13,7 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/ladda-min.scss">
     <link rel="stylesheet" href="/css/ladda-themed.scss">
     <link rel="stylesheet" href="/css/sweetalert.css">
     <link rel="stylesheet" href="/css/bootstrap-social.css">

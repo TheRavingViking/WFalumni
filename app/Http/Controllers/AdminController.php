@@ -179,20 +179,18 @@ class AdminController extends Controller
     }
 
 
-    public function postAdminAssignRoles(Request $request)
+    public function AdminAssign(Request $req)
     {
-        $user = User::where('email', $request['email'])->first();
-        $user->roles()->detach();
-        if ($request['role_user']) {
-            $user->roles()->attach(Role::where('name', 'User')->first());
-        }
-        if ($request['role_author']) {
-            $user->roles()->attach(Role::where('name', 'Author')->first());
-        }
-        if ($request['role_admin']) {
-            $user->roles()->attach(Role::where('name', 'Admin')->first());
-        }
-        return redirect()->back();
+        $id = $req->id;
+        $user = user::find($id);
+        $data = $req->only('bevoegdheid');
+
+        $user->fill($data);
+        $user->save();
+//dd($user);
+      return back()->with('message', 'Update gelukt!');
+
 
     }
 }
+
