@@ -10,7 +10,8 @@
                 <li class="active"><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/overview">User Overview</a></li>
                 <li><a href="">Persooneel toevoegen</a></li>
-                <li><a href="#section3">Alumni toevoegen</a></li>
+                <li><a href="">Alumni toevoegen</a></li>
+                <li><a href="">Opleiding toevoegen</a></li>
                 <li><a href="/admin">Rechten aanpassen</a></li>
             </ul><br>
         </div>

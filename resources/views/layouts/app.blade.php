@@ -18,6 +18,14 @@
     <link rel="stylesheet" href="/css/sweetalert.css">
     <link rel="stylesheet" href="/css/bootstrap-social.css">
     <!-- Scripts -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxQSrZncVpFr_uTMDq6LjP6gHsLs_PHb4&callback=initMap"
+            type="text/javascript"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        ...
+    </script>
     <script src="/js/app.js"></script>
     <script src="/js/sweetalert.min.js"></script>
     <script src="/js/spin.js"></script>

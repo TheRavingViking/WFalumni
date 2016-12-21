@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\woonplaats;
 use App\opleiding;
 use App\User;
 use App\Role;
@@ -169,7 +169,7 @@ class AdminController extends Controller
                 'countPersoneel' => $countPersoneel,
                 'man' => $per_man,
                 'vrouw' => $per_vrouw));
-        }else{
+        } else {
 
             return redirect()->back('dashboard');
 
@@ -188,8 +188,20 @@ class AdminController extends Controller
         $user->fill($data);
         $user->save();
 //dd($user);
-      return back()->with('message', 'Update gelukt!');
+        return back()->with('message', 'Update gelukt!');
 
+
+    }
+
+    public function GeoChart()
+    {
+
+        $long = woonplaats::all('longitude');
+        $lat = woonplaats::all('latitude');
+        $naam = woonplaats::all('naam');
+
+
+        return view ('geochart', array('long' => $long, 'lat' => $lat, 'naam' => $naam));
 
     }
 }
