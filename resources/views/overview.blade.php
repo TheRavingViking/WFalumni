@@ -18,26 +18,19 @@
 
         <div class="panel panel-default" style="padding: 2em">
             <div class="row">
-                <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/overview"
-                      id="delete">
-                    {{ csrf_field() }}
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                        <button type="submit" class="btn btn-danger">Delete User</button>
-                    </div>
-                </form>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
-                    <button class="btn btn-default">
-                        <a href="mailto: @foreach ($users as $mail){{$mail->email}}@endforeach " target="_top">Mail
-                            iedereen</a>
-                    </button>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                    <form class="form-horizontal" method="get" action="/overview/search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" id="searchinput"
+                                   name="searchinput">
+                            <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">Go!</button>
+                        </span>
+                        </div>
+                    </form>
                 </div>
-                <form class="form-horizontal" method="get" action="/overview/search">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="text" name="searchinput" placeholder="Search.." id="searchinput">
-                    <button class="btn btn-primary">Go</button>
-                </form>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
+
                 <form class="form-horizontal" method="get" action="/overview/filter">
                     <select name="richtingen" id="richtingen">
                         <option value="">-----</option>
@@ -65,14 +58,22 @@
                     </select>
                     <button class="btn btn-primary">Go</button>
                 </form>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
+                    <button class="btn btn-default">
+                        <a href="mailto: @foreach ($users as $mail){{$mail->email}}@endforeach">Mail
+                            iedereen</a>
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-1">
+                    <form enctype="multipart/form-data" method="POST" action="/overview"
+                          id="delete">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-danger">Delete User</button>
+                </div>
             </div>
-
         </div>
     </div>
-    </div>
-
-
-
     <div class="container">
         @foreach($users as $user)
 
@@ -98,13 +99,16 @@
                     <div class="col-xs-10 col-sm-2 col-md-2 col-lg-2" style="padding: 1em;">
                         <div class="row">
                             <button type="button" class="btn btn-default btn-lg">
-                                <a href="mailto:{{$user->email}}"><span class="glyphicon glyphicon-envelope"></span></a>
+                                <a href="mailto:{{$user->email}}"><span
+                                            class="glyphicon glyphicon-envelope"></span></a>
                             </button>
                             <button type="button" class="btn btn-default btn-lg">
-                                <a href="https://{{$user->linkedin}}"><span class="glyphicon glyphicon-user"></span></a>
+                                <a href="https://{{$user->linkedin}}"><span
+                                            class="glyphicon glyphicon-user"></span></a>
                             </button>
                             <button type="button" class="btn btn-default btn-lg">
-                                <a href="profiel/{{$user->id}}"><span class="glyphicon glyphicon-cog""></span></a>
+                                <a href="profiel/{{$user->id}}"><span
+                                            class="glyphicon glyphicon-cog"></span></a>
                             </button>
                             <input type="checkbox" name="checkbox[]" value="{{$user->id}}">
                         </div>
@@ -112,17 +116,16 @@
                 </div>
             </div>
 
-        @endforeach
-
-        <div class="container" style="alignment: center">
-            <div class="row">
-                <div>
-                    {{$users->appends(request()->input())->links()}}
+            @endforeach
+            </form>
+            <div class="container" style="alignment: center">
+                <div class="row">
+                    <div>
+                        {{$users->appends(request()->input())->links()}}
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
-
 
 
 

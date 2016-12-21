@@ -13,9 +13,14 @@
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/ladda-min.scss">
     <link rel="stylesheet" href="/css/ladda-themed.scss">
     <link rel="stylesheet" href="/css/sweetalert.css">
     <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -53,6 +58,8 @@
                         <li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
                         &nbsp;
                         <li><a href="{{ url('/mail') }}">Mail</a></li>
+
+                        <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     </ul>
             @else
 

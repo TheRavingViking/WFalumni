@@ -21,9 +21,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'voornaam', 'tussenvoegsel','achternaam', 'email', 'password', 'geslacht', 'burgerlijke_staat', 'studentnummer', 'post_adres',
+        'voornaam', 'tussenvoegsel', 'achternaam', 'email', 'password', 'geslacht', 'burgerlijke_staat', 'studentnummer', 'post_adres',
         'telefoonnummer', 'geboortedatum', 'geboorteplaats', 'nationaliteit', 'titel', 'geboorteland', 'geboorteprovincie', 'foto',
-        'facebook', 'linkedin', 'heeft_kinderen', 'jaarinkomen', 'geenmailverzenden', 'twitter', 'website',
+        'facebook', 'linkedin', 'heeft_kinderen', 'jaarinkomen', 'geenmailverzenden', 'twitter', 'website', 'bevoegdheid',
     ];
 
     /**
@@ -54,52 +54,15 @@ class User extends Authenticatable
 
     public function scopeSearchByKeyword($query, $keyword)
     {
-            if ($keyword!='') {
-                foreach ($keyword as $keyword)
-            $query->where(function ($query) use ($keyword) {
-                $query->where("voornaam", "LIKE","%$keyword%")
-                    ->orWhere("tussenvoegsel", "LIKE", "%$keyword%")
-                    ->orWhere("achternaam", "LIKE", "%$keyword%");
-            });
+        if ($keyword != '') {
+            foreach ($keyword as $keyword)
+                $query->where(function ($query) use ($keyword) {
+                    $query->where("voornaam", "LIKE", "%$keyword%")
+                        ->orWhere("tussenvoegsel", "LIKE", "%$keyword%")
+                        ->orWhere("achternaam", "LIKE", "%$keyword%");
+                });
 
         }
         return $query;
     }
-
-
-
-    public function roles()
-    {
-        return $this->hasMany('App\Role');
-    }
-
-    public function hasAnyRole($roles)
-    {
-        if (is_array($roles)) {
-            foreach ($roles as $role) {
-                if ($this->hasRole($role)) {
-                    return true;
-                }
-            }
-        } else {
-            if ($this->hasRole($roles)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function hasRole($role)
-    {
-        if ($this->roles()->where('name', $role)->first()) {
-            return true;
-        }
-        return false;
-    }
-
-
-
-
-
-
 }

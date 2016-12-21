@@ -25,7 +25,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'voornaam' => $faker->firstName,
         'studentnummer' => $faker->numberBetween($min = 100000, $max = 999999),
         'achternaam' => $faker->lastName,
-        'email' => $faker->unique()->safeEmail,
+        'email' => $faker->unique()->email,
         'foto' => 'default.png',
         'linkedin' => 'www.linkedin.com',
         'password' => $faker->password,
@@ -36,6 +36,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'geboortedatum' => $faker->dateTime,
         'titel' => $faker->title,
         'bevoegdheid' => $faker->randomElement($number),
+        'jaarinkomen' => $faker->numberBetween($min = 0, $max = 100000),
 
 
 
