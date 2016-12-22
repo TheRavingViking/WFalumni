@@ -20,8 +20,8 @@ $factory->define(App\Woonplaats::class, function (Faker\Generator $faker) {
         'naam' => $faker->city,
         'begin' => $faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now'),
         'eind' => $faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now'),
-        'longitude' => $faker->longitude,
-        'latitude' => $faker->latitude,
+        'latitude' => $faker->latitude($min = 51, $max = 54),
+        'longitude' => $faker->longitude($min = 4, $max = 7),
         'land' => $faker->country,
         'provincie' => $faker->state,
 

@@ -165,6 +165,9 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Cornford\Googlmapper\MapperServiceProvider::class,
+
+
 
 
 
@@ -182,8 +185,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
-        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -236,6 +239,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Mapper'   => Cornford\Googlmapper\Facades\MapperFacade::class,
 
 
     ],

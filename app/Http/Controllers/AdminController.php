@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\woonplaats;
 use App\opleiding;
 use App\User;
 use App\Role;
@@ -12,7 +13,7 @@ use App\dropdown_opleidingen;
 use App\dropdown_richting;
 use App\dropdown_specialisaties;
 use Illuminate\Support\Facades\Redirect;
-
+use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 
 class AdminController extends Controller
 {
@@ -169,7 +170,7 @@ class AdminController extends Controller
                 'countPersoneel' => $countPersoneel,
                 'man' => $per_man,
                 'vrouw' => $per_vrouw));
-        }else{
+        } else {
 
             return redirect()->back('dashboard');
 
@@ -188,8 +189,26 @@ class AdminController extends Controller
         $user->fill($data);
         $user->save();
 //dd($user);
-      return back()->with('message', 'Update gelukt!');
+        return back()->with('message', 'Update gelukt!');
 
+
+    }
+
+    public function GeoChart()
+    {
+
+
+        // Draw a map
+        Mapper::map(52.5, 5);
+
+        // Add information window for each address
+        $woonplaats = woonplaats::all();
+
+            foreach($woonplaats as $c){
+                Mapper::marker($c->latitude, $c->longitude);
+            }
+
+        return view('geochart');
 
     }
 }

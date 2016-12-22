@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="container">
+    <div class="container" xmlns="http://www.w3.org/1999/html">
         @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -38,7 +38,6 @@
 
     <div class="container">
         @foreach($opl as $user)
-
             <div class="panel panel-default" style="padding: 1em">
                 <div class="row">
                     <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">
@@ -49,7 +48,8 @@
                     <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                         <div style="margin-left: 1em;">
                             <h4>
-                                <b>{{$user->user->voornaam}} {{$user->user->tussenvoegsel}} {{$user->user->achternaam}}</b>
+                                <b> @if($user->user->bevoegdheid == 2)
+                                        Docent: @endif{{$user->user->voornaam}} {{$user->user->tussenvoegsel}} {{$user->user->achternaam}}</b>
                             </h4>
                             Opleiding:{{$user->naam}} genoten
                             tussen:{{$user->begin}}
@@ -60,13 +60,16 @@
 
                     <div class="col-xs-10 col-sm-2 col-md-2 col-lg-2" style="padding: 1em;">
                         <div class="row">
-                            <button type="button" class="btn btn-default btn-lg">
-                                <a href="mailto:{{$user->user->email}}"><span
-                                            class="glyphicon glyphicon-envelope"></span></a>
-                            </button>
-                            <button type="button" class="btn btn-default btn-lg">
-                                <a href="profiel/{{$user->user->id}}"><span class="glyphicon glyphicon-user"></span></a>
-                            </button>
+                            <a href="https://{{$user->user->facebook}}" class="btn btn-social-icon btn-facebook">
+                                <span class="fa fa-facebook"></span>
+                            </a>
+                            <a href="https://{{$user->user->linkedin}}" class="btn btn-social-icon btn-linkedin">
+                                <span class="fa fa-linkedin"></span>
+                            </a>
+                            <a href="mailto:{{$user->user->email}}" class="btn btn-social-icon btn-google"><span
+                                        class="fa fa-envelope"></span></a>
+                            <a href="profiel/{{$user->user->id}}" class="btn btn-social-icon btn-linkedin">
+                                <span class="fa fa-user"></span></a>
                         </div>
                     </div>
                 </div>

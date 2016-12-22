@@ -6,12 +6,13 @@
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-2 col-md-2 col-lg-2 sidenav hidden-xs">
-            <h2>Logo</h2>
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#section1">Dashboard</a></li>
-                <li><a href="#section2">Age</a></li>
-                <li><a href="#section3">Gender</a></li>
-                <li><a href="#section3">Geo</a></li>
+                <li class="active"><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/overview">User Overview</a></li>
+                <li><a href="">Persooneel toevoegen</a></li>
+                <li><a href="">Alumni toevoegen</a></li>
+                <li><a href="">Opleiding toevoegen</a></li>
+                <li><a href="/admin">Rechten aanpassen</a></li>
             </ul><br>
         </div>
         <br>

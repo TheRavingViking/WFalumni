@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c4607e73ab32570419f1edee71a676ab",
-    "content-hash": "91eaccf4906c3757e8782bece6df5c35",
+    "hash": "9104b00a56627385c5632784673293c4",
+    "content-hash": "6bd0e4551103783206909b25b63904a7",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -114,6 +114,56 @@
                 "preload"
             ],
             "time": "2016-09-16 12:50:15"
+        },
+        {
+            "name": "cornford/googlmapper",
+            "version": "v2.19.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bradcornford/Googlmapper.git",
+                "reference": "328a9be19e3cca0fb9768433f04f5d3f23b7cfd9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bradcornford/Googlmapper/zipball/328a9be19e3cca0fb9768433f04f5d3f23b7cfd9",
+                "reference": "328a9be19e3cca0fb9768433f04f5d3f23b7cfd9",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "illuminate/view": "5.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.1",
+                "phpspec/phpspec": "2.0.*@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Cornford\\Googlmapper": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bradley Cornford",
+                    "email": "me@bradleycornford.co.uk"
+                }
+            ],
+            "description": "An easy way to integrate Google Maps with Laravel.",
+            "keywords": [
+                "google",
+                "laravel",
+                "map",
+                "mapping",
+                "maps",
+                "streetview"
+            ],
+            "time": "2016-10-24 17:11:22"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",

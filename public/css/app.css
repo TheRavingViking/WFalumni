@@ -1668,7 +1668,7 @@ dd {
     }
 }
 
-.btn-group-vertical > .btn-group:after, .btn-toolbar:after, .clearfix:after, .container-fluid:after, .container:after, .dropdown-menu > li > a, .form-horizontal .form-group:after, .modal-footer:after, .modal-header:after, .navbar-collapse:after, .navbar-header:after, .navbar:after, .pager:after, .panel-body:after, .row:after {
+.btn-group-vertical > .btn-group:after, .btn-toolbar:after, .clearfix:after, .container-fluidcontainer-fluid:after, .container:after, .dropdown-menu > li > a, .form-horizontal .form-group:after, .modal-footer:after, .modal-header:after, .navbar-collapse:after, .navbar-header:after, .navbar:after, .pager:after, .panel-body:after, .row:after {
     clear: both
 }
 
@@ -1769,12 +1769,12 @@ pre {
     border-radius: 4px
 }
 
-.container-fluid:after, .container-fluid:before, .container:after, .container:before, .row:after, .row:before {
+.container-fluidcontainer-fluid:after, .container-fluidcontainer-fluid:before, .container:after, .container:before, .row:after, .row:before {
     display: table;
     content: " "
 }
 
-.container, .container-fluid {
+.container, .container-fluidcontainer-fluid {
     margin-right: auto;
     margin-left: auto
 }
@@ -1787,7 +1787,7 @@ pre code {
     border-radius: 0
 }
 
-.container, .container-fluid {
+.container, .container-fluidcontainer-fluid {
     padding-left: 15px;
     padding-right: 15px
 }
@@ -4266,7 +4266,7 @@ tbody.collapse.in {
     }
 }
 
-.container-fluid > .navbar-collapse, .container-fluid > .navbar-header, .container > .navbar-collapse, .container > .navbar-header {
+.container-fluidcontainer-fluid > .navbar-collapse, .container-fluidcontainer-fluid > .navbar-header, .container > .navbar-collapse, .container > .navbar-header {
     margin-right: -15px;
     margin-left: -15px
 }
@@ -4311,7 +4311,7 @@ tbody.collapse.in {
 }
 
 @media (min-width: 768px) {
-    .container-fluid > .navbar-collapse, .container-fluid > .navbar-header, .container > .navbar-collapse, .container > .navbar-header {
+    .container-fluidcontainer-fluid > .navbar-collapse, .container-fluidcontainer-fluid > .navbar-header, .container > .navbar-collapse, .container > .navbar-header {
         margin-right: 0;
         margin-left: 0
     }
@@ -4320,7 +4320,7 @@ tbody.collapse.in {
         border-radius: 0
     }
 
-    .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    .navbar > .container .navbar-brand, .navbar > .container-fluidcontainer-fluid .navbar-brand {
         margin-left: -15px
     }
 }
@@ -5039,7 +5039,7 @@ a.badge:focus, a.badge:hover {
     border-top-color: #d5d5d5
 }
 
-.container .jumbotron, .container-fluid .jumbotron {
+.container .jumbotron, .container-fluidcontainer-fluid .jumbotron {
     border-radius: 6px;
     padding-left: 15px;
     padding-right: 15px
@@ -5055,7 +5055,7 @@ a.badge:focus, a.badge:hover {
         padding-bottom: 48px
     }
 
-    .container .jumbotron, .container-fluid .jumbotron {
+    .container .jumbotron, .container-fluidcontainer-fluid .jumbotron {
         padding-left: 60px;
         padding-right: 60px
     }
