@@ -438,7 +438,7 @@ class UserController extends Controller
         $opleidingen = dropdown_opleidingen::all();
         $specialisaties = dropdown_specialisaties::all();
 
-        return view('addUser', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+        return view('addUser', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties, 'user' => Auth::user()));
     }
 
     public function addUser(request $request) {
@@ -456,7 +456,7 @@ class UserController extends Controller
         $user->geboorteprovincie = $request['geboorteprovincie'];
         $user->geboorteland = $request['geboorteland'];
         $user->nationaliteit = $request['nationaliteit'];
-        $user->bevoegdheid = "1";
+        $user->bevoegdheid = $request['bevoegdheid'];
 
         $opleiding = new Opleiding;
         $opleiding->naam = $request['opleidingen'];
