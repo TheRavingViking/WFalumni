@@ -24,11 +24,11 @@ Route::get('/mail', 'MailController@index');
 Route::post('/mail', 'MailController@send');
 
 Route::get('/profiel', 'UserController@profiel')->middleware('auth');
-Route::get('/profiel/{user}', 'UserController@show')->middleware('auth');
+Route::get('/profiel/{user}', 'UserController@show')->middleware('opladmin');
 Route::post('/profiel/delete', 'UserController@SoftDelete')->middleware('auth');
 
-Route::get('/addUser', 'UserController@addUserIndex')->middleware('auth');
-Route::post('/addUser', 'UserController@addUser')->middleware('auth');
+Route::get('/addUser', 'UserController@addUserIndex')->middleware('opladmin');
+Route::post('/addUser', 'UserController@addUser')->middleware('opladmin');
 
 Route::get('/setPass', 'UserController@setPassIndex');
 Route::post('/setPass', 'UserController@setPass');

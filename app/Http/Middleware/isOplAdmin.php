@@ -16,7 +16,7 @@ class isOplAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->bevoegdheid == 2 || 3) {
+        if (Auth::user()->bevoegdheid > 1) {
             return $next($request);
         } else return redirect('/home');
     }

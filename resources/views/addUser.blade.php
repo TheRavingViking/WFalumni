@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @php
+
+        if ( Auth::user()->bevoegdheid == 3)
+            {
+                $temp = '';
+            } else
+            {
+                $temp = 'disabled';
+            }
+    @endphp
+
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -134,6 +146,18 @@
                                     <input id="nationaliteit" type="text" class="form-control" name="nationaliteit" required>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="bevoegdheid" class="col-md-4 control-label">Bevoegdheid</label>
+                                <div class="col-md-6">
+                                    <select name="bevoegdheid" id="bevoegdheid" class="form-control" >
+                                        <option value="1" selected>Alumni/Docent</option>
+                                        <option value="2" {{$temp}}>Opleidingsadmin</option>
+                                        <option value="3" {{$temp}}>Admin</option>
+                                    </select>
+                                </div>
+                            </div>
+
 
                             <h1>Opleiding</h1>
 
