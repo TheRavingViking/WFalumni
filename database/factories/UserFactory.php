@@ -16,7 +16,6 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     $faker->addProvider(new Faker\Provider\nl_NL\Person($faker));
 
     $geslacht = array('Man', 'Vrouw');
-    $foto = array('default.png', 'default2.png', 'default3.png');
     $number = array('1', '1');
 
 
@@ -27,7 +26,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'studentnummer' => $faker->numberBetween($min = 100000, $max = 999999),
         'achternaam' => $faker->lastName,
         'email' => $faker->unique()->email,
-        'foto' => $faker->randomElement($foto),
+        'foto' => 'default.png',
         'linkedin' => 'www.linkedin.com',
         'password' => $faker->password,
         'telefoonnummer' => $faker->phoneNumber,
@@ -36,8 +35,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'geboorteplaats' => $faker->city,
         'geboortedatum' => $faker->dateTime,
         'titel' => $faker->title,
-        'bevoegdheid' => $faker->randomElement($number),
-        'jaarinkomen' => $faker->numberBetween($min = 0, $max = 100000),
+        'bevoegdheid' => $faker->numberBetween($min = 1, $max = 3),
+        'jaarinkomen' => $faker->numberBetween($min = 0, $max = 200000),
+        'heeft_kinderen' => $faker->numberBetween($min = 0, $max = 1)
 
 
 

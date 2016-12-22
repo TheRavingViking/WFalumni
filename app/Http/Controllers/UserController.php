@@ -7,6 +7,8 @@ use App\dropdown_opleidingen;
 use App\dropdown_richting;
 use App\dropdown_specialisaties;
 use App\richting;
+use App\Mail\Welkommail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Auth;
@@ -440,7 +442,6 @@ class UserController extends Controller
     }
 
     public function addUser(request $request) {
-        //Mail::to($data['email'])->send(new Welkommail);
         $user = new User;
         $user->voornaam = $request['voornaam'];
         $user->tussenvoegsel = $request['tussenvoegsel'];
@@ -472,7 +473,29 @@ class UserController extends Controller
         $opleiding->user()->associate($user);
         $opleiding->save();
 
+        Mail::to($user['email'])->send(new Welkommail($user));
+
         return Redirect::to('addUser');
+    }
+
+    public function setPassIndex() {
+        return view('auth/passwords/setPass');
+    }
+
+    public function setPass(request $request) {
+        $id = $request->id;
+        $user = User::find($id);
+        if($user->password != "") {
+            return redirect::back()->with('error', 'Uw wachtwoord is al ingesteld.');
+        }
+        if($request->password == $request->confirmpw) {
+            $user->password = bcrypt($request->password);
+            $user->save();
+            return redirect::to('login');
+        }
+        else {
+            return redirect::back()->with('error', 'De wachtwoorden komen niet overeen');
+        }
     }
 
 }

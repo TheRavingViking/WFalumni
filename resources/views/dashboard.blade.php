@@ -6,13 +6,12 @@
 <div class="container-fluid">
     <div class="row content">
         <div class="col-sm-2 col-md-2 col-lg-2 sidenav hidden-xs">
+            <h2>Logo</h2>
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/overview">User Overview</a></li>
-                <li><a href="">Persooneel toevoegen</a></li>
-                <li><a href="">Alumni toevoegen</a></li>
-                <li><a href="">Opleiding toevoegen</a></li>
-                <li><a href="/admin">Rechten aanpassen</a></li>
+                <li class="active"><a href="#section1">Dashboard</a></li>
+                <li><a href="#section2">Age</a></li>
+                <li><a href="#section3">Gender</a></li>
+                <li><a href="#section3">Geo</a></li>
             </ul><br>
         </div>
         <br>
@@ -47,40 +46,35 @@
 
                     <button class="btn btn-primary">Go</button>
                 </form>
+                <form class="form-horizontal" method="get" action="/dashboard">
+                    <button class="btn btn-primary">Leegmaken</button>
+                </form>
             </div>
             <div class="row">
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="well">
-                        <h4>Alumni</h4>
-                        <p>{{$countUser}}</p>
+                        <canvas id="alumniVSpersoneel"></canvas>
                     </div>
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="well">
-                        <h4>Personeel</h4>
-                        <p>{{$countPersoneel}}</p>
-                        {{--<a href="">Voeg personeel toe</a>--}}
+                        <canvas id="ouders"></canvas>
                     </div>
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="well">
                         <canvas id="GeslachtVerdeling"></canvas>
-
                     </div>
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                     <div class="well">
-                        <h4>Bounce</h4>
-                        <p>30%</p>
+                        <canvas id="jaarInkomen" width="500" height="600"></canvas>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div class="well">
-                        <p>Text</p>
-                        <p>Text</p>
-                        <p>Text</p>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -113,16 +107,36 @@
         </div>
     </div>
 </div>
-{{$man}}
+
 <div>
 
 </div>
 <script>
 
 
-    var GeslachtVerdelingCHART = document.getElementById('GeslachtVerdeling').getContext('2d');
-    var PieChart = new Chart(GeslachtVerdelingCHART, {
+    var alumniVSpersoneelCHART = document.getElementById('alumniVSpersoneel').getContext('2d');
+    var alumChart = new Chart(alumniVSpersoneelCHART, {
         type: 'pie',
+        data: {
+            labels: ["Alumni", "Personeel"],
+            datasets: [
+                {
+                    backgroundColor:[ "rgba(153,255,51,0.4)", "rgba(153,100,51,0.4)" ],
+                    data: [{{$countUser}}, {{$countPersoneel}}]
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Alumni - Personeel'
+            }
+        }
+    });
+
+    var GeslachtVerdelingCHART = document.getElementById('GeslachtVerdeling').getContext('2d');
+    var GeslachtChart = new Chart(GeslachtVerdelingCHART, {
+        type: 'doughnut',
         data: {
             labels: ["Man", "Vrouw"],
             datasets: [
@@ -135,10 +149,65 @@
         options: {
             title: {
                 display: true,
-                text: 'Geslacht Verdeling'
+                text: 'Geslacht Verdeling in %'
             }
         }
-    })
+    });
+
+    var JaarInkomenCHART = document.getElementById('jaarInkomen').getContext('2d');
+    var InkomenChart = new Chart(JaarInkomenCHART, {
+        type: 'bar',
+        data: {
+            labels: ["0-12500", "12500-30000", "30000-50000", "50000-100000", "100000+"],
+            datasets: [
+                {
+
+                    backgroundColor:[
+                        'rgba(153,255,51,0.4)',
+                        'rgba(130,100,51,0.4)',
+                        'rgba(153,10,51,0.4)',
+                        'rgba(10,100,51,0.4)',
+                        'rgba(255,255,51,0.4)'
+                    ],
+                    borderColor: [
+                        'rgba(153,255,51,0.4)',
+                        'rgba(130,100,51,0.4)',
+                        'rgba(153,10,51,0.4)',
+                        'rgba(10,100,51,0.4)',
+                        'rgba(255,255,51,0.4)'
+                    ],
+                    borderWidth: 1,
+                    data: [ {{$laaginkomen}}, {{$laagmiddeninkomen}}, {{$middeninkomen}}, {{$middenhooginkomen}}, {{$hooginkomen}} ]
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'JaarInkomen'
+            }
+        }
+    });
+
+    var OudersCHART = document.getElementById('ouders').getContext('2d');
+    var heeftKinderenChart = new Chart(OudersCHART, {
+        type: 'pie',
+        data: {
+            labels: ["Ouders", "Niet ouders"],
+            datasets: [
+                {
+                    backgroundColor:[ "rgba(153,255,51,0.4)", "rgba(153,100,51,0.4)" ],
+                    data: [{{$ouders}}, {{$nietOuders}}]
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Ouders'
+            }
+        }
+    });
 
 
 </script>

@@ -17,7 +17,7 @@
                                 <label for="voornaam" class="col-md-4 control-label">Voornaam</label>
 
                                 <div class="col-md-6">
-                                    <input id="voornaam" type="text" class="form-control" name="voornaam" value="{{ old('voornaam') }}" required autofocus>
+                                    <input id="voornaam" type="text" class="form-control" name="voornaam" required autofocus>
                                 </div>
                             </div>
 

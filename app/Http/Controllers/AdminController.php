@@ -169,10 +169,18 @@ class AdminController extends Controller
                 'countUser' => $countUser,
                 'countPersoneel' => $countPersoneel,
                 'man' => $per_man,
-                'vrouw' => $per_vrouw));
-        } else {
+                'vrouw' => $per_vrouw,
+                'laaginkomen' => $countJaarInkomenLaag,
+                'laagmiddeninkomen' => $countJaarInkomenLaagMidden,
+                'middeninkomen' => $countJaarInkomenMidden,
+                'middenhooginkomen' => $countJaarInkomenMiddenHoog,
+                'hooginkomen' => $countJaarInkomenHoog,
+                'ouders' => $ouders,
+                'nietOuders' => $nietOuders,
+                ));
+        }else{
 
-            return redirect()->back('dashboard');
+            return redirect()->back();
 
         }
 
@@ -180,7 +188,7 @@ class AdminController extends Controller
     }
 
 
-    public function AdminAssign(Request $req)
+    public function postAdminAssignRoles(Request $request)
     {
         $id = $req->id;
         $user = user::find($id);
@@ -247,6 +255,18 @@ class AdminController extends Controller
         }
 
         return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+        $user = User::where('email', $request['email'])->first();
+        $user->roles()->detach();
+        if ($request['role_user']) {
+            $user->roles()->attach(Role::where('name', 'User')->first());
+        }
+        if ($request['role_author']) {
+            $user->roles()->attach(Role::where('name', 'Author')->first());
+        }
+        if ($request['role_admin']) {
+            $user->roles()->attach(Role::where('name', 'Admin')->first());
+        }
+        return redirect()->back();
 
     }
 
