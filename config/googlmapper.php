@@ -175,7 +175,7 @@ return array(
     | Enable default Googlmapper map marker cluster.
     |
     */
-    'cluster' => true,
+    'cluster' => false,
 
     /*
     |--------------------------------------------------------------------------

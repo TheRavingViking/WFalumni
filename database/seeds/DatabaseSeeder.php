@@ -24,9 +24,9 @@ class DatabaseSeeder extends Seeder
             ->create()
             ->each(function($o) {$o->opleiding()->save(factory(App\Opleiding::class, 1)
                 ->make());})
-            ->each(function($b) {$b->Bedrijf()->saveMany(factory(App\Bedrijf::class, 2)
+            ->each(function($b) {$b->Bedrijf()->save(factory(App\Bedrijf::class, 1)
                 ->make());})
-            ->each(function($w) {$w->Woonplaats()->saveMany(factory(App\Woonplaats::class, 2)
+            ->each(function($w) {$w->Woonplaats()->save(factory(App\Woonplaats::class, 1)
                 ->make());});
 
     }
