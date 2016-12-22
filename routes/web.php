@@ -24,7 +24,7 @@ Route::get('/mail', 'MailController@index');
 Route::post('/mail', 'MailController@send');
 
 Route::get('/profiel', 'UserController@profiel')->middleware('auth');
-Route::get('/profiel/{user}', 'UserController@show')->middleware('opladmin');
+Route::get('/profiel/{user}', 'UserController@show')->middleware('auth');
 Route::post('/profiel/delete', 'UserController@SoftDelete')->middleware('auth');
 
 Route::get('/addUser', 'UserController@addUserIndex')->middleware('opladmin');
