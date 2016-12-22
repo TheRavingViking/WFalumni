@@ -12,13 +12,13 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/ladda-min.scss">
-    <link rel="stylesheet" href="/css/ladda-themed.scss">
+    {{--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">--}}
     <link rel="stylesheet" href="/css/sweetalert.css">
     <link rel="stylesheet" href="/css/bootstrap-social.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
     <!-- Scripts -->
+    <script src="/js/app.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {packages: ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
@@ -27,8 +27,6 @@
     <script src="/js/app.js"></script>
     <script src="/js/sweetalert.min.js"></script>
     <script src="/js/spin.js"></script>
-    <script src="/js/ladda.js"></script>
-    <script src="/js/custom_script.js"></script>
     <script src="https://use.fontawesome.com/fd199dc15c.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
@@ -42,7 +40,11 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top"
+         style="border-bottom-left-radius: 7px; border-bottom-right-radius: 7px;
+    -webkit-box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);
+-moz-box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);
+box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
         <div class="container">
             <div class="navbar-header">
 
@@ -64,6 +66,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 @if (Auth::check())
+
                     <ul class="nav navbar-nav">
 
                         <li><a href="{{ url('/overview') }}">Overview</a></li>
@@ -94,12 +97,12 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/profiel') }}"><span class="glyphicon glyphicon-user">&nbsp</span>Profiel</a>
+                                <li><a href="{{ url('/profiel') }}"><span class="fa fa-user-circle">&nbsp</span>Profiel</a>
                                 <li>
                                     <a href="{{ url('/logout') }}"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();"><span
-                                    class="glyphicon glyphicon-log-out">&nbsp</span>Logout</a></li>
+                                       onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();"><span class="fa fa-stop-circle">&nbsp</span>Logout</a>
+                                </li>
                                 </li>
 
 

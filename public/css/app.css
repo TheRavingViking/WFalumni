@@ -1,4 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+/*@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);*/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
 
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -18,8 +20,11 @@ hr, img {
 }
 
 body, figure {
-    margin: 0
+    background-image: url("http://blog.hostbaby.com/wp-content/uploads/2014/03/GreyPolygons_1920x1234.jpg");
+    /*margin: 0*/
 }
+
+
 
 .btn-group > .btn-group, .btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .dropdown-menu {
     float: left
@@ -31,11 +36,14 @@ body, figure {
 
 
 .navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse, .pre-scrollable {
-    max-height: 340px
+    max-height: 340px;
+
+
 }
 
+
 html {
-    font-family: sans-serif;
+    font-family:  'Open Sans', sans-serif;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%
 }
@@ -4535,12 +4543,13 @@ tbody.collapse.in {
     }
 
     .navbar-left {
-        float: left !important
+        float: left !important;
+        margin-right: 100px
     }
 
     .navbar-right {
         float: right !important;
-        margin-right: -15px
+        margin-right: -10px
     }
 
     .navbar-right ~ .navbar-right {
@@ -5664,7 +5673,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
 }
 
 .panel-default {
-    border-color: #d3e0e9
+    border-color: #d3e0e9;
+    border-top-left-radius: 9px; border-bottom-left-radius: 9px; border-top-right-radius: 9px; border-bottom-right-radius: 9px;
 }
 
 .panel-default > .panel-heading {

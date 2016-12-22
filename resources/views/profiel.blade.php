@@ -32,9 +32,10 @@
     </div>
 
     {{--//persoonlijke gegevens form--}}
-    <div class="container">
+    <div id="profielcon" class="container">
         <div class="panel panel-default" style="padding: 1em">
             <div class="row">
+                {{--<div class=" row"></div>--}}
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
                         <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive"

@@ -15,7 +15,7 @@
         "uxweb/sweet-alert": "~1.1",
         "barryvdh/laravel-debugbar": "^2.3",
         "swiftmailer/swiftmailer": "^5.4",
-        "cornford/googlmapper": "2.*",
+        "cornford/googlmapper": "2.*"
 
 
     },
