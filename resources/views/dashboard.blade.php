@@ -67,14 +67,19 @@
                     </div>
                 </div>
                 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                    <div class="well">
-                        <canvas id="jaarInkomen" width="500" height="600"></canvas>
+                    <div class="well" style="overflow: scroll;height:300px">
+                        <h1>Personeel</h1><br>
+                        @foreach($personeel as $persoon)
+                            <b>{{$persoon->voornaam}} {{$persoon->tussenvoegsel}} {{$persoon->achternaam}}</b> @if($persoon->bevoegdheid == 3) Opleidings administrator
+                            @else Administrator @endif<br>
+                        @endforeach
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     <div class="well">
+                        <canvas id="jaarInkomen" width="500" height="600"></canvas>
                     </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">

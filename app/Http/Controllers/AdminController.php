@@ -59,6 +59,7 @@ class AdminController extends Controller
         $richtingen = dropdown_richting::all();
         $opleidingen = dropdown_opleidingen::all();
         $specialisaties = dropdown_specialisaties::all();
+        $personeel = User::all()->where('bevoegdheid', '>', 1);
 
         $countUser = User::all()->where('bevoegdheid', 1)->count();
         $countPersoneel = User::all()->where('bevoegdheid', '>', 1)->count();
@@ -96,6 +97,7 @@ class AdminController extends Controller
             'hooginkomen' => $countJaarInkomenHoog,
             'ouders' => $ouders,
             'nietOuders' => $nietOuders,
+            'personeel' => $personeel,
             ));
     }
 
