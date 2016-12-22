@@ -27,8 +27,8 @@ Route::get('/profiel', 'UserController@profiel')->middleware('auth');
 Route::get('/profiel/{user}', 'UserController@show')->middleware('auth');
 Route::post('/profiel/delete', 'UserController@SoftDelete')->middleware('auth');
 
-Route::get('/addUser', 'UserController@addUserIndex');
-Route::post('/addUser', 'UserController@addUser');
+Route::get('/addUser', 'UserController@addUserIndex')->middleware('auth');
+Route::post('/addUser', 'UserController@addUser')->middleware('auth');
 
 Route::get('/setPass', 'UserController@setPassIndex');
 Route::post('/setPass', 'UserController@setPass');
@@ -69,4 +69,5 @@ Route::Post('/admin/assign', 'AdminController@AdminAssign')->name('admin.assign'
 Route::get('/dashboard', 'AdminController@dashboard')->middleware('auth');
 Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('auth');
 Route::get('/geochart', 'AdminController@GeoChart')->middleware('auth');
+Route::get('/geochart/filter', 'AdminController@GeoChartFilter')->middleware('auth');
 \Debugbar::enable(); //<-- Toont debugbar, Laurens, !!!! enable of disable!!!!

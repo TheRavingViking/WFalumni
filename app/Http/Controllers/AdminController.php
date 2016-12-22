@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\woonplaats;
 use App\opleiding;
 use App\User;
 use App\Role;
@@ -12,7 +13,7 @@ use App\dropdown_opleidingen;
 use App\dropdown_richting;
 use App\dropdown_specialisaties;
 use Illuminate\Support\Facades\Redirect;
-
+use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 
 class AdminController extends Controller
 {
@@ -257,6 +258,71 @@ class AdminController extends Controller
 
     public function postAdminAssignRoles(Request $request)
     {
+        $id = $req->id;
+        $user = user::find($id);
+        $data = $req->only('bevoegdheid');
+
+        $user->fill($data);
+        $user->save();
+//dd($user);
+        return back()->with('message', 'Update gelukt!');
+
+
+    }
+
+    public function GeoChart()
+    {
+
+        $richtingen = dropdown_richting::all();
+        $opleidingen = dropdown_opleidingen::all();
+        $specialisaties = dropdown_specialisaties::all();
+
+
+        // Draw a map
+        Mapper::map(52.5, 5);
+
+
+        return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+
+    }
+
+    public function GeoChartfilter(request $request)
+    {
+
+
+
+        $richtingen = dropdown_richting::all();
+        $opleidingen = dropdown_opleidingen::all();
+        $specialisaties = dropdown_specialisaties::all();
+
+        $radio = $request->radio;
+        $opleiding = $request->opleidingen;
+        $richting = $request->richtingen;
+        // Draw a map
+        Mapper::map(52.5, 5);
+
+        $users = DB::table('users')
+            ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+            ->join('woonplaats', 'users.id', '=', 'woonplaats.user_id')
+            ->select('users.*', 'opleiding.*')
+            ->where([
+                ['opleiding.naam', $opleiding],
+                ['richting', $richting],
+            ])
+            ->get();
+
+        return $users;
+
+//        return $users;
+
+        // Add information window for each address
+//        $woonplaats = woonplaats::all();
+
+        foreach ($users as $c) {
+            Mapper::marker($c->latitude, $c->longitude);
+        }
+
+        return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
         $user = User::where('email', $request['email'])->first();
         $user->roles()->detach();
         if ($request['role_user']) {

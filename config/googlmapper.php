@@ -93,7 +93,7 @@ return array(
     | The default zoom level Googlmapper should use.
     |
     */
-    'zoom' => 8,
+    'zoom' => 7,
 
     /*
     |--------------------------------------------------------------------------
@@ -175,7 +175,7 @@ return array(
     | Enable default Googlmapper map marker cluster.
     |
     */
-    'cluster' => false,
+    'cluster' => true,
 
     /*
     |--------------------------------------------------------------------------

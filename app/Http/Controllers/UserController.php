@@ -248,13 +248,33 @@ class UserController extends Controller
     public
     function createBedrijf(Request $request)
     {
+        $address = $request->adres;
+        $postcode = $request->postcode;
+
+        $address = str_replace(" ", "+", $address);
+
+        $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address+$postcode";
+
+        $response = file_get_contents($url);
+
+        $json = json_decode($response, TRUE);
+
+        $lat = $json['results'][0]['geometry']['location']['lat'];
+        $lng = $json['results'][0]['geometry']['location']['lng'];
+
+
+
         $data = array(
             'naam' => $request['naam'],
             'functie' => $request['functie'],
             'richting' => $request['richting'],
             'begin' => $request['begin'],
             'eind' => $request['eind'],
-            'locatie' => $request['locatie'],
+            'stad' => $request['stad'],
+            'postcode' => $request['postcode'],
+            'straatnaam' => $request['adres'],
+            'longitude' => $lng,
+            'latitude' => $lat,
             'telefoonnummer' => $request['telefoonnummer'],
             'bezoekadres' => $request['bezoekadres'],
             'land' => $request['land'],
@@ -284,26 +304,28 @@ class UserController extends Controller
     public
     function createWoonplaats(Request $request)
     {
-        $adres = $request->naam;
-        $url = "http://maps.googleapis.com/maps/api/geocode/json?address='$adres'";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        $response = curl_exec($ch);
-        curl_close($ch);
-        $lat = $response->results[0]->geometry->location->lat;
-        return $lat;
+        $address = $request->straatnaam;
+        $postcode = $request->postcode;
+
+        $address = str_replace(" ", "+", $address);
+
+        $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address+$postcode";
+
+        $response = file_get_contents($url);
+
+        $json = json_decode($response, TRUE);
+
+        $lat = $json['results'][0]['geometry']['location']['lat'];
+        $lng = $json['results'][0]['geometry']['location']['lng'];
 
 
         $data = array(
-            'naam' => $request['naam'],
+            'naam' => $request['straatnaam'],
+            'postcode' => $request['postcode'],
             'begin' => $request['begin'],
             'eind' => $request['eind'],
-            'longitude' => $request['longitude'],
-            'latitude' => $request['latitude'],
+            'longitude' => $lng,
+            'latitude' => $lat,
             'land' => $request['land'],
             'provincie' => $request['provincie'],
             'user_id' => $request['user_id']
@@ -434,6 +456,7 @@ class UserController extends Controller
         $user->geboorteprovincie = $request['geboorteprovincie'];
         $user->geboorteland = $request['geboorteland'];
         $user->nationaliteit = $request['nationaliteit'];
+        $user->bevoegdheid = "1";
 
         $opleiding = new Opleiding;
         $opleiding->naam = $request['opleidingen'];
