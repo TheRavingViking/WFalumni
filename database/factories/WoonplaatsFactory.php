@@ -18,6 +18,7 @@ $factory->define(App\Woonplaats::class, function (Faker\Generator $faker) {
 
     return [
         'naam' => $faker->city,
+        'postcode' => $faker->postcode,
         'begin' => $faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now'),
         'eind' => $faker->dateTimeBetween($startDate = '-30 years', $endDate = 'now'),
         'latitude' => $faker->latitude($min = 51, $max = 54),

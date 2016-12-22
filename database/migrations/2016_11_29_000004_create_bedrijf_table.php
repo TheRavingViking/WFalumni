@@ -16,16 +16,20 @@ class CreateBedrijfTable extends Migration
         Schema::create('bedrijf', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->string('naam', 255);
             $table->string('functie', 255);
             $table->string('richting', 255);
-            $table->string('naam', 255);
-            $table->string('locatie', 255);
+            $table->string('bezoekadres', 255)->nullable();
+            $table->string('straatnaam', 255)->nullable();
+            $table->string('postcode', 255)->nullable();
+            $table->string('stad', 255);
+            $table->string('provincie', 255)->nullable();
+            $table->string('telefoonnummer', 15)->nullable();
+            $table->string('land', 255);
+            $table->string('longitude', 255)->nullable();
+            $table->string('latitude', 255)->nullable();
             $table->date('begin');
             $table->date('eind')->nullable();
-            $table->string('telefoonnummer', 15)->nullable();
-            $table->string('bezoekadres', 255)->nullable();
-            $table->string('land', 255);
-            $table->string('provincie', 255)->nullable();
             $table->integer('user_id')->unsigned();
             $table->nullableTimestamps();
             $table->softDeletes();

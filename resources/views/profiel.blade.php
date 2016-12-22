@@ -273,39 +273,35 @@
                                             {!! csrf_field() !!}
 
                                             <div class="form-group">
-                                                <label for="naam">naam</label>
-                                                <input id="naam" type="text" name="naam" required>
+                                                <label for="naam">Straatnaam</label>
+                                                <input id="straatnaam" type="text" name="straatnaam" required>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="begin">begin</label>
+                                                <label for="naam">Postcode</label>
+                                                <input id="postcode" type="text" name="postcode" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="begin">Begin</label>
                                                 <input id="begin" type="date" name="begin" required>
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="eind">eind</label>
+                                                <label for="eind">Eind</label>
                                                 <input id="eind" type="date" name="eind">
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="longitude">longitude</label>
-                                                <input id="longitude" type="text" name="longitude">
+                                                <label for="provincie">Provincie</label>
+                                                <input id="provincie" type="text" name="provincie">
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="latitude">latitude</label>
-                                                <input id="latitude" type="text" name="latitude">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="land">land</label>
+                                                <label for="land">Land</label>
                                                 <input id="land" type="text" name="land" required>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="provincie">provincie</label>
-                                                <input id="provincie" type="text" name="provincie">
-                                            </div>
 
                                             <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
 
@@ -537,8 +533,18 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="locatie">locatie</label>
-                                                <input id="locatie" type="text" name="locatie" required>
+                                                <label for="stad">Stad</label>
+                                                <input id="stad" type="text" name="stad" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="adres">adres</label>
+                                                <input id="adres" type="text" name="adres" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="postcode">postcode</label>
+                                                <input id="postcode" type="text" name="postcode" required>
                                             </div>
 
                                             <div class="form-group">

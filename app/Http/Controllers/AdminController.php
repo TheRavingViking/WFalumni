@@ -197,19 +197,59 @@ class AdminController extends Controller
     public function GeoChart()
     {
 
+        $richtingen = dropdown_richting::all();
+        $opleidingen = dropdown_opleidingen::all();
+        $specialisaties = dropdown_specialisaties::all();
+
 
         // Draw a map
         Mapper::map(52.5, 5);
 
-        // Add information window for each address
-        $woonplaats = woonplaats::all();
 
-            foreach($woonplaats as $c){
-                Mapper::marker($c->latitude, $c->longitude);
-            }
-
-        return view('geochart');
+        return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
 
     }
+
+    public function GeoChartfilter(request $request)
+    {
+
+
+
+        $richtingen = dropdown_richting::all();
+        $opleidingen = dropdown_opleidingen::all();
+        $specialisaties = dropdown_specialisaties::all();
+
+        $radio = $request->radio;
+        $opleiding = $request->opleidingen;
+        $richting = $request->richtingen;
+        // Draw a map
+        Mapper::map(52.5, 5);
+
+        $users = DB::table('users')
+            ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+            ->join('woonplaats', 'users.id', '=', 'woonplaats.user_id')
+            ->select('users.*', 'opleiding.*')
+            ->where([
+                ['opleiding.naam', $opleiding],
+                ['richting', $richting],
+            ])
+            ->get();
+
+        return $users;
+
+//        return $users;
+
+        // Add information window for each address
+//        $woonplaats = woonplaats::all();
+
+        foreach ($users as $c) {
+            Mapper::marker($c->latitude, $c->longitude);
+        }
+
+        return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+
+    }
+
+
 }
 

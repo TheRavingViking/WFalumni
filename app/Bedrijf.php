@@ -16,8 +16,9 @@ class Bedrijf extends Model
     protected $table = "bedrijf";
 
     protected $fillable = [
-        'naam','functie','richting','begin','eind','locatie','telefoonnummer','bezoekadres','land','provincie','user_id'
+        'naam', 'functie', 'richting', 'begin', 'eind', 'stad', 'telefoonnummer', 'bezoekadres', 'land', 'provincie', 'user_id', 'straatnaam', 'postcode', 'longitude', 'latitude',
     ];
+
 
     public function User()
     {

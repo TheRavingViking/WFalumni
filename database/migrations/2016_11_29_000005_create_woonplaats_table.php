@@ -16,7 +16,8 @@ class CreateWoonplaatsTable extends Migration
         Schema::create('woonplaats', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('naam', 45);
+            $table->string('naam', 255);
+            $table->string('postcode', 45);
             $table->date('begin');
             $table->date('eind')->nullable();
             $table->string('longitude', 255)->nullable();

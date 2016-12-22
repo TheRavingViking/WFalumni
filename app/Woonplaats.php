@@ -13,7 +13,7 @@ class Woonplaats extends Model
     protected $table = "woonplaats";
 
     protected $fillable = [
-        'naam','begin','eind','longitude','latitude','land','provincie','user_id'
+        'naam','begin','eind','longitude','latitude','land','provincie','postcode','user_id'
     ];
 
     public function User()
