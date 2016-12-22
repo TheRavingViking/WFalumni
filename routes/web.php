@@ -67,6 +67,6 @@ Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisa
 Route::get('/admin', 'AdminController@index')->middleware('auth');
 Route::Post('/admin/assign', 'AdminController@AdminAssign')->name('admin.assign');
 Route::get('/dashboard', 'AdminController@dashboard')->middleware('auth');
-Route::get('/dashboard', 'AdminController@dashboard')->middleware('auth');
+Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('auth');
 Route::get('/geochart', 'AdminController@GeoChart')->middleware('auth');
 \Debugbar::enable(); //<-- Toont debugbar, Laurens, !!!! enable of disable!!!!
