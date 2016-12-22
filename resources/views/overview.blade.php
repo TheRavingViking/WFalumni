@@ -31,33 +31,33 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
 
-                <form class="form-horizontal" method="get" action="/overview/filter">
-                    <select name="richtingen" id="richtingen">
-                        <option value="">-----</option>
-                        @foreach($richtingen as $richting)
-                            <option value="{{ $richting->naam }}">
-                                {{ $richting->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <select name="opleidingen" id="opleidingen">
-                        <option value="">-----</option>
-                        @foreach($opleidingen as $opleiding)
-                            <option value="{{ $opleiding->naam }}">
-                                {{ $opleiding->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <select name="specialisaties" id="specialisaties">
-                        <option value="">-----</option>
-                        @foreach($specialisaties as $specialisatie)
-                            <option value="{{ $specialisatie->naam }}">
-                                {{ $specialisatie->naam }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <button class="btn btn-primary">Go</button>
-                </form>
+                    <form class="form-horizontal" method="get" action="/overview/filter">
+                        <select name="richtingen" id="richtingen">
+                            <option value="">-----</option>
+                            @foreach($richtingen as $richting)
+                                <option value="{{ $richting->naam }}">
+                                    {{ $richting->naam }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <select name="opleidingen" id="opleidingen">
+                            <option value="">-----</option>
+                            @foreach($opleidingen as $opleiding)
+                                <option value="{{ $opleiding->naam }}">
+                                    {{ $opleiding->naam }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <select name="specialisaties" id="specialisaties">
+                            <option value="">-----</option>
+                            @foreach($specialisaties as $specialisatie)
+                                <option value="{{ $specialisatie->naam }}">
+                                    {{ $specialisatie->naam }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <button class="btn btn-primary">Go</button>
+                    </form>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2">
                     <button class="btn btn-default">

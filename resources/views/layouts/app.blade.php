@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/css/bootstrap-social.css">
 
     <!-- Scripts -->
-       <script src="/js/app.js"></script>
+    <script src="/js/app.js"></script>
     <script src="/js/sweetalert.min.js"></script>
     <script src="/js/spin.js"></script>
     <script src="/js/ladda.js"></script>

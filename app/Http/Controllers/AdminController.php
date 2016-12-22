@@ -290,69 +290,66 @@ class AdminController extends Controller
 
     public function GeoChartfilter(request $request)
     {
-        if (!empty($radio)) {
 
-            $radio = $request->radio;
+        $radio = $request->radio;
 
-            if ($radio == 'woonplaats') {
+        if ($radio == 'woonplaats') {
 
-                $richtingen = dropdown_richting::all();
-                $opleidingen = dropdown_opleidingen::all();
-                $specialisaties = dropdown_specialisaties::all();
+            $richtingen = dropdown_richting::all();
+            $opleidingen = dropdown_opleidingen::all();
+            $specialisaties = dropdown_specialisaties::all();
 
-                $opleiding = $request->opleidingen;
-                $richting = $request->richtingen;
-                // Draw a map
-                Mapper::map(52.5, 5);
+            $opleiding = $request->opleidingen;
+            $richting = $request->richtingen;
+            // Draw a map
+            Mapper::map(52.5, 5);
 
-                $users = DB::table('users')
-                    ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
-                    ->join('woonplaats', 'users.id', '=', 'woonplaats.user_id')
-                    ->select('users.*', 'opleiding.*', 'woonplaats.*')
-                    ->where([
-                        ['opleiding.naam', $opleiding],
-                        ['richting', $richting],
-                    ])
-                    ->get();
+            $users = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->join('woonplaats', 'users.id', '=', 'woonplaats.user_id')
+                ->select('users.*', 'opleiding.*', 'woonplaats.*')
+                ->where([
+                    ['opleiding.naam', $opleiding],
+                    ['richting', $richting],
+                ])
+                ->get();
 
-                foreach ($users as $c) {
-                    Mapper::marker($c->latitude, $c->longitude);
-                }
-
-                return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
-
-
-            } elseif ($radio == 'bedrijf') {
-
-
-                $richtingen = dropdown_richting::all();
-                $opleidingen = dropdown_opleidingen::all();
-                $specialisaties = dropdown_specialisaties::all();
-
-                $opleiding = $request->opleidingen;
-                $richting = $request->richtingen;
-
-                Mapper::map(52.5, 5);
-
-                $users = DB::table('users')
-                    ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
-                    ->join('bedrijf', 'users.id', '=', 'bedrijf.user_id')
-                    ->select('users.*', 'opleiding.*', 'bedrijf.*')
-                    ->where([
-                        ['opleiding.naam', $opleiding],
-                        ['opleiding.richting', $richting],
-                    ])
-                    ->get();
-
-                foreach ($users as $c) {
-                    Mapper::marker($c->latitude, $c->longitude);
-                }
-
-                return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
-
+            foreach ($users as $c) {
+                Mapper::marker($c->latitude, $c->longitude);
             }
+
+            return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+
+
         } else {
-            return redirect()->back();
+
+
+            $richtingen = dropdown_richting::all();
+            $opleidingen = dropdown_opleidingen::all();
+            $specialisaties = dropdown_specialisaties::all();
+
+            $opleiding = $request->opleidingen;
+            $richting = $request->richtingen;
+
+            Mapper::map(52.5, 5);
+
+            $users = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->join('bedrijf', 'users.id', '=', 'bedrijf.user_id')
+                ->select('users.*', 'opleiding.*', 'bedrijf.*')
+                ->where([
+                    ['opleiding.naam', $opleiding],
+                    ['opleiding.richting', $richting],
+                ])
+                ->get();
+
+            foreach ($users as $c) {
+                Mapper::marker($c->latitude, $c->longitude);
+            }
+
+            return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+
         }
+
     }
 }
