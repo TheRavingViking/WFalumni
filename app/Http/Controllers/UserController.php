@@ -456,6 +456,7 @@ class UserController extends Controller
         $user->geboorteprovincie = $request['geboorteprovincie'];
         $user->geboorteland = $request['geboorteland'];
         $user->nationaliteit = $request['nationaliteit'];
+        $user->bevoegdheid = "1";
 
         $opleiding = new Opleiding;
         $opleiding->naam = $request['opleidingen'];
