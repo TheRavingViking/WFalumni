@@ -17,6 +17,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
     $geslacht = array('Man', 'Vrouw');
     $number = array('1', '1');
+    $foto = array('default.png', 'default2.png', 'default3.png');
 
 
     return [
@@ -26,7 +27,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'studentnummer' => $faker->numberBetween($min = 100000, $max = 999999),
         'achternaam' => $faker->lastName,
         'email' => $faker->unique()->email,
-        'foto' => 'default.png',
+        'foto' => $faker->randomElement($foto),
         'linkedin' => 'www.linkedin.com',
         'password' => $faker->password,
         'telefoonnummer' => $faker->phoneNumber,
