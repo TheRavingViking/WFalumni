@@ -69,6 +69,7 @@ class AdminController extends Controller
         $per_vrouw = round($vrouw / $total * 100, 2);
 
         $averageJaarInkomen = User::avg('jaarinkomen');
+
         $countJaarInkomenLaag = User::all('jaarinkomen')->where('jaarinkomen', '<=', 12500)->count();
         $countJaarInkomenLaagMidden = DB::table('users')->whereBetween('jaarinkomen', [12500, 30000])->count();
         $countJaarInkomenMidden = DB::table('users')->whereBetween('jaarinkomen', [30000, 50000])->count();
