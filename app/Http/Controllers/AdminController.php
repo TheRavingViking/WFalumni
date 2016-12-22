@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\woonplaats;
 use App\opleiding;
 use App\User;
 use App\Role;
@@ -13,7 +12,7 @@ use App\dropdown_opleidingen;
 use App\dropdown_richting;
 use App\dropdown_specialisaties;
 use Illuminate\Support\Facades\Redirect;
-use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
+
 
 class AdminController extends Controller
 {
@@ -68,7 +67,16 @@ class AdminController extends Controller
         $vrouw = User::all('geslacht')->where('geslacht', 'Vrouw')->count();
         $per_man = round($man / $total * 100, 2);
         $per_vrouw = round($vrouw / $total * 100, 2);
+
         $averageJaarInkomen = User::avg('jaarinkomen');
+        $countJaarInkomenLaag = User::all('jaarinkomen')->where('jaarinkomen', '<=', 12500)->count();
+        $countJaarInkomenLaagMidden = DB::table('users')->whereBetween('jaarinkomen', [12500, 30000])->count();
+        $countJaarInkomenMidden = DB::table('users')->whereBetween('jaarinkomen', [30000, 50000])->count();
+        $countJaarInkomenMiddenHoog = DB::table('users')->whereBetween('jaarinkomen', [50000, 100000])->count();
+        $countJaarInkomenHoog = User::all('jaarinkomen')->where('jaarinkomen', '>', 100000)->count();
+
+        $ouders = User::all()->where('heeft_kinderen', '=', 1)->count();
+        $nietOuders = User::all()->where('heeft_kinderen', '=', 0)->count();
 
         return view('dashboard', array(
             'richtingen' => $richtingen,
@@ -78,13 +86,21 @@ class AdminController extends Controller
             'countUser' => $countUser,
             'countPersoneel' => $countPersoneel,
             'man' => $per_man,
-            'vrouw' => $per_vrouw));
-
+            'vrouw' => $per_vrouw,
+            'laaginkomen' => $countJaarInkomenLaag,
+            'laagmiddeninkomen' => $countJaarInkomenLaagMidden,
+            'middeninkomen' => $countJaarInkomenMidden,
+            'middenhooginkomen' => $countJaarInkomenMiddenHoog,
+            'hooginkomen' => $countJaarInkomenHoog,
+            'ouders' => $ouders,
+            'nietOuders' => $nietOuders,
+            ));
     }
 
     public function dashboardFilter(request $request)
     {
-        if (!empty($request)) {
+        //return $request;
+        if (!empty($request->richtingen)) {
 
             $richting = request('richtingen');
             $opleiding = request('opleidingen');
@@ -160,6 +176,56 @@ class AdminController extends Controller
                 ])
                 ->avg('jaarinkomen');
 
+            $countJaarInkomenLaag = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])
+                ->where('jaarinkomen', '<=', 12500)->count();
+
+            $countJaarInkomenLaagMidden = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])
+                ->whereBetween('jaarinkomen', [12500, 30000])->count();
+
+            $countJaarInkomenMidden = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])
+                ->whereBetween('jaarinkomen', [30000, 50000])->count();
+
+            $countJaarInkomenMiddenHoog = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])
+                ->whereBetween('jaarinkomen', [50000, 100000])->count();
+
+            $countJaarInkomenHoog = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])
+                ->where('jaarinkomen', '>', 100000)->count();
+
+            $ouders = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where('heeft_kinderen', '=', 1)->count();
+
+            $nietOuders = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where('heeft_kinderen', '=', 0)->count();
+
 
             return view('dashboard', array(
                 'richtingen' => $richtingen,
@@ -169,10 +235,18 @@ class AdminController extends Controller
                 'countUser' => $countUser,
                 'countPersoneel' => $countPersoneel,
                 'man' => $per_man,
-                'vrouw' => $per_vrouw));
-        } else {
+                'vrouw' => $per_vrouw,
+                'laaginkomen' => $countJaarInkomenLaag,
+                'laagmiddeninkomen' => $countJaarInkomenLaagMidden,
+                'middeninkomen' => $countJaarInkomenMidden,
+                'middenhooginkomen' => $countJaarInkomenMiddenHoog,
+                'hooginkomen' => $countJaarInkomenHoog,
+                'ouders' => $ouders,
+                'nietOuders' => $nietOuders,
+                ));
+        }else{
 
-            return redirect()->back('dashboard');
+            return redirect()->back();
 
         }
 
@@ -180,36 +254,20 @@ class AdminController extends Controller
     }
 
 
-    public function AdminAssign(Request $req)
+    public function postAdminAssignRoles(Request $request)
     {
-        $id = $req->id;
-        $user = user::find($id);
-        $data = $req->only('bevoegdheid');
-
-        $user->fill($data);
-        $user->save();
-//dd($user);
-        return back()->with('message', 'Update gelukt!');
-
-
-    }
-
-    public function GeoChart()
-    {
-
-
-        // Draw a map
-        Mapper::map(52.5, 5);
-
-        // Add information window for each address
-        $woonplaats = woonplaats::all();
-
-            foreach($woonplaats as $c){
-                Mapper::marker($c->latitude, $c->longitude);
-            }
-
-        return view('geochart');
+        $user = User::where('email', $request['email'])->first();
+        $user->roles()->detach();
+        if ($request['role_user']) {
+            $user->roles()->attach(Role::where('name', 'User')->first());
+        }
+        if ($request['role_author']) {
+            $user->roles()->attach(Role::where('name', 'Author')->first());
+        }
+        if ($request['role_admin']) {
+            $user->roles()->attach(Role::where('name', 'Admin')->first());
+        }
+        return redirect()->back();
 
     }
 }
-
