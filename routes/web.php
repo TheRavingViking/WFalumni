@@ -30,6 +30,9 @@ Route::post('/profiel/delete', 'UserController@SoftDelete')->middleware('auth');
 Route::get('/addUser', 'UserController@addUserIndex');
 Route::post('/addUser', 'UserController@addUser');
 
+Route::get('/setPass', 'UserController@setPassIndex');
+Route::post('/setPass', 'UserController@setPass');
+
 Route::post('/profiel', 'UserController@update')->middleware('auth');
 
 Route::post('/profiel/opleiding', 'UserController@createOpleiding')->middleware('auth');
