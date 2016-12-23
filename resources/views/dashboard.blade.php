@@ -48,34 +48,38 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="well">
-                    <canvas id="alumniVSpersoneel"></canvas>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="well">
-                    <canvas id="ouders"></canvas>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="well">
-                    <canvas id="GeslachtVerdeling"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 hidden-xs">
-                <div class="well">
-                    <canvas id="jaarInkomen"></canvas>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="well">
                     <h1></h1><br>
                     {{--@foreach($personeel as $persoon)--}}
                     {{--<b>{{$persoon->voornaam}} {{$persoon->tussenvoegsel}} {{$persoon->achternaam}}</b> @if($persoon->bevoegdheid == 3)--}}
                     {{--Opleidings administrator--}}
                     {{--@else Administrator @endif<br>--}}
                     {{--@endforeach--}}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="well">
+                    <canvas id="alumniVSpersoneel"></canvas>
+
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="well">
+                    <canvas id="ouders"></canvas>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="well">
+                    <canvas id="GeslachtVerdeling"></canvas>
+
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 hidden-xs">
+                <div class="well">
+                    <canvas id="jaarInkomen"></canvas>
+
                 </div>
             </div>
         </div>
@@ -131,7 +135,7 @@
                 labels: ["0-12500", "12500-30000", "30000-50000", "50000-100000", "100000+"],
                 datasets: [
                     {
-
+                        label: "Gebruikers per inkomensniveau",
                         backgroundColor: [
                             'rgba(153,255,51,0.4)',
                             'rgba(130,100,51,0.4)',

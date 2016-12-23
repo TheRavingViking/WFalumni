@@ -315,7 +315,7 @@ class AdminController extends Controller
                 ->get();
 
             foreach ($users as $c) {
-                Mapper::marker($c->latitude, $c->longitude);
+                Mapper::informationWindow($c->latitude, $c->longitude, $c->voornaam||$c->tussenvoegsel, ['markers' => ['animation' => 'DROP']]);
             }
 
             return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
@@ -343,9 +343,21 @@ class AdminController extends Controller
                 ])
                 ->get();
 
+//            return $users;
             foreach ($users as $c) {
-                Mapper::marker($c->latitude, $c->longitude);
+                $bedrijf = $c->naam;
+                $tel = $c->telefoonnummer;
+                $adres = $c->straatnaam;
+                $postcode = $c->postcode;
+                $voornaam = $c->voornaam;
+                $tussenvoegsel = $c->tussenvoegsel;
+                $achternaam = $c->achternaam;
+                $content = 'Bedrijf:'. '' . $bedrijf . '<br>' . 'Tel:' .''. $tel . '<br>' . 'Adres:' .''. $adres . '<br>' . 'Postcode:' .''. $postcode . '<br>' . 'Alumni:' .''. $voornaam .' '. $tussenvoegsel .' '. $achternaam ;
+
+//                Mapper::informationWindow($c->latitude, $c->longitude, $content);
+                Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
             }
+
 
             return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
 
