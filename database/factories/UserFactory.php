@@ -29,6 +29,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->email,
         'foto' => $faker->randomElement($foto),
         'linkedin' => 'www.linkedin.com',
+        'facebook' => 'www.facebook.com',
         'password' => $faker->password,
         'telefoonnummer' => $faker->phoneNumber,
         'nationaliteit' => $faker->country,
