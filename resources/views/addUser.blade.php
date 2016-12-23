@@ -136,6 +136,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="richting" class="col-md-4 control-label">Afdeling</label>
+                                <div class="col-md-6">
+                                    <select name="richtingen" id="richtingen" class="form-control">
+                                        @foreach($richtingen as $richting)
+                                            <option value="{{ $richting->naam }}">
+                                                {{ $richting->naam }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
                             <h1>Opleiding</h1>
 
                             <div class="form-group">
@@ -152,9 +166,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="richting" class="col-md-4 control-label">Opleidingsrichting</label>
+                                <label for="oplrichting" class="col-md-4 control-label">Opleidingsrichting</label>
                                 <div class="col-md-6">
-                                    <select name="richtingen" id="richtingen" class="form-control">
+                                    <select name="oplrichtingen" id="oplrichtingen" class="form-control">
                                         @foreach($richtingen as $richting)
                                             <option value="{{ $richting->naam }}">
                                                 {{ $richting->naam }}
