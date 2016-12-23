@@ -2,8 +2,13 @@
 
 @section('content')
 
-
-    <table class="table table-striped table-bordered">
+<div class="container col-xs-12 col-sm-12 col-md-1 col-lg-10 col-md-offset-1" style="background-color:#f7fcff;
+border-bottom-left-radius: 7px; border-bottom-right-radius: 7px;
+border-top-left-radius: 7px; border-top-right-radius: 7px;
+-webkit-box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);
+-moz-box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);
+box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
+    <table class="table">
         <thead>
         <tr>
             <td>ID</td>
@@ -36,4 +41,6 @@
             </form>
         @endforeach
         </tbody>
+    </table>
+</div>
 @endsection

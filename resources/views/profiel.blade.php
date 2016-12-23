@@ -36,12 +36,12 @@
         <div class="panel panel-default" style="padding: 1em">
             <div class="row">
                 {{--<div class=" row"></div>--}}
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><br>
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
                         <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive"
-                             style="min-width: 100px; float:left; border-radius:50%; margin-right:25px;">
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                             style="border-radius:50%;">
+
+                    {{--<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">--}}
                         <h2>{{ $user->voornaam }} {{ $user->tussenvoegsel }} {{ $user->achternaam }}</h2>
                     </div>
 
@@ -52,11 +52,11 @@
 
                         <input type="hidden" name="id" id="id" value="{{$user->id}}">
 
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-sm-offset-7">
                             <label>Update profiel foto</label>
-                            <input type="file" name="avatar" {{$temp}}>
-
-                            <label for="voornaam">Voornaam</label>
+                            <input type="file" name="avatar" {{$temp}}></div>
+                            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
+                                <label for="voornaam">Voornaam</label>
                             <input id="voornaam" type="text" class="form-control" name="voornaam"
                                    value="{{$user->voornaam}}" {{$temp}}>
 
@@ -195,7 +195,7 @@
                         </div>
 
                     </form>
-                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding: 1em;">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1" style="padding: 1em;">
                     <form action="/profiel/delete" method="POST">
                         <input type="hidden" name="id" value="{{ $user->id }}">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -219,7 +219,7 @@
             <a href="#woonplaatscollapse" class="btn btn-info" data-toggle="collapse">Woonplaats</a>
             <div id="woonplaatscollapse" class="collapse">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
 
                         <h1>Woonplaats</h1>
 
@@ -252,7 +252,7 @@
                         <div>
                             <!-- Trigger/Open The Modal -->
                             <button type="button" class="btn btn-info btn-md" data-toggle="modal"
-                                    data-target="#woonModal" {{$temp}}>
+                                    data-target="#woonModal" {{$temp}} >
                                 Voeg Woonplaats toe
                             </button>
 
@@ -327,7 +327,7 @@
             <a href="#opleidingcollapse" class="btn btn-info" data-toggle="collapse">Opleidingen</a>
             <div id="opleidingcollapse" class="collapse">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
 
                         <h1>Opleidingen</h1>
 
@@ -460,7 +460,7 @@
             <a href="#bedrijfcollapse" class="btn btn-info" data-toggle="collapse">Bedrijven</a>
             <div id="bedrijfcollapse" class="collapse">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
                         <h1>Werkplekken</h1>
 
                         <br>

@@ -1677,6 +1677,7 @@ dd {
 
     .container {
         width: 750px
+
     }
 }
 
@@ -5545,7 +5546,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
     padding: 10px 15px;
     border-bottom: 1px solid transparent;
     border-top-right-radius: 3px;
-    border-top-left-radius: 3px
+    border-top-left-radius: 3px;
+
 }
 
 .panel-title {

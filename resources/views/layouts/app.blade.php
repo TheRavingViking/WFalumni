@@ -38,8 +38,7 @@
 <body>
 <div id="app">
     <nav class="navbar navbar-default navbar-static-top"
-         style="border-bottom-left-radius: 7px; border-bottom-right-radius: 7px;
-    -webkit-box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);
+         style="-webkit-box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);
 -moz-box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);
 box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
         <div class="container">
