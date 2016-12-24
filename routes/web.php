@@ -44,12 +44,6 @@ Route::post('/profiel/bedrijf/delete', 'UserController@deleteBedrijf')->middlewa
 Route::post('/profiel/woonplaats', 'UserController@createWoonplaats')->middleware('auth');
 Route::post('/profiel/woonplaats/delete', 'UserController@deleteWoonplaats')->middleware('auth');
 
-
-//Route::get('/overview', 'UserController@index')->middleware('auth', 'admin');
-//Route::get('overview/search','UserController@search')->middleware('auth', 'admin');
-//Route::get('overview/filter','UserController@filter')->middleware('auth', 'admin');
-//Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth', 'admin');
-
 Route::get('/overview', 'UserController@index')->middleware('auth');
 Route::get('overview/search', 'UserController@search')->middleware('auth');
 Route::get('overview/filter', 'UserController@filter')->middleware('auth');
@@ -71,3 +65,9 @@ Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('
 Route::get('/geochart', 'AdminController@GeoChart')->middleware('auth');
 Route::get('/geochart/filter', 'AdminController@GeoChartFilter')->middleware('auth');
 \Debugbar::enable(); //<-- Toont debugbar, Laurens, !!!! enable of disable!!!!
+
+
+//Route::get('/overview', 'UserController@index')->middleware('auth', 'admin');
+//Route::get('overview/search','UserController@search')->middleware('auth', 'admin');
+//Route::get('overview/filter','UserController@filter')->middleware('auth', 'admin');
+//Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth', 'admin');

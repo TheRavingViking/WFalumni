@@ -257,8 +257,7 @@ class AdminController extends Controller
 
     }
 
-
-    public function postAdminAssign(Request $req)
+    public function AdminAssign(Request $req)
     {
         $id = $req->id;
         $user = user::find($id);
