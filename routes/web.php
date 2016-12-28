@@ -71,3 +71,9 @@ Route::get('/geochart/filter', 'AdminController@GeoChartFilter')->middleware('au
 //Route::get('overview/search','UserController@search')->middleware('auth', 'admin');
 //Route::get('overview/filter','UserController@filter')->middleware('auth', 'admin');
 //Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth', 'admin');
+
+Route::get('/dropdown', 'UserController@dropdown')->middleware('auth');
+route::get('/richtingen', 'DropdownController@opleidingen');
+route::get('/opleidingen', 'DropdownController@specialisaties');
+
+

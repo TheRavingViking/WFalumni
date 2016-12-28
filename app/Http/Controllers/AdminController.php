@@ -289,76 +289,152 @@ class AdminController extends Controller
 
     public function GeoChartfilter(request $request)
     {
+        $specialisaties = $request->specialisaties;
 
-        $radio = $request->radio;
+        If (empty($specialisaties)) {
 
-        if ($radio == 'woonplaats') {
+            $radio = $request->radio;
 
-            $richtingen = dropdown_richting::all();
-            $opleidingen = dropdown_opleidingen::all();
-            $specialisaties = dropdown_specialisaties::all();
+            if ($radio == 'woonplaats') {
 
-            $opleiding = $request->opleidingen;
-            $richting = $request->richtingen;
-            // Draw a map
-            Mapper::map(52.5, 5);
+                $richtingen = dropdown_richting::all();
 
-            $users = DB::table('users')
-                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
-                ->join('woonplaats', 'users.id', '=', 'woonplaats.user_id')
-                ->select('users.*', 'opleiding.*', 'woonplaats.*')
-                ->where([
-                    ['opleiding.naam', $opleiding],
-                    ['richting', $richting],
-                ])
-                ->get();
+                $opleiding = $request->opleidingen;
+                $richting = $request->richtingen;
+                $specialisaties = $request->specialisaties;
+                // Draw a map
+                Mapper::map(52.5, 5);
 
-            foreach ($users as $c) {
-                Mapper::informationWindow($c->latitude, $c->longitude, $c->voornaam||$c->tussenvoegsel, ['markers' => ['animation' => 'DROP']]);
+                $users = DB::table('users')
+                    ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                    ->join('woonplaats', 'users.id', '=', 'woonplaats.user_id')
+                    ->select('users.*', 'opleiding.*', 'woonplaats.*')
+                    ->where([
+                        ['opleiding.naam', $opleiding],
+                        ['richting', $richting],
+                    ])
+                    ->get();
+
+                foreach ($users as $c) {
+                    Mapper::informationWindow($c->latitude, $c->longitude, $c->voornaam || $c->tussenvoegsel, ['markers' => ['animation' => 'DROP']]);
+                }
+
+                return view('geochart', array('richtingen' => $richtingen));
+
+
+            } else {
+
+
+                $richtingen = dropdown_richting::all();
+
+
+                $opleiding = $request->opleidingen;
+                $richting = $request->richtingen;
+
+                Mapper::map(52.5, 5);
+
+                $users = DB::table('users')
+                    ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                    ->join('bedrijf', 'users.id', '=', 'bedrijf.user_id')
+                    ->select('users.*', 'opleiding.*', 'bedrijf.*')
+                    ->where([
+                        ['opleiding.naam', $opleiding],
+                        ['opleiding.richting', $richting],
+                    ])
+                    ->get();
+
+//            return $users;
+                foreach ($users as $c) {
+                    $bedrijf = $c->naam;
+                    $tel = $c->telefoonnummer;
+                    $adres = $c->straatnaam;
+                    $postcode = $c->postcode;
+                    $voornaam = $c->voornaam;
+                    $tussenvoegsel = $c->tussenvoegsel;
+                    $achternaam = $c->achternaam;
+                    $content = 'Bedrijf:' . '' . $bedrijf . '<br>' . 'Tel:' . '' . $tel . '<br>' . 'Adres:' . '' . $adres . '<br>' . 'Postcode:' . '' . $postcode . '<br>' . 'Alumni:' . '' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam;
+
+//                Mapper::informationWindow($c->latitude, $c->longitude, $content);
+                    Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
+                }
+
+
+                return view('geochart', array('richtingen' => $richtingen));
+
             }
-
-            return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
-
 
         } else {
 
 
-            $richtingen = dropdown_richting::all();
-            $opleidingen = dropdown_opleidingen::all();
-            $specialisaties = dropdown_specialisaties::all();
+            $radio = $request->radio;
 
-            $opleiding = $request->opleidingen;
-            $richting = $request->richtingen;
+            if ($radio == 'woonplaats') {
 
-            Mapper::map(52.5, 5);
+                $richtingen = dropdown_richting::all();
 
-            $users = DB::table('users')
-                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
-                ->join('bedrijf', 'users.id', '=', 'bedrijf.user_id')
-                ->select('users.*', 'opleiding.*', 'bedrijf.*')
-                ->where([
-                    ['opleiding.naam', $opleiding],
-                    ['opleiding.richting', $richting],
-                ])
-                ->get();
+                $opleiding = $request->opleidingen;
+                $richting = $request->richtingen;
+                $specialisaties = $request->specialisaties;
+                // Draw a map
+                Mapper::map(52.5, 5);
+
+                $users = DB::table('users')
+                    ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                    ->join('woonplaats', 'users.id', '=', 'woonplaats.user_id')
+                    ->select('users.*', 'opleiding.*', 'woonplaats.*')
+                    ->where([['opleiding.naam', $opleiding],
+                        ['richting', $richting],
+                        ['specialisatie', $specialisaties],])
+                    ->get();
+
+                foreach ($users as $c) {
+                    Mapper::informationWindow($c->latitude, $c->longitude, $c->voornaam || $c->tussenvoegsel, ['markers' => ['animation' => 'DROP']]);
+                }
+
+                return view('geochart', array('richtingen' => $richtingen));
+
+
+            } else {
+
+
+                $richtingen = dropdown_richting::all();
+
+
+                $opleiding = $request->opleidingen;
+                $richting = $request->richtingen;
+
+                Mapper::map(52.5, 5);
+
+                $users = DB::table('users')
+                    ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                    ->join('bedrijf', 'users.id', '=', 'bedrijf.user_id')
+                    ->select('users.*', 'opleiding.*', 'bedrijf.*')
+                    ->where([
+                        ['opleiding.naam', $opleiding],
+                        ['opleiding.richting', $richting],
+                        ['specialisatie', $specialisaties],
+                    ])
+                    ->get();
 
 //            return $users;
-            foreach ($users as $c) {
-                $bedrijf = $c->naam;
-                $tel = $c->telefoonnummer;
-                $adres = $c->straatnaam;
-                $postcode = $c->postcode;
-                $voornaam = $c->voornaam;
-                $tussenvoegsel = $c->tussenvoegsel;
-                $achternaam = $c->achternaam;
-                $content = 'Bedrijf:'. '' . $bedrijf . '<br>' . 'Tel:' .''. $tel . '<br>' . 'Adres:' .''. $adres . '<br>' . 'Postcode:' .''. $postcode . '<br>' . 'Alumni:' .''. $voornaam .' '. $tussenvoegsel .' '. $achternaam ;
+                foreach ($users as $c) {
+                    $bedrijf = $c->naam;
+                    $tel = $c->telefoonnummer;
+                    $adres = $c->straatnaam;
+                    $postcode = $c->postcode;
+                    $voornaam = $c->voornaam;
+                    $tussenvoegsel = $c->tussenvoegsel;
+                    $achternaam = $c->achternaam;
+                    $content = 'Bedrijf:' . '' . $bedrijf . '<br>' . 'Tel:' . '' . $tel . '<br>' . 'Adres:' . '' . $adres . '<br>' . 'Postcode:' . '' . $postcode . '<br>' . 'Alumni:' . '' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam;
 
 //                Mapper::informationWindow($c->latitude, $c->longitude, $content);
-                Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
+                    Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
+                }
+
+
+                return view('geochart', array('richtingen' => $richtingen));
+
             }
-
-
-            return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
 
         }
 

@@ -17,8 +17,9 @@ class CreateOpleidingTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('naam', 255);
-            $table->string('instituut', 255);
+            $table->string('specialisatie', 255);
             $table->string('richting', 255);
+            $table->string('instituut', 255);
             $table->date('begin');
             $table->date('eind')->nullable();
             $table->string('locatie', 255);

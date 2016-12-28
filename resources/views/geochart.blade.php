@@ -5,32 +5,19 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="well well-lg">
-
+                <div class="panel panel-default">
                     <form class="form-horizontal" method="get" action="/geochart/filter">
-                        <select name="richtingen" id="richtingen">
-                            <option value="">-----</option>
+                        <select name="richtingen" id="richtingen" class="input-sm">
+                            <option value="">Kies een Richting</option>
                             @foreach($richtingen as $richting)
-                                <option value="{{ $richting->naam }}">
-                                    {{ $richting->naam }}
-                                </option>
+                                <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
                             @endforeach
                         </select>
-                        <select name="opleidingen" id="opleidingen">
+                        <select name="opleidingen" id="opleidingen" class="input-sm">
                             <option value="">-----</option>
-                            @foreach($opleidingen as $opleiding)
-                                <option value="{{ $opleiding->naam }}">
-                                    {{ $opleiding->naam }}
-                                </option>
-                            @endforeach
                         </select>
-                        <select name="specialisaties" id="specialisaties">
+                        <select name="specialisaties" id="specialisaties" class="input-sm">
                             <option value="">-----</option>
-                            @foreach($specialisaties as $specialisatie)
-                                <option value="{{ $specialisatie->naam }}">
-                                    {{ $specialisatie->naam }}
-                                </option>
-                            @endforeach
                         </select>
                         Woonplaats
                         <input id="radio" name="radio" type="radio"
@@ -54,4 +41,57 @@
         </div>
     </div>
 
+
+
+    <script>
+
+        $('#richtingen').on('change', function (e) {
+            console.log(e);
+
+
+            var richting_naam = e.target.value;
+
+            //ajax
+
+            $.get('/richtingen?richting_naam=' + richting_naam, function (data) {
+
+                $('#opleidingen').empty();
+                $("<option value=''>Kies een opleiding</option>").appendTo('#opleidingen');
+
+                $.each(data, function (index, opleidingen) {
+
+                    $('#opleidingen').append('<option value="' + opleidingen.naam + '">' + opleidingen.naam + '</option>');
+
+                })
+            });
+
+        });
+
+
+        $('#opleidingen').on('change', function (e) {
+            console.log(e);
+
+
+            var opleidingen_naam = e.target.value;
+
+            //ajax
+
+            $.get('/opleidingen?opleidingen_naam=' + opleidingen_naam, function (data) {
+
+                $('#specialisaties').empty();
+                $("<option value=''>Optioneel</option>").appendTo('#specialisaties');
+
+                $.each(data, function (index, specialisaties) {
+
+                    $('#specialisaties').append('<option value="' + specialisaties.naam + '">' + specialisaties.naam + '</option>');
+
+                })
+            });
+
+        });
+
+
+    </script>
 @endsection
+
+

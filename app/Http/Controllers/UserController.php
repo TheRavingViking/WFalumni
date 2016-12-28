@@ -19,6 +19,7 @@ use App\Opleiding;
 use App\Bedrijf;
 use App\Woonplaats;
 use Illuminate\Support\Facades\DB;
+use Response;
 
 class UserController extends Controller
 {
@@ -41,6 +42,7 @@ class UserController extends Controller
 
         return view('overview', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
     }
+
 
     public function show(User $user)
     {
@@ -186,26 +188,43 @@ class UserController extends Controller
         $opleidingen = request('opleidingen');
         $specialisaties = request('specialisaties');
 
-        $users = DB::table('users')
-            ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
-            ->select('users.*', 'opleiding.*')
-            ->where([
-                ['naam', $opleidingen],
-                ['richting', $richtingen],
-            ])
-            ->paginate(25);
+
+        If (empty($specialisaties)) {
+
+
+            $users = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleidingen],
+                    ['richting', $richtingen],
+                ])
+                ->paginate(25);
+
+
+        } else {
+
+            $users = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleidingen],
+                    ['richting', $richtingen],
+
+                ])->where('specialisatie', $specialisaties)
+                ->paginate(25);
+
+        }
 
         if (count($users) == '0') {
             return redirect::to('overview')->with('error', 'Geen zoekresultaten gevonden');
         } else {
-            $request->session()->flash('statusN', 'Aantal zoekresultaten gevonden:' . ' ' . $users->total());
+            $request->session()->flash('status', 'Aantal zoekresultaten gevonden:' . ' ' . $users->total());
         }
 
         $richtingen = dropdown_richting::all();
-        $opleidingen = dropdown_opleidingen::all();
-        $specialisaties = dropdown_specialisaties::all();
 
-        return view('filter', array('users' => $users, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties))->with('status', '');
+        return view('filter', array('users' => $users, 'richtingen' => $richtingen))->with('status');
 
     }
 
@@ -261,7 +280,6 @@ class UserController extends Controller
 
         $lat = $json['results'][0]['geometry']['location']['lat'];
         $lng = $json['results'][0]['geometry']['location']['lng'];
-
 
 
         $data = array(
@@ -433,7 +451,8 @@ class UserController extends Controller
         }
     }
 
-    public function addUserIndex() {
+    public function addUserIndex()
+    {
         $richtingen = dropdown_richting::all();
         $opleidingen = dropdown_opleidingen::all();
         $specialisaties = dropdown_specialisaties::all();
@@ -441,7 +460,8 @@ class UserController extends Controller
         return view('addUser', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties, 'user' => Auth::user()));
     }
 
-    public function addUser(request $request) {
+    public function addUser(request $request)
+    {
         $user = new User;
         $user->voornaam = $request['voornaam'];
         $user->tussenvoegsel = $request['tussenvoegsel'];
@@ -480,22 +500,23 @@ class UserController extends Controller
         return Redirect::to('addUser');
     }
 
-    public function setPassIndex() {
+    public function setPassIndex()
+    {
         return view('auth/passwords/setPass');
     }
 
-    public function setPass(request $request) {
+    public function setPass(request $request)
+    {
         $id = $request->id;
         $user = User::find($id);
-        if($user->password != "") {
+        if ($user->password != "") {
             return redirect::back()->with('error', 'Uw wachtwoord is al ingesteld.');
         }
-        if($request->password == $request->confirmpw) {
+        if ($request->password == $request->confirmpw) {
             $user->password = bcrypt($request->password);
             $user->save();
             return redirect::to('login');
-        }
-        else {
+        } else {
             return redirect::back()->with('error', 'De wachtwoorden komen niet overeen');
         }
     }

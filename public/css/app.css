@@ -5526,7 +5526,8 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
     background-color: #fff;
     border: 1px solid transparent;
     border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    padding: 2em;
 }
 
 .panel-title, .panel > .list-group, .panel > .panel-collapse > .list-group, .panel > .panel-collapse > .table, .panel > .table, .panel > .table-responsive > .table {

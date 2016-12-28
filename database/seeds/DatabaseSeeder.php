@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(add_woonplaats::class);
         $this->call(add_richtingen::class);
         $this->call(add_opleidingen::class);
+        $this->call(add_specialisaties::class);
 
         factory(App\User::class, 200)
             ->create()

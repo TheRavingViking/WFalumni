@@ -16,63 +16,56 @@
             </div>
         @endif
 
-        <div class="panel panel-default" style="padding: 2em">
-            <div class="row">
-                <form enctype="multipart/form-data" method="POST" action="/overview"
-                      id="delete">
-                    {{ csrf_field() }}
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
-                        <button type="submit" class="btn btn-danger">Delete User</button>
-                </form>
-                <button class="btn btn-default">
-                    <a href="mailto: @foreach ($users as $mail){{$mail->email}}@endforeach">Mail
-                        iedereen</a>
-                </button>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
-                <form class="form-horizontal" method="get" action="/overview/search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" id="searchinput"
-                               name="searchinput">
-                        <span class="input-group-btn"><button class="btn btn-primary" type="submit">Go!</button></span>
+            <div class="panel panel-default">
+                <div class="row">
+                    <div class="panel-heading">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                            <form class="form-horizontal" method="get" action="/overview/search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" id="searchinput"
+                                           name="searchinput">
+                                    <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">Go!</button>
+                        </span>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <button class="btn btn-default">
+                                <a href="mailto: @foreach ($users as $mail){{$mail->email}}@endforeach">Mail
+                                    iedereen</a>
+                            </button>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <form enctype="multipart/form-data" method="POST" action="/overview"
+                                  id="delete">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-danger">Delete User</button>
+                            </form>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 2em">
+                            <form class="form-horizontal" method="get" action="/overview/filter">
+                                <select name="richtingen" id="richtingen" class="input-sm">
+                                    <option value="">Kies een Richting</option>
+                                    @foreach($richtingen as $richting)
+                                        <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
+                                    @endforeach
+                                </select>
+                                <select name="opleidingen" id="opleidingen" class="input-sm">
+                                    <option value="">-----</option>
+                                </select>
+                                <select name="specialisaties" id="specialisaties" class="input-sm">
+                                    <option value="">-----</option>
+                                </select>
+                                <button class="btn btn-primary">Go</button>
+                            </form>
+                        </div>
+
                     </div>
-
-                </form>
+                </div>
             </div>
-            <form class="form-horizontal" method="get" action="/overview/filter">
-                <select name="richtingen" id="richtingen">
-                    <option value="">-----</option>
-                    @foreach($richtingen as $richting)
-                        <option value="{{ $richting->naam }}">
-                            {{ $richting->naam }}
-                        </option>
-                    @endforeach
-                </select>
-                <select name="opleidingen" id="opleidingen">
-                    <option value="">-----</option>
-                    @foreach($opleidingen as $opleiding)
-                        <option value="{{ $opleiding->naam }}">
-                            {{ $opleiding->naam }}
-                        </option>
-                    @endforeach
-                </select>
-                <select name="specialisaties" id="specialisaties">
-                    <option value="">-----</option>
-                    @foreach($specialisaties as $specialisatie)
-                        <option value="{{ $specialisatie->naam }}">
-                            {{ $specialisatie->naam }}
-                        </option>
-                    @endforeach
-                </select>
-                <button class="btn btn-primary">Go</button>
-            </form>
-        </div>
     </div>
-    </div>
-
-
-
-
 
     <div class="container">
         @foreach($users as $user)
@@ -124,7 +117,55 @@
         </div>
     </div>
 
+    <script>
 
+        $('#richtingen').on('change', function (e) {
+            console.log(e);
+
+
+            var richting_naam = e.target.value;
+
+            //ajax
+
+            $.get('/richtingen?richting_naam=' + richting_naam, function (data) {
+
+                $('#opleidingen').empty();
+                $("<option value=''>Kies een opleiding</option>").appendTo('#opleidingen');
+
+                $.each(data, function (index, opleidingen) {
+
+                    $('#opleidingen').append('<option value="' + opleidingen.naam + '">' + opleidingen.naam + '</option>');
+
+                })
+            });
+
+        });
+
+
+        $('#opleidingen').on('change', function (e) {
+            console.log(e);
+
+
+            var opleidingen_naam = e.target.value;
+
+            //ajax
+
+            $.get('/opleidingen?opleidingen_naam=' + opleidingen_naam, function (data) {
+
+                $('#specialisaties').empty();
+                $("<option value=''>Optioneel</option>").appendTo('#specialisaties');
+
+                $.each(data, function (index, specialisaties) {
+
+                    $('#specialisaties').append('<option value="' + specialisaties.naam + '">' + specialisaties.naam + '</option>');
+
+                })
+            });
+
+        });
+
+
+    </script>
 
 
 @stop
