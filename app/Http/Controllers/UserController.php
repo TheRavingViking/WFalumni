@@ -57,7 +57,6 @@ class UserController extends Controller
             $eind = Auth::user()->opleiding()->get()->last()->eind;
             $eind = substr($eind, 0, 4);
 
-//            return $auth;
             $richtingen = dropdown_richting::all();
             $opleidingen = dropdown_opleidingen::all();
             $specialisaties = dropdown_specialisaties::all();
