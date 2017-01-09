@@ -24,12 +24,27 @@ use Response;
 class UserController extends Controller
 {
     //
-    public function profiel()
+    public function redirectCheck()
+    {
+
+        if (Auth::user()->bevoegdheid == 3) {
+            return redirect()->action('UserController@index');
+
+        } else {
+
+            return redirect()->action('UserController@mijnOpleiding');
+        }
+    }
+
+
+    public
+    function profiel()
     {
         return view('profiel', array('user' => Auth::user()));
     }
 
-    public function index()
+    public
+    function index()
     {
 
 
@@ -44,13 +59,15 @@ class UserController extends Controller
     }
 
 
-    public function show(User $user)
+    public
+    function show(User $user)
     {
         return view('profiel', compact('user'));
     }
 
 
-    public function mijnOpleiding()
+    public
+    function mijnOpleiding()
     {
         if (Auth::user()->bevoegdheid == 1) {
             $auth = Auth::user()->opleiding()->get()->last()->naam;
@@ -81,7 +98,8 @@ class UserController extends Controller
     }
 
 
-    public function MijnOpleidingSearch(Request $request)
+    public
+    function MijnOpleidingSearch(Request $request)
     {
         if (Auth::user()->bevoegdheid == 1) {
             $opleiding = request('opleiding');
@@ -154,7 +172,8 @@ class UserController extends Controller
     }
 
 
-    public function search(request $request)
+    public
+    function search(request $request)
     {
         $keyword = request('searchinput');
         $keyword = explode(" ", $keyword);
@@ -450,7 +469,8 @@ class UserController extends Controller
         }
     }
 
-    public function addUserIndex()
+    public
+    function addUserIndex()
     {
         $richtingen = dropdown_richting::all();
         $opleidingen = dropdown_opleidingen::all();
@@ -459,7 +479,8 @@ class UserController extends Controller
         return view('addUser', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties, 'user' => Auth::user()));
     }
 
-    public function addUser(request $request)
+    public
+    function addUser(request $request)
     {
         $user = new User;
         $user->voornaam = $request['voornaam'];
@@ -499,12 +520,14 @@ class UserController extends Controller
         return Redirect::to('addUser');
     }
 
-    public function setPassIndex()
+    public
+    function setPassIndex()
     {
         return view('auth/passwords/setPass');
     }
 
-    public function setPass(request $request)
+    public
+    function setPass(request $request)
     {
         $id = $request->id;
         $user = User::find($id);
