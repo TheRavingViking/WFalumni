@@ -11,14 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-//    Alert::info('Wookies', 'Welkom bij WFAlumni!');
-    return view('auth/login');
-});
-
 Auth::routes();
 
-Route::get('/logo', 'UserController@redirectCheck');
+Route::get('/', 'UserController@redirectCheck');
 //Route::get('/home', 'HomeController@index')->middleware('auth');
 
 Route::get('/mail', 'MailController@index');

@@ -60,7 +60,7 @@ box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/logo') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
             </div>

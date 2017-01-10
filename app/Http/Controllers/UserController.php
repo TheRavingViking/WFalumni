@@ -25,13 +25,17 @@ class UserController extends Controller
 {
     public function redirectCheck()
     {
-
-        if (Auth::user()->bevoegdheid == 3) {
-            return redirect()->action('UserController@index');
-
+        if (auth::guest()) {
+            return view('auth/login');
         } else {
+            if (Auth::user()->bevoegdheid == 3) {
+                return redirect()->action('UserController@index');
 
-            return redirect()->action('UserController@mijnOpleiding');
+            } else {
+
+                return redirect()->action('UserController@mijnOpleiding');
+            }
+
         }
     }
 
