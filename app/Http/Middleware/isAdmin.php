@@ -14,10 +14,11 @@ class isAdmin
      * @param  \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
-    {
-        if (Auth::user()->bevoegdheid == 3 ) {
-            return $next($request);
-        } else return redirect('/home');
-    }
+
+public function handle($request, Closure $next)
+{
+    if (Auth::user()->bevoegdheid == 3 ) {
+        return $next($request);
+    } else return redirect('/home');
+}
 }

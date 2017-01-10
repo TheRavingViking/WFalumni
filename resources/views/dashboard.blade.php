@@ -16,21 +16,13 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <select name="opleidingen" id="opleidingen">
+                            <select name="opleidingen" id="opleidingen" class="input-sm">
                                 <option value="">-----</option>
-                                @foreach($opleidingen as $opleiding)
-                                    <option value="{{ $opleiding->naam }}">
-                                        {{ $opleiding->naam }}
-                                    </option>
-                                @endforeach
+
                             </select>
-                            <select name="specialisaties" id="specialisaties">
+                            <select name="specialisaties" id="specialisaties" class="input-sm">
                                 <option value="">-----</option>
-                                @foreach($specialisaties as $specialisatie)
-                                    <option value="{{ $specialisatie->naam }}">
-                                        {{ $specialisatie->naam }}
-                                    </option>
-                                @endforeach
+
                             </select>
 
                             <button class="btn btn-primary">Go</button>
@@ -47,24 +39,8 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="panel">
-                    <h1>Admin Tools:</h1><br>
-
-                    <form class="form-horizontal" method="get" action="/admin">
-                        <button class="btn btn-primary">Bevoegdheid veranderen</button>
-                    </form>
-                    <hr>
-                    {{--<a href="{{ url('/admin') }}">Bevoegdheid veranderen</a><br><hr>--}}
-                    <form class="form-horizontal" method="get" action="/geochart">
-                        <button class="btn btn-primary">Geocharts</button>
-                    </form>
-                    <hr>
-
-                    {{--@foreach($personeel as $persoon)--}}
-                    {{--<b>{{$persoon->voornaam}} {{$persoon->tussenvoegsel}} {{$persoon->achternaam}}</b> @if($persoon->bevoegdheid == 3)--}}
-                    {{--Opleidings administrator--}}
-                    {{--@else Administrator @endif<br>--}}
-                    {{--@endforeach--}}
+                <div class="well">
+                    <canvas id="werkendInVakgebied"></canvas>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -194,6 +170,72 @@
             }
         });
 
+
+        var werkendInVakgebiedCHART = document.getElementById('werkendInVakgebied').getContext('2d');
+        var werkendInVakgebiedChart = new Chart(werkendInVakgebiedCHART, {
+            type: 'pie',
+            data: {
+                labels: ["Werkt in vakgebied", "Werkt niet in vakgebied"],
+                datasets: [
+                    {
+                        backgroundColor: ["rgba(153,255,51,0.4)", "rgba(153,100,51,0.4)"],
+                        data: [{{$werkend}}, {{$nietWerkend}}]
+                    }
+                ]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'werkendInVakgebied'
+                }
+            }
+        });
+
+
+        $('#richtingen').on('change', function (e) {
+            console.log(e);
+
+
+            var richting_naam = e.target.value;
+
+            //ajax
+
+            $.get('/richtingen?richting_naam=' + richting_naam, function (data) {
+
+                $('#opleidingen').empty();
+                $("<option value=''>Kies een opleiding</option>").appendTo('#opleidingen');
+
+                $.each(data, function (index, opleidingen) {
+
+                    $('#opleidingen').append('<option value="' + opleidingen.naam + '">' + opleidingen.naam + '</option>');
+
+                })
+            });
+
+        });
+
+
+        $('#opleidingen').on('change', function (e) {
+            console.log(e);
+
+
+            var opleidingen_naam = e.target.value;
+
+            //ajax
+
+            $.get('/opleidingen?opleidingen_naam=' + opleidingen_naam, function (data) {
+
+                $('#specialisaties').empty();
+                $("<option value=''>Optioneel</option>").appendTo('#specialisaties');
+
+                $.each(data, function (index, specialisaties) {
+
+                    $('#specialisaties').append('<option value="' + specialisaties.naam + '">' + specialisaties.naam + '</option>');
+
+                })
+            });
+
+        });
 
     </script>
 

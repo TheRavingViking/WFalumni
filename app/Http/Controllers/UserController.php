@@ -43,7 +43,8 @@ class UserController extends Controller
     public
     function profiel()
     {
-        return view('profiel', array('user' => Auth::user()));
+        $richtingen = dropdown_richting::all();
+        return view('profiel', array('user' => Auth::user(), 'richtingen' => $richtingen));
     }
 
     public
@@ -65,7 +66,9 @@ class UserController extends Controller
     public
     function show(User $user)
     {
-        return view('profiel', compact('user'));
+        //return view('profiel', compact('user'));
+        $richtingen = dropdown_richting::all();
+        return view('profiel', array('user' => Auth::user(), 'richtingen' => $richtingen));
     }
 
 

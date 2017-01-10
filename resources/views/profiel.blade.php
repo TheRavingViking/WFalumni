@@ -189,10 +189,14 @@
                                 @endif
                             </label>
 
+                            @if( Auth::user()->bevoegdheid == 3 )
+                            <label for="bevoegdheid">bevoegdheid</label>
                             @if($uglyFix == 1) <br> @endif
 
                             <label for="bevoegdheid" style="{{$visibility}}">Bevoegdheid</label>
                             <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
+                                   value="{{ $user->bevoegdheid }}" {{$temp}}>
+                            @endif
                                    value="{{ $user->bevoegdheid }}" {{$temp}} style="{{$visibility}}">
 
                             <label for="afdeling">Afdeling</label>
@@ -409,8 +413,12 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="richting">Naam van de richting</label>
-                                                <input id="richting" type="text" name="richting" required>
+                                                <label for="richting" title="richting">Naam van de richting</label>
+                                                <select name="richting" title="richting" required>
+                                                    @foreach($richtingen as $richting)
+                                                    <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="form-group">
@@ -535,8 +543,12 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="richting">richting</label>
-                                                <input id="richting" type="text" name="richting" required>
+                                                <label for="richting" title="richting">Naam van de richting</label>
+                                                <select name="richting" title="richting" required>
+                                                    @foreach($richtingen as $richting)
+                                                        <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
 
                                             <div class="form-group">

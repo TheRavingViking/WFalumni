@@ -57,8 +57,6 @@ class AdminController extends Controller
     public function dashboard()
     {
         $richtingen = dropdown_richting::all();
-        $opleidingen = dropdown_opleidingen::all();
-        $specialisaties = dropdown_specialisaties::all();
         $personeel = User::all()->where('bevoegdheid', '>', 1);
 
         $countUser = User::all()->where('bevoegdheid', 1)->count();
@@ -81,10 +79,20 @@ class AdminController extends Controller
         $ouders = User::all()->where('heeft_kinderen', '=', 1)->count();
         $nietOuders = User::all()->where('heeft_kinderen', '=', 0)->count();
 
+        $werkend = DB::table('users')
+            ->join('bedrijf', 'users.id', '=', 'bedrijf.user_id')
+            ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+
+            ->select('users.voornaam', 'opleiding.richting as opleiding_richting', 'bedrijf.richting as bedrijf_richting')
+            ->wherecolumn('bedrijf.richting', 'opleiding.richting')
+            ->get()->count();
+        //dd($werkend);
+
+        $nietWerkend = 1;
+
+
         return view('dashboard', array(
             'richtingen' => $richtingen,
-            'opleidingen' => $opleidingen,
-            'specialisaties' => $specialisaties,
             'jaarinkomen' => $averageJaarInkomen,
             'countUser' => $countUser,
             'countPersoneel' => $countPersoneel,
@@ -98,6 +106,8 @@ class AdminController extends Controller
             'ouders' => $ouders,
             'nietOuders' => $nietOuders,
             'personeel' => $personeel,
+            'werkend' => $werkend,
+            'nietWerkend' => $nietWerkend,
         ));
     }
 
@@ -111,8 +121,6 @@ class AdminController extends Controller
             $specialisatie = request('specialisaties');
 
             $richtingen = dropdown_richting::all();
-            $opleidingen = dropdown_opleidingen::all();
-            $specialisaties = dropdown_specialisaties::all();
 
             $countPersoneel = DB::table('users')
                 ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
@@ -233,8 +241,6 @@ class AdminController extends Controller
 
             return view('dashboard', array(
                 'richtingen' => $richtingen,
-                'opleidingen' => $opleidingen,
-                'specialisaties' => $specialisaties,
                 'jaarinkomen' => $averageJaarInkomen,
                 'countUser' => $countUser,
                 'countPersoneel' => $countPersoneel,
