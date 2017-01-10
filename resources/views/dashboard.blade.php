@@ -199,7 +199,7 @@
                 labels: ["Werkt in vakgebied", "Werkt niet in vakgebied"],
                 datasets: [
                     {
-                        backgroundColor: ["rgba(153,255,51,0.4)", "rgba(153,100,51,0.4)"],
+                        backgroundColor: ["rgba(0,70,133,1)", "rgba(213,161,15,1)"],
                         data: [{{$werkend}}, {{$nietWerkend}}]
                     }
                 ]
@@ -207,7 +207,7 @@
             options: {
                 title: {
                     display: true,
-                    text: 'werkendInVakgebied'
+                    text: 'Werkend in vakgebied'
                 }
             }
         });

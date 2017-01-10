@@ -43,7 +43,7 @@
         <div class="panel panel-default" style="padding: 1em">
 
             <a href="#Profielcollapse" class="btn btn-info" data-toggle="collapse">Profiel</a>
-            <div id="Profielcollapse" class="uncollapse">
+            <div id="Profielcollapse" class="collapse in">
                 {{--<div class=" row"></div>--}}
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
