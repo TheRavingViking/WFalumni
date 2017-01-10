@@ -67,21 +67,29 @@ box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                @if (Auth::check())
+
+                @if ( Auth::user()->bevoegdheid == 3)
                     <ul class="nav navbar-nav">
-
                         <li><a href="{{ url('/overview') }}">Overview</a></li>
-
-                        <li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
-
+                        {{--<li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>--}}
                         <li><a href="{{ url('/mail') }}">Mail</a></li>
-
                         <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
-
-                        <li><a href="{{ url('/geochart') }}">Geochart</a></li>
                     </ul>
-            @else
+                @elseif( Auth::user()->bevoegdheid == 2)
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/overview') }}">Overview</a></li>
+                        <li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
+                        {{--<li><a href="{{ url('/mail') }}">Mail</a></li>--}}
+                        {{--<li><a href="{{ url('/dashboard') }}">Dashboard</a></li>--}}
+                    </ul>
 
+                @elseif( Auth::user()->bevoegdheid == 1)
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/overview') }}">Overview</a></li>
+                        <li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
+                        {{--<li><a href="{{ url('/mail') }}">Mail</a></li>--}}
+                        {{--<li><a href="{{ url('/dashboard') }}">Dashboard</a></li>--}}
+                    </ul>
             @endif
 
             <!-- Right Side Of Navbar -->

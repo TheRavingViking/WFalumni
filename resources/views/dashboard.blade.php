@@ -4,7 +4,7 @@
 
     <div class="container-fluid" style="padding: 1.25em;">
         <div class="row">
-            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="well">
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                         <form class="form-horizontal" method="get" action="/dashboard/filter">
@@ -48,7 +48,18 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="well">
-                    <h1></h1><br>
+                    <h1>Admin Tools:</h1><br>
+
+                    <form class="form-horizontal" method="get" action="/admin">
+                        <button class="btn btn-primary">Bevoegdheid veranderen</button>
+                    </form>
+                    <hr>
+                    {{--<a href="{{ url('/admin') }}">Bevoegdheid veranderen</a><br><hr>--}}
+                    <form class="form-horizontal" method="get" action="/geochart">
+                        <button class="btn btn-primary">Geocharts</button>
+                    </form>
+                    <hr>
+
                     {{--@foreach($personeel as $persoon)--}}
                     {{--<b>{{$persoon->voornaam}} {{$persoon->tussenvoegsel}} {{$persoon->achternaam}}</b> @if($persoon->bevoegdheid == 3)--}}
                     {{--Opleidings administrator--}}

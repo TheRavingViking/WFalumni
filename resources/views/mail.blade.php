@@ -14,41 +14,39 @@
             </div>
         @endif
         <div class="container">
-
             <div class="panel panel-default">
-                <div class="panel-heading">Mail Iedereen:</div>
+                <div class="panel-heading"><h3>Mail Iedereen:</h3></div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="row col-md-10">
-                        <div class="col-md-10 col-md-offset-2">
-                            <form enctype="multipart/form-data" class="form-horizontal" method="POST" action=""
-                                  id="delete">   {{ csrf_field() }}
-                                <div class="form-group">
-                                    <input type="hidden" name="users"
-                                           value="@foreach($users as $user) {{$user->email}} @endforeach">
-                                    {{--<h3>Mail Iedereen:</h3>--}}
+                            <div class="col-md-10 col-md-offset-2">
+                                <form enctype="multipart/form-data" class="form-horizontal" method="POST" action=""
+                                      id="delete">   {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <input type="hidden" name="users"
+                                               value="@foreach($users as $user) {{$user->email}} @endforeach">
+                                        {{--<h3>Mail Iedereen:</h3>--}}
 
-                                    <label for="onderwerp" class="col-md-4 control-label">Onderwerp</label>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" name="subject" placeholder="Onderwerp">
+                                        <label for="onderwerp" class="col-md-4 control-label">Onderwerp</label>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" name="subject"
+                                                   placeholder="Onderwerp"><br>
+                                        </div>
+                                        <label for="onderwerp" class="col-md-4 control-label">titel</label>
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="text" name="title" placeholder="Titel">
+                                        </div>
+
                                     </div>
-<br>
-
-                                    <label for="onderwerp" class="col-md-4 control-label">titel</label>
-                                    <div class="col-md-6">
-                                        <input class="form-control" type="text" name="title" placeholder="Titel">
-                                    </div>
-
-                                </div>
-                                <div class="form-group">
+                                    <div class="form-group">
 
                             <textarea class="form-control" rows="10" name="email" id="email"
                                       placeholder="Schrijf hier je bericht."></textarea> <br>
-                                    <input class="btn btn-primary" type="submit">
-                                </div>
-                                {{ csrf_field() }}
-                            </form>
-                        </div>
+                                        <input class="btn btn-primary" type="submit">
+                                    </div>
+                                    {{ csrf_field() }}
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
