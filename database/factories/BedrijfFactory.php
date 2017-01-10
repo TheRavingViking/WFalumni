@@ -19,7 +19,7 @@ $factory->define(App\Bedrijf::class, function (Faker\Generator $faker) {
 
     return [
         'functie' => $faker->name,
-        'richting' => $faker->randomElements($richting),
+        'richting' => $faker->randomElement($richting),
         'naam' => $faker->company,
         'straatnaam' => $faker->address,
         'postcode' => $faker->postcode,
