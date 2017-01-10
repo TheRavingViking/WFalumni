@@ -11,8 +11,11 @@
             }
         if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3 || Auth::user()->bevoegdheid == 2) {
             $visibility = '';
+            //uglyFix is om layout te fixen.
+            $uglyFix = 1;
          } else {
             $visibility = 'display: none;';
+            $uglyFix = 0;
         }
     @endphp
 
@@ -72,7 +75,7 @@
                             <input id="achternaam" type="text" class="form-control" name="achternaam"
                                    value="{{ $user->achternaam }}" {{$temp}}>
 
-                            <label for="email">E-Mail Address</label>
+                            <label for="email">E-mailadres</label>
                             <input id="email" type="email" class="form-control" name="email"
                                    value="{{ $user->email }}" {{$temp}}>
 
@@ -84,30 +87,30 @@
                             <input id="telefoonnummer" type="text" class="form-control" name="telefoonnummer"
                                    value="{{ $user->telefoonnummer }}" style="{{$visibility}}" {{$temp}}>
 
-                            <label for="facebook">facebook</label>
+                            <label for="facebook">Facebook</label>
                             <input id="facebook" type="text" class="form-control" name="facebook"
                                    value="{{ $user->facebook }}" {{$temp}}>
 
-                            <label for="linkedin">linkedin</label>
+                            <label for="linkedin">Linkedin</label>
                             <input id="linkedin" type="text" class="form-control" name="linkedin"
                                    value="{{ $user->linkedin }}" {{$temp}}>
 
-                            <label for="twitter">twitter</label>
+                            <label for="twitter">Twitter</label>
                             <input id="twitter" type="text" class="form-control" name="twitter"
                                    value="{{ $user->twitter }}" {{$temp}}>
 
-                            <label for="website">website</label>
+                            <label for="website">Website</label>
                             <input id="website" type="text" class="form-control" name="website"
                                    value="{{ $user->website }}" {{$temp}}>
 
-                            <label for="post adres" style="{{$visibility}}">Post adres</label>
+                            <label for="post adres" style="{{$visibility}}">Postadres</label>
                             <input id="post adres" type="text" class="form-control" name="post adres"
                                    value="{{ $user->post_adres }}" style="{{$visibility}}" {{$temp}}>
 
-                            <label for="password" style="{{$visibility}}">Password</label>
+                            <label for="password" style="{{$visibility}}">Wachtwoord</label>
                             <input id="password" type="password" class="form-control" name="password" style="{{$visibility}}" {{$temp}}>
 
-                            <label for="password-confirm" style="{{$visibility}}">Confirm Password</label>
+                            <label for="password-confirm" style="{{$visibility}}">Bevestig wachtwoord</label>
                             <input id="password-confirm" type="password" class="form-control"
                                    name="password_confirmation" style="{{$visibility}}" {{$temp}}>
 
@@ -125,14 +128,18 @@
                             </label>
 
                             <br><label for="burgerlijke staat" title="burgelijke staat" style="{{$visibility}}">Burgerlijke staat</label>
-                            <select name="burgerlijke staat" title="burgelijke staat" {{$temp}} style="{{$visibility}}">
-                                <option value="ongehuwd">ongehuwd</option>
-                                <option value="gehuwd">gehuwd</option>
-                            </select><br>
+                            <select name="burgerlijke staat" title="burgelijke staat" {{$temp}} class="form-control" style="{{$visibility}}">
+                                <option value="ongehuwd">Ongehuwd</option>
+                                <option value="gehuwd">Gehuwd</option>
+                            </select>
 
-                            <label for="heeft_kinderen"style="{{$visibility}}">heeft_kinderen</label>
-                            <input id="heeft_kinderen" type="text" class="form-control" name="heeft_kinderen"
-                                   value="{{ $user->heeft_kinderen }}" {{$temp}} style="{{$visibility}}">
+                            <label for="heeft_kinderen" style="{{$visibility}}">Heeft kinderen
+                                <br>Ja:&nbsp&nbsp
+                                 <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="1" @if($user->heeft_kinderen == 1) checked @endif>
+                                <br>Nee: <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="0" @if($user->heeft_kinderen == 0) checked @endif>
+                            </label>
+
+                            @if($uglyFix == 1) <br> @endif
 
                             <label for="nationaliteit" style="{{$visibility}}">Nationaliteit</label>
                             <input id="nationaliteit" type="text" class="form-control" name="nationaliteit"
@@ -146,11 +153,11 @@
                             <input id="geboorteplaats" type="text" class="form-control" name="geboorteplaats"
                                    value="{{ $user->geboorteplaats }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="geboorteprovincie" style="{{$visibility}}">geboorteprovincie</label>
+                            <label for="geboorteprovincie" style="{{$visibility}}">Geboorteprovincie</label>
                             <input id="geboorteprovincie" type="text" class="form-control" name="geboorteprovincie"
                                    value="{{ $user->geboorteprovincie }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="geboorteland" style="{{$visibility}}">geboorteland</label>
+                            <label for="geboorteland" style="{{$visibility}}">Geboorteland</label>
                             <input id="geboorteland" type="text" class="form-control" name="geboorteland"
                                    value="{{ $user->geboorteland }}" {{$temp}} style="{{$visibility}}">
 
@@ -159,7 +166,7 @@
                             <input id="titel" type="text" class="form-control" name="titel"
                                    value="{{ $user->titel }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="jaarinkomen" style="{{$visibility}}">jaarinkomen</label>
+                            <label for="jaarinkomen" style="{{$visibility}}">Jaarinkomen</label>
                             <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen"
                                    value="{{ $user->jaarinkomen }}" {{$temp}} style="{{$visibility}}">
 
@@ -180,13 +187,15 @@
                                 @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"
                                              value="0" {{$temp}}>
                                 @endif
-                            </label><br>
+                            </label>
 
-                            <label for="bevoegdheid" style="{{$visibility}}">bevoegdheid</label>
+                            @if($uglyFix == 1) <br> @endif
+
+                            <label for="bevoegdheid" style="{{$visibility}}">Bevoegdheid</label>
                             <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
                                    value="{{ $user->bevoegdheid }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="afdeling">afdeling</label>
+                            <label for="afdeling">Afdeling</label>
                             <input id="afdeling" type="text" class="form-control" name="afdeling"
                                    value="{{ $user->afdeling }}" {{$temp}}>
 
