@@ -316,7 +316,18 @@ class AdminController extends Controller
                     ->get();
 
                 foreach ($users as $c) {
-                    Mapper::informationWindow($c->latitude, $c->longitude, $c->voornaam || $c->tussenvoegsel, ['markers' => ['animation' => 'DROP']]);
+
+                    $tel = $c->telefoonnummer;
+                    $email = $c->email;
+                    $adres = $c->naam;
+                    $postcode = $c->postcode;
+                    $voornaam = $c->voornaam;
+                    $tussenvoegsel = $c->tussenvoegsel;
+                    $achternaam = $c->achternaam;
+
+                    $content =   'Alumni:' . ' ' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam . '<br>' . 'Tel:' . ' ' . $tel .  '<br>' . 'Email:' . ' ' . $email . '<br>' . 'Adres:' . ' ' . $adres . '<br>' . 'Postcode:' . ' ' . $postcode . '<br>';
+
+                    Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
                 }
 
                 return view('geochart', array('richtingen' => $richtingen));
@@ -388,7 +399,17 @@ class AdminController extends Controller
                     ->get();
 
                 foreach ($users as $c) {
-                    Mapper::informationWindow($c->latitude, $c->longitude, $c->voornaam || $c->tussenvoegsel, ['markers' => ['animation' => 'DROP']]);
+                    $tel = $c->telefoonnummer;
+                    $email = $c->email;
+                    $adres = $c->naam;
+                    $postcode = $c->postcode;
+                    $voornaam = $c->voornaam;
+                    $tussenvoegsel = $c->tussenvoegsel;
+                    $achternaam = $c->achternaam;
+
+                    $content =   'Alumni:' . ' ' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam . '<br>' . 'Tel:' . ' ' . $tel .  '<br>' . 'Email:' . ' ' . $email . '<br>' . 'Adres:' . ' ' . $adres . '<br>' . 'Postcode:' . ' ' . $postcode . '<br>';
+
+                    Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
                 }
 
                 return view('geochart', array('richtingen' => $richtingen));

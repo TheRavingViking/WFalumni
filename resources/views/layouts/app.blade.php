@@ -77,6 +77,8 @@ box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
                         <li><a href="{{ url('/mail') }}">Mail</a></li>
 
                         <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+
+                        <li><a href="{{ url('/geochart') }}">Geochart</a></li>
                     </ul>
             @else
 

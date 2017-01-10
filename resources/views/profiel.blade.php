@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     @php
         if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3)
             {
@@ -41,7 +40,7 @@
                         <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive"
                              style="border-radius:50%;">
 
-                    {{--<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">--}}
+                        {{--<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">--}}
                         <h2>{{ $user->voornaam }} {{ $user->tussenvoegsel }} {{ $user->achternaam }}</h2>
                     </div>
 
@@ -55,8 +54,8 @@
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-sm-offset-7">
                             <label>Update profiel foto</label>
                             <input type="file" name="avatar" {{$temp}}></div>
-                            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
-                                <label for="voornaam">Voornaam</label>
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
+                            <label for="voornaam">Voornaam</label>
                             <input id="voornaam" type="text" class="form-control" name="voornaam"
                                    value="{{$user->voornaam}}" {{$temp}}>
 
@@ -196,16 +195,16 @@
 
                     </form>
                     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1" style="padding: 1em;">
-                    <form action="/profiel/delete" method="POST">
-                        <input type="hidden" name="id" value="{{ $user->id }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="form-group">
+                        <form action="/profiel/delete" method="POST">
+                            <input type="hidden" name="id" value="{{ $user->id }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-danger" {{$temp}}>
                                     Delete User
                                 </button>
                             </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
 
                 </div>
 
