@@ -3383,8 +3383,8 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-primary.focus, .btn-primary:focus {
     color: #fff;
-    background-color: #2579a9;
-    border-color: #133d55
+    background-color: #ffcf00;
+    border-color: #ffcf00
 }
 
 .btn-primary.active, .btn-primary:active, .btn-primary:hover, .open > .btn-primary.dropdown-toggle {
@@ -3395,8 +3395,8 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open > .btn-primary.dropdown-toggle.focus, .open > .btn-primary.dropdown-toggle:focus, .open > .btn-primary.dropdown-toggle:hover {
     color: #fff;
-    background-color: #1f648b;
-    border-color: #133d55
+    background-color: #ffcf00;
+    border-color: #ffcf00
 }
 
 .btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover, .btn-primary[disabled].focus, .btn-primary[disabled]:focus, .btn-primary[disabled]:hover, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
@@ -3449,31 +3449,31 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-info {
     color: #fff;
-    background-color: #8eb4cb;
-    border-color: #7da8c3
+    background-color: #D5A10F;
+    border-color: #D5A10F
 }
 
 .btn-info.focus, .btn-info:focus {
     color: #fff;
-    background-color: #6b9dbb;
-    border-color: #3d6983
+    background-color: #ffcf00;
+    border-color: #ffcf00
 }
 
 .btn-info.active, .btn-info:active, .btn-info:hover, .open > .btn-info.dropdown-toggle {
     color: #fff;
-    background-color: #6b9dbb;
-    border-color: #538db0
+    background-color: #ffcf00;
+    border-color: #ffcf00
 }
 
 .btn-info.active.focus, .btn-info.active:focus, .btn-info.active:hover, .btn-info:active.focus, .btn-info:active:focus, .btn-info:active:hover, .open > .btn-info.dropdown-toggle.focus, .open > .btn-info.dropdown-toggle:focus, .open > .btn-info.dropdown-toggle:hover {
     color: #fff;
-    background-color: #538db0;
-    border-color: #3d6983
+    background-color: #ffcf00;
+    border-color: #ffcf00
 }
 
 .btn-info.disabled.focus, .btn-info.disabled:focus, .btn-info.disabled:hover, .btn-info[disabled].focus, .btn-info[disabled]:focus, .btn-info[disabled]:hover, fieldset[disabled] .btn-info.focus, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:hover {
-    background-color: #8eb4cb;
-    border-color: #7da8c3
+    background-color: #D5A10F;
+    border-color: #D5A10F
 }
 
 .btn-info .badge {

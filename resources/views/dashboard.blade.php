@@ -1,6 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="panel">
+            <h1>Admin Tools:</h1><br>
+
+            <form class="form-horizontal" method="get" action="/admin">
+                <button class="btn btn-primary">Bevoegdheid veranderen</button>
+            </form>
+            <hr>
+            {{--<a href="{{ url('/admin') }}">Bevoegdheid veranderen</a><br><hr>--}}
+            <form class="form-horizontal" method="get" action="/geochart">
+                <button class="btn btn-primary">Geocharts</button>
+            </form>
+            <hr>
+
+            {{--@foreach($personeel as $persoon)--}}
+            {{--<b>{{$persoon->voornaam}} {{$persoon->tussenvoegsel}} {{$persoon->achternaam}}</b> @if($persoon->bevoegdheid == 3)--}}
+            {{--Opleidings administrator--}}
+            {{--@else Administrator @endif<br>--}}
+            {{--@endforeach--}}
+        </div>
+    </div>
 
     <div class="container-fluid" style="padding: 1.25em;">
         <div class="row">
@@ -8,7 +29,7 @@
                 <div class="panel">
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                         <form class="form-horizontal" method="get" action="/dashboard/filter">
-                            <select name="richtingen" id="richtingen">
+                            <select name="richtingen" id="richtingen" class="input-sm">
                                 <option value="">-----</option>
                                 @foreach($richtingen as $richting)
                                     <option value="{{ $richting->naam }}">
