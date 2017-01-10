@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="container" xmlns="http://www.w3.org/1999/html">
+    <div class="container">
         @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -58,16 +58,16 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-10 col-sm-2 col-md-2 col-lg-2" style="padding: 1em;">
-                        <div class="row">
-                            <a href="https://{{$user->user->facebook}}" class="btn btn-social-icon btn-facebook">
-                                <span class="fa fa-facebook"></span>
-                            </a>
-                            <a href="https://{{$user->user->linkedin}}" class="btn btn-social-icon btn-linkedin">
-                                <span class="fa fa-linkedin"></span>
-                            </a>
-                            <a href="mailto:{{$user->user->email}}" class="btn btn-social-icon btn-google"><span
-                                        class="fa fa-envelope"></span></a>
+                        <div class="col-xs-10 col-sm-2 col-md-2 col-lg-2" style="padding: 1em;">
+                                    <div class="row">
+                                        <a href="https://{{$user->user->facebook}}" class="btn btn-social-icon btn-facebook">
+                                            <span class="fa fa-facebook"></span>
+                                        </a>
+                                        <a href="https://{{$user->user->linkedin}}" class="btn btn-social-icon btn-linkedin">
+                                            <span class="fa fa-linkedin"></span>
+                                        </a>
+                                        <a href="mailto:{{$user->user->email}}" class="btn btn-social-icon btn-google"><span
+                                                    class="fa fa-envelope"></span></a>
                             <a href="profiel/{{$user->user->id}}" class="btn btn-social-icon btn-linkedin">
                                 <span class="fa fa-user"></span></a>
                         </div>
@@ -86,8 +86,5 @@
         </div>
     </div>
 
-
-
-
-@stop
+@endsection
 

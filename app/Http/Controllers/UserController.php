@@ -291,38 +291,48 @@ class UserController extends Controller
         $address = $request->adres;
         $postcode = $request->postcode;
 
-        $address = str_replace(" ", "+", $address);
+        $address = str_replace(" ", "%", $address);
+        $postcode = str_replace(" ", "%", $postcode);
 
         $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address+$postcode";
 
         $response = file_get_contents($url);
 
-        $json = json_decode($response, TRUE);
+        if (!$response == '') {
 
-        $lat = $json['results'][0]['geometry']['location']['lat'];
-        $lng = $json['results'][0]['geometry']['location']['lng'];
+            $json = json_decode($response, TRUE);
 
 
-        $data = array(
-            'naam' => $request['naam'],
-            'functie' => $request['functie'],
-            'richting' => $request['richting'],
-            'begin' => $request['begin'],
-            'eind' => $request['eind'],
-            'stad' => $request['stad'],
-            'postcode' => $request['postcode'],
-            'straatnaam' => $request['adres'],
-            'longitude' => $lng,
-            'latitude' => $lat,
-            'telefoonnummer' => $request['telefoonnummer'],
-            'bezoekadres' => $request['bezoekadres'],
-            'land' => $request['land'],
-            'provincie' => $request['provincie'],
-            'user_id' => $request['user_id']
-        );
-        $id = $request['user_id'];
-        bedrijf::create($data);
-        return redirect::to('profiel/' . $id)->with('message', 'bedrijf toegevoegd');
+            $lat = $json['results'][0]['geometry']['location']['lat'];
+            $lng = $json['results'][0]['geometry']['location']['lng'];
+
+
+            $data = array(
+                'naam' => $request['naam'],
+                'functie' => $request['functie'],
+                'richting' => $request['richting'],
+                'begin' => $request['begin'],
+                'eind' => $request['eind'],
+                'stad' => $request['stad'],
+                'postcode' => $request['postcode'],
+                'straatnaam' => $request['adres'],
+                'longitude' => $lng,
+                'latitude' => $lat,
+                'telefoonnummer' => $request['telefoonnummer'],
+                'bezoekadres' => $request['bezoekadres'],
+                'land' => $request['land'],
+                'provincie' => $request['provincie'],
+                'user_id' => $request['user_id']
+            );
+            $id = $request['user_id'];
+            bedrijf::create($data);
+            return redirect::to('profiel/' . $id)->with('message', 'bedrijf toegevoegd');
+        } else {
+            $id = $request['user_id'];
+            return redirect::to('profiel/' . $id)->with('error', 'Geen geldig adres');
+        }
+
+
     }
 
     public
@@ -346,11 +356,14 @@ class UserController extends Controller
         $address = $request->straatnaam;
         $postcode = $request->postcode;
 
-        $address = str_replace(" ", "+", $address);
+        $address = str_replace(" ", "%", $address);
+        $postcode = str_replace(" ", "%", $postcode);
 
         $url = "http://maps.google.com/maps/api/geocode/json?sensor=false&address=$address+$postcode";
 
         $response = file_get_contents($url);
+
+        if (!$response == '') {
 
         $json = json_decode($response, TRUE);
 
@@ -372,7 +385,11 @@ class UserController extends Controller
         $id = $request['user_id'];
         woonplaats::create($data);
         return redirect::to('profiel/' . $id)->with('message', 'woonplaats toegevoegd');
-        //return view('profiel/' . $id);
+        } else {
+            $id = $request['user_id'];
+            return redirect::to('profiel/' . $id)->with('error', 'Geen geldig adres');
+        }
+
     }
 
     public
@@ -524,8 +541,7 @@ class UserController extends Controller
             Mail::to($user['email'])->send(new Welkommail($user));
 
             return Redirect::back()->with('status', 'De user is succesvol toegevoegd');
-        }
-        else {
+        } else {
             return redirect::back()->with('error', 'Dit e-mailadres is al in gebruik.');
         }
 
