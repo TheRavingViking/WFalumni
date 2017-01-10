@@ -40,15 +40,13 @@ class UserController extends Controller
     }
 
 
-    public
-    function profiel()
+    public function profiel()
     {
         $richtingen = dropdown_richting::all();
         return view('profiel', array('user' => Auth::user(), 'richtingen' => $richtingen));
     }
 
-    public
-    function index()
+    public function index()
     {
 
 
@@ -63,17 +61,15 @@ class UserController extends Controller
     }
 
 
-    public
-    function show(User $user)
+    public function show(User $user)
     {
         //return view('profiel', compact('user'));
         $richtingen = dropdown_richting::all();
-        return view('profiel', array('user' => Auth::user(), 'richtingen' => $richtingen));
+        return view('profiel', array('user' => $user, 'richtingen' => $richtingen));
     }
 
 
-    public
-    function mijnOpleiding()
+    public function mijnOpleiding()
     {
         if (Auth::user()->bevoegdheid == 1) {
             $auth = Auth::user()->opleiding()->get()->last()->naam;
@@ -93,19 +89,15 @@ class UserController extends Controller
             $eind = Auth::user()->opleiding()->get()->last()->eind;
             $eind = substr($eind, 0, 4);
 
-            $richtingen = dropdown_richting::all();
-            $opleidingen = dropdown_opleidingen::all();
-            $specialisaties = dropdown_specialisaties::all();
 
             $opl = Opleiding::with('user')->where('richting', $auth)->where('behaald', 1)->paginate(25);
 
-            return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => $eind, 'richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
+            return view('MijnOpleiding', array('opl' => $opl, 'auth' => $auth, 'eind' => $eind));
         }
     }
 
 
-    public
-    function MijnOpleidingSearch(Request $request)
+    public function MijnOpleidingSearch(Request $request)
     {
         if (Auth::user()->bevoegdheid == 1) {
             $opleiding = request('opleiding');
@@ -178,8 +170,7 @@ class UserController extends Controller
     }
 
 
-    public
-    function search(request $request)
+    public function search(request $request)
     {
         $keyword = request('searchinput');
         $keyword = explode(" ", $keyword);
@@ -204,8 +195,7 @@ class UserController extends Controller
     }
 
 
-    public
-    function filter(Request $request)
+    public function filter(Request $request)
     {
 
         $richtingen = request('richtingen');
@@ -222,7 +212,7 @@ class UserController extends Controller
                 ->where([
                     ['naam', $opleidingen],
                     ['richting', $richtingen],
-                ])
+                ])->where('users.deleted_at', '=', null)
                 ->paginate(25);
 
 
@@ -236,6 +226,7 @@ class UserController extends Controller
                     ['richting', $richtingen],
 
                 ])->where('specialisatie', $specialisaties)
+                ->where('users.deleted_at', '=', null)
                 ->paginate(25);
 
         }
@@ -252,8 +243,7 @@ class UserController extends Controller
 
     }
 
-    public
-    function createOpleiding(Request $request)
+    public function createOpleiding(Request $request)
     {
         $data = array(
             'naam' => $request['naam'],
@@ -288,8 +278,7 @@ class UserController extends Controller
     }
 
 
-    public
-    function createBedrijf(Request $request)
+    public function createBedrijf(Request $request)
     {
         $address = $request->adres;
         $postcode = $request->postcode;
@@ -338,8 +327,7 @@ class UserController extends Controller
 
     }
 
-    public
-    function deleteBedrijf(Request $request)
+    public function deleteBedrijf(Request $request)
     {
         $user = $request->user_id;
         if (Bedrijf::where('user_id', $user)->count() > 1) {
@@ -368,26 +356,26 @@ class UserController extends Controller
 
         if (!$response == '') {
 
-        $json = json_decode($response, TRUE);
+            $json = json_decode($response, TRUE);
 
-        $lat = $json['results'][0]['geometry']['location']['lat'];
-        $lng = $json['results'][0]['geometry']['location']['lng'];
+            $lat = $json['results'][0]['geometry']['location']['lat'];
+            $lng = $json['results'][0]['geometry']['location']['lng'];
 
 
-        $data = array(
-            'naam' => $request['straatnaam'],
-            'postcode' => $request['postcode'],
-            'begin' => $request['begin'],
-            'eind' => $request['eind'],
-            'longitude' => $lng,
-            'latitude' => $lat,
-            'land' => $request['land'],
-            'provincie' => $request['provincie'],
-            'user_id' => $request['user_id']
-        );
-        $id = $request['user_id'];
-        woonplaats::create($data);
-        return redirect::to('profiel/' . $id)->with('message', 'woonplaats toegevoegd');
+            $data = array(
+                'naam' => $request['straatnaam'],
+                'postcode' => $request['postcode'],
+                'begin' => $request['begin'],
+                'eind' => $request['eind'],
+                'longitude' => $lng,
+                'latitude' => $lat,
+                'land' => $request['land'],
+                'provincie' => $request['provincie'],
+                'user_id' => $request['user_id']
+            );
+            $id = $request['user_id'];
+            woonplaats::create($data);
+            return redirect::to('profiel/' . $id)->with('message', 'woonplaats toegevoegd');
         } else {
             $id = $request['user_id'];
             return redirect::to('profiel/' . $id)->with('error', 'Geen geldig adres');
@@ -456,8 +444,7 @@ class UserController extends Controller
         return back()->with('status', 'Update was succesvol!!');
     }
 
-    public
-    function SoftDelete(request $id)
+    public function SoftDelete(request $id)
     {
 
         $user = Auth::user($id);
@@ -465,30 +452,29 @@ class UserController extends Controller
         $user = User::find($id);
 
         $user->delete();
+        if (Auth::user()->bevoegdheid == 3) {
+            return redirect()->action('UserController@index');
+        } else {
+            return view('/', array('user' => Auth::logout()));
+        }
 
-        return view('welcome', array('user' => Auth::logout()));
-
-//        $user = Auth::user();
-//        $value = '1';
-//        $user->deleted_at = $value;
-//        $user->save();
-//        return view('welcome', array('user' => Auth::logout()));
     }
 
 
     public
-    function MassSoftDelete(Request $users)
+    function MassSoftDelete(Request $request)
     {
+        $users = $request->checkbox;
 
-        if (empty($users->checkbox)) {
-            return redirect::to('overview')->with('error', 'Geen gebruikers verwijderd, selecteer gebruikers');
+        if ($users == '') {
+            return redirect()->back()->with('error', 'Geen gebruikers verwijderd, selecteer gebruikers');
         } else {
-            $checkbox = $users->checkbox;
+            $checkbox = $users;
             foreach ($checkbox as $id)
                 $id = User::where('id', $id)->delete();
 
 
-            return redirect()->action('UserController@index');
+            return redirect()->back()->with('error', 'gebruikers verwijderd');
         }
     }
 

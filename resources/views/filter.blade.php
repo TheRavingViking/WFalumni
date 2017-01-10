@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <div class="container">
+    <div class="container" xmlns="http://www.w3.org/1999/html">
         @if (session('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -31,37 +31,45 @@
                             </form>
                         </div>
 
-                        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <button class="btn btn-default">
-                                <a href="mailto: @foreach ($users as $mail){{$mail->email}}@endforeach">Mail
-                                    iedereen</a>
-                            </button>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-2 col-lg-2">
-                            <form enctype="multipart/form-data" method="POST" action="/overview"
-                                  id="delete">
-                                {{ csrf_field() }}
-                                <button type="submit" class="btn btn-danger">Delete User</button>
-                            </form>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-top: 2em">
-                            <form class="form-horizontal" method="get" action="/overview/filter">
-                                <select name="richtingen" id="richtingen" class="input-sm">
-                                    <option value="">Kies een Richting</option>
-                                    @foreach($richtingen as $richting)
-                                        <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
-                                    @endforeach
-                                </select>
-                                <select name="opleidingen" id="opleidingen" class="input-sm">
-                                    <option value="">-----</option>
-                                </select>
-                                <select name="specialisaties" id="specialisaties" class="input-sm">
-                                    <option value="">-----</option>
-                                </select>
-                                <button class="btn btn-primary">Go</button>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="dropdown-group">
+                                <form class="form-horizontal" method="get" action="/overview/filter">
+                                    <select name="richtingen" id="richtingen" class="input-sm input-margin">
+                                        <option value="">Kies een Richting</option>
+                                        @foreach($richtingen as $richting)
+                                            <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
+                                        @endforeach
+                                    </select>
+                                    <select name="opleidingen" id="opleidingen" class="input-sm input-margin">
+                                        <option value="">-----</option>
+                                    </select>
+
+                                    <select name="specialisaties" id="specialisaties" class="input-sm input-margin">
+                                        <option value="">-----</option>
+                                    </select>
+
+                                    <button class="btn btn-primary">Go</button>
+                            </div>
                             </form>
                         </div>
 
+                        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                            <div class="btn-toolbar">
+                                <div class="btn-group">
+                                    <button class=" btn btn-primary">Mail iedereen
+                                        <a href="mailto: @foreach ($users as $mail){{$mail->email}}@endforeach"></a>
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <form enctype="multipart/form-data" method="POST" action="/overview"
+                                          id="delete">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger">Delete User</button>
+
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -100,13 +108,14 @@
                                         class="fa fa-envelope"></span></a>
                             <a href="/profiel/{{$user->user_id}}" class="btn btn-social-icon btn-linkedin">
                                 <span class="fa fa-user"></span></a>
+                            <input type="checkbox" name="checkbox[]" id="checkbox[]" value="{{$user->user_id}}">
                         </div>
                     </div>
                 </div>
             </div>
 
         @endforeach
-
+    </form>
         <div class="container" style="alignment: center">
             <div class="row">
                 <div>

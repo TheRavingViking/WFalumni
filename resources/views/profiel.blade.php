@@ -239,9 +239,7 @@
         </div>
     </div>
 
-    </div>
-    </div>
-    </div>
+
     {{--Woonplaats form & modal--}}
     <div class="container" style="{{$visibility}}">
         <div class="panel panel-default" style="padding: 1em">

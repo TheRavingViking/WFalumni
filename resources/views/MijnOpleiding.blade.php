@@ -2,7 +2,7 @@
 
 @section('content')
 
-
+{{--{{dd($opl)}}--}}
     <div class="container">
         @if (session('error'))
             <div class="alert alert-danger">
@@ -40,16 +40,17 @@
         @foreach($opl as $user)
             <div class="panel panel-default" style="padding: 1em">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-2 col-md-1 col-lg-1">
-                        <img src="/uploads/avatars/{{ $user->user->foto }}" class="img-responsive"
-                             style="min-width: 5em; float:left; border-radius:50%; margin-right:1em;">
+                    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+                        <img src="/uploads/avatars/{{ $user->user->foto }}" class="img-responsive img-circle">
                     </div>
 
-                    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
-                        <div style="margin-left: 1em;">
+                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                        <div>
                             <h4>
-                                <b> @if($user->user->bevoegdheid == 2)
-                                        Docent: @endif{{$user->user->voornaam}} {{$user->user->tussenvoegsel}} {{$user->user->achternaam}}</b>
+                                <b style="align-text:left"> @if($user->user->bevoegdheid == 2)
+                                        Docent <i class="glyphicon glyphicon-user"> </i> :
+                                    @endif
+                                </b>{{$user->user->voornaam}} {{$user->user->tussenvoegsel}} {{$user->user->achternaam}}
                             </h4>
                             Opleiding:{{$user->naam}} genoten
                             tussen:{{$user->begin}}
@@ -58,18 +59,20 @@
                         </div>
                     </div>
 
-                        <div class="col-xs-10 col-sm-2 col-md-2 col-lg-2" style="padding: 1em;">
-                                    <div class="row">
-                                        <a href="https://{{$user->user->facebook}}" class="btn btn-social-icon btn-facebook">
-                                            <span class="fa fa-facebook"></span>
-                                        </a>
-                                        <a href="https://{{$user->user->linkedin}}" class="btn btn-social-icon btn-linkedin">
-                                            <span class="fa fa-linkedin"></span>
-                                        </a>
-                                        <a href="mailto:{{$user->user->email}}" class="btn btn-social-icon btn-google"><span
-                                                    class="fa fa-envelope"></span></a>
-                            <a href="profiel/{{$user->user->id}}" class="btn btn-social-icon btn-linkedin">
-                                <span class="fa fa-user"></span></a>
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                        <div class="row">
+                            <div class="social-icons-bar">
+                                <a href="https://{{$user->user->facebook}}" class="btn btn-social-icon btn-facebook">
+                                    <span class="fa fa-facebook"></span>
+                                </a>
+                                <a href="https://{{$user->user->linkedin}}" class="btn btn-social-icon btn-linkedin">
+                                    <span class="fa fa-linkedin"></span>
+                                </a>
+                                <a href="mailto:{{$user->user->email}}" class="btn btn-social-icon btn-google"><span
+                                            class="fa fa-envelope"></span></a>
+                                <a href="profiel/{{$user->user->id}}" class="btn btn-social-icon btn-linkedin">
+                                    <span class="fa fa-user"></span></a>
+                            </div>
                         </div>
                     </div>
                 </div>

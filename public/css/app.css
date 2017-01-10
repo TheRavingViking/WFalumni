@@ -1362,6 +1362,20 @@ a:focus {
     height: auto
 }
 
+.image-rounded {
+    min-width: 5em;
+    border-radius:50%;
+    margin-bottom: 15px;
+}
+
+.social-icons-bar {
+    margin-top: 15px;
+    margin-left: 15px;
+
+}
+
+
+
 .img-rounded {
     border-radius: 6px
 }
@@ -1378,7 +1392,8 @@ a:focus {
 }
 
 .img-circle {
-    border-radius: 50%
+    border-radius: 50%;
+    margin-right: 0px
 }
 
 hr {
@@ -2862,6 +2877,13 @@ input[type=checkbox], input[type=radio] {
     display: block
 }
 
+.input-margin{
+
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+}
+
 input[type=file] {
     display: block
 }
@@ -3662,6 +3684,15 @@ tbody.collapse.in {
     outline: 0
 }
 
+.dropdown-group{
+
+    margin-top: 0px;
+    margin-bottom: 5px;
+
+}
+
+
+
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -3943,7 +3974,8 @@ tbody.collapse.in {
 
 .input-group {
     display: table;
-    border-collapse: separate
+    border-collapse: separate;
+    margin-bottom: 10px;
 }
 
 .input-group[class*=col-] {
@@ -5538,7 +5570,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
     border: 1px solid transparent;
     border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    padding: 2em;
+    padding: 15px;
 }
 
 .panel-title, .panel > .list-group, .panel > .panel-collapse > .list-group, .panel > .panel-collapse > .table, .panel > .table, .panel > .table-responsive > .table {
