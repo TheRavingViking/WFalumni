@@ -5,7 +5,7 @@
     <div class="container-fluid" style="padding: 1.25em;">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <div class="well">
+                <div class="panel">
                     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                         <form class="form-horizontal" method="get" action="/dashboard/filter">
                             <select name="richtingen" id="richtingen">
@@ -47,7 +47,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="well">
+                <div class="panel">
                     <h1>Admin Tools:</h1><br>
 
                     <form class="form-horizontal" method="get" action="/admin">
@@ -68,13 +68,13 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="well">
+                <div class="panel">
                     <canvas id="alumniVSpersoneel"></canvas>
 
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="well">
+                <div class="panel">
                     <canvas id="ouders"></canvas>
 
                 </div>
@@ -82,13 +82,13 @@
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <div class="well">
+                <div class="panel">
                     <canvas id="GeslachtVerdeling"></canvas>
 
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 hidden-xs">
-                <div class="well">
+                <div class="panel">
                     <canvas id="jaarInkomen"></canvas>
 
                 </div>
@@ -106,7 +106,7 @@
                 labels: ["Alumni", "Personeel"],
                 datasets: [
                     {
-                        backgroundColor: ["rgba(153,255,51,0.4)", "rgba(153,100,51,0.4)"],
+                        backgroundColor: ["rgba(0,70,133,1)", "rgba(213,161,15,1)"],
                         data: [{{$countUser}}, {{$countPersoneel}}]
                     }
                 ]
@@ -126,7 +126,7 @@
                 labels: ["Man", "Vrouw"],
                 datasets: [
                     {
-                        backgroundColor: ["rgba(153,255,51,0.4)", "rgba(153,100,51,0.4)"],
+                        backgroundColor: ["rgba(0,70,133,1)", "rgba(213,161,15,1)"],
                         data: [{{$man}}, {{$vrouw}}]
                     }
                 ]
@@ -148,18 +148,18 @@
                     {
                         label: "Gebruikers per inkomensniveau",
                         backgroundColor: [
-                            'rgba(153,255,51,0.4)',
-                            'rgba(130,100,51,0.4)',
-                            'rgba(153,10,51,0.4)',
-                            'rgba(10,100,51,0.4)',
-                            'rgba(255,255,51,0.4)'
+                            "rgba(0,70,133,1)",
+                            "rgba(213,161,15,1)",
+                            "rgba(0,70,133,1)",
+                            "rgba(213,161,15,1)",
+                            "rgba(0,70,133,1)"
                         ],
                         borderColor: [
-                            'rgba(153,255,51,0.4)',
-                            'rgba(130,100,51,0.4)',
-                            'rgba(153,10,51,0.4)',
-                            'rgba(10,100,51,0.4)',
-                            'rgba(255,255,51,0.4)'
+                            "rgba(0,70,133,1)",
+                            "rgba(213,161,15,1)",
+                            "rgba(0,70,133,1)",
+                            "rgba(213,161,15,1)",
+                            "rgba(0,70,133,1)"
                         ],
                         borderWidth: 1,
                         data: [ {{$laaginkomen}}, {{$laagmiddeninkomen}}, {{$middeninkomen}}, {{$middenhooginkomen}}, {{$hooginkomen}} ]
@@ -181,7 +181,7 @@
                 labels: ["Ouders", "Niet ouders"],
                 datasets: [
                     {
-                        backgroundColor: ["rgba(153,255,51,0.4)", "rgba(153,100,51,0.4)"],
+                        backgroundColor: ["rgba(0,70,133,1)", "rgba(213,161,15,1)"],
                         data: [{{$ouders}}, {{$nietOuders}}]
                     }
                 ]
