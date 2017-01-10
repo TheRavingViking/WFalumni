@@ -23,7 +23,6 @@ use Response;
 
 class UserController extends Controller
 {
-    //
     public function redirectCheck()
     {
 
