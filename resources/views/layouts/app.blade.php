@@ -62,17 +62,18 @@ box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="https://www.studieboekencentrale.nl/image/Logo_Windesheimgroot.gif" class="img-responsive" style="height: 25px">
+                    <img src="https://www.studieboekencentrale.nl/image/Logo_Windesheimgroot.gif" class="img-responsive"
+                         style="height: 25px">
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-
-                @if ( Auth::user()->bevoegdheid == 3)
+                @if(!Auth::guest())
+                @if ( Auth::User()->bevoegdheid == 3)
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('/overview') }}">Overview</a></li>
-                        {{--<li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>--}}
+                        <li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
                         <li><a href="{{ url('/mail') }}">Mail</a></li>
                         <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     </ul>
@@ -80,17 +81,18 @@ box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('/overview') }}">Overview</a></li>
                         <li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
-                        {{--<li><a href="{{ url('/mail') }}">Mail</a></li>--}}
-                        {{--<li><a href="{{ url('/dashboard') }}">Dashboard</a></li>--}}
+                        <li><a href="{{ url('/mail') }}">Mail</a></li>
+                        <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     </ul>
 
                 @elseif( Auth::user()->bevoegdheid == 1)
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('/overview') }}">Overview</a></li>
                         <li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
-                        {{--<li><a href="{{ url('/mail') }}">Mail</a></li>--}}
-                        {{--<li><a href="{{ url('/dashboard') }}">Dashboard</a></li>--}}
+                        <li><a href="{{ url('/mail') }}">Mail</a></li>
+                        <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     </ul>
+            @endif
             @endif
 
             <!-- Right Side Of Navbar -->

@@ -520,12 +520,14 @@ class UserController extends Controller
         $user->geboorteland = $request['geboorteland'];
         $user->nationaliteit = $request['nationaliteit'];
         $user->bevoegdheid = $request['bevoegdheid'];
-        $user->afdeling = $request['richtingen'];
+        $user->afdeling = $request['afdeling'];
+        $user->foto = 'default.png';
 
         $opleiding = new Opleiding;
         $opleiding->naam = $request['opleidingen'];
+        $opleiding->richting = $request['richtingen'];
+        $opleiding->specialisatie = $request['specialisaties'];
         $opleiding->instituut = $request['opleidingsinstituut'];
-        $opleiding->richting = $request['oplrichtingen'];
         $opleiding->begin = $request['begin'];
         $opleiding->eind = $request['eind'];
         $opleiding->locatie = $request['locatie'];
@@ -567,7 +569,7 @@ class UserController extends Controller
         if ($request->password == $request->confirmpw) {
             $user->password = bcrypt($request->password);
             $user->save();
-            return redirect::to('login');
+            return redirect::to('/');
         } else {
             return redirect::back()->with('error', 'De wachtwoorden komen niet overeen');
         }

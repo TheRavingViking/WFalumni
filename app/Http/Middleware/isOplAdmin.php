@@ -18,6 +18,6 @@ class isOplAdmin
     {
         if (Auth::user()->bevoegdheid > 1) {
             return $next($request);
-        } else return redirect('/home');
+        } else return redirect('/');
     }
 }

@@ -48,7 +48,8 @@
                                 <label for="voornaam" class="col-md-4 control-label">Voornaam</label>
 
                                 <div class="col-md-6">
-                                    <input id="voornaam" type="text" class="form-control" name="voornaam" required autofocus>
+                                    <input id="voornaam" type="text" class="form-control" name="voornaam" required
+                                           autofocus>
                                 </div>
                             </div>
 
@@ -69,7 +70,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                                <label for="email" class="col-md-4 control-label">E-Mail adres</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email" required>
@@ -90,42 +91,48 @@
                             <div class="form-group">
                                 <label for="studentnummer" class="col-md-4 control-label">Studentnummer</label>
                                 <div class="col-md-6">
-                                    <input id="studentnummer" type="number" class="form-control" name="studentnummer" required>
+                                    <input id="studentnummer" type="number" class="form-control" name="studentnummer"
+                                           required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="post_adres" class="col-md-4 control-label">Postadres</label>
                                 <div class="col-md-6">
-                                    <input id="post_adres" type="text" class="form-control" name="post_adres" value="{{ old('post_adres') }}" required>
+                                    <input id="post_adres" type="text" class="form-control" name="post_adres"
+                                           value="{{ old('post_adres') }}" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="telefoonnummer" class="col-md-4 control-label">Telefoonnummer</label>
                                 <div class="col-md-6">
-                                    <input id="telefoonnummer" type="text" class="form-control" name="telefoonnummer" value="{{ old('telefoonnummer') }}" required>
+                                    <input id="telefoonnummer" type="text" class="form-control" name="telefoonnummer"
+                                           value="{{ old('telefoonnummer') }}" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="geboortedatum" class="col-md-4 control-label">Geboortedatum</label>
                                 <div class="col-md-6">
-                                    <input id="geboortedatum" type="date" class="form-control" name="geboortedatum" required>
+                                    <input id="geboortedatum" type="date" class="form-control" name="geboortedatum"
+                                           required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="geboorteplaats" class="col-md-4 control-label">Geboorteplaats</label>
                                 <div class="col-md-6">
-                                    <input id="geboorteplaats" type="text" class="form-control" name="geboorteplaats" required>
+                                    <input id="geboorteplaats" type="text" class="form-control" name="geboorteplaats"
+                                           required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="geboorteprovincie" class="col-md-4 control-label">Geboorteprovincie</label>
                                 <div class="col-md-6">
-                                    <input id="geboorteprovincie" type="text" class="form-control" name="geboorteprovincie" required>
+                                    <input id="geboorteprovincie" type="text" class="form-control"
+                                           name="geboorteprovincie" required>
 
                                 </div>
                             </div>
@@ -133,21 +140,23 @@
                             <div class="form-group">
                                 <label for="geboorteland" class="col-md-4 control-label">Geboorteland</label>
                                 <div class="col-md-6">
-                                    <input id="geboorteland" type="text" class="form-control" name="geboorteland" required>
+                                    <input id="geboorteland" type="text" class="form-control" name="geboorteland"
+                                           required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="nationaliteit" class="col-md-4 control-label">Nationaliteit</label>
                                 <div class="col-md-6">
-                                    <input id="nationaliteit" type="text" class="form-control" name="nationaliteit" required>
+                                    <input id="nationaliteit" type="text" class="form-control" name="nationaliteit"
+                                           required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="bevoegdheid" class="col-md-4 control-label">Bevoegdheid</label>
                                 <div class="col-md-6">
-                                    <select name="bevoegdheid" id="bevoegdheid" class="form-control" >
+                                    <select name="bevoegdheid" id="bevoegdheid" class="form-control">
                                         <option value="1" selected>Alumni/Docent</option>
                                         <option value="2" {{$temp}}>Opleidingsadmin</option>
                                         <option value="3" {{$temp}}>Admin</option>
@@ -156,9 +165,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="richting" class="col-md-4 control-label">Afdeling</label>
+                                <label for="afdeling" class="col-md-4 control-label">Afdeling</label>
                                 <div class="col-md-6">
-                                    <select name="richtingen" id="richtingen" class="form-control">
+                                    <select name="afdeling" id="afdeling" class="form-control">
+                                        <option value="">Kies een afdeling</option>
                                         @foreach($richtingen as $richting)
                                             <option value="{{ $richting->naam }}">
                                                 {{ $richting->naam }}
@@ -172,35 +182,44 @@
                             <h1>Opleiding</h1>
 
                             <div class="form-group">
-                                <label for="opleidingsnaam" class="col-md-4 control-label">Opleidingsnaam</label>
+                                <label for="richting" class="col-md-4 control-label">Richting</label>
+                                <div class="col-md-6">
+                                    <select name="richtingen" id="richtingen" class="form-control">
+                                        <option value="">Kies een richting</option>
+                                        @foreach($richtingen as $richting)
+                                            <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="opleidingen" class="col-md-4 control-label">Opleiding</label>
                                 <div class="col-md-6">
                                     <select name="opleidingen" id="opleidingen" class="form-control">
-                                        @foreach($opleidingen as $opleiding)
-                                            <option value="{{ $opleiding->naam }}">
-                                                {{ $opleiding->naam }}
-                                            </option>
-                                        @endforeach
+                                        <option value="">----
+                                        </option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="oplrichting" class="col-md-4 control-label">Opleidingsrichting</label>
+                                <label for="specialisatie" class="col-md-4 control-label">Specialisatie</label>
                                 <div class="col-md-6">
-                                    <select name="oplrichtingen" id="oplrichtingen" class="form-control">
-                                        @foreach($richtingen as $richting)
-                                            <option value="{{ $richting->naam }}">
-                                                {{ $richting->naam }}
-                                            </option>
-                                        @endforeach
+                                    <select name="specialisaties" id="specialisaties" class="form-control">
+                                        <option value="">----
+                                        </option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="opleidingsinstituut" class="col-md-4 control-label">Opleidingsinstituut</label>
+                                <label for="opleidingsinstituut"
+                                       class="col-md-4 control-label">Opleidingsinstituut</label>
                                 <div class="col-md-6">
-                                    <input id="opleidingsinstituut" type="text" class="form-control" name="opleidingsinstituut" value="Windesheim Flevoland" required>
+                                    <input id="opleidingsinstituut" type="text" class="form-control"
+                                           name="opleidingsinstituut" value="Windesheim Flevoland" required>
                                 </div>
                             </div>
 
@@ -221,7 +240,8 @@
                             <div class="form-group">
                                 <label for="locatie" class="col-md-4 control-label">Locatie</label>
                                 <div class="col-md-6">
-                                    <input id="locatie" type="text" class="form-control" name="locatie" value="Almere" required>
+                                    <input id="locatie" type="text" class="form-control" name="locatie" value="Almere"
+                                           required>
                                 </div>
                             </div>
 
@@ -237,16 +257,19 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="opleidingsprovincie" class="col-md-4 control-label">Opleidingsprovincie</label>
+                                <label for="opleidingsprovincie"
+                                       class="col-md-4 control-label">Opleidingsprovincie</label>
                                 <div class="col-md-6">
-                                    <input id="opleidingsprovincie" type="text" class="form-control" name="opleidingsprovincie" value="Flevoland" required>
+                                    <input id="opleidingsprovincie" type="text" class="form-control"
+                                           name="opleidingsprovincie" value="Flevoland" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="opleidingsland" class="col-md-4 control-label">Opleidingsland</label>
                                 <div class="col-md-6">
-                                    <input id="opleidingsland" type="text" class="form-control" name="opleidingsland" value="Nederland" required>
+                                    <input id="opleidingsland" type="text" class="form-control" name="opleidingsland"
+                                           value="Nederland" required>
                                 </div>
                             </div>
 
@@ -263,4 +286,55 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+        $('#richtingen').on('change', function (e) {
+            console.log(e);
+
+
+            var richting_naam = e.target.value;
+
+            //ajax
+
+            $.get('/richtingen?richting_naam=' + richting_naam, function (data) {
+
+                $('#opleidingen').empty();
+                $("<option value=''>Kies een opleiding</option>").appendTo('#opleidingen');
+
+                $.each(data, function (index, opleidingen) {
+
+                    $('#opleidingen').append('<option value="' + opleidingen.naam + '">' + opleidingen.naam + '</option>');
+
+                })
+            });
+
+        });
+
+
+        $('#opleidingen').on('change', function (e) {
+            console.log(e);
+
+
+            var opleidingen_naam = e.target.value;
+
+            //ajax
+
+            $.get('/opleidingen?opleidingen_naam=' + opleidingen_naam, function (data) {
+
+                $('#specialisaties').empty();
+                $("<option value=''>Optioneel</option>").appendTo('#specialisaties');
+
+                $.each(data, function (index, specialisaties) {
+
+                    $('#specialisaties').append('<option value="' + specialisaties.naam + '">' + specialisaties.naam + '</option>');
+
+                })
+            });
+
+        });
+
+
+    </script>
+
 @endsection
