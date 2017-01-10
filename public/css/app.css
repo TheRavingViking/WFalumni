@@ -8,7 +8,8 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  *//*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
-
+/*#004685*/
+/*#D5A10F*/
 
 
 .label, sub, sup {
@@ -1314,7 +1315,7 @@ td, th {
 }
 
 html {
-    background: #9be0f5;
+    background: #004685;
 }
 
 body {
@@ -1325,15 +1326,14 @@ body {
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background: rgba(219,243,252,1);
-    background: -moz-linear-gradient(top, rgba(219,243,252,1) 0%, rgba(155,224,245,1) 100%);
-    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(219,243,252,1)), color-stop(100%, rgba(155,224,245,1)));
-    background: -webkit-linear-gradient(top, rgba(219,243,252,1) 0%, rgba(155,224,245,1) 100%);
-    background: -o-linear-gradient(top, rgba(219,243,252,1) 0%, rgba(155,224,245,1) 100%);
-    background: -ms-linear-gradient(top, rgba(219,243,252,1) 0%, rgba(155,224,245,1) 100%);
-    background: linear-gradient(to bottom, rgba(219,243,252,1) 0%, rgba(155,224,245,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dbf3fc', endColorstr='#9be0f5', GradientType=0 );
-
+    background: rgba(8,113,204,1);
+    background: -moz-linear-gradient(top, rgba(8,113,204,1) 0%, rgba(0,70,133,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(8,113,204,1)), color-stop(100%, rgba(0,70,133,1)));
+    background: -webkit-linear-gradient(top, rgba(8,113,204,1) 0%, rgba(0,70,133,1) 100%);
+    background: -o-linear-gradient(top, rgba(8,113,204,1) 0%, rgba(0,70,133,1) 100%);
+    background: -ms-linear-gradient(top, rgba(8,113,204,1) 0%, rgba(0,70,133,1) 100%);
+    background: linear-gradient(to bottom, rgba(8,113,204,1) 0%, rgba(0,70,133,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0871cc', endColorstr='#004685', GradientType=0 );
 }
 
 button, input, select, textarea {
@@ -3343,7 +3343,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-default {
     color: #636b6f;
-    background-color: #fff;
+    background-color: #D5A10F;
     border-color: #ccc
 }
 
@@ -3377,8 +3377,8 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-primary {
     color: #fff;
-    background-color: #3097D1;
-    border-color: #2a88bd
+    background-color: #D5A10F;
+    border-color: #D5A10F
 }
 
 .btn-primary.focus, .btn-primary:focus {
@@ -3389,8 +3389,8 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 .btn-primary.active, .btn-primary:active, .btn-primary:hover, .open > .btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #2579a9;
-    border-color: #1f648b
+    background-color: #ffcf00;
+    border-color: #ffcf00
 }
 
 .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open > .btn-primary.dropdown-toggle.focus, .open > .btn-primary.dropdown-toggle:focus, .open > .btn-primary.dropdown-toggle:hover {
