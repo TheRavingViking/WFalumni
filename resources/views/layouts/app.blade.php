@@ -61,7 +61,7 @@ box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="https://www.studieboekencentrale.nl/image/Logo_Windesheimgroot.gif" class="img-responsive" style="height: 25px">
                 </a>
             </div>
 

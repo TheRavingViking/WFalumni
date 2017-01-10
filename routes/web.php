@@ -10,7 +10,11 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-
+//OLD TRASH!
+//Route::get('/overview', 'UserController@index')->middleware('auth', 'admin');
+//Route::get('overview/search','UserController@search')->middleware('auth', 'admin');
+//Route::get('overview/filter','UserController@filter')->middleware('auth', 'admin');
+//Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth', 'admin');
 Auth::routes();
 
 Route::get('/', 'UserController@redirectCheck');
@@ -66,8 +70,4 @@ Route::get('/dropdown', 'UserController@dropdown')->middleware('auth');
 route::get('/richtingen', 'DropdownController@opleidingen');
 route::get('/opleidingen', 'DropdownController@specialisaties');
 
-//OLD TRASH!
-//Route::get('/overview', 'UserController@index')->middleware('auth', 'admin');
-//Route::get('overview/search','UserController@search')->middleware('auth', 'admin');
-//Route::get('overview/filter','UserController@filter')->middleware('auth', 'admin');
-//Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth', 'admin');
+
