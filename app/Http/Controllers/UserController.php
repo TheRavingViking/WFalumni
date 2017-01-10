@@ -514,13 +514,21 @@ class UserController extends Controller
         $opleiding->land = $request['opleidingsprovincie'];
         $opleiding->provincie = $request['opleidingsland'];
 
-        $user->save();
-        $opleiding->user()->associate($user);
-        $opleiding->save();
+        $emailExists = User::where('email', $request['email'])->exists();
 
-        Mail::to($user['email'])->send(new Welkommail($user));
+        if ($emailExists == null) {
+            $user->save();
+            $opleiding->user()->associate($user);
+            $opleiding->save();
 
-        return Redirect::to('addUser');
+            Mail::to($user['email'])->send(new Welkommail($user));
+
+            return Redirect::back()->with('status', 'De user is succesvol toegevoegd');
+        }
+        else {
+            return redirect::back()->with('error', 'Dit e-mailadres is al in gebruik.');
+        }
+
     }
 
     public
