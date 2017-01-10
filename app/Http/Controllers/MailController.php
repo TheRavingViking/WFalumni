@@ -21,7 +21,7 @@ class MailController extends Controller
     public function send(request $request)
     {
 
-        if (empty($request)) {
+        if (!empty($request)) {
 
 
             $users = User::all('email');

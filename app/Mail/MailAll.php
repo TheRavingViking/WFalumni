@@ -33,6 +33,6 @@ class MailAll extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->view('MailAll')->subject($this->subject);
+        return $this->view('email/MailAll')->subject($this->subject);
     }
 }
