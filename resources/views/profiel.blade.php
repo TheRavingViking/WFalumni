@@ -9,6 +9,11 @@
             {
                 $temp = 'disabled';
             }
+        if ( $user->id == Auth::user()->id || Auth::user()->bevoegdheid == 3 || Auth::user()->bevoegdheid == 2) {
+            $visibility = '';
+         } else {
+            $visibility = 'display: none;';
+        }
     @endphp
 
     <div class="container">
@@ -52,8 +57,8 @@
                         <input type="hidden" name="id" id="id" value="{{$user->id}}">
 
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-sm-offset-7">
-                            <label>Update profiel foto</label>
-                            <input type="file" name="avatar" {{$temp}}></div>
+                            <label  style="{{$visibility}}">Update profiel foto</label>
+                            <input type="file" name="avatar" {{$temp}} style="{{$visibility}}"></div>
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
                             <label for="voornaam">Voornaam</label>
                             <input id="voornaam" type="text" class="form-control" name="voornaam"
@@ -71,13 +76,13 @@
                             <input id="email" type="email" class="form-control" name="email"
                                    value="{{ $user->email }}" {{$temp}}>
 
-                            <label for="studentnummer">Studentnummer</label>
-                            <input id="studentnummer" type="text" class="form-control" name="studentnummer"
-                                   value="{{ $user->studentnummer }}" {{$temp}}>
+                            <label for="studentnummer" style="{{$visibility}}">Studentnummer</label>
+                            <input id="studentnummer" type="number" class="form-control" name="studentnummer"
+                                   value="{{ $user->studentnummer }}" style="{{$visibility}}" {{$temp}}  >
 
-                            <label for="telefoonnummer">Telefoonnummer</label>
+                            <label for="telefoonnummer" style="{{$visibility}}">Telefoonnummer</label>
                             <input id="telefoonnummer" type="text" class="form-control" name="telefoonnummer"
-                                   value="{{ $user->telefoonnummer }}" {{$temp}}>
+                                   value="{{ $user->telefoonnummer }}" style="{{$visibility}}" {{$temp}}>
 
                             <label for="facebook">facebook</label>
                             <input id="facebook" type="text" class="form-control" name="facebook"
@@ -95,72 +100,70 @@
                             <input id="website" type="text" class="form-control" name="website"
                                    value="{{ $user->website }}" {{$temp}}>
 
-
-                            <label for="post adres">Post adres</label>
+                            <label for="post adres" style="{{$visibility}}">Post adres</label>
                             <input id="post adres" type="text" class="form-control" name="post adres"
-                                   value="{{ $user->post_adres }}" {{$temp}}>
+                                   value="{{ $user->post_adres }}" style="{{$visibility}}" {{$temp}}>
 
+                            <label for="password" style="{{$visibility}}">Password</label>
+                            <input id="password" type="password" class="form-control" name="password" style="{{$visibility}}" {{$temp}}>
 
-                            <label for="password">Password</label>
-                            <input id="password" type="password" class="form-control" name="password" {{$temp}}>
-
-                            <label for="password-confirm">Confirm Password</label>
+                            <label for="password-confirm" style="{{$visibility}}">Confirm Password</label>
                             <input id="password-confirm" type="password" class="form-control"
-                                   name="password_confirmation" {{$temp}}>
+                                   name="password_confirmation" style="{{$visibility}}" {{$temp}}>
 
                             <label for="geslacht">Geslacht
                                 <br>Man:&nbsp&nbsp&nbsp
-                                @if($user->geslacht == 'man') <input id="geslacht" name="geslacht" type="radio"
-                                                                     value="man" checked {{$temp}}>
-                                @else <input id="geslacht" name="geslacht" type="radio" value="man" {{$temp}}>
+                                @if($user->geslacht == 'man' || $user->geslacht == 'Man' ) <input id="geslacht" name="geslacht" type="radio"
+                                                                     value="Man" checked {{$temp}}>
+                                @else <input id="geslacht" name="geslacht" type="radio" value="Man" {{$temp}}>
                                 @endif
                                 <br>Vrouw:
-                                @if($user->geslacht == 'vrouw') <input id="geslacht" name="geslacht" type="radio"
-                                                                       value="vrouw" checked {{$temp}}>
-                                @else <input id="geslacht" name="geslacht" type="radio" value="vrouw" {{$temp}}>
+                                @if($user->geslacht == 'vrouw' || $user->geslacht == 'Vrouw') <input id="geslacht" name="geslacht" type="radio"
+                                                                       value="Vrouw" checked {{$temp}}>
+                                @else <input id="geslacht" name="geslacht" type="radio" value="Vrouw" {{$temp}}>
                                 @endif
                             </label>
 
-                            <br><label for="burgerlijke staat" title="burgelijke staat">Burgerlijke staat</label>
-                            <select name="burgerlijke staat" title="burgelijke staat" {{$temp}}>
+                            <br><label for="burgerlijke staat" title="burgelijke staat" style="{{$visibility}}">Burgerlijke staat</label>
+                            <select name="burgerlijke staat" title="burgelijke staat" {{$temp}} style="{{$visibility}}">
                                 <option value="ongehuwd">ongehuwd</option>
                                 <option value="gehuwd">gehuwd</option>
                             </select><br>
 
-                            <label for="heeft_kinderen">heeft_kinderen</label>
+                            <label for="heeft_kinderen"style="{{$visibility}}">heeft_kinderen</label>
                             <input id="heeft_kinderen" type="text" class="form-control" name="heeft_kinderen"
-                                   value="{{ $user->heeft_kinderen }}" {{$temp}}>
+                                   value="{{ $user->heeft_kinderen }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="nationaliteit">Nationaliteit</label>
+                            <label for="nationaliteit" style="{{$visibility}}">Nationaliteit</label>
                             <input id="nationaliteit" type="text" class="form-control" name="nationaliteit"
-                                   value="{{ $user->nationaliteit }}" {{$temp}}>
+                                   value="{{ $user->nationaliteit }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="geboortedatum">Geboortedatum</label>
+                            <label for="geboortedatum" style="{{$visibility}}">Geboortedatum</label>
                             <input id="geboortedatum" type="date" class="form-control" name="geboortedatum"
-                                   value="{{ $user->geboortedatum }}" {{$temp}}>
+                                   value="{{ $user->geboortedatum }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="geboorteplaats">Geboorteplaats</label>
+                            <label for="geboorteplaats" style="{{$visibility}}">Geboorteplaats</label>
                             <input id="geboorteplaats" type="text" class="form-control" name="geboorteplaats"
-                                   value="{{ $user->geboorteplaats }}" {{$temp}}>
+                                   value="{{ $user->geboorteplaats }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="geboorteprovincie">geboorteprovincie</label>
+                            <label for="geboorteprovincie" style="{{$visibility}}">geboorteprovincie</label>
                             <input id="geboorteprovincie" type="text" class="form-control" name="geboorteprovincie"
-                                   value="{{ $user->geboorteprovincie }}" {{$temp}}>
+                                   value="{{ $user->geboorteprovincie }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="geboorteland">geboorteland</label>
+                            <label for="geboorteland" style="{{$visibility}}">geboorteland</label>
                             <input id="geboorteland" type="text" class="form-control" name="geboorteland"
-                                   value="{{ $user->geboorteland }}" {{$temp}}>
+                                   value="{{ $user->geboorteland }}" {{$temp}} style="{{$visibility}}">
 
 
-                            <label for="titel">Titel</label>
+                            <label for="titel" style="{{$visibility}}">Titel</label>
                             <input id="titel" type="text" class="form-control" name="titel"
-                                   value="{{ $user->titel }}" {{$temp}}>
+                                   value="{{ $user->titel }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="jaarinkomen">jaarinkomen</label>
+                            <label for="jaarinkomen" style="{{$visibility}}">jaarinkomen</label>
                             <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen"
-                                   value="{{ $user->jaarinkomen }}" {{$temp}}>
+                                   value="{{ $user->jaarinkomen }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="geenmailverzenden">Wenst email te ontvangen:
+                            <label for="geenmailverzenden"  style="{{$visibility}}">Wenst email te ontvangen:
                                 <br>Ja, graag&nbsp&nbsp&nbsp&nbsp&nbsp
 
                                 @if($user->geenmailverzenden == 1) <input id="geenmailverzenden"
@@ -179,16 +182,16 @@
                                 @endif
                             </label><br>
 
-                            <label for="bevoegdheid">bevoegdheid</label>
+                            <label for="bevoegdheid" style="{{$visibility}}">bevoegdheid</label>
                             <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
-                                   value="{{ $user->bevoegdheid }}" {{$temp}}>
+                                   value="{{ $user->bevoegdheid }}" {{$temp}} style="{{$visibility}}">
 
                             <label for="afdeling">afdeling</label>
                             <input id="afdeling" type="text" class="form-control" name="afdeling"
                                    value="{{ $user->afdeling }}" {{$temp}}>
 
                             <br>
-                            <button type="submit" class="btn btn-primary" {{$temp}}>
+                            <button type="submit" class="btn btn-primary" {{$temp}} style="{{$visibility}}">
                                 Wijzig
                             </button>
                         </div>
@@ -199,7 +202,7 @@
                             <input type="hidden" name="id" value="{{ $user->id }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-danger" {{$temp}}>
+                                <button type="submit" class="btn btn-danger" {{$temp}}  style="{{$visibility}}">
                                     Delete User
                                 </button>
                             </div>
@@ -213,9 +216,9 @@
         </div>
     </div>
     {{--Woonplaats form & modal--}}
-    <div class="container">
+    <div class="container"  style="{{$visibility}}">
         <div class="panel panel-default" style="padding: 1em">
-            <a href="#woonplaatscollapse" class="btn btn-info" data-toggle="collapse">Woonplaats</a>
+            <a href="#woonplaatscollapse" class="btn btn-info" data-toggle="collapse" >Woonplaats</a>
             <div id="woonplaatscollapse" class="collapse">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
@@ -321,7 +324,7 @@
         </div>
     </div>
     {{--opleiding form & modal--}}
-    <div class="container">
+    <div class="container"  style="{{$visibility}}">
         <div class="panel panel-default" style="padding: 1em">
             <a href="#opleidingcollapse" class="btn btn-info" data-toggle="collapse">Opleidingen</a>
             <div id="opleidingcollapse" class="collapse">
@@ -454,7 +457,7 @@
         </div>
     </div>
     {{--bedrijf form & modal--}}
-    <div class="container">
+    <div class="container"  style="{{$visibility}}">
         <div class="panel panel-default" style="padding: 1em">
             <a href="#bedrijfcollapse" class="btn btn-info" data-toggle="collapse">Bedrijven</a>
             <div id="bedrijfcollapse" class="collapse">
