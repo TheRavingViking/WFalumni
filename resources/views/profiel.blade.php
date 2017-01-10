@@ -41,14 +41,15 @@
     {{--//persoonlijke gegevens form--}}
     <div id="profielcon" class="container">
         <div class="panel panel-default" style="padding: 1em">
-            <div class="row">
+
+            <a href="#Profielcollapse" class="btn btn-info" data-toggle="collapse">Profiel</a>
+            <div id="Profielcollapse" class="uncollapse">
                 {{--<div class=" row"></div>--}}
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><br>
+                <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
                         <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive"
                              style="border-radius:50%;">
-
-                        {{--<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">--}}
+                        {{--opleiding form & modal--}}
                         <h2>{{ $user->voornaam }} {{ $user->tussenvoegsel }} {{ $user->achternaam }}</h2>
                     </div>
 
@@ -60,7 +61,7 @@
                         <input type="hidden" name="id" id="id" value="{{$user->id}}">
 
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-sm-offset-7">
-                            <label  style="{{$visibility}}">Update profiel foto</label>
+                            <label style="{{$visibility}}">Update profiel foto</label>
                             <input type="file" name="avatar" {{$temp}} style="{{$visibility}}"></div>
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
                             <label for="voornaam">Voornaam</label>
@@ -81,7 +82,7 @@
 
                             <label for="studentnummer" style="{{$visibility}}">Studentnummer</label>
                             <input id="studentnummer" type="number" class="form-control" name="studentnummer"
-                                   value="{{ $user->studentnummer }}" style="{{$visibility}}" {{$temp}}  >
+                                   value="{{ $user->studentnummer }}" style="{{$visibility}}" {{$temp}} >
 
                             <label for="telefoonnummer" style="{{$visibility}}">Telefoonnummer</label>
                             <input id="telefoonnummer" type="text" class="form-control" name="telefoonnummer"
@@ -108,7 +109,8 @@
                                    value="{{ $user->post_adres }}" style="{{$visibility}}" {{$temp}}>
 
                             <label for="password" style="{{$visibility}}">Wachtwoord</label>
-                            <input id="password" type="password" class="form-control" name="password" style="{{$visibility}}" {{$temp}}>
+                            <input id="password" type="password" class="form-control" name="password"
+                                   style="{{$visibility}}" {{$temp}}>
 
                             <label for="password-confirm" style="{{$visibility}}">Bevestig wachtwoord</label>
                             <input id="password-confirm" type="password" class="form-control"
@@ -116,27 +118,37 @@
 
                             <label for="geslacht">Geslacht
                                 <br>Man:&nbsp&nbsp&nbsp
-                                @if($user->geslacht == 'man' || $user->geslacht == 'Man' ) <input id="geslacht" name="geslacht" type="radio"
-                                                                     value="Man" checked {{$temp}}>
+                                @if($user->geslacht == 'man' || $user->geslacht == 'Man' ) <input id="geslacht"
+                                                                                                  name="geslacht"
+                                                                                                  type="radio"
+                                                                                                  value="Man"
+                                                                                                  checked {{$temp}}>
                                 @else <input id="geslacht" name="geslacht" type="radio" value="Man" {{$temp}}>
                                 @endif
                                 <br>Vrouw:
-                                @if($user->geslacht == 'vrouw' || $user->geslacht == 'Vrouw') <input id="geslacht" name="geslacht" type="radio"
-                                                                       value="Vrouw" checked {{$temp}}>
+                                @if($user->geslacht == 'vrouw' || $user->geslacht == 'Vrouw') <input id="geslacht"
+                                                                                                     name="geslacht"
+                                                                                                     type="radio"
+                                                                                                     value="Vrouw"
+                                                                                                     checked {{$temp}}>
                                 @else <input id="geslacht" name="geslacht" type="radio" value="Vrouw" {{$temp}}>
                                 @endif
                             </label>
 
-                            <br><label for="burgerlijke staat" title="burgelijke staat" style="{{$visibility}}">Burgerlijke staat</label>
-                            <select name="burgerlijke staat" title="burgelijke staat" {{$temp}} class="form-control" style="{{$visibility}}">
+                            <br><label for="burgerlijke staat" title="burgelijke staat" style="{{$visibility}}">Burgerlijke
+                                staat</label>
+                            <select name="burgerlijke staat" title="burgelijke staat" {{$temp}} class="form-control"
+                                    style="{{$visibility}}">
                                 <option value="ongehuwd">Ongehuwd</option>
                                 <option value="gehuwd">Gehuwd</option>
                             </select>
 
                             <label for="heeft_kinderen" style="{{$visibility}}">Heeft kinderen
                                 <br>Ja:&nbsp&nbsp
-                                 <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="1" @if($user->heeft_kinderen == 1) checked @endif>
-                                <br>Nee: <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="0" @if($user->heeft_kinderen == 0) checked @endif>
+                                <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="1"
+                                       @if($user->heeft_kinderen == 1) checked @endif>
+                                <br>Nee: <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="0"
+                                                @if($user->heeft_kinderen == 0) checked @endif>
                             </label>
 
                             @if($uglyFix == 1) <br> @endif
@@ -170,7 +182,7 @@
                             <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen"
                                    value="{{ $user->jaarinkomen }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="geenmailverzenden"  style="{{$visibility}}">Wenst email te ontvangen:
+                            <label for="geenmailverzenden" style="{{$visibility}}">Wenst email te ontvangen:
                                 <br>Ja, graag&nbsp&nbsp&nbsp&nbsp&nbsp
 
                                 @if($user->geenmailverzenden == 1) <input id="geenmailverzenden"
@@ -219,15 +231,17 @@
                     </div>
 
                 </div>
-
-
             </div>
         </div>
     </div>
+
+    </div>
+    </div>
+    </div>
     {{--Woonplaats form & modal--}}
-    <div class="container"  style="{{$visibility}}">
+    <div class="container" style="{{$visibility}}">
         <div class="panel panel-default" style="padding: 1em">
-            <a href="#woonplaatscollapse" class="btn btn-info" data-toggle="collapse" >Woonplaats</a>
+            <a href="#woonplaatscollapse" class="btn btn-info" data-toggle="collapse">Woonplaats</a>
             <div id="woonplaatscollapse" class="collapse">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
@@ -333,7 +347,7 @@
         </div>
     </div>
     {{--opleiding form & modal--}}
-    <div class="container"  style="{{$visibility}}">
+    <div class="container" style="{{$visibility}}">
         <div class="panel panel-default" style="padding: 1em">
             <a href="#opleidingcollapse" class="btn btn-info" data-toggle="collapse">Opleidingen</a>
             <div id="opleidingcollapse" class="collapse">
@@ -466,7 +480,7 @@
         </div>
     </div>
     {{--bedrijf form & modal--}}
-    <div class="container"  style="{{$visibility}}">
+    <div class="container" style="{{$visibility}}">
         <div class="panel panel-default" style="padding: 1em">
             <a href="#bedrijfcollapse" class="btn btn-info" data-toggle="collapse">Bedrijven</a>
             <div id="bedrijfcollapse" class="collapse">
