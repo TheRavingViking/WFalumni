@@ -1831,6 +1831,10 @@ pre code {
     padding-right: 15px
 }
 
+.container-fluid-padding{
+    padding: 1.25em;
+}
+
 .pre-scrollable {
     overflow-y: scroll
 }

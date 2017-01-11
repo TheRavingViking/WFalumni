@@ -17,7 +17,7 @@
     </div>
 
 
-    <div class="container-fluid" style="padding: 1.25em;">
+    <div class="container-fluid container-fluid-padding">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="panel">
