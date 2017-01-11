@@ -208,11 +208,11 @@
                                 <label for="bevoegdheid" style="{{$visibility}}">Bevoegdheid</label>
                                 <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
                                        value="
-@if ($user->bevoegdheid == 3)Admin
-@elseif ($user->bevoegdheid == 2)Docent
-@elseif($user->bevoegdheid == 3)Alumnus
-@endif " disabled {{$temp}}>
-                            @endif
+                                            @if ($user->bevoegdheid == 3)Admin
+                                            @elseif ($user->bevoegdheid == 2)Docent
+                                            @elseif($user->bevoegdheid == 3)Alumnus
+                                            @endif " disabled {{$temp}}>
+                                        @endif
 
                             <label for="afdeling">Afdeling</label>
                             <input id="afdeling" type="text" class="form-control" name="afdeling"
@@ -221,10 +221,11 @@
                             <br>
                             <button type="submit" class="btn btn-primary" {{$temp}} style="{{$visibility}}">
                                 Wijzig
-                            </button>
+                            </button><hr>
                         </div>
 
                     </form>
+
                     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1" style="padding: 1em;">
                         <form action="/profiel/delete" method="POST">
                             <input type="hidden" name="id" value="{{ $user->id }}">
@@ -249,7 +250,7 @@
             <a href="#woonplaatscollapse" class="btn btn-info" data-toggle="collapse">Woonplaats</a>
             <div id="woonplaatscollapse" class="collapse">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
 
                         <h1>Woonplaats</h1>
 
@@ -363,7 +364,7 @@
             <a href="#opleidingcollapse" class="btn btn-info" data-toggle="collapse">Opleidingen</a>
             <div id="opleidingcollapse" class="collapse">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
 
                         <h1>Opleidingen</h1>
 
@@ -510,7 +511,7 @@
             <a href="#bedrijfcollapse" class="btn btn-info" data-toggle="collapse">Bedrijven</a>
             <div id="bedrijfcollapse" class="collapse">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
                         <h1>Werkplekken</h1>
 
                         <br>
@@ -653,14 +654,6 @@
         </div>
     </div>
     </div>
-
-
-
-
-
-
-
-
 
 @endsection
 
