@@ -507,6 +507,7 @@ class UserController extends Controller
     public
     function addUser(request $request)
     {
+
         $user = new User;
         $user->voornaam = $request['voornaam'];
         $user->tussenvoegsel = $request['tussenvoegsel'];
@@ -521,7 +522,13 @@ class UserController extends Controller
         $user->geboorteprovincie = $request['geboorteprovincie'];
         $user->geboorteland = $request['geboorteland'];
         $user->nationaliteit = $request['nationaliteit'];
-        $user->bevoegdheid = $request['bevoegdheid'];
+        if($request['bevoegdheid'] == "Alumni" || $request['bevoegdheid'] == "Docent") {
+            $user->bevoegdheid = 1;
+        } else if($request['bevoegdheid'] == "Opleidingsadmin") {
+            $user->bevoegdheid = 2;
+        } else {
+            $user->bevoegdheid = 3;
+        }
         $user->afdeling = $request['afdeling'];
         $user->foto = 'default.png';
 

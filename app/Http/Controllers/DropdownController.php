@@ -22,6 +22,18 @@ use Response;
 
 class DropdownController extends Controller
 {
+
+    public function afdeling() {
+        $bevoegdheid_naam = request('bevoegdheid_naam');
+        if($bevoegdheid_naam != "Alumni") {
+            $afdeling = dropdown_richting::where('id', '>', 0)->get();
+        } else {
+            $afdeling = "";
+        }
+        return response::json($afdeling);
+
+    }
+
     public function opleidingen()
     {
 
