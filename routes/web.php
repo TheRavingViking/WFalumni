@@ -67,6 +67,7 @@ Route::get('/geochart/filter', 'AdminController@GeoChartFilter')->middleware('au
 \Debugbar::enable(); //<-- Toont debugbar, Laurens, !!!! enable of disable!!!!
 //Dropdowns
 Route::get('/dropdown', 'UserController@dropdown')->middleware('auth');
+Route::get('/bevoegdheid', 'DropdownController@afdeling');
 route::get('/richtingen', 'DropdownController@opleidingen');
 route::get('/opleidingen', 'DropdownController@specialisaties');
 

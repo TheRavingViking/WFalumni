@@ -157,9 +157,10 @@
                                 <label for="bevoegdheid" class="col-md-4 control-label">Bevoegdheid</label>
                                 <div class="col-md-6">
                                     <select name="bevoegdheid" id="bevoegdheid" class="form-control">
-                                        <option value="1" selected>Alumni/Docent</option>
-                                        <option value="2" {{$temp}}>Opleidingsadmin</option>
-                                        <option value="3" {{$temp}}>Admin</option>
+                                        <option value="Alumni" selected>Alumni</option>
+                                        <option value="Docent" >Docent</option>
+                                        <option value="Opleidingsadmin" {{$temp}}>Opleidingsadmin</option>
+                                        <option value="Admin" {{$temp}}>Admin</option>
                                     </select>
                                 </div>
                             </div>
@@ -168,12 +169,8 @@
                                 <label for="afdeling" class="col-md-4 control-label">Afdeling</label>
                                 <div class="col-md-6">
                                     <select name="afdeling" id="afdeling" class="form-control">
-                                        <option value="">Kies een afdeling</option>
-                                        @foreach($richtingen as $richting)
-                                            <option value="{{ $richting->naam }}">
-                                                {{ $richting->naam }}
-                                            </option>
-                                        @endforeach
+                                        <option value="">
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -289,6 +286,28 @@
 
     <script>
 
+        $('#bevoegdheid').on('change', function (e) {
+            console.log(e);
+
+
+            var bevoegdheid_naam = e.target.value;
+
+            //ajax
+
+            $.get('/bevoegdheid?bevoegdheid_naam=' + bevoegdheid_naam, function (data) {
+
+                $('#afdeling').empty();
+                $("<option value=''></option>").appendTo('#afdeling');
+
+                $.each(data, function (index, afdeling) {
+
+                    $('#afdeling').append('<option value="' + afdeling.naam + '">' + afdeling.naam + '</option>');
+
+                })
+            });
+
+        });
+
         $('#richtingen').on('change', function (e) {
             console.log(e);
 
@@ -310,7 +329,6 @@
             });
 
         });
-
 
         $('#opleidingen').on('change', function (e) {
             console.log(e);
