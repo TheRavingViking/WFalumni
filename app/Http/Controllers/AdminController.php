@@ -70,11 +70,45 @@ class AdminController extends Controller
 
         $averageJaarInkomen = User::avg('jaarinkomen');
 
-        $countJaarInkomenLaag = User::all('jaarinkomen')->where('jaarinkomen', '<=', 12500)->count();
-        $countJaarInkomenLaagMidden = DB::table('users')->whereBetween('jaarinkomen', [12500, 30000])->count();
-        $countJaarInkomenMidden = DB::table('users')->whereBetween('jaarinkomen', [30000, 50000])->count();
-        $countJaarInkomenMiddenHoog = DB::table('users')->whereBetween('jaarinkomen', [50000, 100000])->count();
-        $countJaarInkomenHoog = User::all('jaarinkomen')->where('jaarinkomen', '>', 100000)->count();
+        $countJaarInkomenLaagMan = DB::table('users')
+            ->where('jaarinkomen', '<=', 12500)
+            ->where('geslacht', 'Man')->count();
+
+        $countJaarInkomenLaagVrouw = DB::table('users')
+            ->where('jaarinkomen', '<=', 12500)
+            ->where('geslacht', 'Vrouw')->count();
+
+        $countJaarInkomenLaagMiddenMan = DB::table('users')
+            ->whereBetween('jaarinkomen', [12500, 30000])
+            ->where('geslacht', 'Man')->count();
+
+        $countJaarInkomenLaagMiddenVrouw = DB::table('users')
+            ->whereBetween('jaarinkomen', [12500, 30000])
+            ->where('geslacht', 'Vrouw')->count();
+
+        $countJaarInkomenMiddenMan = DB::table('users')
+            ->whereBetween('jaarinkomen', [30000, 50000])
+            ->where('geslacht', 'Man')->count();
+
+        $countJaarInkomenMiddenVrouw = DB::table('users')
+            ->whereBetween('jaarinkomen', [30000, 50000])
+            ->where('geslacht', 'Vrouw')->count();
+
+        $countJaarInkomenMiddenHoogMan = DB::table('users')
+            ->whereBetween('jaarinkomen', [50000, 100000])
+            ->where('geslacht', 'Man')->count();
+
+        $countJaarInkomenMiddenHoogVrouw = DB::table('users')
+            ->whereBetween('jaarinkomen', [50000, 100000])
+            ->where('geslacht', 'Vrouw')->count();
+
+        $countJaarInkomenHoogMan = DB::table('users')
+            ->where('jaarinkomen', '>', 100000)
+            ->where('geslacht', 'Man')->count();
+
+        $countJaarInkomenHoogVrouw = DB::table('users')
+            ->where('jaarinkomen', '>', 100000)
+            ->where('geslacht', 'Vrouw')->count();
 
         $ouders = User::all()->where('heeft_kinderen', '=', 1)->count();
         $nietOuders = User::all()->where('heeft_kinderen', '=', 0)->count();
@@ -96,11 +130,16 @@ class AdminController extends Controller
             'countPersoneel' => $countPersoneel,
             'man' => $per_man,
             'vrouw' => $per_vrouw,
-            'laaginkomen' => $countJaarInkomenLaag,
-            'laagmiddeninkomen' => $countJaarInkomenLaagMidden,
-            'middeninkomen' => $countJaarInkomenMidden,
-            'middenhooginkomen' => $countJaarInkomenMiddenHoog,
-            'hooginkomen' => $countJaarInkomenHoog,
+            'laaginkomenman' => $countJaarInkomenLaagMan,
+            'laagmiddeninkomenman' => $countJaarInkomenLaagMiddenMan,
+            'middeninkomenman' => $countJaarInkomenMiddenMan,
+            'middenhooginkomenman' => $countJaarInkomenMiddenHoogMan,
+            'hooginkomenman' => $countJaarInkomenHoogMan,
+            'laaginkomenvrouw' => $countJaarInkomenLaagVrouw,
+            'laagmiddeninkomenvrouw' => $countJaarInkomenLaagMiddenVrouw,
+            'middeninkomenvrouw' => $countJaarInkomenMiddenVrouw,
+            'middenhooginkomenvrouw' => $countJaarInkomenMiddenHoogVrouw,
+            'hooginkomenvrouw' => $countJaarInkomenHoogVrouw,
             'ouders' => $ouders,
             'nietOuders' => $nietOuders,
             'personeel' => $personeel,
@@ -188,45 +227,95 @@ class AdminController extends Controller
                 ])->where('users.deleted_at', '=', null)
                 ->avg('jaarinkomen');
 
-            $countJaarInkomenLaag = DB::table('users')
+            $countJaarInkomenLaagMan = DB::table('users')
                 ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
                 ->select('users.*', 'opleiding.*')
                 ->where([
                     ['naam', $opleiding],
                     ['richting', $richting]])->where('users.deleted_at', '=', null)
-                ->where('jaarinkomen', '<=', 12500)->count();
+                ->where('jaarinkomen', '<=', 12500)
+                ->where('geslacht', 'Man')->count();
 
-            $countJaarInkomenLaagMidden = DB::table('users')
+            $countJaarInkomenLaagVrouw = DB::table('users')
                 ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
                 ->select('users.*', 'opleiding.*')
                 ->where([
                     ['naam', $opleiding],
                     ['richting', $richting]])->where('users.deleted_at', '=', null)
-                ->whereBetween('jaarinkomen', [12500, 30000])->count();
+                ->where('jaarinkomen', '<=', 12500)
+                ->where('geslacht', 'Vrouw')->count();
 
-            $countJaarInkomenMidden = DB::table('users')
+            $countJaarInkomenLaagMiddenMan = DB::table('users')
                 ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
                 ->select('users.*', 'opleiding.*')
                 ->where([
                     ['naam', $opleiding],
                     ['richting', $richting]])->where('users.deleted_at', '=', null)
-                ->whereBetween('jaarinkomen', [30000, 50000])->count();
+                ->whereBetween('jaarinkomen', [12500, 30000])
+                ->where('geslacht', 'Man')->count();
 
-            $countJaarInkomenMiddenHoog = DB::table('users')
+            $countJaarInkomenLaagMiddenVrouw = DB::table('users')
                 ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
                 ->select('users.*', 'opleiding.*')
                 ->where([
                     ['naam', $opleiding],
                     ['richting', $richting]])->where('users.deleted_at', '=', null)
-                ->whereBetween('jaarinkomen', [50000, 100000])->count();
+                ->whereBetween('jaarinkomen', [12500, 30000])
+                ->where('geslacht', 'Vrouw')->count();
 
-            $countJaarInkomenHoog = DB::table('users')
+            $countJaarInkomenMiddenMan = DB::table('users')
                 ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
                 ->select('users.*', 'opleiding.*')
                 ->where([
                     ['naam', $opleiding],
                     ['richting', $richting]])->where('users.deleted_at', '=', null)
-                ->where('jaarinkomen', '>', 100000)->count();
+                ->whereBetween('jaarinkomen', [30000, 50000])
+                ->where('geslacht', 'Man')->count();
+
+            $countJaarInkomenMiddenVrouw = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
+                ->whereBetween('jaarinkomen', [30000, 50000])
+                ->where('geslacht', 'Vrouw')->count();
+
+            $countJaarInkomenMiddenHoogMan = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
+                ->whereBetween('jaarinkomen', [50000, 100000])
+                ->where('geslacht', 'Man')->count();
+
+            $countJaarInkomenMiddenHoogVrouw = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
+                ->whereBetween('jaarinkomen', [50000, 100000])
+                ->where('geslacht', 'Vrouw')->count();
+
+            $countJaarInkomenHoogMan = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
+                ->where('jaarinkomen', '>', 100000)
+                ->where('geslacht', 'Man')->count();
+
+            $countJaarInkomenHoogVrouw = DB::table('users')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
+                ->where('jaarinkomen', '>', 100000)
+                ->where('geslacht', 'Vrouw')->count();
 
             $ouders = DB::table('users')
                 ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
@@ -270,11 +359,16 @@ class AdminController extends Controller
                 'countPersoneel' => $countPersoneel,
                 'man' => $per_man,
                 'vrouw' => $per_vrouw,
-                'laaginkomen' => $countJaarInkomenLaag,
-                'laagmiddeninkomen' => $countJaarInkomenLaagMidden,
-                'middeninkomen' => $countJaarInkomenMidden,
-                'middenhooginkomen' => $countJaarInkomenMiddenHoog,
-                'hooginkomen' => $countJaarInkomenHoog,
+                'laaginkomenman' => $countJaarInkomenLaagMan,
+                'laagmiddeninkomenman' => $countJaarInkomenLaagMiddenMan,
+                'middeninkomenman' => $countJaarInkomenMiddenMan,
+                'middenhooginkomenman' => $countJaarInkomenMiddenHoogMan,
+                'hooginkomenman' => $countJaarInkomenHoogMan,
+                'laaginkomenvrouw' => $countJaarInkomenLaagVrouw,
+                'laagmiddeninkomenvrouw' => $countJaarInkomenLaagMiddenVrouw,
+                'middeninkomenvrouw' => $countJaarInkomenMiddenVrouw,
+                'middenhooginkomenvrouw' => $countJaarInkomenMiddenHoogVrouw,
+                'hooginkomenvrouw' => $countJaarInkomenHoogVrouw,
                 'ouders' => $ouders,
                 'nietOuders' => $nietOuders,
                 'werkend' => $werkend,

@@ -120,7 +120,7 @@
 
         var alumniVSpersoneelCHART = document.getElementById('alumniVSpersoneel').getContext('2d');
         var alumChart = new Chart(alumniVSpersoneelCHART, {
-            type: 'pie',
+            type: 'doughnut',
             data: {
                 labels: ["Alumni", "Personeel"],
                 datasets: [
@@ -165,23 +165,43 @@
                 labels: ["0-12500", "12500-30000", "30000-50000", "50000-100000", "100000+"],
                 datasets: [
                     {
-                        label: "Gebruikers per inkomensniveau",
+                        label: "Mannelijke gebruikers per inkomensniveau",
                         backgroundColor: [
                             "rgba(0,70,133,1)",
-                            "rgba(213,161,15,1)",
                             "rgba(0,70,133,1)",
-                            "rgba(213,161,15,1)",
+                            "rgba(0,70,133,1)",
+                            "rgba(0,70,133,1)",
                             "rgba(0,70,133,1)"
                         ],
                         borderColor: [
                             "rgba(0,70,133,1)",
-                            "rgba(213,161,15,1)",
                             "rgba(0,70,133,1)",
-                            "rgba(213,161,15,1)",
+                            "rgba(0,70,133,1)",
+                            "rgba(0,70,133,1)",
                             "rgba(0,70,133,1)"
                         ],
                         borderWidth: 1,
-                        data: [ {{$laaginkomen}}, {{$laagmiddeninkomen}}, {{$middeninkomen}}, {{$middenhooginkomen}}, {{$hooginkomen}} ]
+                        data: [ {{$laaginkomenman}}, {{$laagmiddeninkomenman}}, {{$middeninkomenman}}, {{$middenhooginkomenman}}, {{$hooginkomenman}} ]
+                    },
+
+                    {
+                        label: "Vrouwelijke gebruikers per inkomensniveau",
+                        backgroundColor: [
+                            "rgba(213,161,15,1)",
+                            "rgba(213,161,15,1)",
+                            "rgba(213,161,15,1)",
+                            "rgba(213,161,15,1)",
+                            "rgba(213,161,15,1)"
+                        ],
+                        borderColor: [
+                            "rgba(213,161,15,1)",
+                            "rgba(213,161,15,1)",
+                            "rgba(213,161,15,1)",
+                            "rgba(213,161,15,1)",
+                            "rgba(213,161,15,1)"
+                        ],
+                        borderWidth: 1,
+                        data: [ {{$laaginkomenvrouw}}, {{$laagmiddeninkomenvrouw}}, {{$middeninkomenvrouw}}, {{$middenhooginkomenvrouw}}, {{$hooginkomenvrouw}} ]
                     }
                 ]
             },
