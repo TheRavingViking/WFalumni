@@ -450,8 +450,17 @@ class UserController extends Controller
         $user = Auth::user($id);
         $id = $id->id;
         $user = User::find($id);
+        $woonplaats = Woonplaats::where('user_id', $id);
+        $opleiding = Opleiding::where('user_id', $id);
+        $bedrijf = Bedrijf::where('user_id', $id);
+
 
         $user->delete();
+        $woonplaats->delete();
+        $opleiding->delete();
+        $bedrijf->delete();
+
+
         if (Auth::user()->bevoegdheid == 3) {
             return redirect()->action('UserController@index');
         } else {
@@ -461,8 +470,7 @@ class UserController extends Controller
     }
 
 
-    public
-    function MassSoftDelete(Request $request)
+    public function MassSoftDelete(Request $request)
     {
         $users = $request->checkbox;
 
@@ -470,11 +478,19 @@ class UserController extends Controller
             return redirect()->back()->with('error', 'Geen gebruikers verwijderd, selecteer gebruikers');
         } else {
             $checkbox = $users;
-            foreach ($checkbox as $id)
-                $id = User::where('id', $id)->delete();
+            foreach ($checkbox as $id) {
+                $user = User::where('id', $id);
+                $bedrijf = Bedrijf::where('user_id', $id);
+                $woonplaats = Woonplaats::where('user_id', $id);
+                $opleiding = Opleiding::where('user_id', $id);
 
-
+                $user->delete();
+                $woonplaats->delete();
+                $opleiding->delete();
+                $bedrijf->delete();
+            }
             return redirect()->back()->with('error', 'gebruikers verwijderd');
+
         }
     }
 
