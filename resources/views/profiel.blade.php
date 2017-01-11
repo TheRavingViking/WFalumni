@@ -209,7 +209,6 @@
                             <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
                                    value="{{ $user->bevoegdheid }}" {{$temp}}>
                             @endif
-                                   value="{{ $user->bevoegdheid }}" {{$temp}} style="{{$visibility}}">
 
                             <label for="afdeling">Afdeling</label>
                             <input id="afdeling" type="text" class="form-control" name="afdeling"
