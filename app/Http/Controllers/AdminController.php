@@ -53,6 +53,27 @@ class AdminController extends Controller
 
     }
 
+    public function search(request $request)
+    {
+        $keyword = request('searchinput');
+        $keyword = explode(" ", $keyword);
+
+        $users = User::SearchByKeyword($keyword)->paginate(25);
+
+
+        if (count($users) == '0') {
+            return redirect::to('admin')->with('error', 'Geen zoekresultaten gevonden');
+
+        } Else {
+            $users->count();
+            $users->total();
+
+            $request->session()->flash('status', 'Aantal zoekresultaten gevonden:' . ' ' . $users->total());
+
+            return view('admin', array('users' => $users));
+        }
+    }
+
     public function dashboard()
     {
         $richtingen = dropdown_richting::all();

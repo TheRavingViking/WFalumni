@@ -54,6 +54,7 @@ Route::post('/adminOpleidingen/richting', 'AdminController@createRichting')->mid
 Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding')->middleware('admin');
 Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie')->middleware('admin');
 Route::get('/admin', 'AdminController@index')->middleware('admin');
+Route::get('/admin/search', 'AdminController@search')->middleware('admin');
 Route::Post('/admin/assign', ['as' => 'admin.assign', 'uses' => 'AdminController@AdminAssign'])->middleware('admin'); //<-admin.assign rename, Laurens
 Route::get('/dashboard', 'AdminController@dashboard')->middleware('opladmin');
 Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('opladmin');
