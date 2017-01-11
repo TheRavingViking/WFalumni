@@ -321,6 +321,17 @@ class AdminController extends Controller
 
     public function GeoChartfilter(request $request)
     {
+        if (empty($request->richtingen)){
+            return redirect()->back()->with('error', 'Richting vereist');
+        }
+
+        if (empty($request->opleidingen)){
+            return redirect()->back()->with('error', 'Opleiding vereist');
+        }
+
+        if (empty($request->radio)){
+            return redirect()->back()->with('error', 'Selecteer woonplaats of bedrijf');
+        }
         $specialisaties = $request->specialisaties;
 
         If (empty($specialisaties)) {
@@ -425,9 +436,11 @@ class AdminController extends Controller
                     ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
                     ->join('woonplaats', 'users.id', '=', 'woonplaats.user_id')
                     ->select('users.*', 'opleiding.*', 'woonplaats.*')
-                    ->where([['opleiding.naam', $opleiding],
+                    ->where([
+                        ['opleiding.naam', $opleiding],
                         ['richting', $richting],
-                        ['specialisatie', $specialisaties],])->where('users.deleted_at', '=', null)
+                        ['specialisatie', $specialisaties],
+                    ])->where('users.deleted_at', '=', null)
                     ->get();
 
                 foreach ($users as $c) {
