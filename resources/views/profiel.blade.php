@@ -202,7 +202,7 @@
                             </label>
 
                             @if( Auth::user()->bevoegdheid == 3 )
-                                <label for="bevoegdheid">bevoegdheid</label>
+
                                 @if($uglyFix == 1) <br> @endif
 
                                 <label for="bevoegdheid" style="{{$visibility}}">Bevoegdheid</label>

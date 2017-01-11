@@ -21,8 +21,8 @@ Route::get('/', 'UserController@redirectCheck');
 //Route::get('/home', 'HomeController@index')->middleware('auth');
 
 //mail
-Route::get('/mail', 'MailController@index');
-Route::post('/mail', 'MailController@send');
+Route::get('/mail', 'MailController@index')->middleware('auth');
+Route::post('/mail', 'MailController@send')->middleware('auth');
 //profiel
 Route::get('/profiel', 'UserController@profiel')->middleware('auth');
 Route::get('/profiel/{user}', 'UserController@show')->middleware('auth');
@@ -31,8 +31,8 @@ Route::post('/profiel/delete', 'UserController@SoftDelete')->middleware('auth');
 Route::get('/addUser', 'UserController@addUserIndex')->middleware('auth');
 Route::post('/addUser', 'UserController@addUser')->middleware('auth');
 //SetPass
-Route::get('/setPass', 'UserController@setPassIndex');
-Route::post('/setPass', 'UserController@setPass');
+Route::get('/setPass', 'UserController@setPassIndex')->middleware('auth');
+Route::post('/setPass', 'UserController@setPass')->middleware('auth');
 //profiel
 Route::post('/profiel', 'UserController@update')->middleware('auth');
 //profiel->opleiding
@@ -54,21 +54,21 @@ Route::get('/mijnopleiding', 'UserController@mijnOpleiding')->middleware('auth')
 Route::get('/mijnopleiding/search', 'UserController@mijnOpleidingSearch')->middleware('auth');
 Route::get('/mijnopleiding/filter', 'UserController@mijnOpleidingFilter')->middleware('auth');
 //Adminopleidingen
-Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen');
-Route::post('/adminOpleidingen/richting', 'AdminController@createRichting');
-Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding');
-Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie');
-Route::get('/admin', 'AdminController@index')->middleware('auth');
-Route::Post('/admin/assign', 'AdminController@AdminAssign')->name('admin.assign');
-Route::get('/dashboard', 'AdminController@dashboard')->middleware('auth');
-Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('auth');
-Route::get('/geochart', 'AdminController@GeoChart')->middleware('auth');
-Route::get('/geochart/filter', 'AdminController@GeoChartFilter')->middleware('auth');
-\Debugbar::enable(); //<-- Toont debugbar, Laurens, !!!! enable of disable!!!!
+Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen')->middleware('admin');
+Route::post('/adminOpleidingen/richting', 'AdminController@createRichting')->middleware('admin');
+Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding')->middleware('admin');
+Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie')->middleware('admin');
+Route::get('/admin', 'AdminController@index')->middleware('admin');
+Route::Post('/admin/assign', ['as' => 'admin.assign', 'uses' => 'AdminController@AdminAssign'])->middleware('admin'); //<-admin.assign rename, Laurens
+Route::get('/dashboard', 'AdminController@dashboard')->middleware('opladmin');
+Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('opladmin');
+Route::get('/geochart', 'AdminController@GeoChart')->middleware('opladmin');
+Route::get('/geochart/filter', 'AdminController@GeoChartFilter')->middleware('opladmin');
 //Dropdowns
 Route::get('/dropdown', 'UserController@dropdown')->middleware('auth');
-Route::get('/bevoegdheid', 'DropdownController@afdeling');
-route::get('/richtingen', 'DropdownController@opleidingen');
-route::get('/opleidingen', 'DropdownController@specialisaties');
+Route::get('/bevoegdheid', 'DropdownController@afdeling')->middleware('auth');
+route::get('/richtingen', 'DropdownController@opleidingen')->middleware('auth');
+route::get('/opleidingen', 'DropdownController@specialisaties')->middleware('auth');
 
+\Debugbar::enable(); //<-- Toont debugbar, Laurens, !!!! enable of disable!!!!
 
