@@ -202,12 +202,16 @@
                             </label>
 
                             @if( Auth::user()->bevoegdheid == 3 )
-                            <label for="bevoegdheid">bevoegdheid</label>
-                            @if($uglyFix == 1) <br> @endif
+                                <label for="bevoegdheid">bevoegdheid</label>
+                                @if($uglyFix == 1) <br> @endif
 
-                            <label for="bevoegdheid" style="{{$visibility}}">Bevoegdheid</label>
-                            <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
-                                   value="{{ $user->bevoegdheid }}" {{$temp}}>
+                                <label for="bevoegdheid" style="{{$visibility}}">Bevoegdheid</label>
+                                <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
+                                       value="
+@if ($user->bevoegdheid == 3)Admin
+@elseif ($user->bevoegdheid == 2)Docent
+@elseif($user->bevoegdheid == 3)Alumnus
+@endif " disabled {{$temp}}>
                             @endif
 
                             <label for="afdeling">Afdeling</label>
@@ -427,7 +431,7 @@
                                                 <label for="richting" title="richting">Naam van de richting</label>
                                                 <select name="richting" title="richting" required>
                                                     @foreach($richtingen as $richting)
-                                                    <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
+                                                        <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

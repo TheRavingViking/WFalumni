@@ -36,7 +36,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Register</div>
+                    <div class="panel-heading"><h3>Register user</h3></div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="">
                             {{ csrf_field() }}
@@ -176,8 +176,8 @@
                             </div>
 
 
-                            <h1>Opleiding</h1>
-
+                            <h3>Opleiding</h3>
+                            <hr>
                             <div class="form-group">
                                 <label for="richting" class="col-md-4 control-label">Richting</label>
                                 <div class="col-md-6">

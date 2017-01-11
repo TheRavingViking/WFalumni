@@ -82,13 +82,11 @@ class AdminController extends Controller
         $werkend = DB::table('users')
             ->join('bedrijf', 'users.id', '=', 'bedrijf.user_id')
             ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
-
             ->select('users.voornaam', 'opleiding.richting as opleiding_richting', 'bedrijf.richting as bedrijf_richting')
             ->wherecolumn('bedrijf.richting', 'opleiding.richting')
             ->get()->count();
-        //dd($werkend);
 
-        $nietWerkend = 1;
+        $nietWerkend = User::all()->count() - $werkend;
 
 
         return view('dashboard', array(
@@ -115,7 +113,9 @@ class AdminController extends Controller
     {
         //return $request;
         if (!empty($request->richtingen)) {
-
+            if (empty($request->opleidingen)){
+                return redirect()->back()->with('error', 'Opleiding vereist');
+            }
             $richting = request('richtingen');
             $opleiding = request('opleidingen');
             $specialisatie = request('specialisaties');
@@ -129,7 +129,7 @@ class AdminController extends Controller
                     ['naam', $opleiding],
                     ['richting', $richting],
                     ['bevoegdheid', '>', 1],
-                ])
+                ])->where('users.deleted_at', '=', null)
                 ->count();
 
             $countUser = DB::table('users')
@@ -139,7 +139,7 @@ class AdminController extends Controller
                     ['naam', $opleiding],
                     ['richting', $richting],
                     ['bevoegdheid', 1],
-                ])
+                ])->where('users.deleted_at', '=', null)
                 ->count();
 
             $total = DB::table('users')
@@ -148,7 +148,7 @@ class AdminController extends Controller
                 ->where([
                     ['naam', $opleiding],
                     ['richting', $richting],
-                ])
+                ])->where('users.deleted_at', '=', null)
                 ->count();
 
             $man = DB::table('users')
@@ -158,7 +158,7 @@ class AdminController extends Controller
                     ['naam', $opleiding],
                     ['richting', $richting],
                     ['Geslacht', 'Man'],
-                ])
+                ])->where('users.deleted_at', '=', null)
                 ->count();
 
             $vrouw = DB::table('users')
@@ -168,7 +168,7 @@ class AdminController extends Controller
                     ['naam', $opleiding],
                     ['richting', $richting],
                     ['Geslacht', 'Vrouw'],
-                ])
+                ])->where('users.deleted_at', '=', null)
                 ->count();
 
             if (!$total == 0) {
@@ -185,7 +185,7 @@ class AdminController extends Controller
                 ->where([
                     ['naam', $opleiding],
                     ['richting', $richting],
-                ])
+                ])->where('users.deleted_at', '=', null)
                 ->avg('jaarinkomen');
 
             $countJaarInkomenLaag = DB::table('users')
@@ -193,7 +193,7 @@ class AdminController extends Controller
                 ->select('users.*', 'opleiding.*')
                 ->where([
                     ['naam', $opleiding],
-                    ['richting', $richting]])
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
                 ->where('jaarinkomen', '<=', 12500)->count();
 
             $countJaarInkomenLaagMidden = DB::table('users')
@@ -201,7 +201,7 @@ class AdminController extends Controller
                 ->select('users.*', 'opleiding.*')
                 ->where([
                     ['naam', $opleiding],
-                    ['richting', $richting]])
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
                 ->whereBetween('jaarinkomen', [12500, 30000])->count();
 
             $countJaarInkomenMidden = DB::table('users')
@@ -209,7 +209,7 @@ class AdminController extends Controller
                 ->select('users.*', 'opleiding.*')
                 ->where([
                     ['naam', $opleiding],
-                    ['richting', $richting]])
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
                 ->whereBetween('jaarinkomen', [30000, 50000])->count();
 
             $countJaarInkomenMiddenHoog = DB::table('users')
@@ -217,7 +217,7 @@ class AdminController extends Controller
                 ->select('users.*', 'opleiding.*')
                 ->where([
                     ['naam', $opleiding],
-                    ['richting', $richting]])
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
                 ->whereBetween('jaarinkomen', [50000, 100000])->count();
 
             $countJaarInkomenHoog = DB::table('users')
@@ -225,18 +225,42 @@ class AdminController extends Controller
                 ->select('users.*', 'opleiding.*')
                 ->where([
                     ['naam', $opleiding],
-                    ['richting', $richting]])
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
                 ->where('jaarinkomen', '>', 100000)->count();
 
             $ouders = DB::table('users')
                 ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
                 ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
                 ->where('heeft_kinderen', '=', 1)->count();
 
             $nietOuders = DB::table('users')
                 ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
                 ->select('users.*', 'opleiding.*')
+                ->where([
+                    ['naam', $opleiding],
+                    ['richting', $richting]])->where('users.deleted_at', '=', null)
                 ->where('heeft_kinderen', '=', 0)->count();
+
+            $werkend = DB::table('users')
+                ->join('bedrijf', 'users.id', '=', 'bedrijf.user_id')
+                ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                ->select('users.*', 'opleiding.richting as opleiding_richting', 'opleiding.naam as opleiding_naam', 'bedrijf.richting as bedrijf_richting')
+                ->where([
+                    ['opleiding.naam', $opleiding],
+                    ['opleiding.richting', $richting]])->where('users.deleted_at', '=', null)
+                ->wherecolumn('bedrijf.richting', 'opleiding.richting')
+                ->get()->count();
+
+            $nietWerkend = DB::table('users')
+                    ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
+                    ->select('users.*', 'opleiding.*')
+                    ->where([
+                        ['naam', $opleiding],
+                        ['richting', $richting]])->where('users.deleted_at', '=', null)
+                    ->count() - $werkend;
 
 
             return view('dashboard', array(
@@ -253,6 +277,8 @@ class AdminController extends Controller
                 'hooginkomen' => $countJaarInkomenHoog,
                 'ouders' => $ouders,
                 'nietOuders' => $nietOuders,
+                'werkend' => $werkend,
+                'nietWerkend' => $nietWerkend,
             ));
         } else {
 
@@ -295,6 +321,17 @@ class AdminController extends Controller
 
     public function GeoChartfilter(request $request)
     {
+        if (empty($request->richtingen)){
+            return redirect()->back()->with('error', 'Richting vereist');
+        }
+
+        if (empty($request->opleidingen)){
+            return redirect()->back()->with('error', 'Opleiding vereist');
+        }
+
+        if (empty($request->radio)){
+            return redirect()->back()->with('error', 'Selecteer woonplaats of bedrijf');
+        }
         $specialisaties = $request->specialisaties;
 
         If (empty($specialisaties)) {
@@ -318,7 +355,7 @@ class AdminController extends Controller
                     ->where([
                         ['opleiding.naam', $opleiding],
                         ['richting', $richting],
-                    ])
+                    ])->where('users.deleted_at', '=', null)
                     ->get();
 
                 foreach ($users as $c) {
@@ -357,7 +394,7 @@ class AdminController extends Controller
                     ->where([
                         ['opleiding.naam', $opleiding],
                         ['opleiding.richting', $richting],
-                    ])
+                    ])->where('users.deleted_at', '=', null)
                     ->get();
 
 //            return $users;
@@ -399,9 +436,11 @@ class AdminController extends Controller
                     ->join('opleiding', 'users.id', '=', 'opleiding.user_id')
                     ->join('woonplaats', 'users.id', '=', 'woonplaats.user_id')
                     ->select('users.*', 'opleiding.*', 'woonplaats.*')
-                    ->where([['opleiding.naam', $opleiding],
+                    ->where([
+                        ['opleiding.naam', $opleiding],
                         ['richting', $richting],
-                        ['specialisatie', $specialisaties],])
+                        ['specialisatie', $specialisaties],
+                    ])->where('users.deleted_at', '=', null)
                     ->get();
 
                 foreach ($users as $c) {
@@ -440,7 +479,7 @@ class AdminController extends Controller
                         ['opleiding.naam', $opleiding],
                         ['opleiding.richting', $richting],
                         ['specialisatie', $specialisaties],
-                    ])
+                    ])->where('users.deleted_at', '=', null)
                     ->get();
 
 //            return $users;
