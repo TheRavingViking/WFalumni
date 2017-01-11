@@ -2,7 +2,7 @@
 
 @section('content')
 
-{{--{{dd($opl)}}--}}
+    {{--{{dd($opl)}}--}}
     <div class="container">
         @if (session('error'))
             <div class="alert alert-danger">
@@ -47,10 +47,18 @@
                     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                         <div>
                             <h4>
-                                <b style="align-text:left"> @if($user->user->bevoegdheid == 2)
-                                        Docent <i class="glyphicon glyphicon-user"> </i> :
+                                <b style="align-text:left">
+                                    @if($user->user->bevoegdheid == 2) Docent <i
+                                            class="glyphicon glyphicon-user"> </i> :
+                                </b><b style="align-text:left">
+                                    @elseif($user->user->bevoegdheid == 1) Student <i
+                                            class="glyphicon glyphicon-user"> </i> :
+                                </b><b style="align-text:left">
+                                    @elseif($user->user->bevoegdheid == 3) Admin <i
+                                            class="glyphicon glyphicon-user"> </i> :
                                     @endif
-                                </b>{{$user->user->voornaam}} {{$user->user->tussenvoegsel}} {{$user->user->achternaam}}
+                                </b>
+                                {{$user->user->voornaam}} {{$user->user->tussenvoegsel}} {{$user->user->achternaam}}
                             </h4>
                             Opleiding:{{$user->naam}} genoten
                             tussen:{{$user->begin}}
