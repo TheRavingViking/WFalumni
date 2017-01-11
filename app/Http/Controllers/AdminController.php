@@ -385,6 +385,7 @@ class AdminController extends Controller
 
     public function AdminAssign(Request $req)
     {
+
         $id = $req->id;
         $user = user::find($id);
         $data = $req->only('bevoegdheid');
