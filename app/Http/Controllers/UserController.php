@@ -435,7 +435,7 @@ class UserController extends Controller
             'twitter' => $req['twitter'],
             'website' => $req['website'],
             'geenmailverzenden' => $req['geenmailverzenden'],
-            'bevoegdheid' => $req['bevoegdheid'],
+//            'bevoegdheid' => $req['bevoegdheid'],
             'afdeling' => $req['afdeling']
         );
         $user->fill($new_user_data);
