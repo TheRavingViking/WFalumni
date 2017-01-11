@@ -3,106 +3,116 @@
 @section('content')
 
     <div class="container">
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
     </div>
 
 
     <div class="container-fluid" style="padding: 1.25em;">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="panel">
-                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
-                    <form class="form-horizontal" method="get" action="/dashboard/filter">
-                        <select name="richtingen" id="richtingen" class="input-sm">
-                            <option value="">-----</option>
-                            @foreach($richtingen as $richting)
-                                <option value="{{ $richting->naam }}">
-                                    {{ $richting->naam }}
-                                </option>
-                            @endforeach
-                        </select>
-                        <select name="opleidingen" id="opleidingen" class="input-sm">
-                            <option value="">-----</option>
-                        </select>
-                        <select name="specialisaties" id="specialisaties" class="input-sm">
-                            <option value="">-----</option>
-                        </select>
-                        <button class="btn btn-primary">Go</button>
-                    </form>
+                <div class="panel">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8 col-md-4 col-lg-3">
+                            <form class="form-horizontal" method="get" action="/dashboard/filter">
+                                <select name="richtingen" id="richtingen" class="input-sm">
+                                    <option value="">-----</option>
+                                    @foreach($richtingen as $richting)
+                                        <option value="{{ $richting->naam }}">
+                                            {{ $richting->naam }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <select name="opleidingen" id="opleidingen" class="input-sm">
+                                    <option value="">-----</option>
+                                </select>
+                                <select name="specialisaties" id="specialisaties" class="input-sm">
+                                    <option value="">-----</option>
+                                </select>
+                                <button class="btn btn-primary">Go</button>
+                            </form>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-4 col-lg-1">
+
+                            <div class="btn-toolbar">
+                                <div class="btn-group">
+                                    <form class="" method="get" action="/dashboard">
+                                        <button class="btn btn-primary">Leegmaken</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-8 col-md-4 col-lg-8">
+
+                            <div class="btn-toolbar">
+                                <div class="btn-group">
+                                    <form class="form-horizontal" method="get" action="/admin">
+                                        <button class="btn btn-primary">Bevoegdheid veranderen</button>
+                                    </form>
+                                </div>
+                                <div class="btn-group">
+                                    <form class="form-horizontal" method="get" action="/geochart">
+                                        <button class="btn btn-primary">Geocharts</button>
+                                    </form>
+                                </div>
+                                <div class="btn-group">
+                                    <form class="form-horizontal" method="get" action="/addUser">
+                                        <button class="btn btn-primary">Add User</button>
+                                    </form>
+                                </div>
+                                <div class="btn-group">
+                                    <form class="form-horizontal" method="get" action="/adminOpleidingen">
+                                        <button class="btn btn-primary">Opleidingen toevoegen</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="btn-toolbar">
-                    <div class="btn-group">
-                        <form class="form-horizontal" method="get" action="/dashboard">
-                            <button class="btn btn-primary">Leegmaken</button>
-                        </form>
-                    </div>
-                    <div class="btn-group">
-                        <form class="form-horizontal" method="get" action="/admin">
-                            <button class="btn btn-primary">Bevoegdheid veranderen</button>
-                        </form>
-                    </div>
-                    <div class="btn-group">
-                        <form class="form-horizontal" method="get" action="/geochart">
-                            <button class="btn btn-primary">Geocharts</button>
-                        </form>
-                    </div>
-                    <div class="btn-group">
-                        <form class="form-horizontal" method="get" action="/addUser">
-                            <button class="btn btn-primary">Add User</button>
-                        </form>
-                    </div>
-                    <div class="btn-group">
-                        <form class="form-horizontal" method="get" action="/adminOpleidingen">
-                            <button class="btn btn-primary">Opleidingen toevoegen</button>
-                        </form>
-                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="well">
+                    <canvas id="werkendInVakgebied"></canvas>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="panel">
+                    <canvas id="alumniVSpersoneel"></canvas>
+
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="panel">
+                    <canvas id="ouders"></canvas>
+
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            <div class="well">
-                <canvas id="werkendInVakgebied"></canvas>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            <div class="panel">
-                <canvas id="alumniVSpersoneel"></canvas>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="panel">
+                    <canvas id="GeslachtVerdeling"></canvas>
 
+                </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            <div class="panel">
-                <canvas id="ouders"></canvas>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 hidden-xs">
+                <div class="panel">
+                    <canvas id="jaarInkomen"></canvas>
 
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-            <div class="panel">
-                <canvas id="GeslachtVerdeling"></canvas>
-
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 hidden-xs">
-            <div class="panel">
-                <canvas id="jaarInkomen"></canvas>
-
-            </div>
-        </div>
-    </div>
     </div>
 
     <script>
