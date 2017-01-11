@@ -208,11 +208,11 @@
                                 <label for="bevoegdheid" style="{{$visibility}}">Bevoegdheid</label>
                                 <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
                                        value="
-@if ($user->bevoegdheid == 3)Admin
-@elseif ($user->bevoegdheid == 2)Docent
-@elseif($user->bevoegdheid == 3)Alumnus
-@endif " disabled {{$temp}}>
-                            @endif
+                                            @if ($user->bevoegdheid == 3)Admin
+                                            @elseif ($user->bevoegdheid == 2)Docent
+                                            @elseif($user->bevoegdheid == 3)Alumnus
+                                            @endif " disabled {{$temp}}>
+                                        @endif
 
                             <label for="afdeling">Afdeling</label>
                             <input id="afdeling" type="text" class="form-control" name="afdeling"
@@ -654,14 +654,6 @@
         </div>
     </div>
     </div>
-
-
-
-
-
-
-
-
 
 @endsection
 

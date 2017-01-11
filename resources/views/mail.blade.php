@@ -25,7 +25,6 @@
                                     <div class="form-group">
                                         <input type="hidden" name="users"
                                                value="@foreach($users as $user) {{$user->email}} @endforeach">
-                                        {{--<h3>Mail Iedereen:</h3>--}}
 
                                         <label for="onderwerp" class="col-md-4 control-label">Onderwerp</label>
                                         <div class="col-md-6">

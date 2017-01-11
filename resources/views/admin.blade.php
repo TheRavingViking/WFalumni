@@ -27,9 +27,7 @@ box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
             <tbody>
             @foreach($users as $user)
                 <tr>
-                    {{--{{ dd($users) }}--}}
                     <form action="{{ route('admin.assign') }}" method="POST">
-                        {{--{{ method_field('PATCH') }}--}}
                         <td>{{ $user->id }}</td>
                         <input type="hidden" name="id" value="{{ $user->id }}"></td>
                         <td>{{ $user->voornaam }}</td>

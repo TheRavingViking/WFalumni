@@ -10,15 +10,10 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-//OLD TRASH!
-//Route::get('/overview', 'UserController@index')->middleware('auth', 'admin');
-//Route::get('overview/search','UserController@search')->middleware('auth', 'admin');
-//Route::get('overview/filter','UserController@filter')->middleware('auth', 'admin');
-//Route::post('/overview', 'UserController@MassSoftDelete')->middleware('auth', 'admin');
+
 Auth::routes();
 
 Route::get('/', 'UserController@redirectCheck');
-//Route::get('/home', 'HomeController@index')->middleware('auth');
 
 //mail
 Route::get('/mail', 'MailController@index')->middleware('auth');

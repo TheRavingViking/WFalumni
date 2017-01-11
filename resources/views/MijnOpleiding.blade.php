@@ -2,7 +2,6 @@
 
 @section('content')
 
-    {{--{{dd($opl)}}--}}
     <div class="container">
         @if (session('error'))
             <div class="alert alert-danger">
@@ -20,7 +19,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <form class="form-horizontal" method="get" action="/mijnopleiding/search">
-                        {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="opleiding" id="opleiding" value="{{$auth}}">
                         <input type="hidden" name="jaar" id="jaar" value="{{$eind}}">
                         <div class="input-group">

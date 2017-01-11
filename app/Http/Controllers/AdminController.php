@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\woonplaats;
 use App\opleiding;
 use App\User;
-use App\Role;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -150,7 +149,6 @@ class AdminController extends Controller
 
     public function dashboardFilter(request $request)
     {
-        //return $request;
         if (!empty($request->richtingen)) {
             if (empty($request->opleidingen)){
                 return redirect()->back()->with('error', 'Opleiding vereist');
@@ -391,7 +389,6 @@ class AdminController extends Controller
 
         $user->fill($data);
         $user->save();
-//dd($user);
         return back()->with('message', 'Update gelukt!');
 
 
@@ -404,10 +401,8 @@ class AdminController extends Controller
         $opleidingen = dropdown_opleidingen::all();
         $specialisaties = dropdown_specialisaties::all();
 
-
         // Draw a map
         Mapper::map(52.5, 5);
-
 
         return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
 
@@ -491,7 +486,6 @@ class AdminController extends Controller
                     ])->where('users.deleted_at', '=', null)
                     ->get();
 
-//            return $users;
                 foreach ($users as $c) {
                     $bedrijf = $c->naam;
                     $tel = $c->telefoonnummer;
@@ -502,7 +496,6 @@ class AdminController extends Controller
                     $achternaam = $c->achternaam;
                     $content = 'Bedrijf:' . '' . $bedrijf . '<br>' . 'Tel:' . '' . $tel . '<br>' . 'Adres:' . '' . $adres . '<br>' . 'Postcode:' . '' . $postcode . '<br>' . 'Alumni:' . '' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam;
 
-//                Mapper::informationWindow($c->latitude, $c->longitude, $content);
                     Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
                 }
 
@@ -576,7 +569,6 @@ class AdminController extends Controller
                     ])->where('users.deleted_at', '=', null)
                     ->get();
 
-//            return $users;
                 foreach ($users as $c) {
                     $bedrijf = $c->naam;
                     $tel = $c->telefoonnummer;
@@ -587,7 +579,6 @@ class AdminController extends Controller
                     $achternaam = $c->achternaam;
                     $content = 'Bedrijf:' . '' . $bedrijf . '<br>' . 'Tel:' . '' . $tel . '<br>' . 'Adres:' . '' . $adres . '<br>' . 'Postcode:' . '' . $postcode . '<br>' . 'Alumni:' . '' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam;
 
-//                Mapper::informationWindow($c->latitude, $c->longitude, $content);
                     Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
                 }
 
