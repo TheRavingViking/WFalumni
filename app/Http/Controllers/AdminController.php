@@ -31,9 +31,9 @@ class AdminController extends Controller
 
         $req = $request->richting_id;
         // hier hebben we de id van de dropdown
-        $new_richting_data = array('naam' => $request['richtingen']);
+        $new_richting_data = $request['richtingen'];
         // hier hebben we de nieuwe informatie
-        $richting = Dropdown_richting::where('id', $req)->first();
+        $richting = Dropdown_richting::find($req);
         //hier hebben wij het object dat aangepast moet worden
         $oudrichting = $richting->naam;
         //hier hebben wij de zoekterm zodat we de records die ge-update moeten worden kunnen vinden
@@ -42,13 +42,12 @@ class AdminController extends Controller
         $opleiding = Opleiding::where('richting', $oudrichting)->get();
         $bedrijf = Bedrijf::where('richting', $oudrichting)->get();
 
-       // dd($richting);
 
         //update
-        $richting->fill(['naam' => $new_richting_data] ) ;
+        $richting->naam = $new_richting_data;
         $richting->save();
-     //   $users[0]->naam = $new_richting_data;
-     //   $users->save();
+//        $users->afdeling = $new_richting_data;
+//        $users->save();
      //   $opleiding[0]->naam = $new_richting_data;
      //   $opleiding->save();
      //   $bedrijf[0]->naam = $new_richting_data;
