@@ -42,16 +42,25 @@ class AdminController extends Controller
         $opleiding = Opleiding::where('richting', $oudrichting)->get();
         $bedrijf = Bedrijf::where('richting', $oudrichting)->get();
 
+        if (empty($new_richting_data)){
+            return back()->with('error', 'invulveld is leeg');
+        }
 
         //update
         $richting->naam = $new_richting_data;
         $richting->save();
-//        $users->afdeling = $new_richting_data;
-//        $users->save();
-     //   $opleiding[0]->naam = $new_richting_data;
-     //   $opleiding->save();
-     //   $bedrijf[0]->naam = $new_richting_data;
-     //   $bedrijf->save();
+        foreach ($users as $user) {
+            $user->afdeling = $new_richting_data;
+            $user->save();
+        }
+        foreach ($opleiding as $opl) {
+            $opl->richting = $new_richting_data;
+            $opl->save();
+        }
+        foreach ($bedrijf as $bed){
+            $bed->richting = $new_richting_data;
+            $bed->save();
+        }
         return back()->with('status', 'Richting ge-edit');
     }
 
@@ -67,6 +76,33 @@ class AdminController extends Controller
         $opleiding = array('naam' => $request['opleidingen'], 'richtingen_id' => $request['richtingen']);
         dropdown_opleidingen::create($opleiding);
         return back()->with('status', 'Opleiding toegevoegd');
+    }
+
+    public function updateOpleiding(Request $request)
+    {
+
+        $req = $request->opleiding_id;
+
+        $new_opleiding_data = $request['naam'];
+
+        $opleiding = Dropdown_opleiding::find($req);
+
+        $oudopleiding = $opleiding->naam;
+
+        $opleiding = Opleiding::where('naam', $oudopleiding)->get();
+
+        if (empty($new_opleiding_data)){
+            return back()->with('error', 'invulveld is leeg');
+        }
+
+        //update
+        $opleiding->naam = $new_opleiding_data;
+        $opleiding->save();
+        foreach ($opleiding as $opl) {
+            $opl->naam = $new_opleiding_data;
+            $opl->save();
+        }
+        return back()->with('status', 'Richting ge-edit');
     }
 
     public function createSpecialisatie(Request $request)
