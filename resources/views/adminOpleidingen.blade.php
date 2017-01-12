@@ -38,10 +38,10 @@
                                 </option>
                             @endforeach
                         </select>
-                                <input type="text" name="richtingen" id="richtingen" class="form-control" placeholder="Richting" style="margin-bottom: 5px">
+                                <input type="text" name="richtingen_edit" id="richtingen_edit" class="form-control" placeholder="Richting" style="margin-bottom: 5px">
 
 
-                        <button class="btn btn-primary" type="submit">Edit</button>
+                        <button id="richtingen" class="btn btn-primary" type="submit">Edit</button>
                     </form>
 
                 </div>
@@ -76,7 +76,7 @@
                         <input type="text" name="opleiding_edit" id="opleiding_edit" class="form-control" placeholder="Richting" style="margin-bottom: 5px">
 
 
-                        <button class="btn btn-primary" type="submit">Edit</button>
+                        <button id="opleidingen" class="btn btn-primary" type="submit">Edit</button>
                     </form>
 
 
@@ -104,11 +104,83 @@
 
                         <button class="btn btn-primary" type="submit">Toevoegen</button>
                     </form>
+                    <h2>Specialisatie aanpassen</h2>
+
+                    <form method="POST" action="/adminOpleidingen/specialisatieEdit">
+                        {!! csrf_field() !!}
+                        <select class="input-sm" name="specialisatie_id" id="specialisatie_id" style="margin-bottom: 5px">
+
+                            @foreach($specialisaties as $specialisatie)
+                                <option value="{{ $specialisatie->id }}">
+                                    {{ $specialisatie->naam }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <input type="text" name="specialisatie_edit" id="specialisatie_edit" class="form-control" placeholder="Richting" style="margin-bottom: 5px">
+
+
+                        <button id="specialisaties" class="btn btn-primary" type="submit">Edit</button>
+                    </form>
                 </div>
             </div>
             <hr>
 
         </div>
+
+<script>
+
+    $('#richtingen').on('click',function(e){
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+            title: "Weet je het zeker?",
+            text: "Deze actie is permanent!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#ffcf00",
+            confirmButtonText: "Ja, wijzig richting!",
+            closeOnConfirm: false
+        }, function(isConfirm){
+            if (isConfirm) form.submit();
+        });
+    });
+
+    $('#opleidingen').on('click',function(e){
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+            title: "Weet je het zeker?",
+            text: "Deze actie is permanent!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#ffcf00",
+            confirmButtonText: "Ja, wijzig opleiding!",
+            closeOnConfirm: false
+        }, function(isConfirm){
+            if (isConfirm) form.submit();
+        });
+    });
+
+    $('#specialisaties').on('click',function(e){
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+            title: "Weet je het zeker?",
+            text: "Deze actie is permanent!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#ffcf00",
+            confirmButtonText: "Ja, wijzig specialisatie!",
+            closeOnConfirm: false
+        }, function(isConfirm){
+            if (isConfirm) form.submit();
+        });
+    });
+
+
+</script>
+
+
 
 @endsection
 

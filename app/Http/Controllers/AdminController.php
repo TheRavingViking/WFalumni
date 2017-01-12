@@ -30,14 +30,9 @@ class AdminController extends Controller
     {
 
         $req = $request->richting_id;
-        // hier hebben we de id van de dropdown
-        $new_richting_data = $request['richtingen'];
-        // hier hebben we de nieuwe informatie
+        $new_richting_data = $request['richtingen_edit'];
         $richting = Dropdown_richting::find($req);
-        //hier hebben wij het object dat aangepast moet worden
         $oudrichting = $richting->naam;
-        //hier hebben wij de zoekterm zodat we de records die ge-update moeten worden kunnen vinden
-        // de query's om de records te zoeken
         $users = User::where('afdeling', $oudrichting)->get();
         $opleiding = Opleiding::where('richting', $oudrichting)->get();
         $bedrijf = Bedrijf::where('richting', $oudrichting)->get();
@@ -46,7 +41,6 @@ class AdminController extends Controller
             return back()->with('error', 'invulveld is leeg');
         }
 
-        //update
         $richting->naam = $new_richting_data;
         $richting->save();
         foreach ($users as $user) {
@@ -64,6 +58,60 @@ class AdminController extends Controller
         return back()->with('status', 'Richting ge-edit');
     }
 
+    public function updateOpleiding(Request $request)
+    {
+        $req = $request->opleiding_id;
+
+        $new_opleiding_data = $request['opleiding_edit'];
+
+        $opleiding = Dropdown_opleidingen::find($req);
+        $oudopleiding = $opleiding->naam;
+
+        $opls = Opleiding::where('naam', $oudopleiding)->get();
+
+        if (empty($new_opleiding_data)) {
+            return back()->with('error', 'invulveld is leeg');
+        }
+
+        //update
+        $opleiding->naam = $new_opleiding_data;
+        $opleiding->save();
+
+        foreach ($opls as $opl) {
+            $opl->naam = $new_opleiding_data;
+            $opl->save();
+        }
+        return back()->with('status', 'Richting ge-edit');
+    }
+
+    public function updateSpecialisatie(Request $request)
+    {
+        $req = $request->specialisatie_id;
+
+        $new_specialisatie_data = $request['specialisatie_edit'];
+
+        $specialisatie = Dropdown_specialisaties::find($req);
+        $oudspecialisatie = $specialisatie->naam;
+
+        $opls = Opleiding::where('specialisatie', $oudspecialisatie)->get();
+
+        if (empty($new_specialisatie_data)) {
+            return back()->with('error', 'invulveld is leeg');
+        }
+
+        //update
+        $specialisatie->naam = $new_specialisatie_data;
+        $specialisatie->save();
+
+
+        foreach ($opls as $opl) {
+            $opl->specialisatie = $new_specialisatie_data;
+            $opl->save();
+        }
+        return back()->with('status', 'specialisatie ge-edit');
+    }
+
+
     public function createRichting(Request $request)
     {
         $richting = array('naam' => $request['richtingen']);
@@ -78,31 +126,6 @@ class AdminController extends Controller
         return back()->with('status', 'Opleiding toegevoegd');
     }
 
-    public function updateOpleiding(Request $request)
-    {
-        $req = $request->opleiding_id;
-
-        $new_opleiding_data = $request['opleiding_edit'];
-
-        $opleiding = Dropdown_opleidingen::find($req);
-        $oudopleiding = $opleiding->naam;
-
-        $opleiding = Opleiding::where('naam', $oudopleiding)->get();
-
-        if (empty($new_opleiding_data)) {
-            return back()->with('error', 'invulveld is leeg');
-        }
-
-        //update
-        $oudopleiding->naam = $new_opleiding_data;
-        $oudopleiding->save();
-
-        foreach ($opleiding as $opl) {
-            $opl->naam = $new_opleiding_data;
-            $opl->save();
-        }
-        return back()->with('status', 'Richting ge-edit');
-    }
 
     public function createSpecialisatie(Request $request)
     {
