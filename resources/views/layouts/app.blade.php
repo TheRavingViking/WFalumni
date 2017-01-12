@@ -79,18 +79,13 @@ box-shadow: 0px 10px 30px -1px rgba(0,0,0,0.20);">
                     </ul>
                 @elseif( Auth::user()->bevoegdheid == 2)
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/overview') }}">Overview</a></li>
                         <li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
-                        <li><a href="{{ url('/mail') }}">Mail</a></li>
                         <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     </ul>
 
                 @elseif( Auth::user()->bevoegdheid == 1)
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/overview') }}">Overview</a></li>
                         <li><a href="{{ url('/mijnopleiding') }}">Mijn Opleiding</a></li>
-                        <li><a href="{{ url('/mail') }}">Mail</a></li>
-                        <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
                     </ul>
             @endif
             @endif
