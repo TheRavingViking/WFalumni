@@ -38,6 +38,38 @@
 
     </div>
 
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="row">
+                @if( Auth::user()->bevoegdheid >= 2 )
+                    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1" style="margin-bottom: 5px">
+                        <form action="/comments" method="get">
+                            <input type="hidden" name="id" id="id" value="{{$user->id}}">
+                            <button type="submit" class="btn btn-primary" style="{{$visibility}}">
+                                Comments
+                            </button>
+                        </form>
+                    </div>
+                @endif
+
+                <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
+                    <form action="/profiel/delete" method="POST">
+                        <input type="hidden" name="id" value="{{ $user->id }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <button id="delete" type="submit" class="btn btn-danger" {{$temp}}  style="{{$visibility}}">
+                                Delete User
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
     {{--//persoonlijke gegevens form--}}
     <div id="profielcon" class="container">
         <div class="panel panel-default">
@@ -115,9 +147,10 @@
                             <label for="password-confirm" style="{{$visibility}}">Bevestig wachtwoord</label>
                             <input id="password-confirm" type="password" class="form-control"
                                    name="password_confirmation" style="{{$visibility}}" {{$temp}}>
-
+                            <br>
                             <label for="geslacht">Geslacht
-                                <br>Man:&nbsp&nbsp&nbsp
+                                <br>
+                                Man:
                                 @if($user->geslacht == 'man' || $user->geslacht == 'Man' ) <input id="geslacht"
                                                                                                   name="geslacht"
                                                                                                   type="radio"
@@ -125,7 +158,7 @@
                                                                                                   checked {{$temp}}>
                                 @else <input id="geslacht" name="geslacht" type="radio" value="Man" {{$temp}}>
                                 @endif
-                                <br>Vrouw:
+                                &nbsp&nbspVrouw:
                                 @if($user->geslacht == 'vrouw' || $user->geslacht == 'Vrouw') <input id="geslacht"
                                                                                                      name="geslacht"
                                                                                                      type="radio"
@@ -134,22 +167,24 @@
                                 @else <input id="geslacht" name="geslacht" type="radio" value="Vrouw" {{$temp}}>
                                 @endif
                             </label>
-
-                            <br><label for="burgerlijke staat" title="burgelijke staat" style="{{$visibility}}">Burgerlijke
+                            <br>
+                            <br>
+                            <label for="burgerlijke staat" title="burgelijke staat" style="{{$visibility}}">Burgerlijke
                                 staat</label>
                             <select name="burgerlijke staat" title="burgelijke staat" {{$temp}} class="form-control"
                                     style="{{$visibility}}">
                                 <option value="ongehuwd">Ongehuwd</option>
                                 <option value="gehuwd">Gehuwd</option>
                             </select>
-
+                            <br>
                             <label for="heeft_kinderen" style="{{$visibility}}">Heeft kinderen
-                                <br>Ja:&nbsp&nbsp
+                                <br>Ja:
                                 <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="1"
                                        @if($user->heeft_kinderen == 1) checked @endif>
-                                <br>Nee: <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="0"
+                                &nbsp&nbsp Nee: <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="0"
                                                 @if($user->heeft_kinderen == 0) checked @endif>
                             </label>
+                            <br>
 
                             @if($uglyFix == 1) <br> @endif
 
@@ -182,24 +217,24 @@
                             <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen"
                                    value="{{ $user->jaarinkomen }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="geenmailverzenden" style="{{$visibility}}">Wenst email te ontvangen:
-                                <br>Ja, graag&nbsp&nbsp&nbsp&nbsp&nbsp
+                            {{--<label for="geenmailverzenden" style="{{$visibility}}">Wenst email te ontvangen:--}}
+                                {{--<br>Ja, graag&nbsp&nbsp&nbsp&nbsp&nbsp--}}
 
-                                @if($user->geenmailverzenden == 1) <input id="geenmailverzenden"
-                                                                          name="geenmailverzenden" type="radio"
-                                                                          value="1" checked {{$temp}}><br>
-                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"
-                                             value="1" {{$temp}}><br>
-                                @endif
+                                {{--@if($user->geenmailverzenden == 1) <input id="geenmailverzenden"--}}
+                                                                          {{--name="geenmailverzenden" type="radio"--}}
+                                                                          {{--value="1" checked {{$temp}}><br>--}}
+                                {{--@else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"--}}
+                                             {{--value="1" {{$temp}}><br>--}}
+                                {{--@endif--}}
 
-                                Nee, dank je
-                                @if($user->geenmailverzenden == 0) <input id="geenmailverzenden"
-                                                                          name="geenmailverzenden" type="radio"
-                                                                          value="0" checked {{$temp}}>
-                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"
-                                             value="0" {{$temp}}>
-                                @endif
-                            </label>
+                                {{--Nee, dank je--}}
+                                {{--@if($user->geenmailverzenden == 0) <input id="geenmailverzenden"--}}
+                                                                          {{--name="geenmailverzenden" type="radio"--}}
+                                                                          {{--value="0" checked {{$temp}}>--}}
+                                {{--@else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"--}}
+                                             {{--value="0" {{$temp}}>--}}
+                                {{--@endif--}}
+                            {{--</label>--}}
 
                             @if( Auth::user()->bevoegdheid == 3 )
 
@@ -207,10 +242,9 @@
 
                                 <label for="bevoegdheid" style="{{$visibility}}">Bevoegdheid</label>
                                 <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
-                                       value="
-                                            @if ($user->bevoegdheid == 3)Admin
-                                            @elseif ($user->bevoegdheid == 2)Docent
-                                            @elseif($user->bevoegdheid == 3)Alumnus
+                                       value="@if ($user->bevoegdheid == 3)Admin
+                                            @elseif ($user->bevoegdheid == 2)Docent/Opleidingscoördinator
+                                            @elseif($user->bevoegdheid == 1)Alumnus
                                             @endif " disabled {{$temp}}>
                             @endif
 
@@ -226,28 +260,6 @@
                     </form>
                 </div>
 
-                @if( Auth::user()->bevoegdheid >= 2 )
-                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1" style="padding: 1em;">
-                        <form action="/comments" method="get">
-                            <input type="hidden" name="id" id="id" value="{{$user->id}}">
-                            <button type="submit" class="btn btn-primary" style="{{$visibility}}">
-                                comments
-                            </button>
-                        </form>
-                    </div>
-                @endif
-
-                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1" style="padding: 1em;">
-                    <form action="/profiel/delete" method="POST">
-                        <input type="hidden" name="id" value="{{ $user->id }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="form-group">
-                            <button id="delete" type="submit" class="btn btn-danger" {{$temp}}  style="{{$visibility}}">
-                                Delete User
-                            </button>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
