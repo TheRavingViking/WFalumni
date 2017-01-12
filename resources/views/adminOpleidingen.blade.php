@@ -28,6 +28,22 @@
                         <button class="btn btn-primary" type="submit">Toevoegen</button>
                     </form>
 
+                    <form method="POST" action="/adminOpleidingen/richtingedit">
+                        {!! csrf_field() !!}
+                        <select class="input-sm" name="richting_id" id="richting_id" style="margin-bottom: 5px">
+
+                            @foreach($richtingen as $richting)
+                                <option value="{{ $richting->id }}">
+                                    {{ $richting->naam }}
+                                </option>
+                            @endforeach
+                        </select>
+                                <input type="text" name="richtingen" id="richtingen" class="form-control" placeholder="Richting" style="margin-bottom: 5px">
+
+
+                        <button class="btn btn-primary" type="submit">Edit</button>
+                    </form>
+
                 </div>
             </div>
             <hr>
