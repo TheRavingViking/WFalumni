@@ -60,7 +60,7 @@
 
                         <input type="hidden" name="id" id="id" value="{{$user->id}}">
 
-                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-sm-offset-7">
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
                             <label style="{{$visibility}}">Update profiel foto</label>
                             <input type="file" name="avatar" {{$temp}} style="{{$visibility}}"></div>
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
