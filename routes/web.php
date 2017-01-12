@@ -51,9 +51,11 @@ Route::get('/mijnopleiding/filter', 'UserController@mijnOpleidingFilter')->middl
 //Adminopleidingen
 Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen')->middleware('admin');
 Route::post('/adminOpleidingen/richting', 'AdminController@createRichting')->middleware('admin');
-Route::post('/adminOpleidingen/richtingedit', 'AdminController@updateRichting')->middleware('admin');
+Route::post('/adminOpleidingen/richtingEdit', 'AdminController@updateRichting')->middleware('admin');
 Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding')->middleware('admin');
+Route::post('/adminOpleidingen/opleidingEdit', 'AdminController@updateOpleiding')->middleware('admin');
 Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie')->middleware('admin');
+Route::post('/adminOpleidingen/specialisatieEdit', 'AdminController@updateSpecialisatie')->middleware('admin');
 //Admin bevoegdheid
 Route::get('/admin', 'AdminController@index')->middleware('admin');
 Route::get('/admin/search', 'AdminController@search')->middleware('admin');

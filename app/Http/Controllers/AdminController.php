@@ -42,7 +42,7 @@ class AdminController extends Controller
         $opleiding = Opleiding::where('richting', $oudrichting)->get();
         $bedrijf = Bedrijf::where('richting', $oudrichting)->get();
 
-        if (empty($new_richting_data)){
+        if (empty($new_richting_data)) {
             return back()->with('error', 'invulveld is leeg');
         }
 
@@ -57,7 +57,7 @@ class AdminController extends Controller
             $opl->richting = $new_richting_data;
             $opl->save();
         }
-        foreach ($bedrijf as $bed){
+        foreach ($bedrijf as $bed) {
             $bed->richting = $new_richting_data;
             $bed->save();
         }
@@ -80,24 +80,23 @@ class AdminController extends Controller
 
     public function updateOpleiding(Request $request)
     {
-
         $req = $request->opleiding_id;
 
-        $new_opleiding_data = $request['naam'];
+        $new_opleiding_data = $request['opleiding_edit'];
 
-        $opleiding = Dropdown_opleiding::find($req);
-
+        $opleiding = Dropdown_opleidingen::find($req);
         $oudopleiding = $opleiding->naam;
 
         $opleiding = Opleiding::where('naam', $oudopleiding)->get();
 
-        if (empty($new_opleiding_data)){
+        if (empty($new_opleiding_data)) {
             return back()->with('error', 'invulveld is leeg');
         }
 
         //update
-        $opleiding->naam = $new_opleiding_data;
-        $opleiding->save();
+        $oudopleiding->naam = $new_opleiding_data;
+        $oudopleiding->save();
+
         foreach ($opleiding as $opl) {
             $opl->naam = $new_opleiding_data;
             $opl->save();
@@ -237,7 +236,7 @@ class AdminController extends Controller
     public function dashboardFilter(request $request)
     {
         if (!empty($request->richtingen)) {
-            if (empty($request->opleidingen)){
+            if (empty($request->opleidingen)) {
                 return redirect()->back()->with('error', 'Opleiding vereist');
             }
             $richting = request('richtingen');
@@ -498,15 +497,15 @@ class AdminController extends Controller
 
     public function GeoChartfilter(request $request)
     {
-        if (empty($request->richtingen)){
+        if (empty($request->richtingen)) {
             return redirect()->back()->with('error', 'Richting vereist');
         }
 
-        if (empty($request->opleidingen)){
+        if (empty($request->opleidingen)) {
             return redirect()->back()->with('error', 'Opleiding vereist');
         }
 
-        if (empty($request->radio)){
+        if (empty($request->radio)) {
             return redirect()->back()->with('error', 'Selecteer woonplaats of bedrijf');
         }
         $specialisaties = $request->specialisaties;
@@ -545,7 +544,7 @@ class AdminController extends Controller
                     $tussenvoegsel = $c->tussenvoegsel;
                     $achternaam = $c->achternaam;
 
-                    $content =   'Alumni:' . ' ' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam . '<br>' . 'Tel:' . ' ' . $tel .  '<br>' . 'Email:' . ' ' . $email . '<br>' . 'Adres:' . ' ' . $adres . '<br>' . 'Postcode:' . ' ' . $postcode . '<br>';
+                    $content = 'Alumni:' . ' ' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam . '<br>' . 'Tel:' . ' ' . $tel . '<br>' . 'Email:' . ' ' . $email . '<br>' . 'Adres:' . ' ' . $adres . '<br>' . 'Postcode:' . ' ' . $postcode . '<br>';
 
                     Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
                 }
@@ -627,7 +626,7 @@ class AdminController extends Controller
                     $tussenvoegsel = $c->tussenvoegsel;
                     $achternaam = $c->achternaam;
 
-                    $content =   'Alumni:' . ' ' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam . '<br>' . 'Tel:' . ' ' . $tel .  '<br>' . 'Email:' . ' ' . $email . '<br>' . 'Adres:' . ' ' . $adres . '<br>' . 'Postcode:' . ' ' . $postcode . '<br>';
+                    $content = 'Alumni:' . ' ' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam . '<br>' . 'Tel:' . ' ' . $tel . '<br>' . 'Email:' . ' ' . $email . '<br>' . 'Adres:' . ' ' . $adres . '<br>' . 'Postcode:' . ' ' . $postcode . '<br>';
 
                     Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
                 }
