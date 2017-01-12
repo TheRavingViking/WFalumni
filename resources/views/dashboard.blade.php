@@ -52,29 +52,38 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-4 col-lg-8">
-
-                            <div class="btn-toolbar">
-                                <div class="btn-group  btn-toolbar-margin">
-                                    <form class="form-horizontal" method="get" action="/admin">
-                                        <button class="btn btn-primary">Bevoegdheid veranderen</button>
-                                    </form>
+                            @if ( Auth::User()->bevoegdheid == 3)
+                                <div class="btn-toolbar">
+                                    <div class="btn-group btn-toolbar-margin">
+                                        <form class="form-horizontal" method="get" action="/admin">
+                                            <button class="btn btn-primary">Bevoegdheid veranderen</button>
+                                        </form>
+                                    </div>
+                                    <div class="btn-group btn-toolbar-margin">
+                                        <form class="form-horizontal" method="get" action="/geochart">
+                                            <button class="btn btn-primary">Geocharts</button>
+                                        </form>
+                                    </div>
+                                    <div class="btn-group btn-toolbar-margin">
+                                        <form class="form-horizontal" method="get" action="/addUser">
+                                            <button class="btn btn-primary">Add User</button>
+                                        </form>
+                                    </div>
+                                    <div class="btn-group btn-toolbar-margin">
+                                        <form class="form-horizontal" method="get" action="/adminOpleidingen">
+                                            <button class="btn btn-primary">Opleidingen toevoegen</button>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="btn-group  btn-toolbar-margin">
-                                    <form class="form-horizontal" method="get" action="/geochart">
-                                        <button class="btn btn-primary">Geocharts</button>
-                                    </form>
-                                </div>
-                                <div class="btn-group  btn-toolbar-margin">
-                                    <form class="form-horizontal" method="get" action="/addUser">
-                                        <button class="btn btn-primary">Add User</button>
-                                    </form>
-                                </div>
-                                <div class="btn-group  btn-toolbar-margin">
-                                    <form class="form-horizontal" method="get" action="/adminOpleidingen">
-                                        <button class="btn btn-primary">Opleidingen toevoegen</button>
-                                    </form>
-                                </div>
-                            </div>
+                            @elseif( Auth::user()->bevoegdheid == 2)
+                                <div class="btn-toolbar">
+                                    <div class="btn-group btn-toolbar-margin">
+                                        <form class="form-horizontal" method="get" action="/geochart">
+                                            <button class="btn btn-primary">Geocharts</button>
+                                        </form>
+                                    </div>
+                                 </div>
+                            @endif
                         </div>
                     </div>
                 </div>
