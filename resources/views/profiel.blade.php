@@ -40,7 +40,7 @@
 
     {{--//persoonlijke gegevens form--}}
     <div id="profielcon" class="container">
-        <div class="panel panel-default" style="padding: 1em">
+        <div class="panel panel-default">
 
             <a href="#Profielcollapse" class="btn btn-info" data-toggle="collapse">Profiel</a>
             <div id="Profielcollapse" class="collapse in">
@@ -212,36 +212,47 @@
                                             @elseif ($user->bevoegdheid == 2)Docent
                                             @elseif($user->bevoegdheid == 3)Alumnus
                                             @endif " disabled {{$temp}}>
-                                        @endif
+                            @endif
 
                             <label for="afdeling">Afdeling</label>
                             <input id="afdeling" type="text" class="form-control" name="afdeling"
                                    value="{{ $user->afdeling }}" {{$temp}}>
 
                             <br>
-                            <button id="wijzig_profiel" type="submit" class="btn btn-primary" {{$temp}} style="{{$visibility}}">
+                            <button id="wijzig_profiel" type="submit" class="btn btn-primary"
+                                    {{$temp}} style="{{$visibility}}">
                                 Wijzig
-                            </button><hr>
-                        </div>
-
+                            </button>
                     </form>
+                </div>
 
+                @if( Auth::user()->bevoegdheid >= 2 )
                     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1" style="padding: 1em;">
-                        <form action="/profiel/delete" method="POST">
-                            <input type="hidden" name="id" value="{{ $user->id }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <div class="form-group">
-                                <button id="delete" type="submit" class="btn btn-danger" {{$temp}}  style="{{$visibility}}">
-                                    Delete User
-                                </button>
-                            </div>
+                        <form action="/comments" method="get">
+                            <input type="hidden" name="id" id="id" value="{{$user->id}}">
+                            <button type="submit" class="btn btn-primary" style="{{$visibility}}">
+                                comments
+                            </button>
                         </form>
                     </div>
+                @endif
 
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1" style="padding: 1em;">
+                    <form action="/profiel/delete" method="POST">
+                        <input type="hidden" name="id" value="{{ $user->id }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="form-group">
+                            <button id="delete" type="submit" class="btn btn-danger" {{$temp}}  style="{{$visibility}}">
+                                Delete User
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+
 
 
     {{--Woonplaats form & modal--}}
@@ -274,7 +285,9 @@
                                 <input id="id" type="hidden" name="id" value="{{ $woonplaats->id }}">
                                 <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button id="deleteWoonplaats" type="submit" class="btn btn-danger" {{$temp}}>Delete Woonplaats</button>
+                                <button id="deleteWoonplaats" type="submit" class="btn btn-danger" {{$temp}}>Delete
+                                    Woonplaats
+                                </button>
 
                                 <hr>
                             </form>
@@ -342,7 +355,7 @@
 
                                                 <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
 
-                                                <button  type="submit" class="btn btn-info">Submit</button>
+                                                <button type="submit" class="btn btn-info">Submit</button>
                                             </form>
                                         </div>
                                     </div>
@@ -393,7 +406,9 @@
                                 <input id="id" type="hidden" name="id" value="{{ $opl->id }}">
                                 <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button id="deleteOpleiding" type="submit" class="btn btn-danger" {{$temp}}>Delete Opleiding</button>
+                                <button id="deleteOpleiding" type="submit" class="btn btn-danger" {{$temp}}>Delete
+                                    Opleiding
+                                </button>
 
                                 <hr>
                             </form>
@@ -537,7 +552,9 @@
                                 <input id="id" type="hidden" name="id" value="{{ $bedrijf->id }}">
                                 <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button id="deleteBedrijf" type="submit" class="btn btn-danger" {{$temp}}>Delete bedrijf</button>
+                                <button id="deleteBedrijf" type="submit" class="btn btn-danger" {{$temp}}>Delete
+                                    bedrijf
+                                </button>
 
                                 <hr>
                             </form>
@@ -573,13 +590,15 @@
 
                                                 <div class="form-group">
                                                     <label for="functie">functie</label>
-                                                    <input class="form-control" id="functie" type="text" name="functie" required>
+                                                    <input class="form-control" id="functie" type="text" name="functie"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="richting" title="richting">Naam van de
                                                         richting</label>
-                                                    <select class="form-control" name="richting" title="richting" required>
+                                                    <select class="form-control" name="richting" title="richting"
+                                                            required>
                                                         @foreach($richtingen as $richting)
                                                             <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
                                                         @endforeach
@@ -588,27 +607,32 @@
 
                                                 <div class="form-group">
                                                     <label for="naam">naam</label>
-                                                    <input class="form-control" id="naam" type="text" name="naam" required>
+                                                    <input class="form-control" id="naam" type="text" name="naam"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="stad">Stad</label>
-                                                    <input class="form-control" id="stad" type="text" name="stad" required>
+                                                    <input class="form-control" id="stad" type="text" name="stad"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="adres">adres</label>
-                                                    <input class="form-control" id="adres" type="text" name="adres" required>
+                                                    <input class="form-control" id="adres" type="text" name="adres"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="postcode">postcode</label>
-                                                    <input class="form-control" id="postcode" type="text" name="postcode" required>
+                                                    <input class="form-control" id="postcode" type="text"
+                                                           name="postcode" required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="begin">begin</label>
-                                                    <input class="form-control" id="begin" type="date" name="begin" required>
+                                                    <input class="form-control" id="begin" type="date" name="begin"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
@@ -618,22 +642,26 @@
 
                                                 <div class="form-group">
                                                     <label for="telefoonnummer">telefoonnummer</label>
-                                                    <input class="form-control" id="telefoonnummer" type="text" name="telefoonnummer">
+                                                    <input class="form-control" id="telefoonnummer" type="text"
+                                                           name="telefoonnummer">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="bezoekadres">bezoekadres</label>
-                                                    <input class="form-control" id="bezoekadres" type="text" name="bezoekadres">
+                                                    <input class="form-control" id="bezoekadres" type="text"
+                                                           name="bezoekadres">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="land">land</label>
-                                                    <input class="form-control" id="land" type="text" name="land" required>
+                                                    <input class="form-control" id="land" type="text" name="land"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="provincie">provincie</label>
-                                                    <input class="form-control" id="provincie" type="text" name="provincie">
+                                                    <input class="form-control" id="provincie" type="text"
+                                                           name="provincie">
                                                 </div>
 
                                                 <input class="form-control" id="user_id" type="hidden" name="user_id"
@@ -653,10 +681,10 @@
             </div>
         </div>
     </div>
-    </div>
+
 
     <script>
-        $('#delete').on('click',function(e){
+        $('#delete').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -665,15 +693,15 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ja, verwijderd mijn account!",
+                confirmButtonText: "Ja, verwijder mijn account!",
                 closeOnConfirm: false
-            }, function(isConfirm){
+            }, function (isConfirm) {
                 if (isConfirm) form.submit();
             });
         });
 
 
-        $('#deleteWoonplaats').on('click',function(e){
+        $('#deleteWoonplaats').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -682,14 +710,14 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ja, verwijderd woonplaats!",
+                confirmButtonText: "Ja, verwijder woonplaats!",
                 closeOnConfirm: false
-            }, function(isConfirm){
+            }, function (isConfirm) {
                 if (isConfirm) form.submit();
             });
         });
 
-        $('#deleteOpleiding').on('click',function(e){
+        $('#deleteOpleiding').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -698,14 +726,14 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ja, verwijderd opleiding!",
+                confirmButtonText: "Ja, verwijder opleiding!",
                 closeOnConfirm: false
-            }, function(isConfirm){
+            }, function (isConfirm) {
                 if (isConfirm) form.submit();
             });
         });
 
-        $('#deleteBedrijf').on('click',function(e){
+        $('#deleteBedrijf').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -714,15 +742,15 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ja, verwijderd opleiding!",
+                confirmButtonText: "Ja, verwijder opleiding!",
                 closeOnConfirm: false
-            }, function(isConfirm){
+            }, function (isConfirm) {
                 if (isConfirm) form.submit();
             });
         });
 
 
-        $('#wijzig_profiel').on('click',function(e){
+        $('#wijzig_profiel').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -733,11 +761,10 @@
                 confirmButtonColor: "#ffcf00",
                 confirmButtonText: "Ja, wijzig profiel!",
                 closeOnConfirm: false
-            }, function(isConfirm){
+            }, function (isConfirm) {
                 if (isConfirm) form.submit();
             });
         });
-
 
 
     </script>

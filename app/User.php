@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(woonplaats::class);
     }
 
+    public function comment()
+    {
+        return $this->hasMany(comment::class);
+    }
+
     public function scopeSearchByKeyword($query, $keyword)
     {
         if ($keyword != '') {

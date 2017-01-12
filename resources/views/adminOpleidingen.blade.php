@@ -25,7 +25,7 @@
                         {!! csrf_field() !!}
                         <h2>Voeg richting toe</h2>
                         <input type="text" name="richtingen" class="form-control" placeholder="Richting" style="margin-bottom: 5px">
-                        <button class="btn btn-primary" type="submit">Toevoegen</button>
+                        <button id="richt" class="btn btn-primary" type="submit">Toevoegen</button>
                     </form>
                     <h2>Richting aanpassen</h2>
                     <form method="POST" action="/adminOpleidingen/richtingEdit">
@@ -60,7 +60,7 @@
                             @endforeach
                         </select>
                         <input type="text" class="form-control" name="opleidingen" placeholder="Opleiding" style="margin-bottom: 5px">
-                        <button class="btn btn-primary" type="submit">Toevoegen</button>
+                        <button id="opl" class="btn btn-primary" type="submit">Toevoegen</button>
                     </form>
                     <h2>Opleiding aanpassen</h2>
                     <form method="POST" action="/adminOpleidingen/opleidingEdit">
@@ -99,10 +99,10 @@
                             @endforeach
                         </select>
                         <br>
-                        <input type="text" class="form-control" name="specialisaties"
+                        <input  type="text" class="form-control" name="specialisaties"
                                placeholder="Specialisiatie" style="margin-bottom: 5px">
 
-                        <button class="btn btn-primary" type="submit">Toevoegen</button>
+                        <button id="spec" class="btn btn-primary" type="submit">Toevoegen</button>
                     </form>
                     <h2>Specialisatie aanpassen</h2>
 
@@ -176,6 +176,55 @@
             if (isConfirm) form.submit();
         });
     });
+
+    $('#richt').on('click',function(e){
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+            title: "Weet je het zeker?",
+            text: "Deze actie is permanent!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#ffcf00",
+            confirmButtonText: "Ja, voeg richting toe!",
+            closeOnConfirm: false
+        }, function(isConfirm){
+            if (isConfirm) form.submit();
+        });
+    });
+
+    $('#opl').on('click',function(e){
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+            title: "Weet je het zeker?",
+            text: "Deze actie is permanent!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#ffcf00",
+            confirmButtonText: "Ja, voeg opleiding toe!",
+            closeOnConfirm: false
+        }, function(isConfirm){
+            if (isConfirm) form.submit();
+        });
+    });
+
+    $('#spec').on('click',function(e){
+        e.preventDefault();
+        var form = $(this).parents('form');
+        swal({
+            title: "Weet je het zeker?",
+            text: "Deze actie is permanent!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#ffcf00",
+            confirmButtonText: "Ja, voeg specialisatie toe!",
+            closeOnConfirm: false
+        }, function(isConfirm){
+            if (isConfirm) form.submit();
+        });
+    });
+
 
 
 </script>

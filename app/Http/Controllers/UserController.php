@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use App\dropdown_opleidingen;
 use App\dropdown_richting;
 use App\dropdown_specialisaties;
-use App\richting;
 use App\Mail\Welkommail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -14,10 +13,12 @@ use Illuminate\Support\Facades\Redirect;
 use Auth;
 use Illuminate\Support\Facades\App;
 use Image;
+use App\richting;
 use App\User;
 use App\Opleiding;
 use App\Bedrijf;
 use App\Woonplaats;
+use App\Comment;
 use Illuminate\Support\Facades\DB;
 use Response;
 
@@ -522,9 +523,9 @@ class UserController extends Controller
         $user->geboorteprovincie = $request['geboorteprovincie'];
         $user->geboorteland = $request['geboorteland'];
         $user->nationaliteit = $request['nationaliteit'];
-        if($request['bevoegdheid'] == "Alumni" || $request['bevoegdheid'] == "Docent") {
+        if ($request['bevoegdheid'] == "Alumni" || $request['bevoegdheid'] == "Docent") {
             $user->bevoegdheid = 1;
-        } else if($request['bevoegdheid'] == "Opleidingsadmin") {
+        } else if ($request['bevoegdheid'] == "Opleidingsadmin") {
             $user->bevoegdheid = 2;
         } else {
             $user->bevoegdheid = 3;
@@ -583,6 +584,7 @@ class UserController extends Controller
             return redirect::back()->with('error', 'De wachtwoorden komen niet overeen');
         }
     }
+
 
 }
 

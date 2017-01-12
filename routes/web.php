@@ -65,6 +65,11 @@ Route::get('/dashboard', 'AdminController@dashboard')->middleware('opladmin');
 Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('opladmin');
 Route::get('/geochart', 'AdminController@GeoChart')->middleware('opladmin');
 Route::get('/geochart/filter', 'AdminController@GeoChartFilter')->middleware('opladmin');
+//Comments
+Route::get('/comments', 'CommentController@index')->middleware('opladmin');
+Route::post('/addComment', 'CommentController@insertComment')->middleware('opladmin');
+Route::post('/deleteComment', 'CommentController@deleteComment')->middleware('opladmin');
+
 //Dropdowns
 Route::get('/dropdown', 'UserController@dropdown')->middleware('auth');
 Route::get('/bevoegdheid', 'DropdownController@afdeling')->middleware('auth');
