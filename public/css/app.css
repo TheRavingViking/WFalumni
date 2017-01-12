@@ -3864,6 +3864,11 @@ tbody.collapse.in {
     margin-left: -5px
 }
 
+.btn-toolbar-margin {
+    margin-top: 5px;
+    margin-bottom:5px
+}
+
 .btn-toolbar:after, .btn-toolbar:before {
     content: " ";
     display: table

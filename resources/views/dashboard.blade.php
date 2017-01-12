@@ -44,7 +44,7 @@
                         <div class="col-xs-12 col-sm-8 col-md-4 col-lg-1">
 
                             <div class="btn-toolbar">
-                                <div class="btn-group">
+                                <div class="btn-group  btn-toolbar-margin">
                                     <form class="" method="get" action="/dashboard">
                                         <button class="btn btn-primary">Leegmaken</button>
                                     </form>
@@ -54,22 +54,22 @@
                         <div class="col-xs-12 col-sm-8 col-md-4 col-lg-8">
 
                             <div class="btn-toolbar">
-                                <div class="btn-group">
+                                <div class="btn-group  btn-toolbar-margin">
                                     <form class="form-horizontal" method="get" action="/admin">
                                         <button class="btn btn-primary">Bevoegdheid veranderen</button>
                                     </form>
                                 </div>
-                                <div class="btn-group">
+                                <div class="btn-group  btn-toolbar-margin">
                                     <form class="form-horizontal" method="get" action="/geochart">
                                         <button class="btn btn-primary">Geocharts</button>
                                     </form>
                                 </div>
-                                <div class="btn-group">
+                                <div class="btn-group  btn-toolbar-margin">
                                     <form class="form-horizontal" method="get" action="/addUser">
                                         <button class="btn btn-primary">Add User</button>
                                     </form>
                                 </div>
-                                <div class="btn-group">
+                                <div class="btn-group  btn-toolbar-margin">
                                     <form class="form-horizontal" method="get" action="/adminOpleidingen">
                                         <button class="btn btn-primary">Opleidingen toevoegen</button>
                                     </form>
