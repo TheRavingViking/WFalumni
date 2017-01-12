@@ -29,21 +29,21 @@ class AdminController extends Controller
     {
         $richting = array('naam' => $request['richtingen']);
         dropdown_richting::create($richting);
-        return Redirect::to('adminOpleidingen')->with('message', 'Richting toegevoegd');
+        return back()->with('status', 'Richting toegevoegd');
     }
 
     public function createOpleiding(Request $request)
     {
         $opleiding = array('naam' => $request['opleidingen'], 'richtingen_id' => $request['richtingen']);
         dropdown_opleidingen::create($opleiding);
-        return Redirect::to('adminOpleidingen')->with('message', 'Opleidingen toegevoegd');
+        return back()->with('status', 'Opleiding toegevoegd');
     }
 
     public function createSpecialisatie(Request $request)
     {
         $specialisatie = array('naam' => $request['specialisaties'], 'opleidingen_id' => $request['opleidingen']);
         dropdown_specialisaties::create($specialisatie);
-        return Redirect::to('adminOpleidingen')->with('message', 'Specialisaties toegevoegd');
+        return back()->with('status', 'Specialisatie toegevoegd');
     }
 
     public function index()
@@ -411,7 +411,7 @@ class AdminController extends Controller
 
         $user->fill($data);
         $user->save();
-        return back()->with('message', 'Update gelukt!');
+        return back()->with('status', 'Update gelukt!');
 
 
     }

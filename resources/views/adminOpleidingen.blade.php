@@ -1,6 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <div class="container">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+    </div>
+
+
     <div class="container">
         <div class="panel panel-default">
             <div class="row">
