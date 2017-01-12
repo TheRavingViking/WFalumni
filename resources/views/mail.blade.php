@@ -41,7 +41,7 @@
 
                             <textarea class="form-control" rows="10" name="email" id="email"
                                       placeholder="Schrijf hier je bericht."></textarea> <br>
-                                        <input class="btn btn-primary" type="submit">
+                                        <input id="sendmail" class="btn btn-primary" type="submit">
                                     </div>
                                     {{ csrf_field() }}
                                 </form>
@@ -52,7 +52,24 @@
             </div>
         </div>
     </div>
-    </div>
+
+    <script>
+        $('#sendmail').on('click', function (e) {
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: "Weet je het zeker?",
+                text: "Deze actie is permanent!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#ffcf00",
+                confirmButtonText: "Ja, mail versturen!",
+                closeOnConfirm: false
+            }, function (isConfirm) {
+                if (isConfirm) form.submit();
+            });
+        });
+    </script>
 @stop
 
 

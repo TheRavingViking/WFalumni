@@ -60,7 +60,7 @@
 
                         <input type="hidden" name="id" id="id" value="{{$user->id}}">
 
-                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-sm-offset-7">
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
                             <label style="{{$visibility}}">Update profiel foto</label>
                             <input type="file" name="avatar" {{$temp}} style="{{$visibility}}"></div>
                         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
@@ -219,7 +219,7 @@
                                    value="{{ $user->afdeling }}" {{$temp}}>
 
                             <br>
-                            <button type="submit" class="btn btn-primary" {{$temp}} style="{{$visibility}}">
+                            <button id="wijzig_profiel" type="submit" class="btn btn-primary" {{$temp}} style="{{$visibility}}">
                                 Wijzig
                             </button><hr>
                         </div>
@@ -231,7 +231,7 @@
                             <input type="hidden" name="id" value="{{ $user->id }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-danger" {{$temp}}  style="{{$visibility}}">
+                                <button id="delete" type="submit" class="btn btn-danger" {{$temp}}  style="{{$visibility}}">
                                     Delete User
                                 </button>
                             </div>
@@ -274,7 +274,7 @@
                                 <input id="id" type="hidden" name="id" value="{{ $woonplaats->id }}">
                                 <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" class="btn btn-danger" {{$temp}}>Delete Woonplaats</button>
+                                <button id="deleteWoonplaats" type="submit" class="btn btn-danger" {{$temp}}>Delete Woonplaats</button>
 
                                 <hr>
                             </form>
@@ -342,7 +342,7 @@
 
                                                 <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
 
-                                                <button type="submit" class="btn btn-info">Submit</button>
+                                                <button  type="submit" class="btn btn-info">Submit</button>
                                             </form>
                                         </div>
                                     </div>
@@ -393,7 +393,7 @@
                                 <input id="id" type="hidden" name="id" value="{{ $opl->id }}">
                                 <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" class="btn btn-danger" {{$temp}}>Delete Opleiding</button>
+                                <button id="deleteOpleiding" type="submit" class="btn btn-danger" {{$temp}}>Delete Opleiding</button>
 
                                 <hr>
                             </form>
@@ -537,7 +537,7 @@
                                 <input id="id" type="hidden" name="id" value="{{ $bedrijf->id }}">
                                 <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button type="submit" class="btn btn-danger" {{$temp}}>Delete bedrijf</button>
+                                <button id="deleteBedrijf" type="submit" class="btn btn-danger" {{$temp}}>Delete bedrijf</button>
 
                                 <hr>
                             </form>
@@ -654,6 +654,94 @@
         </div>
     </div>
     </div>
+
+    <script>
+        $('#delete').on('click',function(e){
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: "Weet je het zeker?",
+                text: "Deze actie is permanent!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ja, verwijderd mijn account!",
+                closeOnConfirm: false
+            }, function(isConfirm){
+                if (isConfirm) form.submit();
+            });
+        });
+
+
+        $('#deleteWoonplaats').on('click',function(e){
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: "Weet je het zeker?",
+                text: "Deze actie is permanent!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ja, verwijderd woonplaats!",
+                closeOnConfirm: false
+            }, function(isConfirm){
+                if (isConfirm) form.submit();
+            });
+        });
+
+        $('#deleteOpleiding').on('click',function(e){
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: "Weet je het zeker?",
+                text: "Deze actie is permanent!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ja, verwijderd opleiding!",
+                closeOnConfirm: false
+            }, function(isConfirm){
+                if (isConfirm) form.submit();
+            });
+        });
+
+        $('#deleteBedrijf').on('click',function(e){
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: "Weet je het zeker?",
+                text: "Deze actie is permanent!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ja, verwijderd opleiding!",
+                closeOnConfirm: false
+            }, function(isConfirm){
+                if (isConfirm) form.submit();
+            });
+        });
+
+
+        $('#wijzig_profiel').on('click',function(e){
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: "Weet je het zeker?",
+                text: "Deze actie is permanent!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#ffcf00",
+                confirmButtonText: "Ja, wijzig profiel!",
+                closeOnConfirm: false
+            }, function(isConfirm){
+                if (isConfirm) form.submit();
+            });
+        });
+
+
+
+    </script>
+
 
 @endsection
 

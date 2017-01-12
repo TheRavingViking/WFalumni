@@ -64,7 +64,7 @@
                                 <form enctype="multipart/form-data" method="POST" action="/overview"
                                       id="delete" name="checkbox">
                                     {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-danger">Delete User</button>
+                                    <button id="delete_it" type="submit" class="btn btn-danger">Delete User</button>
 
                             </div>
                         </div>
@@ -174,6 +174,22 @@
 
         });
 
+
+        $('#delete_it').on('click',function(e){
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: "Weet je het zeker?",
+                text: "Deze actie is permanent!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ja, verwijderd accounts!",
+                closeOnConfirm: false
+            }, function(isConfirm){
+                if (isConfirm) form.submit();
+            });
+        });
 
     </script>
 
