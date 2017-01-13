@@ -153,7 +153,7 @@
                             <label for="password-confirm" style="{{$visibility}}">Bevestig wachtwoord</label>
                             <input id="password-confirm" type="password" class="form-control"
                                    name="password_confirmation" style="{{$visibility}}" {{$temp}}>
-                            <br>
+                            @if($uglyFix == 1) <br> @endif
                             <label for="geslacht">Geslacht
                                 <br>
                                 Man:
@@ -174,7 +174,7 @@
                                 @endif
                             </label>
                             <br>
-                            <br>
+                            @if($uglyFix == 1) <br> @endif
                             <label for="burgerlijke staat" title="burgelijke staat" style="{{$visibility}}">Burgerlijke
                                 staat</label>
                             <select name="burgerlijke staat" title="burgelijke staat" {{$temp}} class="form-control"
@@ -182,7 +182,7 @@
                                 <option value="ongehuwd">Ongehuwd</option>
                                 <option value="gehuwd">Gehuwd</option>
                             </select>
-                            <br>
+                            @if($uglyFix == 1) <br> @endif
                             <label for="heeft_kinderen" style="{{$visibility}}">Heeft kinderen
                                 <br>Ja:
                                 <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="1"
@@ -190,7 +190,7 @@
                                 &nbsp&nbsp Nee: <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="0"
                                                        @if($user->heeft_kinderen == 0) checked @endif>
                             </label>
-                            <br>
+                            @if($uglyFix == 1) <br> @endif
 
                             @if($uglyFix == 1) <br> @endif
 

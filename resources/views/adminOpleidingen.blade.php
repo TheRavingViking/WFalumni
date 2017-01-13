@@ -73,7 +73,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <input type="text" name="opleiding_edit" id="opleiding_edit" class="form-control" placeholder="Richting" style="margin-bottom: 5px">
+                        <input type="text" name="opleiding_edit" id="opleiding_edit" class="form-control" placeholder="Opleiding" style="margin-bottom: 5px">
 
 
                         <button id="opleidingen" class="btn btn-primary" type="submit">Edit</button>
@@ -116,7 +116,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        <input type="text" name="specialisatie_edit" id="specialisatie_edit" class="form-control" placeholder="Richting" style="margin-bottom: 5px">
+                        <input type="text" name="specialisatie_edit" id="specialisatie_edit" class="form-control" placeholder="Specialisatie" style="margin-bottom: 5px">
 
 
                         <button id="specialisaties" class="btn btn-primary" type="submit">Edit</button>
