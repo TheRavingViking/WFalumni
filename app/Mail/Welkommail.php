@@ -31,7 +31,7 @@ class Welkommail extends Mailable
     {
         return $this->view('email.welkommail')
                     ->with([
-                        'id' => $this->user->id,
+                        'email' => $this->user->hashemail,
                         'voornaam' => $this->user->voornaam,
                         'tussenvoegsel' => $this->user->tussenvoegsel,
                         'achternaam' => $this->user->achternaam,
