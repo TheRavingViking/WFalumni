@@ -39,17 +39,17 @@ class User extends Authenticatable
 
     public function opleiding()
     {
-        return $this->hasMany(opleiding::class);
+        return $this->hasMany(Opleiding::class);
     }
 
     public function bedrijf()
     {
-        return $this->hasMany(bedrijf::class);
+        return $this->hasMany(Bedrijf::class);
     }
 
     public function woonplaats()
     {
-        return $this->hasMany(woonplaats::class);
+        return $this->hasMany(Woonplaats::class);
     }
 
     public function comment()

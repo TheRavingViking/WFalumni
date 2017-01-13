@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\woonplaats;
-use App\opleiding;
+use App\Woonplaats;
+use App\Opleiding;
 use App\Bedrijf;
 use App\User;
 use Auth;
