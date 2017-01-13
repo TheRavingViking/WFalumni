@@ -41,11 +41,10 @@
     <div class="container">
         <div class="panel panel-default">
 
-            <a href="#Profielcollapse" class="btn btn-info" data-toggle="collapse">Comments</a>
-            <div id="Profielcollapse" class="collapse">
+
                 <div class="row">
                     @if( Auth::user()->bevoegdheid >= 2 )
-                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 >
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
                         <form action="/comments" method="get">
                         <input type="hidden" name="id" id="id" value="{{$user->id}}">
                         <button type="submit" class="btn btn-primary" style="{{$visibility}}">
@@ -55,7 +54,7 @@
                 </div>
                 @endif
             </div>
-        </div>
+
     </div>
     </div>
 
