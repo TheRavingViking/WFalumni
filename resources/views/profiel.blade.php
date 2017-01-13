@@ -249,14 +249,19 @@
                             @endif
 
                             <label for="afdeling">Afdeling</label>
-                            <input id="afdeling" type="text" class="form-control" name="afdeling"
-                                   value="{{ $user->afdeling }}" {{$temp}}>
+                            <select name="afdeling" id="afdeling" class="form-control" {{$temp}}>
+                                <option value="">Kies een Afdeling</option>
+                                @foreach($richtingen as $richting)
+                                    <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
+                                @endforeach
+                            </select>
 
                             <br>
                             <button id="wijzig_profiel" type="submit" class="btn btn-primary"
                                     {{$temp}} style="{{$visibility}}">
                                 Wijzig
                             </button>
+                            </div>
                     </form>
                 </div>
 
