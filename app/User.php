@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'voornaam', 'tussenvoegsel', 'achternaam', 'email', 'password', 'geslacht', 'burgerlijke_staat', 'studentnummer', 'post_adres',
         'telefoonnummer', 'geboortedatum', 'geboorteplaats', 'nationaliteit', 'titel', 'geboorteland', 'geboorteprovincie', 'foto',
-        'facebook', 'linkedin', 'heeft_kinderen', 'jaarinkomen', 'geenmailverzenden', 'twitter', 'website', 'bevoegdheid',
+        'facebook', 'linkedin', 'heeft_kinderen', 'jaarinkomen', 'geenmailverzenden', 'twitter', 'website', 'bevoegdheid', 'afdeling'
     ];
 
     /**
