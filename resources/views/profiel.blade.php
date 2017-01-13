@@ -257,7 +257,7 @@
 
                             <label for="afdeling">Afdeling</label>
                             <select name="afdeling" id="afdeling" class="form-control" {{$temp}}>
-                                <option value="">Kies een Afdeling</option>
+                                <option value="">{{$user->afdeling}}</option>
                                 @foreach($richtingen as $richting)
                                     <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
                                 @endforeach
