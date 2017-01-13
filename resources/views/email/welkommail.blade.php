@@ -46,7 +46,7 @@
 
                                     <!-- Intro -->
                                     <p style="margin-top: 0; color: #74787E; font-size: 16px; line-height: 1.5em;">
-                                        Welkom je krijgt deze mail omdat je uitgenodigd bent voor de WF Alumni
+                                        je krijgt deze mail omdat je uitgenodigd bent voor de WF Alumni
                                         applicatie
                                     </p>
 
@@ -83,7 +83,7 @@
                                         <tr>
                                             <td style="font-family: Arial, &#039;Helvetica Neue&#039;, Helvetica, sans-serif;">
                                                 <p style="margin-top: 0; color: #74787E; font-size: 12px; line-height: 1.5em;">
-                                                    If you’re having trouble clicking the "Reset Password" button,
+                                                    If you’re having trouble clicking the "set password" button,
                                                     copy and paste the URL below into your web browser:
                                                 </p>
 
