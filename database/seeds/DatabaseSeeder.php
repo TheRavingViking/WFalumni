@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(add_richtingen::class);
         $this->call(add_opleidingen::class);
         $this->call(add_specialisaties::class);
+        $this->call(add_comment::class);
 
         factory(App\User::class, 200)
             ->create()
@@ -28,7 +29,10 @@ class DatabaseSeeder extends Seeder
             ->each(function($b) {$b->Bedrijf()->save(factory(App\Bedrijf::class, 1)
                 ->make());})
             ->each(function($w) {$w->Woonplaats()->save(factory(App\Woonplaats::class, 1)
+                ->make());})
+            ->each(function($c) {$c->Comment()->saveMany(factory(App\Comment::class, 3)
                 ->make());});
+
 
     }
 }

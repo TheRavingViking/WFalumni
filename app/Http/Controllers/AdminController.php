@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\woonplaats;
 use App\opleiding;
+use App\Bedrijf;
 use App\User;
 use Auth;
 use DB;
@@ -25,6 +26,92 @@ class AdminController extends Controller
         return view('adminOpleidingen', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
     }
 
+    public function updateRichting(Request $request)
+    {
+
+        $req = $request->richting_id;
+        $new_richting_data = $request['richtingen_edit'];
+        $richting = Dropdown_richting::find($req);
+        $oudrichting = $richting->naam;
+        $users = User::where('afdeling', $oudrichting)->get();
+        $opleiding = Opleiding::where('richting', $oudrichting)->get();
+        $bedrijf = Bedrijf::where('richting', $oudrichting)->get();
+
+        if (empty($new_richting_data)) {
+            return back()->with('error', 'invulveld is leeg');
+        }
+
+        $richting->naam = $new_richting_data;
+        $richting->save();
+        foreach ($users as $user) {
+            $user->afdeling = $new_richting_data;
+            $user->save();
+        }
+        foreach ($opleiding as $opl) {
+            $opl->richting = $new_richting_data;
+            $opl->save();
+        }
+        foreach ($bedrijf as $bed) {
+            $bed->richting = $new_richting_data;
+            $bed->save();
+        }
+        return back()->with('status', 'Richting ge-edit');
+    }
+
+    public function updateOpleiding(Request $request)
+    {
+        $req = $request->opleiding_id;
+
+        $new_opleiding_data = $request['opleiding_edit'];
+
+        $opleiding = Dropdown_opleidingen::find($req);
+        $oudopleiding = $opleiding->naam;
+
+        $opls = Opleiding::where('naam', $oudopleiding)->get();
+
+        if (empty($new_opleiding_data)) {
+            return back()->with('error', 'invulveld is leeg');
+        }
+
+        //update
+        $opleiding->naam = $new_opleiding_data;
+        $opleiding->save();
+
+        foreach ($opls as $opl) {
+            $opl->naam = $new_opleiding_data;
+            $opl->save();
+        }
+        return back()->with('status', 'Opleiding ge-edit');
+    }
+
+    public function updateSpecialisatie(Request $request)
+    {
+        $req = $request->specialisatie_id;
+
+        $new_specialisatie_data = $request['specialisatie_edit'];
+
+        $specialisatie = Dropdown_specialisaties::find($req);
+        $oudspecialisatie = $specialisatie->naam;
+
+        $opls = Opleiding::where('specialisatie', $oudspecialisatie)->get();
+
+        if (empty($new_specialisatie_data)) {
+            return back()->with('error', 'invulveld is leeg');
+        }
+
+        //update
+        $specialisatie->naam = $new_specialisatie_data;
+        $specialisatie->save();
+
+
+        foreach ($opls as $opl) {
+            $opl->specialisatie = $new_specialisatie_data;
+            $opl->save();
+        }
+        return back()->with('status', 'specialisatie ge-edit');
+    }
+
+
     public function createRichting(Request $request)
     {
         $richting = array('naam' => $request['richtingen']);
@@ -38,6 +125,7 @@ class AdminController extends Controller
         dropdown_opleidingen::create($opleiding);
         return back()->with('status', 'Opleiding toegevoegd');
     }
+
 
     public function createSpecialisatie(Request $request)
     {
@@ -171,7 +259,7 @@ class AdminController extends Controller
     public function dashboardFilter(request $request)
     {
         if (!empty($request->richtingen)) {
-            if (empty($request->opleidingen)){
+            if (empty($request->opleidingen)) {
                 return redirect()->back()->with('error', 'Opleiding vereist');
             }
             $richting = request('richtingen');
@@ -432,15 +520,15 @@ class AdminController extends Controller
 
     public function GeoChartfilter(request $request)
     {
-        if (empty($request->richtingen)){
+        if (empty($request->richtingen)) {
             return redirect()->back()->with('error', 'Richting vereist');
         }
 
-        if (empty($request->opleidingen)){
+        if (empty($request->opleidingen)) {
             return redirect()->back()->with('error', 'Opleiding vereist');
         }
 
-        if (empty($request->radio)){
+        if (empty($request->radio)) {
             return redirect()->back()->with('error', 'Selecteer woonplaats of bedrijf');
         }
         $specialisaties = $request->specialisaties;
@@ -479,7 +567,7 @@ class AdminController extends Controller
                     $tussenvoegsel = $c->tussenvoegsel;
                     $achternaam = $c->achternaam;
 
-                    $content =   'Alumni:' . ' ' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam . '<br>' . 'Tel:' . ' ' . $tel .  '<br>' . 'Email:' . ' ' . $email . '<br>' . 'Adres:' . ' ' . $adres . '<br>' . 'Postcode:' . ' ' . $postcode . '<br>';
+                    $content = 'Alumni:' . ' ' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam . '<br>' . 'Tel:' . ' ' . $tel . '<br>' . 'Email:' . ' ' . $email . '<br>' . 'Adres:' . ' ' . $adres . '<br>' . 'Postcode:' . ' ' . $postcode . '<br>';
 
                     Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
                 }
@@ -561,7 +649,7 @@ class AdminController extends Controller
                     $tussenvoegsel = $c->tussenvoegsel;
                     $achternaam = $c->achternaam;
 
-                    $content =   'Alumni:' . ' ' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam . '<br>' . 'Tel:' . ' ' . $tel .  '<br>' . 'Email:' . ' ' . $email . '<br>' . 'Adres:' . ' ' . $adres . '<br>' . 'Postcode:' . ' ' . $postcode . '<br>';
+                    $content = 'Alumni:' . ' ' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam . '<br>' . 'Tel:' . ' ' . $tel . '<br>' . 'Email:' . ' ' . $email . '<br>' . 'Adres:' . ' ' . $adres . '<br>' . 'Postcode:' . ' ' . $postcode . '<br>';
 
                     Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
                 }

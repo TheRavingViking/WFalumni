@@ -3,32 +3,31 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventsTable extends Migration
+class CreateCommentTable extends Migration
 {
     /**
      * Run the migrations.
-     * @table events
+     * @table users
      *
      * @return void
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('plaats', 255);
-            $table->date('datum');
-            $table->date('begin');
-            $table->date('eind');
-            $table->string('naam', 255);
-            $table->string('beschrijving', 255);
-            $table->string('categorie', 255);
-            $table->softDeletes();
+
+            $table->string('comment', 255)->nullable();
+            $table->string('voornaam', 255)->nullable();
+            $table->string('tussenvoegsel', 255)->nullable();
+            $table->string('achternaam', 255)->nullable();
+            $table->integer('rating')->nullable();
             $table->integer('user_id')->unsigned();
+            $table->integer('docent_id')->unsigned();
             $table->nullableTimestamps();
+            $table->softDeletes();
 
-
-            $table->foreign('user_id', 'fk_events_users_idx')
+            $table->foreign('user_id', 'fk_comments_users_idx')
                 ->references('id')->on('users')
                 ->onDelete('no action')
                 ->onUpdate('no action');
@@ -42,6 +41,6 @@ class CreateEventsTable extends Migration
      */
      public function down()
      {
-       Schema::dropIfExists('events');
+       Schema::dropIfExists('comments');
      }
 }

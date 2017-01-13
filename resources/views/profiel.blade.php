@@ -38,9 +38,33 @@
 
     </div>
 
+    <div class="container">
+        <div class="panel panel-default">
+
+            <a href="#Profielcollapse" class="btn btn-info" data-toggle="collapse">Comments</a>
+            <div id="Profielcollapse" class="collapse">
+                <div class="row">
+                    @if( Auth::user()->bevoegdheid >= 2 )
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 >
+                        <form action="/comments" method="get">
+                        <input type="hidden" name="id" id="id" value="{{$user->id}}">
+                        <button type="submit" class="btn btn-primary" style="{{$visibility}}">
+                            Comments maken
+                        </button>
+                        </form>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+
     {{--//persoonlijke gegevens form--}}
     <div id="profielcon" class="container">
-        <div class="panel panel-default" style="padding: 1em">
+        <div class="panel panel-default">
 
             <a href="#Profielcollapse" class="btn btn-info" data-toggle="collapse">Profiel</a>
             <div id="Profielcollapse" class="collapse in">
@@ -52,6 +76,21 @@
                         {{--opleiding form & modal--}}
                         <h2>{{ $user->voornaam }} {{ $user->tussenvoegsel }} {{ $user->achternaam }}</h2>
                     </div>
+                    @if( Auth::user()->bevoegdheid == 3 )
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
+                            <form action="/profiel/delete" method="POST">
+                                <input type="hidden" name="id" value="{{ $user->id }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="form-group">
+                                    <button id="delete" type="submit" class="btn btn-danger"
+                                            {{$temp}}  style="{{$visibility}}">
+                                        Delete User
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
+
 
                     <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/profiel"
                           id="profielform">
@@ -115,9 +154,10 @@
                             <label for="password-confirm" style="{{$visibility}}">Bevestig wachtwoord</label>
                             <input id="password-confirm" type="password" class="form-control"
                                    name="password_confirmation" style="{{$visibility}}" {{$temp}}>
-
+                            <br>
                             <label for="geslacht">Geslacht
-                                <br>Man:&nbsp&nbsp&nbsp
+                                <br>
+                                Man:
                                 @if($user->geslacht == 'man' || $user->geslacht == 'Man' ) <input id="geslacht"
                                                                                                   name="geslacht"
                                                                                                   type="radio"
@@ -125,7 +165,7 @@
                                                                                                   checked {{$temp}}>
                                 @else <input id="geslacht" name="geslacht" type="radio" value="Man" {{$temp}}>
                                 @endif
-                                <br>Vrouw:
+                                &nbsp&nbspVrouw:
                                 @if($user->geslacht == 'vrouw' || $user->geslacht == 'Vrouw') <input id="geslacht"
                                                                                                      name="geslacht"
                                                                                                      type="radio"
@@ -134,22 +174,24 @@
                                 @else <input id="geslacht" name="geslacht" type="radio" value="Vrouw" {{$temp}}>
                                 @endif
                             </label>
-
-                            <br><label for="burgerlijke staat" title="burgelijke staat" style="{{$visibility}}">Burgerlijke
+                            <br>
+                            <br>
+                            <label for="burgerlijke staat" title="burgelijke staat" style="{{$visibility}}">Burgerlijke
                                 staat</label>
                             <select name="burgerlijke staat" title="burgelijke staat" {{$temp}} class="form-control"
                                     style="{{$visibility}}">
                                 <option value="ongehuwd">Ongehuwd</option>
                                 <option value="gehuwd">Gehuwd</option>
                             </select>
-
+                            <br>
                             <label for="heeft_kinderen" style="{{$visibility}}">Heeft kinderen
-                                <br>Ja:&nbsp&nbsp
+                                <br>Ja:
                                 <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="1"
                                        @if($user->heeft_kinderen == 1) checked @endif>
-                                <br>Nee: <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="0"
-                                                @if($user->heeft_kinderen == 0) checked @endif>
+                                &nbsp&nbsp Nee: <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="0"
+                                                       @if($user->heeft_kinderen == 0) checked @endif>
                             </label>
+                            <br>
 
                             @if($uglyFix == 1) <br> @endif
 
@@ -182,24 +224,24 @@
                             <input id="jaarinkomen" type="text" class="form-control" name="jaarinkomen"
                                    value="{{ $user->jaarinkomen }}" {{$temp}} style="{{$visibility}}">
 
-                            <label for="geenmailverzenden" style="{{$visibility}}">Wenst email te ontvangen:
-                                <br>Ja, graag&nbsp&nbsp&nbsp&nbsp&nbsp
+                            {{--<label for="geenmailverzenden" style="{{$visibility}}">Wenst email te ontvangen:--}}
+                            {{--<br>Ja, graag&nbsp&nbsp&nbsp&nbsp&nbsp--}}
 
-                                @if($user->geenmailverzenden == 1) <input id="geenmailverzenden"
-                                                                          name="geenmailverzenden" type="radio"
-                                                                          value="1" checked {{$temp}}><br>
-                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"
-                                             value="1" {{$temp}}><br>
-                                @endif
+                            {{--@if($user->geenmailverzenden == 1) <input id="geenmailverzenden"--}}
+                            {{--name="geenmailverzenden" type="radio"--}}
+                            {{--value="1" checked {{$temp}}><br>--}}
+                            {{--@else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"--}}
+                            {{--value="1" {{$temp}}><br>--}}
+                            {{--@endif--}}
 
-                                Nee, dank je
-                                @if($user->geenmailverzenden == 0) <input id="geenmailverzenden"
-                                                                          name="geenmailverzenden" type="radio"
-                                                                          value="0" checked {{$temp}}>
-                                @else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"
-                                             value="0" {{$temp}}>
-                                @endif
-                            </label>
+                            {{--Nee, dank je--}}
+                            {{--@if($user->geenmailverzenden == 0) <input id="geenmailverzenden"--}}
+                            {{--name="geenmailverzenden" type="radio"--}}
+                            {{--value="0" checked {{$temp}}>--}}
+                            {{--@else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"--}}
+                            {{--value="0" {{$temp}}>--}}
+                            {{--@endif--}}
+                            {{--</label>--}}
 
                             @if( Auth::user()->bevoegdheid == 3 )
 
@@ -207,41 +249,34 @@
 
                                 <label for="bevoegdheid" style="{{$visibility}}">Bevoegdheid</label>
                                 <input id="bevoegdheid" type="text" class="form-control" name="bevoegdheid"
-                                       value="
-                                            @if ($user->bevoegdheid == 3)Admin
-                                            @elseif ($user->bevoegdheid == 2)Docent
-                                            @elseif($user->bevoegdheid == 3)Alumnus
+                                       value="@if ($user->bevoegdheid == 3)Admin
+                                            @elseif ($user->bevoegdheid == 2)Docent/Opleidingscoördinator
+                                            @elseif($user->bevoegdheid == 1)Alumnus
                                             @endif " disabled {{$temp}}>
-                                        @endif
+                            @endif
 
                             <label for="afdeling">Afdeling</label>
-                            <input id="afdeling" type="text" class="form-control" name="afdeling"
-                                   value="{{ $user->afdeling }}" {{$temp}}>
+                            <select name="afdeling" id="afdeling" class="form-control" {{$temp}}>
+                                <option value="">Kies een Afdeling</option>
+                                @foreach($richtingen as $richting)
+                                    <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
+                                @endforeach
+                            </select>
 
                             <br>
-                            <button id="wijzig_profiel" type="submit" class="btn btn-primary" {{$temp}} style="{{$visibility}}">
+                            <button id="wijzig_profiel" type="submit" class="btn btn-primary"
+                                    {{$temp}} style="{{$visibility}}">
                                 Wijzig
-                            </button><hr>
-                        </div>
-
-                    </form>
-
-                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1" style="padding: 1em;">
-                        <form action="/profiel/delete" method="POST">
-                            <input type="hidden" name="id" value="{{ $user->id }}">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <div class="form-group">
-                                <button id="delete" type="submit" class="btn btn-danger" {{$temp}}  style="{{$visibility}}">
-                                    Delete User
-                                </button>
+                            </button>
                             </div>
-                        </form>
-                    </div>
-
+                    </form>
                 </div>
+
             </div>
         </div>
     </div>
+    </div>
+
 
 
     {{--Woonplaats form & modal--}}
@@ -274,7 +309,9 @@
                                 <input id="id" type="hidden" name="id" value="{{ $woonplaats->id }}">
                                 <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button id="deleteWoonplaats" type="submit" class="btn btn-danger" {{$temp}}>Delete Woonplaats</button>
+                                <button id="deleteWoonplaats" type="submit" class="btn btn-danger" {{$temp}}>Delete
+                                    Woonplaats
+                                </button>
 
                                 <hr>
                             </form>
@@ -342,7 +379,7 @@
 
                                                 <input id="user_id" type="hidden" name="user_id" value="{{$user->id}}">
 
-                                                <button  type="submit" class="btn btn-info">Submit</button>
+                                                <button type="submit" class="btn btn-info">Submit</button>
                                             </form>
                                         </div>
                                     </div>
@@ -393,7 +430,9 @@
                                 <input id="id" type="hidden" name="id" value="{{ $opl->id }}">
                                 <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button id="deleteOpleiding" type="submit" class="btn btn-danger" {{$temp}}>Delete Opleiding</button>
+                                <button id="deleteOpleiding" type="submit" class="btn btn-danger" {{$temp}}>Delete
+                                    Opleiding
+                                </button>
 
                                 <hr>
                             </form>
@@ -537,7 +576,9 @@
                                 <input id="id" type="hidden" name="id" value="{{ $bedrijf->id }}">
                                 <input id="id" type="hidden" name="user_id" value="{{ $user->id }}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <button id="deleteBedrijf" type="submit" class="btn btn-danger" {{$temp}}>Delete bedrijf</button>
+                                <button id="deleteBedrijf" type="submit" class="btn btn-danger" {{$temp}}>Delete
+                                    bedrijf
+                                </button>
 
                                 <hr>
                             </form>
@@ -573,13 +614,15 @@
 
                                                 <div class="form-group">
                                                     <label for="functie">functie</label>
-                                                    <input class="form-control" id="functie" type="text" name="functie" required>
+                                                    <input class="form-control" id="functie" type="text" name="functie"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="richting" title="richting">Naam van de
                                                         richting</label>
-                                                    <select class="form-control" name="richting" title="richting" required>
+                                                    <select class="form-control" name="richting" title="richting"
+                                                            required>
                                                         @foreach($richtingen as $richting)
                                                             <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
                                                         @endforeach
@@ -588,27 +631,32 @@
 
                                                 <div class="form-group">
                                                     <label for="naam">naam</label>
-                                                    <input class="form-control" id="naam" type="text" name="naam" required>
+                                                    <input class="form-control" id="naam" type="text" name="naam"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="stad">Stad</label>
-                                                    <input class="form-control" id="stad" type="text" name="stad" required>
+                                                    <input class="form-control" id="stad" type="text" name="stad"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="adres">adres</label>
-                                                    <input class="form-control" id="adres" type="text" name="adres" required>
+                                                    <input class="form-control" id="adres" type="text" name="adres"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="postcode">postcode</label>
-                                                    <input class="form-control" id="postcode" type="text" name="postcode" required>
+                                                    <input class="form-control" id="postcode" type="text"
+                                                           name="postcode" required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="begin">begin</label>
-                                                    <input class="form-control" id="begin" type="date" name="begin" required>
+                                                    <input class="form-control" id="begin" type="date" name="begin"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
@@ -618,22 +666,26 @@
 
                                                 <div class="form-group">
                                                     <label for="telefoonnummer">telefoonnummer</label>
-                                                    <input class="form-control" id="telefoonnummer" type="text" name="telefoonnummer">
+                                                    <input class="form-control" id="telefoonnummer" type="text"
+                                                           name="telefoonnummer">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="bezoekadres">bezoekadres</label>
-                                                    <input class="form-control" id="bezoekadres" type="text" name="bezoekadres">
+                                                    <input class="form-control" id="bezoekadres" type="text"
+                                                           name="bezoekadres">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="land">land</label>
-                                                    <input class="form-control" id="land" type="text" name="land" required>
+                                                    <input class="form-control" id="land" type="text" name="land"
+                                                           required>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="provincie">provincie</label>
-                                                    <input class="form-control" id="provincie" type="text" name="provincie">
+                                                    <input class="form-control" id="provincie" type="text"
+                                                           name="provincie">
                                                 </div>
 
                                                 <input class="form-control" id="user_id" type="hidden" name="user_id"
@@ -653,10 +705,10 @@
             </div>
         </div>
     </div>
-    </div>
+
 
     <script>
-        $('#delete').on('click',function(e){
+        $('#delete').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -665,15 +717,15 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ja, verwijderd mijn account!",
+                confirmButtonText: "Ja, verwijder mijn account!",
                 closeOnConfirm: false
-            }, function(isConfirm){
+            }, function (isConfirm) {
                 if (isConfirm) form.submit();
             });
         });
 
 
-        $('#deleteWoonplaats').on('click',function(e){
+        $('#deleteWoonplaats').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -682,14 +734,14 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ja, verwijderd woonplaats!",
+                confirmButtonText: "Ja, verwijder woonplaats!",
                 closeOnConfirm: false
-            }, function(isConfirm){
+            }, function (isConfirm) {
                 if (isConfirm) form.submit();
             });
         });
 
-        $('#deleteOpleiding').on('click',function(e){
+        $('#deleteOpleiding').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -698,14 +750,14 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ja, verwijderd opleiding!",
+                confirmButtonText: "Ja, verwijder opleiding!",
                 closeOnConfirm: false
-            }, function(isConfirm){
+            }, function (isConfirm) {
                 if (isConfirm) form.submit();
             });
         });
 
-        $('#deleteBedrijf').on('click',function(e){
+        $('#deleteBedrijf').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -714,15 +766,15 @@
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Ja, verwijderd opleiding!",
+                confirmButtonText: "Ja, verwijder opleiding!",
                 closeOnConfirm: false
-            }, function(isConfirm){
+            }, function (isConfirm) {
                 if (isConfirm) form.submit();
             });
         });
 
 
-        $('#wijzig_profiel').on('click',function(e){
+        $('#wijzig_profiel').on('click', function (e) {
             e.preventDefault();
             var form = $(this).parents('form');
             swal({
@@ -733,11 +785,10 @@
                 confirmButtonColor: "#ffcf00",
                 confirmButtonText: "Ja, wijzig profiel!",
                 closeOnConfirm: false
-            }, function(isConfirm){
+            }, function (isConfirm) {
                 if (isConfirm) form.submit();
             });
         });
-
 
 
     </script>

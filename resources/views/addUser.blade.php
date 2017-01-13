@@ -169,8 +169,10 @@
                                 <label for="afdeling" class="col-md-4 control-label">Afdeling</label>
                                 <div class="col-md-6">
                                     <select name="afdeling" id="afdeling" class="form-control">
-                                        <option value="">
-                                        </option>
+                                        <option value="">Kies een Afdeling</option>
+                                        @foreach($richtingen as $richting)
+                                            <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

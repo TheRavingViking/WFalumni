@@ -51,8 +51,11 @@ Route::get('/mijnopleiding/filter', 'UserController@mijnOpleidingFilter')->middl
 //Adminopleidingen
 Route::get('/adminOpleidingen', 'AdminController@adminOpleidingen')->middleware('admin');
 Route::post('/adminOpleidingen/richting', 'AdminController@createRichting')->middleware('admin');
+Route::post('/adminOpleidingen/richtingEdit', 'AdminController@updateRichting')->middleware('admin');
 Route::post('/adminOpleidingen/opleiding', 'AdminController@createOpleiding')->middleware('admin');
+Route::post('/adminOpleidingen/opleidingEdit', 'AdminController@updateOpleiding')->middleware('admin');
 Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisatie')->middleware('admin');
+Route::post('/adminOpleidingen/specialisatieEdit', 'AdminController@updateSpecialisatie')->middleware('admin');
 //Admin bevoegdheid
 Route::get('/admin', 'AdminController@index')->middleware('admin');
 Route::get('/admin/search', 'AdminController@search')->middleware('admin');
@@ -62,6 +65,11 @@ Route::get('/dashboard', 'AdminController@dashboard')->middleware('opladmin');
 Route::get('/dashboard/filter', 'AdminController@dashboardFilter')->middleware('opladmin');
 Route::get('/geochart', 'AdminController@GeoChart')->middleware('opladmin');
 Route::get('/geochart/filter', 'AdminController@GeoChartFilter')->middleware('opladmin');
+//Comments
+Route::get('/comments', 'CommentController@index')->middleware('opladmin');
+Route::post('/addComment', 'CommentController@insertComment')->middleware('opladmin');
+Route::post('/deleteComment', 'CommentController@deleteComment')->middleware('opladmin');
+
 //Dropdowns
 Route::get('/dropdown', 'UserController@dropdown')->middleware('auth');
 Route::get('/bevoegdheid', 'DropdownController@afdeling')->middleware('auth');

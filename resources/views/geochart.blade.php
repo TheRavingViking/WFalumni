@@ -16,7 +16,7 @@
         @endif
     </div>
 
-    <div class="container col-md-offset-2 col-xs-8 col-sm-8 col-md-8 col-lg-8">
+    <div class="container col-md-offset-2 col-xs-12 col-sm-12 col-md-8 col-lg-8">
         <div class="row ">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="panel panel-default">
@@ -38,7 +38,7 @@
                         Woonplaats
                         <input id="radio" name="radio" type="radio"
                                value="woonplaats">
-                        bedrijven
+                        Bedrijven
                         <input id="radio" name="radio" type="radio"
                                value="bedrijf">
                         <button class="btn btn-primary">Go</button>
