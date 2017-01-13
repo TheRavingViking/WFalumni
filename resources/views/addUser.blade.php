@@ -170,9 +170,6 @@
                                 <div class="col-md-6">
                                     <select name="afdeling" id="afdeling" class="form-control">
                                         <option value="">Kies een Afdeling</option>
-                                        @foreach($richtingen as $richting)
-                                            <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -299,7 +296,7 @@
             $.get('/bevoegdheid?bevoegdheid_naam=' + bevoegdheid_naam, function (data) {
 
                 $('#afdeling').empty();
-                $("<option value=''></option>").appendTo('#afdeling');
+                $("<option value=''>Kies een afdeling</option>").appendTo('#afdeling');
 
                 $.each(data, function (index, afdeling) {
 
