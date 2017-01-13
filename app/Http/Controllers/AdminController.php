@@ -81,7 +81,7 @@ class AdminController extends Controller
             $opl->naam = $new_opleiding_data;
             $opl->save();
         }
-        return back()->with('status', 'Richting ge-edit');
+        return back()->with('status', 'Opleiding ge-edit');
     }
 
     public function updateSpecialisatie(Request $request)

@@ -50,7 +50,7 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+                            <input type="hidden" name="auth" value="<?php echo $_GET['auth']; ?>">
                         </form>
                     </div>
                 </div>

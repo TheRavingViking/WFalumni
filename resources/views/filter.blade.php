@@ -49,7 +49,7 @@
                                     </select>
 
                                     <button class="btn btn-primary">Go</button>
-                            </div>
+
                             </form>
                         </div>
 

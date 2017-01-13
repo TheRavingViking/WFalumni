@@ -40,31 +40,23 @@
 
     <div class="container">
         <div class="panel panel-default">
-            <div class="row">
-                @if( Auth::user()->bevoegdheid >= 2 )
-                    <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1" style="margin-bottom: 5px">
-                        <form action="/comments" method="get">
-                            <input type="hidden" name="id" id="id" value="{{$user->id}}">
-                            <button type="submit" class="btn btn-primary" style="{{$visibility}}">
-                                Comments
-                            </button>
-                        </form>
-                    </div>
-                @endif
 
-                <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1">
-                    <form action="/profiel/delete" method="POST">
-                        <input type="hidden" name="id" value="{{ $user->id }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div class="form-group">
-                            <button id="delete" type="submit" class="btn btn-danger" {{$temp}}  style="{{$visibility}}">
-                                Delete User
-                            </button>
-                        </div>
-                    </form>
+            <a href="#Profielcollapse" class="btn btn-info" data-toggle="collapse">Comments</a>
+            <div id="Profielcollapse" class="collapse">
+                <div class="row">
+                    @if( Auth::user()->bevoegdheid >= 2 )
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1 >
+                        <form action="/comments" method="get">
+                        <input type="hidden" name="id" id="id" value="{{$user->id}}">
+                        <button type="submit" class="btn btn-primary" style="{{$visibility}}">
+                            Comments maken
+                        </button>
+                        </form>
                 </div>
+                @endif
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -84,6 +76,21 @@
                         {{--opleiding form & modal--}}
                         <h2>{{ $user->voornaam }} {{ $user->tussenvoegsel }} {{ $user->achternaam }}</h2>
                     </div>
+                    @if( Auth::user()->bevoegdheid == 3 )
+                        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-md-offset-1">
+                            <form action="/profiel/delete" method="POST">
+                                <input type="hidden" name="id" value="{{ $user->id }}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <div class="form-group">
+                                    <button id="delete" type="submit" class="btn btn-danger"
+                                            {{$temp}}  style="{{$visibility}}">
+                                        Delete User
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
+
 
                     <form enctype="multipart/form-data" class="form-horizontal" method="POST" action="/profiel"
                           id="profielform">
@@ -182,7 +189,7 @@
                                 <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="1"
                                        @if($user->heeft_kinderen == 1) checked @endif>
                                 &nbsp&nbsp Nee: <input id="heeft_kinderen" name="heeft_kinderen" type="radio" value="0"
-                                                @if($user->heeft_kinderen == 0) checked @endif>
+                                                       @if($user->heeft_kinderen == 0) checked @endif>
                             </label>
                             <br>
 
@@ -218,22 +225,22 @@
                                    value="{{ $user->jaarinkomen }}" {{$temp}} style="{{$visibility}}">
 
                             {{--<label for="geenmailverzenden" style="{{$visibility}}">Wenst email te ontvangen:--}}
-                                {{--<br>Ja, graag&nbsp&nbsp&nbsp&nbsp&nbsp--}}
+                            {{--<br>Ja, graag&nbsp&nbsp&nbsp&nbsp&nbsp--}}
 
-                                {{--@if($user->geenmailverzenden == 1) <input id="geenmailverzenden"--}}
-                                                                          {{--name="geenmailverzenden" type="radio"--}}
-                                                                          {{--value="1" checked {{$temp}}><br>--}}
-                                {{--@else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"--}}
-                                             {{--value="1" {{$temp}}><br>--}}
-                                {{--@endif--}}
+                            {{--@if($user->geenmailverzenden == 1) <input id="geenmailverzenden"--}}
+                            {{--name="geenmailverzenden" type="radio"--}}
+                            {{--value="1" checked {{$temp}}><br>--}}
+                            {{--@else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"--}}
+                            {{--value="1" {{$temp}}><br>--}}
+                            {{--@endif--}}
 
-                                {{--Nee, dank je--}}
-                                {{--@if($user->geenmailverzenden == 0) <input id="geenmailverzenden"--}}
-                                                                          {{--name="geenmailverzenden" type="radio"--}}
-                                                                          {{--value="0" checked {{$temp}}>--}}
-                                {{--@else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"--}}
-                                             {{--value="0" {{$temp}}>--}}
-                                {{--@endif--}}
+                            {{--Nee, dank je--}}
+                            {{--@if($user->geenmailverzenden == 0) <input id="geenmailverzenden"--}}
+                            {{--name="geenmailverzenden" type="radio"--}}
+                            {{--value="0" checked {{$temp}}>--}}
+                            {{--@else <input id="geenmailverzenden" name="geenmailverzenden" type="radio"--}}
+                            {{--value="0" {{$temp}}>--}}
+                            {{--@endif--}}
                             {{--</label>--}}
 
                             @if( Auth::user()->bevoegdheid == 3 )
@@ -249,14 +256,19 @@
                             @endif
 
                             <label for="afdeling">Afdeling</label>
-                            <input id="afdeling" type="text" class="form-control" name="afdeling"
-                                   value="{{ $user->afdeling }}" {{$temp}}>
+                            <select name="afdeling" id="afdeling" class="form-control" {{$temp}}>
+                                <option value="">Kies een Afdeling</option>
+                                @foreach($richtingen as $richting)
+                                    <option value="{{ $richting->naam }}">{{ $richting->naam }}</option>
+                                @endforeach
+                            </select>
 
                             <br>
                             <button id="wijzig_profiel" type="submit" class="btn btn-primary"
                                     {{$temp}} style="{{$visibility}}">
                                 Wijzig
                             </button>
+                            </div>
                     </form>
                 </div>
 

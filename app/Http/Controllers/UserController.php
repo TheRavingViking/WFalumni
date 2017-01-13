@@ -514,6 +514,7 @@ class UserController extends Controller
         $user->tussenvoegsel = $request['tussenvoegsel'];
         $user->achternaam = $request['achternaam'];
         $user->email = $request['email'];
+        $user->hashemail = bcrypt($request['email']);
         $user->geslacht = $request['geslacht'];
         $user->studentnummer = $request['studentnummer'];
         $user->post_adres = $request['post_adres'];
@@ -571,8 +572,8 @@ class UserController extends Controller
     public
     function setPass(request $request)
     {
-        $id = $request->id;
-        $user = User::find($id);
+        $auth = ($request->auth);
+        $user = User::where('hashemail', $auth)->first();
         if ($user->password != "") {
             return redirect::back()->with('error', 'Uw wachtwoord is al ingesteld.');
         }
