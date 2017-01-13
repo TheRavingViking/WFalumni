@@ -136,7 +136,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        $users = User::get();
+        $users = User::withTrashed()->paginate(25);
         return view('admin', compact('users'));
 
     }
@@ -146,7 +146,7 @@ class AdminController extends Controller
         $keyword = request('searchinput');
         $keyword = explode(" ", $keyword);
 
-        $users = User::SearchByKeyword($keyword)->paginate(25);
+        $users = User::SearchByKeyword($keyword)->withTrashed()->paginate(25);
 
 
         if (count($users) == '0') {
@@ -514,6 +514,7 @@ class AdminController extends Controller
         // Draw a map
         Mapper::map(52.5, 5);
 
+
         return view('geochart', array('richtingen' => $richtingen, 'opleidingen' => $opleidingen, 'specialisaties' => $specialisaties));
 
     }
@@ -605,7 +606,6 @@ class AdminController extends Controller
                     $tussenvoegsel = $c->tussenvoegsel;
                     $achternaam = $c->achternaam;
                     $content = 'Bedrijf:' . '' . $bedrijf . '<br>' . 'Tel:' . '' . $tel . '<br>' . 'Adres:' . '' . $adres . '<br>' . 'Postcode:' . '' . $postcode . '<br>' . 'Alumni:' . '' . $voornaam . ' ' . $tussenvoegsel . ' ' . $achternaam;
-
                     Mapper::informationWindow($c->latitude, $c->longitude, $content, ['markers' => ['animation' => 'DROP']]);
                 }
 
