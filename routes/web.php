@@ -58,6 +58,7 @@ Route::post('/adminOpleidingen/specialisatie', 'AdminController@createSpecialisa
 Route::post('/adminOpleidingen/specialisatieEdit', 'AdminController@updateSpecialisatie')->middleware('admin');
 //Admin bevoegdheid
 Route::get('/admin', 'AdminController@index')->middleware('admin');
+Route::post('/restore', 'AdminController@restore')->middleware('admin');
 Route::get('/admin/search', 'AdminController@search')->middleware('admin');
 Route::Post('/admin/assign', ['as' => 'admin.assign', 'uses' => 'AdminController@AdminAssign'])->middleware('admin'); //<-admin.assign rename, Laurens
 //Admindashboard

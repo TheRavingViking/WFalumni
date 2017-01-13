@@ -141,6 +141,23 @@ class AdminController extends Controller
 
     }
 
+    public function restore(request $request)
+    {
+        $id = $request->id;
+        $user = User::onlyTrashed($id);
+        $woonplaats = Woonplaats::onlyTrashed('user_id', $id);
+        $opleiding = Opleiding::onlyTrashed('user_id', $id);
+        $bedrijf = Bedrijf::onlyTrashed('user_id', $id);
+
+        $user->restore();
+        $woonplaats->restore();
+        $opleiding->restore();
+        $bedrijf->restore();
+
+        return back()->with('status', 'Gebruiker hersteld');
+    }
+
+
     public function search(request $request)
     {
         $keyword = request('searchinput');

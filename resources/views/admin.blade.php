@@ -15,8 +15,6 @@
         @endif
     </div>
 
-
-
     <div class="container">
 
         <div class="panel panel-default">
@@ -51,7 +49,7 @@
                         <img src="/uploads/avatars/{{ $user->foto }}" class="img-responsive image-rounded">
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                         <h4>
                             <b>{{$user->voornaam}} {{$user->tussenvoegsel}} {{$user->achternaam}}</b>
                         </h4>
@@ -61,8 +59,19 @@
 
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-6">
-                        <div class="dropdown-group-middle" style="float: right; vvertical-align:middle">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        @if ($user->trashed())
+                            <div class="btn-group btn-toolbar-margin">
+                                <form method="POST" action="/restore">
+                                    <input type="hidden" name="id" id="id" value="{{ $user->id }}">
+                                    <button id="prorestore" class="btn btn-primary" type="submit">Restore</button>
+                                    {{ csrf_field() }}
+                                </form>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        <div class="dropdown-group-middle" style="float: right; vertical-align:middle">
                             <form class="form-horizontal" action="{{ route('admin.assign') }}" method="POST">
                                 <input type="hidden" name="id" id="id" value="{{ $user->id }}">
                                 <select class="input-sm input-margin" name="bevoegdheid">
@@ -78,6 +87,8 @@
                                     {{ csrf_field() }}
                                     <button class="btn btn-primary" type="submit">Rollen wijzigen</button>
                             </form>
+
+
                         </div>
                     </div>
                 </div>
@@ -95,5 +106,27 @@
 
 
     </div>
+    <script>
+        $('#prorestore').on('click', function (e) {
+            e.preventDefault();
+            var form = $(this).parents('form');
+            swal({
+                title: "Weet je het zeker?",
+                text: "Gebruiker wordt weer zichtbaar",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Ja, herstel gebruiker!",
+                closeOnConfirm: false
+            }, function (isConfirm) {
+                if (isConfirm) form.submit();
+            });
+        });
+    </script>
 
-@endsection
+
+
+
+@stop
+
+

@@ -56,7 +56,7 @@
                                 <div class="btn-toolbar">
                                     <div class="btn-group btn-toolbar-margin">
                                         <form class="form-horizontal" method="get" action="/admin">
-                                            <button class="btn btn-primary">Bevoegdheid veranderen</button>
+                                            <button class="btn btn-primary">Gebruikers beheren</button>
                                         </form>
                                     </div>
                                     <div class="btn-group btn-toolbar-margin">
