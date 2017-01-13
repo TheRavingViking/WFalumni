@@ -21,7 +21,7 @@
     <div class="container">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="panel panel-default">
-                <h1>Gemiddelde score gast docent</h1>
+                <h1>Gemiddelde score</h1>
                 <input id="rating" type="text" class="rating" data-size="md" value="{{round($comments->avg('rating'))}}"
                        disabled>
 
