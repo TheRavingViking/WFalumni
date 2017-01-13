@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="btn-group btn-toolbar-margin">
                                         <form class="form-horizontal" method="get" action="/addUser">
-                                            <button class="btn btn-primary">Add User</button>
+                                            <button class="btn btn-primary">Users toevoegen</button>
                                         </form>
                                     </div>
                                     <div class="btn-group btn-toolbar-margin">
