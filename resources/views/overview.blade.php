@@ -107,7 +107,7 @@
                                 </a>
                                 <a href="mailto:{{$user->email}}" class="btn btn-social-icon btn-google"><span
                                             class="fa fa-envelope"></span></a>
-                                <a href="profiel/{{$user->id}}" class="btn btn-social-icon btn-linkedin">
+                                <a href="/profiel/{{$user->id}}" class="btn btn-social-icon btn-linkedin">
                                     <span class="fa fa-user"></span></a>
                                 <input type="checkbox" name="checkbox[]" id="checkbox[]" value="{{$user->id}}">
                             </div>
